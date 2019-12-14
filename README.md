@@ -1,5 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My Youtube
 
+## Intro
+Yang Fan's personal Youtube watch app built by React and Google Youtube Data API.
+
+## Features & Functionality
+* Display channels list subscribed by Yang Fan
+* View channel details
+* Play video
+ 
 ## Available Scripts
 
 In the project directory, you can run:
