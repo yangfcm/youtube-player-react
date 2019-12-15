@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const PlayListItem = ({ playlist }) => {
   return (
     <div className="card">
-      <Link>
+      <Link to={`/playlist/${playlist.id}`}>
         <img
           src={playlist.snippet.thumbnails.medium.url}
           alt={playlist.snippet.title}
@@ -12,7 +12,7 @@ const PlayListItem = ({ playlist }) => {
         />
       </Link>
       <div className="card-body">
-        <Link>
+        <Link to={`/playlist/${playlist.id}`}>
           <p className="card-text">
             {playlist.snippet.title}&nbsp;
             <br />

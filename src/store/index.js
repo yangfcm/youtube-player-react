@@ -1,6 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { channelReducer, playlistReducer, errorReducer } from "../reducers/app";
+import {
+  channelReducer,
+  playlistReducer,
+  playlistDetailReducer,
+  errorReducer
+} from "../reducers/app";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -9,7 +14,8 @@ const cnofigStore = () => {
     combineReducers({
       channel: channelReducer,
       error: errorReducer,
-      playlist: playlistReducer
+      playlist: playlistReducer,
+      playlistDetail: playlistDetailReducer
     }),
     composeEnhancers(applyMiddleware(thunk))
   );

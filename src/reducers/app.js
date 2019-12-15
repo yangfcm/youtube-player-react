@@ -9,6 +9,19 @@ import {
   CLEAR_ERROR
 } from "../actions/types";
 
+export const playlistDetailReducer = (state = null, action) => {
+  switch (action.type) {
+    case FETCH_PLAY_LIST_DETAIL:
+      return {
+        pageInfo: action.payload.pageInfo,
+        items: action.payload.items,
+        nextPageToken: action.payload.nextPageToken
+      };
+    default:
+      return state;
+  }
+};
+
 export const playlistReducer = (state = null, action) => {
   switch (action.type) {
     case FETCH_PLAY_LIST:

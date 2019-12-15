@@ -39,6 +39,32 @@ export const fetchPlaylist = (
   };
 };
 
+/** Fetch play list detail */
+export const fetchPlaylistDetail = (playlistId, pageToken) => {
+  return async dispatch => {
+    try {
+      const response = await axios.get("/playlistItems", {
+        params: {
+          part: "snippet,contentDetails",
+          maxResults: 15,
+          key: process.env.REACT_APP_API_KEY,
+          playlistId,
+          pageToken
+        }
+      });
+      dispatch({
+        type: FETCH_PLAY_LIST_DETAIL,
+        payload: response.data
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch playlist"
+      });
+    }
+  };
+};
+
 /** Fetch subscribed channels */
 export const fetchChannel = pageToken => {
   return async dispatch => {
