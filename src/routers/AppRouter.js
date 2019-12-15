@@ -19,7 +19,7 @@ const AppRouter = () => {
       <div className="flex-grow-1 mb-4">
         <Router history={history}>
           <Header />
-          <div className="container">
+          <div className="container-fluid px-5">
             <Switch>
               <Route path="/video/:id" component={Video} />
               <Route path="/channel/:id" component={ChannelDetail} />

@@ -13,3 +13,5 @@ export const mainMenuItems = [
   { link: "/channel", exact: false, name: "Channel" },
   { link: "/playlist", exact: false, name: "Play List" }
 ];
+
+export const maxResults = 12;

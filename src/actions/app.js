@@ -1,4 +1,4 @@
-import { defAxios as axios } from "../settings";
+import { defAxios as axios, maxResults } from "../settings";
 import {
   FETCH_CHANNEL,
   FETCH_PLAY_LIST,
@@ -20,7 +20,7 @@ export const fetchPlaylist = (
       const response = await axios.get("/playlists", {
         params: {
           part: "snippet,contentDetails",
-          maxResults: 15,
+          maxResults,
           channelId,
           pageToken,
           key: process.env.REACT_APP_API_KEY
@@ -46,7 +46,7 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
       const response = await axios.get("/playlistItems", {
         params: {
           part: "snippet,contentDetails",
-          maxResults: 15,
+          maxResults,
           key: process.env.REACT_APP_API_KEY,
           playlistId,
           pageToken
@@ -72,7 +72,7 @@ export const fetchChannel = pageToken => {
       const response = await axios.get("/subscriptions", {
         params: {
           part: "snippet",
-          maxResults: 15,
+          maxResults,
           channelId: process.env.REACT_APP_MY_CHANNEL_ID,
           key: process.env.REACT_APP_API_KEY,
           pageToken
