@@ -6,7 +6,7 @@ const Banner = props => {
   return (
     <div className="d-flex align-items-center mb-2">
       <FontAwesomeIcon icon="user-astronaut" size="3x"></FontAwesomeIcon>
-      <h3 className="display-4">{props.name || defaultName}</h3>
+      <h3 className="display-4 mx-3">{props.name || defaultName}</h3>
     </div>
   );
 };

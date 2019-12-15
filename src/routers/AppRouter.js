@@ -16,7 +16,7 @@ const history = createBrowserHistory();
 const AppRouter = () => {
   return (
     <div className="d-flex flex-column" style={{ height: "100vh" }}>
-      <div className="flex-grow-1">
+      <div className="flex-grow-1 mb-4">
         <Router history={history}>
           <Header />
           <div className="container">
