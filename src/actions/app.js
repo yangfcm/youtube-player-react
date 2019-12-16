@@ -10,6 +10,29 @@ import {
   CLEAR_ERROR
 } from "./types";
 
+export const fetchVideo = videoId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get("/videos", {
+        params: {
+          part: "snippet,statistics",
+          key: process.env.REACT_APP_API_KEY,
+          id: videoId
+        }
+      });
+      dispatch({
+        type: FETCH_VIDEO,
+        payload: response.data
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch video"
+      });
+    }
+  };
+};
+
 /** Fetch playlist */
 export const fetchPlaylist = (
   pageToken,
@@ -46,7 +69,7 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
       const response = await axios.get("/playlistItems", {
         params: {
           part: "snippet,contentDetails",
-          maxResults,
+          maxResults: 8,
           key: process.env.REACT_APP_API_KEY,
           playlistId,
           pageToken

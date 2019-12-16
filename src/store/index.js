@@ -4,6 +4,7 @@ import {
   channelReducer,
   playlistReducer,
   playlistDetailReducer,
+  videoReducer,
   errorReducer
 } from "../reducers/app";
 
@@ -15,7 +16,8 @@ const cnofigStore = () => {
       channel: channelReducer,
       error: errorReducer,
       playlist: playlistReducer,
-      playlistDetail: playlistDetailReducer
+      playlistDetail: playlistDetailReducer,
+      video: videoReducer
     }),
     composeEnhancers(applyMiddleware(thunk))
   );

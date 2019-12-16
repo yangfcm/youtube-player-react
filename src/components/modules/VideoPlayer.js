@@ -1,36 +1,69 @@
 import React from "react";
+import { connect } from "react-redux";
 import moment from "moment";
+import { fetchVideo, clearError } from "../../actions/app";
+import Loading from "../common/Loading";
+import VideoDetail from "./VideoDetail";
+import ErrorMessage from "../common/ErrorMessage";
 
-const stylePlayerContainer = {
-  position: "relative",
-  maxWidth: "100%",
-  height: "0",
-  overflow: "hidden",
-  background: "#dcddde",
-  paddingBottom: "62%"
-};
+class VideoPlayer extends React.Component {
+  state = {
+    video: null
+  };
+  componentDidMount = async () => {
+    await this.props.fetchVideo(this.props.videoId);
+    this.setState({
+      video: this.props.video.items[0]
+    });
+  };
 
-const stylePlayer = {
-  width: "100%",
-  height: "100%",
-  position: "absolute"
-};
+  componentWillUnmount = () => {
+    this.props.clearError();
+  };
 
-const VideoPlayer = ({ video }) => {
-  const videoSrc = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
+  render() {
+    const videoSrc = `https://www.youtube.com/embed/${this.props.videoId}`;
+    const stylePlayerContainer = {
+      position: "relative",
+      maxWidth: "100%",
+      height: "0",
+      overflow: "hidden",
+      background: "#dcddde",
+      paddingBottom: "62%"
+    };
 
-  return (
-    <div>
-      <div style={stylePlayerContainer}>
-        <iframe
-          src={videoSrc}
-          alt="video"
-          title="video player"
-          style={stylePlayer}
-        ></iframe>
+    const stylePlayer = {
+      width: "100%",
+      height: "100%",
+      position: "absolute"
+    };
+
+    return (
+      <div>
+        <div style={stylePlayerContainer} className="mb-3">
+          <iframe
+            src={videoSrc}
+            alt="video"
+            title="video player"
+            style={stylePlayer}
+          ></iframe>
+        </div>
+        {!this.props.error && !this.state.video && <Loading />}
+
+        {this.props.error && <ErrorMessage message={this.props.error} />}
+
+        {this.state.video && <VideoDetail video={this.state.video} />}
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default VideoPlayer;
+const mapStateToProps = state => {
+  return {
+    video: state.video,
+    error: state.error
+  };
+};
+export default connect(mapStateToProps, { fetchVideo, clearError })(
+  VideoPlayer
+);

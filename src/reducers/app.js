@@ -9,6 +9,15 @@ import {
   CLEAR_ERROR
 } from "../actions/types";
 
+export const videoReducer = (state = null, action) => {
+  switch (action.type) {
+    case FETCH_VIDEO:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const playlistDetailReducer = (state = null, action) => {
   switch (action.type) {
     case FETCH_PLAY_LIST_DETAIL:

@@ -66,11 +66,15 @@ class PlayListDetail extends React.Component {
         {this.state.playlistDetail && (
           <div className="row">
             <div className="col-lg-8">
-              <VideoPlayer video={this.state.playlistDetail.items[0]} />
+              <VideoPlayer
+                videoId={
+                  this.state.playlistDetail.items[0].contentDetails.videoId
+                }
+              />
             </div>
             <div
               className="col-lg-4"
-              style={{ maxHeight: "500px", overflowY: "auto" }}
+              // style={{ maxHeight: "600px", overflowY: "auto" }}
             >
               {this.renderPlaylistItems()}
               <div className="text-center">
