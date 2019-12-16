@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import VideoPlayer from "../modules/VideoPlayer";
+import VideoList from "../modules/VideoList";
 import VideoListItem from "../modules/VideoListItem";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
@@ -31,11 +32,17 @@ class PlayListDetail extends React.Component {
     });
   };
 
-  renderPlaylistItems = () => {
-    return this.state.playlistDetail.items.map(item => {
-      return <VideoListItem key={item.id} video={item} />;
-    });
-  };
+  // renderPlaylistItems = () => {
+  //   return this.state.playlistDetail.items.map(item => {
+  //     return (
+  //       <VideoListItem
+  //         key={item.id}
+  //         video={item}
+  //         playlistId={this.props.match.params.id}
+  //       />
+  //     );
+  //   });
+  // };
 
   fetchNextPagePlaylist = async () => {
     const { nextPageToken } = this.state.playlistDetail;
@@ -64,19 +71,23 @@ class PlayListDetail extends React.Component {
         )}
 
         {this.state.playlistDetail && (
-          <div className="row">
-            <div className="col-lg-8">
+          <div className="row justify-content-center ">
+            {/* <div className="col-lg-8">
               <VideoPlayer
                 videoId={
                   this.state.playlistDetail.items[0].contentDetails.videoId
                 }
               />
-            </div>
+              </div> */}
             <div
-              className="col-lg-4"
+              className="col col-md-8"
               // style={{ maxHeight: "600px", overflowY: "auto" }}
             >
-              {this.renderPlaylistItems()}
+              {/* this.renderPlaylistItems() */}
+              <VideoList
+                videoList={this.state.playlistDetail.items}
+                playlistId={this.props.match.params.id}
+              />
               <div className="text-center">
                 {this.state.playlistDetail.nextPageToken && (
                   <button

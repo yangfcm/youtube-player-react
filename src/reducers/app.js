@@ -5,9 +5,19 @@ import {
   FETCH_CHANNEL_DETAIL,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
+  FETCH_COMMENTS,
   CATCH_ERROR,
   CLEAR_ERROR
 } from "../actions/types";
+
+export const commentsReducer = (state = null, action) => {
+  switch (action.type) {
+    case FETCH_COMMENTS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
 export const videoReducer = (state = null, action) => {
   switch (action.type) {

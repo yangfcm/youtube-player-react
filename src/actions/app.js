@@ -6,10 +6,35 @@ import {
   FETCH_CHANNEL_DETAIL,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
+  FETCH_COMMENTS,
   CATCH_ERROR,
   CLEAR_ERROR
 } from "./types";
 
+/** Fetch comments by video id */
+export const fetchComments = videoId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get("/commentThreads", {
+        part: "snippet",
+        key: process.env.REACT_APP_API_KEY,
+        videoId,
+        maxResults
+      });
+      dispatch({
+        type: FETCH_COMMENTS,
+        payload: response.data
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch comments"
+      });
+    }
+  };
+};
+
+/** Fetch a vidoe by id */
 export const fetchVideo = videoId => {
   return async dispatch => {
     try {
@@ -33,7 +58,7 @@ export const fetchVideo = videoId => {
   };
 };
 
-/** Fetch playlist */
+/** Fetch playlist by ChannelId*/
 export const fetchPlaylist = (
   pageToken,
   channelId = process.env.REACT_APP_MY_CHANNEL_ID
