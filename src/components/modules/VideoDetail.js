@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { separateNumber } from "../../utils/helper";
 
 const VideoDetail = ({ video }) => {
   // console.log(video);
@@ -18,18 +19,18 @@ const VideoDetail = ({ video }) => {
         <div>
           Published at{" "}
           {moment(video.snippet.publishedAt).format("D MMM YYYY k:mm")} |{" "}
-          {video.statistics.viewCount} Views
+          {separateNumber(video.statistics.viewCount)} Views
         </div>
         <div>
           <span className="mr-3">
             <FontAwesomeIcon icon="thumbs-up" />
             &nbsp;
-            {video.statistics.likeCount}{" "}
+            {separateNumber(video.statistics.likeCount)}{" "}
           </span>
           <span>
             <FontAwesomeIcon icon="thumbs-down" />
             &nbsp;
-            {video.statistics.dislikeCount}
+            {separateNumber(video.statistics.dislikeCount)}
           </span>
         </div>
       </div>
