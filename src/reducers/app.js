@@ -6,6 +6,7 @@ import {
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
   FETCH_COMMENTS,
+  FETCH_COMMENTS_DISABLED,
   CATCH_ERROR,
   CLEAR_ERROR
 } from "../actions/types";
@@ -13,6 +14,8 @@ import {
 export const commentsReducer = (state = null, action) => {
   switch (action.type) {
     case FETCH_COMMENTS:
+      return action.payload;
+    case FETCH_COMMENTS_DISABLED:
       return action.payload;
     default:
       return state;

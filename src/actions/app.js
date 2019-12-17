@@ -7,29 +7,43 @@ import {
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
   FETCH_COMMENTS,
+  FETCH_COMMENTS_DISABLED,
   CATCH_ERROR,
   CLEAR_ERROR
 } from "./types";
 
 /** Fetch comments by video id */
-export const fetchComments = videoId => {
+export const fetchComments = (videoId, pageToken) => {
   return async dispatch => {
     try {
       const response = await axios.get("/commentThreads", {
-        part: "snippet",
-        key: process.env.REACT_APP_API_KEY,
-        videoId,
-        maxResults
+        params: {
+          part: "snippet",
+          key: process.env.REACT_APP_API_KEY,
+          videoId,
+          maxResults,
+          pageToken
+        }
       });
       dispatch({
         type: FETCH_COMMENTS,
         payload: response.data
       });
     } catch (e) {
-      dispatch({
-        type: CATCH_ERROR,
-        payload: "Failed to fetch comments"
-      });
+      console.log(e.response.data.error.errors[0].reason);
+      const errorReason = e.response.data.error.errors[0].reason;
+      if (errorReason === "commentsDisabled") {
+        // Consider comment is disabled by publisher.
+        dispatch({
+          type: FETCH_COMMENTS_DISABLED,
+          payload: errorReason
+        });
+      } else {
+        dispatch({
+          type: CATCH_ERROR,
+          payload: "Failed to fetch comments"
+        });
+      }
     }
   };
 };

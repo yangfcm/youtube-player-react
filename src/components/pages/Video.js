@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import queryString from "query-string";
-
 import VideoPlayer from "../modules/VideoPlayer";
 import VideoDetail from "../modules/VideoDetail";
 import VideoList from "../modules/VideoList";
-import Comments from "../modules/Comments";
-import Loading from "../common/Loading";
+import CommentsList from "../modules/CommentsList";
 import MoreButton from "../modules/MoreButton";
 import ErrorMessage from "../common/ErrorMessage";
 
@@ -25,6 +23,9 @@ class Video extends React.Component {
     const playlistId = queryString.parse(this.props.location.search).playlistId;
     await this.props.fetchVideo(videoId);
     await this.props.fetchPlaylistDetail(playlistId);
+    if (this.props.error) {
+      return;
+    }
     this.setState({
       videoId,
       playlistId,
@@ -50,6 +51,7 @@ class Video extends React.Component {
   };
 
   componentWillUnmount = () => {
+    console.log("video unmount");
     this.props.clearError();
   };
 
@@ -73,7 +75,7 @@ class Video extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.error && <ErrorMessage messate={this.props.error} />}
+        {this.props.error && <ErrorMessage message={this.props.error} />}
         {!this.props.error && (
           <div className="row">
             <div className="col-lg-8">
@@ -81,6 +83,10 @@ class Video extends React.Component {
                 <VideoPlayer videoId={this.state.videoId} />
               )}
               {this.state.video && <VideoDetail video={this.state.video} />}
+
+              {this.state.videoId && (
+                <CommentsList videoId={this.state.videoId} />
+              )}
             </div>
             <div className="col-lg-4">
               {this.state.playlistDetail && this.state.playlistId && (
@@ -105,7 +111,8 @@ class Video extends React.Component {
 const mapStateToProps = state => {
   return {
     playlistDetail: state.playlistDetail,
-    video: state.video
+    video: state.video,
+    error: state.error
   };
 };
 
