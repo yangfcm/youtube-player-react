@@ -4,7 +4,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const VideoDetail = ({ video }) => {
-  console.log(video);
+  // console.log(video);
   return (
     <div>
       <div className="mb-3">

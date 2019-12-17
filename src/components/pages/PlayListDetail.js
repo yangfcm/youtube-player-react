@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import VideoPlayer from "../modules/VideoPlayer";
 import VideoList from "../modules/VideoList";
-import VideoListItem from "../modules/VideoListItem";
+import MoreButton from "../modules/MoreButton";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 
@@ -32,18 +32,6 @@ class PlayListDetail extends React.Component {
     });
   };
 
-  // renderPlaylistItems = () => {
-  //   return this.state.playlistDetail.items.map(item => {
-  //     return (
-  //       <VideoListItem
-  //         key={item.id}
-  //         video={item}
-  //         playlistId={this.props.match.params.id}
-  //       />
-  //     );
-  //   });
-  // };
-
   fetchNextPagePlaylist = async () => {
     const { nextPageToken } = this.state.playlistDetail;
     await this.props.fetchPlaylistDetail(
@@ -63,7 +51,7 @@ class PlayListDetail extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         {!this.props.errorData && !this.state.playlistDetail && <Loading />}
 
         {this.props.errorData && (
@@ -71,38 +59,24 @@ class PlayListDetail extends React.Component {
         )}
 
         {this.state.playlistDetail && (
-          <div className="row justify-content-center ">
-            {/* <div className="col-lg-8">
-              <VideoPlayer
-                videoId={
-                  this.state.playlistDetail.items[0].contentDetails.videoId
-                }
-              />
-              </div> */}
-            <div
-              className="col col-md-8"
-              // style={{ maxHeight: "600px", overflowY: "auto" }}
-            >
-              {/* this.renderPlaylistItems() */}
+          <div className="row justify-content-center">
+            <div className="col col-md-8">
+              <div className="mb-3 ">
+                <h5 className="font-weight-bold">Playlist Videos</h5>
+                <Link to="/playlist">&lt;&lt;Back to My Playlist</Link>
+              </div>
               <VideoList
                 videoList={this.state.playlistDetail.items}
                 playlistId={this.props.match.params.id}
               />
-              <div className="text-center">
-                {this.state.playlistDetail.nextPageToken && (
-                  <button
-                    className="btn btn-danger"
-                    style={{ width: "100%" }}
-                    onClick={this.fetchNextPagePlaylist}
-                  >
-                    More...
-                  </button>
-                )}
-              </div>
+
+              {this.state.playlistDetail.nextPageToken && (
+                <MoreButton onClickMore={this.fetchNextPagePlaylist} />
+              )}
             </div>
           </div>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
