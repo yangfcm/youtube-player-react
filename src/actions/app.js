@@ -2,7 +2,7 @@ import { defAxios as axios, maxResults } from "../settings";
 import {
   FETCH_CHANNEL,
   FETCH_PLAY_LIST,
-  FETCH_RECOMMEND,
+  FETCH_VIDEOS,
   FETCH_CHANNEL_DETAIL,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
@@ -11,6 +11,31 @@ import {
   CATCH_ERROR,
   CLEAR_ERROR
 } from "./types";
+
+export const fetchVideos = (filter, pageToken) => {
+  return async dispatch => {
+    try {
+      const response = await axios.get("/videos", {
+        params: {
+          part: "snippet,statistics",
+          key: process.env.REACT_APP_API_KEY,
+          maxResults: 15,
+          pageToken,
+          chart: filter.chart ? filter.chart : null
+        }
+      });
+      dispatch({
+        type: FETCH_VIDEOS,
+        payload: response.data
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch videos list"
+      });
+    }
+  };
+};
 
 /** Fetch comments by video id */
 export const fetchComments = (videoId, pageToken) => {
@@ -30,7 +55,6 @@ export const fetchComments = (videoId, pageToken) => {
         payload: response.data
       });
     } catch (e) {
-      console.log(e.response.data.error.errors[0].reason);
       const errorReason = e.response.data.error.errors[0].reason;
       if (errorReason === "commentsDisabled") {
         // Consider comment is disabled by publisher.

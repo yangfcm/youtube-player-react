@@ -15,7 +15,8 @@ class Video extends React.Component {
     playlistDetail: null,
     video: null,
     videoId: null,
-    playlistId: null
+    playlistId: null,
+    error: null
   };
 
   componentDidMount = async () => {
@@ -24,7 +25,9 @@ class Video extends React.Component {
     await this.props.fetchVideo(videoId);
     await this.props.fetchPlaylistDetail(playlistId);
     if (this.props.error) {
-      return;
+      this.setState({
+        error: this.props.error
+      });
     }
     this.setState({
       videoId,
@@ -51,7 +54,6 @@ class Video extends React.Component {
   };
 
   componentWillUnmount = () => {
-    console.log("video unmount");
     this.props.clearError();
   };
 
@@ -75,8 +77,8 @@ class Video extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.error && <ErrorMessage message={this.props.error} />}
-        {!this.props.error && (
+        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {!this.state.error && (
           <div className="row">
             <div className="col-lg-8">
               {this.state.videoId && (

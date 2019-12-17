@@ -1,7 +1,7 @@
 import {
   FETCH_CHANNEL,
   FETCH_PLAY_LIST,
-  FETCH_RECOMMEND,
+  FETCH_VIDEOS,
   FETCH_CHANNEL_DETAIL,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
@@ -16,6 +16,15 @@ export const commentsReducer = (state = null, action) => {
     case FETCH_COMMENTS:
       return action.payload;
     case FETCH_COMMENTS_DISABLED:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const videosReducer = (state = null, action) => {
+  switch (action.type) {
+    case FETCH_VIDEOS:
       return action.payload;
     default:
       return state;

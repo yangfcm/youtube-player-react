@@ -4,11 +4,11 @@ const MoreButton = ({ onClickMore }) => {
   return (
     <div className="text-center">
       <button
-        className="btn btn-danger"
+        className="btn btn-light"
         style={{ width: "100%" }}
         onClick={onClickMore}
       >
-        More...
+        <span className="text-dark">More...</span>
       </button>
     </div>
   );

@@ -19,16 +19,20 @@ const AppRouter = () => {
       <div className="flex-grow-1 mb-4">
         <Router history={history}>
           <Header />
-          <div className="container-fluid px-5">
-            <Switch>
-              <Route path="/video/:id" component={Video} />
-              <Route path="/channel/:id" component={ChannelDetail} />
-              <Route path="/playlist/:id" component={PlaylistDetail} />
-              <Route path="/channel" component={Channel} />
-              <Route path="/playlist" component={PlayList} />
-              <Route path="/" exact component={Home} />
-              <Route path="*" component={NotFound} />
-            </Switch>
+          <div className="container-fluid">
+            <div className="row justify-content-center">
+              <div className="col-md-11">
+                <Switch>
+                  <Route path="/video/:id" component={Video} />
+                  <Route path="/channel/:id" component={ChannelDetail} />
+                  <Route path="/playlist/:id" component={PlaylistDetail} />
+                  <Route path="/channel" component={Channel} />
+                  <Route path="/playlist" component={PlayList} />
+                  <Route path="/" exact component={Home} />
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </div>
+            </div>
           </div>
         </Router>
       </div>
