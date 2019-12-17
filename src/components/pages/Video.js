@@ -23,21 +23,26 @@ class Video extends React.Component {
     const videoId = this.props.match.params.id;
     const playlistId = queryString.parse(this.props.location.search).playlistId;
     await this.props.fetchVideo(videoId);
-    await this.props.fetchPlaylistDetail(playlistId);
+    if (playlistId) {
+      await this.props.fetchPlaylistDetail(playlistId);
+    }
     if (this.props.error) {
       this.setState({
         error: this.props.error
       });
+      return;
     }
     this.setState({
       videoId,
       playlistId,
       video: this.props.video.items[0],
-      playlistDetail: {
-        pageInfo: this.props.playlistDetail.pageInfo,
-        items: this.props.playlistDetail.items,
-        nextPageToken: this.props.playlistDetail.nextPageToken
-      }
+      playlistDetail: this.props.playlistDetail
+        ? {
+            pageInfo: this.props.playlistDetail.pageInfo,
+            items: this.props.playlistDetail.items,
+            nextPageToken: this.props.playlistDetail.nextPageToken
+          }
+        : null
     });
   };
 
@@ -79,7 +84,7 @@ class Video extends React.Component {
       <React.Fragment>
         {this.state.error && <ErrorMessage message={this.state.error} />}
         {!this.state.error && (
-          <div className="row">
+          <div className="row justify-content-center">
             <div className="col-lg-8">
               {this.state.videoId && (
                 <VideoPlayer videoId={this.state.videoId} />
@@ -90,19 +95,18 @@ class Video extends React.Component {
                 <CommentsList videoId={this.state.videoId} />
               )}
             </div>
-            <div className="col-lg-4">
-              {this.state.playlistDetail && this.state.playlistId && (
+            {this.state.playlistDetail && this.state.playlistId && (
+              <div className="col-lg-4">
                 <VideoList
                   videoList={this.state.playlistDetail.items}
                   playlistId={this.state.playlistId}
                 />
-              )}
 
-              {this.state.playlistDetail &&
-                this.state.playlistDetail.nextPageToken && (
+                {this.state.playlistDetail.nextPageToken && (
                   <MoreButton onClickMore={this.fetchNextPagePlaylist} />
                 )}
-            </div>
+              </div>
+            )}
           </div>
         )}
       </React.Fragment>
