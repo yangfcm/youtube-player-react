@@ -48,7 +48,7 @@ class PlayList extends React.Component {
   };
 
   fetchNextPagePlayList = async () => {
-    const { nextPageToken } = this.props.playlistData;
+    const { nextPageToken } = this.props.playlist;
     const { channelId } = this.props;
     await this.props.fetchPlaylist(nextPageToken, channelId);
     this.setState((state, props) => {

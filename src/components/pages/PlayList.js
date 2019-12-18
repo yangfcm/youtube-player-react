@@ -6,6 +6,7 @@ import Menu from "../layout/Menu";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import PlayListItem from "../modules/PlayListItem";
+import MoreButton from "../modules/MoreButton";
 import { mainMenuItems } from "../../settings";
 import { fetchPlaylist, clearError } from "../../actions/app";
 
@@ -86,13 +87,7 @@ class PlayList extends React.Component {
             </div>
             <div className="text-center">
               {this.state.playlist.nextPageToken && (
-                <button
-                  className="btn btn-danger"
-                  style={{ width: "50%" }}
-                  onClick={this.fetchNextPagePlayList}
-                >
-                  More...
-                </button>
+                <MoreButton onClickMore={this.fetchNextPagePlayList} />
               )}
             </div>
           </div>
