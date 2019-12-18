@@ -4,7 +4,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const VideoListItem = ({ video, playlistId }) => {
-  let linkUrl = `/video/${video.snippet.resourceId.videoId}`;
+  let linkUrl = `/video/${video.id.videoId}`;
   if (playlistId) linkUrl += `?playlistId=${playlistId}`;
   return (
     <div className="d-flex flex-md-row my-2">
@@ -23,6 +23,10 @@ const VideoListItem = ({ video, playlistId }) => {
           <h6 className="text-primary font-weight-bold">
             {video.snippet.title}
           </h6>
+        </Link>
+        <Link to={`/channel/${video.snippet.channelId}`}>
+          {" "}
+          {video.snippet.channelTitle}
         </Link>
         <p className="font-weight-light">
           <FontAwesomeIcon icon="user-clock" />{" "}

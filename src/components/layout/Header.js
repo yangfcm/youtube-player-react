@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DropdownMenu from "../common/DropdownMenu";
 import { mainMenuItems } from "../../settings";
 
 class Header extends React.Component {
   state = {
-    showDropdownMenu: false
+    showDropdownMenu: false,
+    search: ""
   };
 
   toggleDropdownMenu = () => {
@@ -18,6 +19,20 @@ class Header extends React.Component {
   };
 
   componentDidMount = () => {};
+
+  handleSearch = e => {
+    e.preventDefault();
+    this.props.history.push(`/results?q=${this.state.search}`);
+    this.setState({
+      search: ""
+    });
+  };
+
+  handleInput = e => {
+    this.setState({
+      search: e.target.value
+    });
+  };
 
   render() {
     return (
@@ -33,11 +48,12 @@ class Header extends React.Component {
           </span>
         </Link>
         <div className="d-flex align-items-center">
-          <form className="d-flex">
+          <form className="d-flex" onSubmit={this.handleSearch}>
             <input
               type="text"
               placeholder="Search video..."
               className="form-control"
+              onInput={this.handleInput}
             />
             <button className="btn btn-outline-dark mx-2" type="submit">
               <FontAwesomeIcon icon="search" />
@@ -69,4 +85,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

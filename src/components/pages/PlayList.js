@@ -45,8 +45,8 @@ class PlayList extends React.Component {
   };
 
   renderPlayList = () => {
-    return this.state.playlist.items.map(item => {
-      return <PlayListItem playlist={item} key={item.id} />;
+    return this.state.playlist.items.map((item, index) => {
+      return <PlayListItem playlist={item} key={index} />;
     });
   };
 

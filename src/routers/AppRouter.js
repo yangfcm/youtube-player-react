@@ -8,6 +8,7 @@ import PlayList from "../components/pages/PlayList";
 import ChannelDetail from "../components/pages/ChannelDetail";
 import PlaylistDetail from "../components/pages/PlayListDetail";
 import Video from "../components/pages/Video";
+import SearchResult from "../components/pages/SearchResult";
 import NotFound from "../components/pages/NotFound";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -28,6 +29,7 @@ const AppRouter = () => {
                   <Route path="/playlist/:id" component={PlaylistDetail} />
                   <Route path="/channel" exact component={Channel} />
                   <Route path="/playlist" component={PlayList} />
+                  <Route path="/results" component={SearchResult} />
                   <Route path="/" exact component={Home} />
                   <Route path="*" component={NotFound} />
                 </Switch>

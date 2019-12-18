@@ -1,23 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import Banner from "../layout/Banner";
-import Menu from "../layout/Menu";
-import VideoGrid from "../modules/VideoGrid";
+import queryString from "query-string";
+import VideoList from "../modules/VideoList";
+import MoreButton from "../modules/MoreButton";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
-import MoreButton from "../modules/MoreButton";
-import { mainMenuItems } from "../../settings";
 
-import { fetchVideos, clearError } from "../../actions/app";
+import { searchVideos, clearError } from "../../actions/app";
 
-class Home extends React.Component {
+class SearchResult extends React.Component {
   state = {
     videos: null,
     error: null
   };
 
-  componentDidMount = async () => {
-    await this.props.fetchVideos({ chart: "mostPopular" });
+  searchVideos = async q => {
+    await this.props.searchVideos({ q });
     if (this.props.error) {
       this.setState({
         error: this.props.error
@@ -35,9 +33,26 @@ class Home extends React.Component {
         });
       } else {
         this.setState({
-          error: "No video recommended"
+          error: `No video found with the key word: ${q}`
         });
       }
+    }
+  };
+
+  componentDidMount = () => {
+    const { q } = queryString.parse(this.props.location.search);
+    this.searchVideos(q);
+  };
+
+  componentDidUpdate = async prevProps => {
+    const prevq = queryString.parse(prevProps.location.search).q;
+    const { q } = queryString.parse(this.props.location.search);
+    if (prevq !== q) {
+      this.setState({
+        videos: null,
+        error: null
+      });
+      this.searchVideos(q);
     }
   };
 
@@ -46,8 +61,9 @@ class Home extends React.Component {
   };
 
   fetchNextPageVideos = async () => {
+    const { q } = queryString.parse(this.props.location.search);
     const { nextPageToken } = this.props.videos;
-    await this.props.fetchVideos({ chart: "mostPopular" }, nextPageToken);
+    await this.props.searchVideos({ q }, nextPageToken);
     this.setState((state, props) => {
       return {
         videos: {
@@ -61,23 +77,21 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <Banner />
-        <Menu menuItems={mainMenuItems} />
-        <div className="mb-3"></div>
+      <React.Fragment>
         {!this.state.error && !this.state.videos && <Loading />}
-        {this.state.error && <ErrorMessage message={this.props.error} />}
-        {this.state.videos && (
+        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {!this.state.error && this.state.videos && (
           <div>
-            <VideoGrid videos={this.state.videos.items} />
+            <VideoList videoList={this.state.videos.items} />
+
             {this.state.videos.nextPageToken && (
-              <div className="mt-3" style={{ width: "50%", margin: "0 auto" }}>
+              <div style={{ width: "50%", margin: "0 auto" }}>
                 <MoreButton onClickMore={this.fetchNextPageVideos} />
               </div>
             )}
           </div>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -88,5 +102,6 @@ const mapStateToProps = state => {
     error: state.error
   };
 };
-
-export default connect(mapStateToProps, { fetchVideos, clearError })(Home);
+export default connect(mapStateToProps, { searchVideos, clearError })(
+  SearchResult
+);

@@ -2,10 +2,8 @@ import React from "react";
 import VideoListItem from "../modules/VideoListItem";
 
 const renderList = (videoList, playlistId) => {
-  return videoList.map(video => {
-    return (
-      <VideoListItem key={video.id} video={video} playlistId={playlistId} />
-    );
+  return videoList.map((video, index) => {
+    return <VideoListItem key={index} video={video} playlistId={playlistId} />;
   });
 };
 
