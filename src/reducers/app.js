@@ -2,6 +2,7 @@ import {
   FETCH_CHANNEL,
   FETCH_PLAY_LIST,
   FETCH_VIDEOS,
+  SEARCH_VIDEOS,
   FETCH_CHANNEL_INTRO,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
@@ -24,6 +25,8 @@ export const commentsReducer = (state = null, action) => {
 
 export const videosReducer = (state = null, action) => {
   switch (action.type) {
+    case SEARCH_VIDEOS:
+      return action.payload;
     case FETCH_VIDEOS:
       return action.payload;
     default:
@@ -56,19 +59,12 @@ export const playlistDetailReducer = (state = null, action) => {
 export const playlistReducer = (state = null, action) => {
   switch (action.type) {
     case FETCH_PLAY_LIST:
-      if (!state) {
-        return {
-          pageInfo: action.payload.pageInfo,
-          items: action.payload.items,
-          nextPageToken: action.payload.nextPageToken
-        };
-      } else {
-        return {
-          pageInfo: action.payload.pageInfo,
-          items: state.items.concat(action.payload.items),
-          nextPageToken: action.payload.nextPageToken
-        };
-      }
+      return {
+        pageInfo: action.payload.pageInfo,
+        items: action.payload.items,
+        nextPageToken: action.payload.nextPageToken
+      };
+
     default:
       return state;
   }

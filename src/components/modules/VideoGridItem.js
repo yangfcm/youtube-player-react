@@ -7,7 +7,7 @@ const VideoGridItem = ({ video }) => {
   return (
     <div>
       <div className="mb-2">
-        <Link to={`/video/${video.id}`}>
+        <Link to={`/video/${video.id.videoId || video.id}`}>
           <img
             style={{ width: "100%", height: "auto" }}
             src={video.snippet.thumbnails.medium.url}
@@ -26,7 +26,10 @@ const VideoGridItem = ({ video }) => {
           }}
           className="mb-1"
         >
-          <Link to={`/video/${video.id}`} title={video.snippet.title}>
+          <Link
+            to={`/video/${video.id.videoId || video.id}`}
+            title={video.snippet.title}
+          >
             {video.snippet.title}
           </Link>
         </div>
@@ -35,10 +38,14 @@ const VideoGridItem = ({ video }) => {
             <span className="text-secondary">{video.snippet.channelTitle}</span>
           </Link>
         </div>
-        <div className="text-muted">
-          {separateNumber(video.statistics.viewCount)} Views |{" "}
-          {moment(video.snippet.publishedAt).fromNow()}
-        </div>
+        {
+          <div className="text-muted">
+            {video.statistics && (
+              <span>{separateNumber(video.statistics.viewCount)} Views |</span>
+            )}{" "}
+            {moment(video.snippet.publishedAt).fromNow()}
+          </div>
+        }
       </div>
     </div>
   );

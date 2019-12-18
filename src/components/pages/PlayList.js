@@ -10,9 +10,32 @@ import { mainMenuItems } from "../../settings";
 import { fetchPlaylist, clearError } from "../../actions/app";
 
 class PlayList extends React.Component {
+  state = {
+    playlist: null,
+    error: null
+  };
   componentDidMount = async () => {
-    if (!this.props.playlistData) {
-      await this.props.fetchPlaylist();
+    await this.props.fetchPlaylist();
+    if (this.props.error) {
+      this.setState({
+        error: this.props.error
+      });
+      return;
+    }
+    if (this.props.playlist) {
+      if (this.props.playlist.items.length > 0) {
+        this.setState({
+          playlist: {
+            pageInfo: this.props.playlist.pageInfo,
+            items: this.props.playlist.items,
+            nextPageToken: this.props.playlist.nextPageToken
+          }
+        });
+      } else {
+        this.setState({
+          error: "No Playlist in this channel"
+        });
+      }
     }
   };
 
@@ -21,7 +44,7 @@ class PlayList extends React.Component {
   };
 
   renderPlayList = () => {
-    return this.props.playlistData.items.map(item => {
+    return this.state.playlist.items.map(item => {
       return <PlayListItem playlist={item} key={item.id} />;
     });
   };
@@ -29,6 +52,15 @@ class PlayList extends React.Component {
   fetchNextPagePlayList = async () => {
     const { nextPageToken } = this.props.playlistData;
     await this.props.fetchPlaylist(nextPageToken);
+    this.setState((state, props) => {
+      return {
+        playlist: {
+          pageInfo: props.playlist.pageInfo,
+          items: state.playlist.items.concat(props.playlist.items),
+          nextPageToken: props.playlist.nextPageToken
+        }
+      };
+    });
   };
 
   render() {
@@ -42,19 +74,18 @@ class PlayList extends React.Component {
       <div>
         <Banner />
         <Menu menuItems={mainMenuItems} />
-        {!this.props.errorData && !this.props.playlistData && <Loading />}
+        {!this.props.error && !this.state.playlist && <Loading />}
 
-        {this.props.errorData && (
-          <ErrorMessage message={this.props.errorData} />
-        )}
+        {this.props.error && <ErrorMessage message={this.props.error} />}
 
-        {this.props.playlistData && (
+        {this.state.playlist && (
           <div className="mt-3">
+            <h3 className="mb-2 text-primary font-weight-bold">My Play List</h3>
             <div className="mb-3" style={playlistStyle}>
               {this.renderPlayList()}
             </div>
             <div className="text-center">
-              {this.props.playlistData.nextPageToken && (
+              {this.state.playlist.nextPageToken && (
                 <button
                   className="btn btn-danger"
                   style={{ width: "50%" }}
@@ -73,8 +104,8 @@ class PlayList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    playlistData: state.playlist,
-    errorData: state.error
+    playlist: state.playlist,
+    error: state.error
   };
 };
 

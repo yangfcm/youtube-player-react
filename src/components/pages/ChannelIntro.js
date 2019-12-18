@@ -38,7 +38,7 @@ class ChannelIntro extends React.Component {
     this.props.clearError();
   };
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const { channelIntro } = this.state;
     return (
       <React.Fragment>

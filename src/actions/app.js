@@ -3,6 +3,7 @@ import {
   FETCH_CHANNEL,
   FETCH_PLAY_LIST,
   FETCH_VIDEOS,
+  SEARCH_VIDEOS,
   FETCH_CHANNEL_INTRO,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
@@ -12,16 +13,41 @@ import {
   CLEAR_ERROR
 } from "./types";
 
+export const searchVideos = (filter, pageToken) => {
+  return async dispatch => {
+    try {
+      const response = await axios.get("/search", {
+        params: {
+          ...filter,
+          part: "snippet",
+          key: process.env.REACT_APP_API_KEY,
+          maxResults: 15,
+          pageToken
+        }
+      });
+      dispatch({
+        type: SEARCH_VIDEOS,
+        payload: response.data
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch videos list"
+      });
+    }
+  };
+};
+
 export const fetchVideos = (filter, pageToken) => {
   return async dispatch => {
     try {
       const response = await axios.get("/videos", {
         params: {
+          ...filter,
           part: "snippet,statistics",
           key: process.env.REACT_APP_API_KEY,
           maxResults: 15,
-          pageToken,
-          chart: filter.chart ? filter.chart : null
+          pageToken
         }
       });
       dispatch({
@@ -158,10 +184,11 @@ export const fetchChannel = pageToken => {
       const response = await axios.get("/subscriptions", {
         params: {
           part: "snippet",
-          maxResults,
+          maxResults: 50,
           channelId: process.env.REACT_APP_MY_CHANNEL_ID,
           key: process.env.REACT_APP_API_KEY,
-          pageToken
+          pageToken,
+          order: "alphabetical"
         }
       });
       dispatch({

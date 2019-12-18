@@ -75,6 +75,9 @@ class Channel extends React.Component {
         {/* Error message */}
         {this.state.channels && (
           <div className="mt-3">
+            <h3 className="mb-2 text-primary font-weight-bold">
+              My Subscriptions
+            </h3>
             <div style={channelListStyle} className="mb-3">
               {this.renderChannelList()}
             </div>

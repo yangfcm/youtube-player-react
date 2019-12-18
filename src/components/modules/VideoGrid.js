@@ -2,8 +2,8 @@ import React from "react";
 import VideoGridItem from "./VideoGridItem";
 
 const renderGrid = videos => {
-  return videos.map(video => {
-    return <VideoGridItem key={video.id} video={video} />;
+  return videos.map((video, index) => {
+    return <VideoGridItem key={index} video={video} />;
   });
 };
 
