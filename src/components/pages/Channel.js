@@ -10,9 +10,27 @@ import { mainMenuItems } from "../../settings";
 import { fetchChannel, clearError } from "../../actions/app";
 
 class Channel extends React.Component {
+  state = {
+    channels: null,
+    error: null
+  };
+
   componentDidMount = async () => {
-    if (!this.props.channelData) {
-      await this.props.fetchChannel();
+    await this.props.fetchChannel();
+    if (this.props.error) {
+      this.setState({
+        error: this.props.error
+      });
+      return;
+    }
+    if (this.props.channelData) {
+      this.setState({
+        channels: {
+          pageInfo: this.props.channelData.pageInfo,
+          items: this.props.channelData.items,
+          nextPageToken: this.props.channelData.nextPageToken
+        }
+      });
     }
   };
 
@@ -21,7 +39,7 @@ class Channel extends React.Component {
   };
 
   renderChannelList = () => {
-    return this.props.channelData.items.map(item => {
+    return this.state.channels.items.map(item => {
       return <ChannelItem channel={item} key={item.id} />;
     });
   };
@@ -29,6 +47,15 @@ class Channel extends React.Component {
   fetchNextPageChannel = async () => {
     const { nextPageToken } = this.props.channelData;
     await this.props.fetchChannel(nextPageToken);
+    this.setState((state, props) => {
+      return {
+        channels: {
+          pageInfo: props.channelData.pageInfo,
+          items: state.channels.items.concat(props.channelData.items),
+          nextPageToken: props.channelData.nextPageToken
+        }
+      };
+    });
   };
 
   render() {
@@ -42,19 +69,17 @@ class Channel extends React.Component {
       <div>
         <Banner />
         <Menu menuItems={mainMenuItems} />
-        {!this.props.errorData && !this.props.channelData && <Loading />}{" "}
+        {!this.state.error && !this.state.channels && <Loading />}{" "}
         {/* Loading */}
-        {this.props.errorData && (
-          <ErrorMessage message={this.props.errorData} />
-        )}{" "}
+        {this.state.error && <ErrorMessage message={this.state.error} />}{" "}
         {/* Error message */}
-        {this.props.channelData && (
+        {this.state.channels && (
           <div className="mt-3">
             <div style={channelListStyle} className="mb-3">
               {this.renderChannelList()}
             </div>
             <div className="text-center">
-              {this.props.channelData.nextPageToken && (
+              {this.state.channels.nextPageToken && (
                 <button
                   className="btn btn-danger"
                   style={{ width: "50%" }}

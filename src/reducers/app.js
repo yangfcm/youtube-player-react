@@ -77,19 +77,11 @@ export const playlistReducer = (state = null, action) => {
 export const channelReducer = (state = null, action) => {
   switch (action.type) {
     case FETCH_CHANNEL:
-      if (!state) {
-        return {
-          pageInfo: action.payload.pageInfo,
-          items: action.payload.items,
-          nextPageToken: action.payload.nextPageToken
-        };
-      } else {
-        return {
-          pageInfo: action.payload.pageInfo,
-          items: state.items.concat(action.payload.items),
-          nextPageToken: action.payload.nextPageToken
-        };
-      }
+      return {
+        pageInfo: action.payload.pageInfo,
+        items: action.payload.items,
+        nextPageToken: action.payload.nextPageToken
+      };
     case FETCH_CHANNEL_INTRO:
       return {
         items: action.payload.items

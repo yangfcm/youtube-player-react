@@ -26,7 +26,7 @@ const AppRouter = () => {
                   <Route path="/video/:id" component={Video} />
                   <Route path="/channel/:id" component={ChannelDetail} />
                   <Route path="/playlist/:id" component={PlaylistDetail} />
-                  <Route path="/channel" component={Channel} />
+                  <Route path="/channel" exact component={Channel} />
                   <Route path="/playlist" component={PlayList} />
                   <Route path="/" exact component={Home} />
                   <Route path="*" component={NotFound} />
