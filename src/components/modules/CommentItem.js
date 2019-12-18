@@ -5,7 +5,7 @@ const CommentItem = ({ comment }) => {
   const commentSnippet = comment.snippet.topLevelComment.snippet;
   return (
     <React.Fragment>
-      <div className="d-flex mb-2">
+      <div className="d-flex mb-2" style={{ overflow: "auto" }}>
         <div className="mr-3">
           <img
             src={commentSnippet.authorProfileImageUrl}

@@ -6,7 +6,10 @@ const PlayListItem = ({ playlist }) => {
     <div className="card">
       <Link to={`/playlist/${playlist.id}`}>
         <img
-          src={playlist.snippet.thumbnails.medium.url}
+          src={
+            playlist.snippet.thumbnails &&
+            playlist.snippet.thumbnails.medium.url
+          }
           alt={playlist.snippet.title}
           className="card-img-top"
         />

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import PlayListItem from "../modules/PlayListItem";
+import MoreButton from "../modules/MoreButton";
 import { fetchPlaylist, clearError } from "../../actions/app";
 
 class PlayList extends React.Component {
@@ -63,7 +64,6 @@ class PlayList extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     const playlistStyle = {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill, minmax(15rem, 1fr))",
@@ -79,20 +79,19 @@ class PlayList extends React.Component {
         {this.state.playlist && (
           <div className="mt-3">
             <h3 className="text-primary font-weight-bold mb-2">
-              {this.state.playlist.items[0].snippet.title} - Play List
+              {this.state.playlist.items[0].snippet.channelTitle} - Play List
             </h3>
             <div className="mb-3" style={playlistStyle}>
               {this.renderPlayList()}
             </div>
             <div className="text-center">
               {this.state.playlist.nextPageToken && (
-                <button
-                  className="btn btn-danger"
-                  style={{ width: "50%" }}
-                  onClick={this.fetchNextPagePlayList}
+                <div
+                  className="mt-3"
+                  style={{ width: "50%", margin: "0 auto" }}
                 >
-                  More...
-                </button>
+                  <MoreButton onClickMore={this.fetchNextPagePlayList} />
+                </div>
               )}
             </div>
           </div>

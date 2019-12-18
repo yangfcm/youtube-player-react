@@ -87,7 +87,12 @@ class PlayList extends React.Component {
             </div>
             <div className="text-center">
               {this.state.playlist.nextPageToken && (
-                <MoreButton onClickMore={this.fetchNextPagePlayList} />
+                <div
+                  className="mt-3"
+                  style={{ width: "50%", margin: "0 auto" }}
+                >
+                  <MoreButton onClickMore={this.fetchNextPagePlayList} />
+                </div>
               )}
             </div>
           </div>

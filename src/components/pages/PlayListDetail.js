@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import VideoList from "../modules/VideoList";
 import MoreButton from "../modules/MoreButton";
@@ -67,7 +67,6 @@ class PlayListDetail extends React.Component {
             <div className="col col-md-8">
               <div className="mb-3 ">
                 <h5 className="font-weight-bold">Playlist Videos</h5>
-                <Link to="/playlist">&lt;&lt;Back to My Playlist</Link>
               </div>
               <VideoList
                 videoList={this.state.playlistDetail.items}

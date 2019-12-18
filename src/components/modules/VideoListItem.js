@@ -10,7 +10,12 @@ const VideoListItem = ({ video, playlistId }) => {
     <div className="d-flex flex-md-row my-2">
       <div className="d-flex align-items-center">
         <Link to={linkUrl}>
-          <img src={video.snippet.thumbnails.default.url} alt={video.title} />
+          <img
+            src={
+              video.snippet.thumbnails && video.snippet.thumbnails.default.url
+            }
+            alt={video.title}
+          />
         </Link>
       </div>
       <div className="d-flex flex-column justify-content-center ml-3">

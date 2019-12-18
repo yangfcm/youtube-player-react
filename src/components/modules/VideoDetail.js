@@ -35,7 +35,10 @@ const VideoDetail = ({ video }) => {
         </div>
       </div>
       <hr />
-      <p dangerouslySetInnerHTML={{ __html: video.snippet.description }}></p>
+      <p
+        dangerouslySetInnerHTML={{ __html: video.snippet.description }}
+        style={{ overflow: "hidden" }}
+      ></p>
     </div>
   );
 };
