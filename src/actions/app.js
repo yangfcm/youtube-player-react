@@ -3,7 +3,7 @@ import {
   FETCH_CHANNEL,
   FETCH_PLAY_LIST,
   FETCH_VIDEOS,
-  FETCH_CHANNEL_DETAIL,
+  FETCH_CHANNEL_INTRO,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
   FETCH_COMMENTS,
@@ -172,6 +172,30 @@ export const fetchChannel = pageToken => {
       dispatch({
         type: CATCH_ERROR,
         payload: "Failed to fetch channels"
+      });
+    }
+  };
+};
+
+/** Fetch channel intro */
+export const fetchChannelIntro = channelId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/channels`, {
+        params: {
+          part: "snippet,statistics",
+          id: channelId,
+          key: process.env.REACT_APP_API_KEY
+        }
+      });
+      dispatch({
+        type: FETCH_CHANNEL_INTRO,
+        payload: response.data
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch channel's intro"
       });
     }
   };

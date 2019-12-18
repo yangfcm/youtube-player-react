@@ -2,7 +2,7 @@ import {
   FETCH_CHANNEL,
   FETCH_PLAY_LIST,
   FETCH_VIDEOS,
-  FETCH_CHANNEL_DETAIL,
+  FETCH_CHANNEL_INTRO,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_VIDEO,
   FETCH_COMMENTS,
@@ -90,6 +90,10 @@ export const channelReducer = (state = null, action) => {
           nextPageToken: action.payload.nextPageToken
         };
       }
+    case FETCH_CHANNEL_INTRO:
+      return {
+        items: action.payload.items
+      };
     default:
       return state;
   }

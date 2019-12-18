@@ -30,12 +30,12 @@ const VideoGridItem = ({ video }) => {
             {video.snippet.title}
           </Link>
         </div>
-        <div>
+        <div className="mb-2">
           <Link to={`/channel/${video.snippet.channelId}`}>
-            <span className="text-muted">{video.snippet.channelTitle}</span>
+            <span className="text-secondary">{video.snippet.channelTitle}</span>
           </Link>
         </div>
-        <div>
+        <div className="text-muted">
           {separateNumber(video.statistics.viewCount)} Views |{" "}
           {moment(video.snippet.publishedAt).fromNow()}
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import VideoList from "../modules/VideoList";
 import MoreButton from "../modules/MoreButton";
@@ -16,13 +16,17 @@ class PlayListDetail extends React.Component {
 
   componentDidMount = async () => {
     await this.props.fetchPlaylistDetail(this.props.match.params.id);
-    this.setState({
-      playlistDetail: {
-        pageInfo: this.props.playlistDetail.pageInfo,
-        items: this.props.playlistDetail.items,
-        nextPageToken: this.props.playlistDetail.nextPageToken
-      }
-    });
+    if (this.props.playlistDetail) {
+      this.setState({
+        playlistDetail: {
+          pageInfo: this.props.playlistDetail.pageInfo,
+          items: this.props.playlistDetail.items,
+          nextPageToken: this.props.playlistDetail.nextPageToken
+        }
+      });
+    } else {
+      this.props.history.push("/not-found");
+    }
   };
 
   componentWillUnmount = () => {
@@ -89,5 +93,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { fetchPlaylistDetail, clearError })(
-  PlayListDetail
+  withRouter(PlayListDetail)
 );

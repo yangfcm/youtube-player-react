@@ -11,7 +11,7 @@ const VideoGrid = ({ videos }) => {
   const gridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(15rem, 1fr))",
-    gap: "1.2rem"
+    gap: "1.8rem"
   };
   return <div style={gridStyle}> {renderGrid(videos)}</div>;
 };
