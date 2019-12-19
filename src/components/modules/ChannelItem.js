@@ -5,12 +5,12 @@ const ChannelItem = ({ channel }) => {
   return (
     <div className="card">
       <Link to={`/channel/${channel.snippet.resourceId.channelId}`}>
-        <div className="pt-3 d-flex justify-content-center">
+        <div className="p-3 d-flex justify-content-center">
           <img
             src={channel.snippet.thumbnails.medium.url}
             alt={channel.title}
-            className="card-img-top rounded-circle"
-            style={{ maxWidth: "80%", height: "auto" }}
+            className="rounded-circle"
+            style={{ maxWidth: "100%", height: "auto" }}
           />
         </div>
       </Link>
