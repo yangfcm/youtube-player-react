@@ -82,6 +82,12 @@ class SearchResult extends React.Component {
         {this.state.error && <ErrorMessage message={this.state.error} />}
         {!this.state.error && this.state.videos && (
           <div>
+            <h3 className="mb-3">
+              Search results with keyword:{" "}
+              <span className="text-danger">
+                {queryString.parse(this.props.location.search).q}
+              </span>
+            </h3>
             <VideoList videoList={this.state.videos.items} />
 
             {this.state.videos.nextPageToken && (
