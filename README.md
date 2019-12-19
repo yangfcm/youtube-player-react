@@ -25,7 +25,8 @@ My personal Youtube video watch app built by React and Google Youtube Data API.
 * Run `npm start` to run it on local machine.
 
 ## Deployment
-* The app is deployed at [Netlify](https://www.netlify.com/).
+* The app is deployed at [Netlify](https://www.netlify.com/) using CI/CD provided by Netlify.
+* Issue - Page Not Found on Netlify with React Router. When you go to the home page and navigate between pages, routing works well. But if you go to a specific route(not root route), Netlify will return 404 error because SPA's routing is configured on the client while Netlify as a server will first handle the route(which doesn't exist on server). To fix it create a file `.redirects` under public directory with the content: `/* /index.html 200` to tell Netlify pass on any route handling to `index.html`. Reference: https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps
 
 ## Available Scripts
 
