@@ -6,6 +6,7 @@ import Menu from "../layout/Menu";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import ChannelItem from "../modules/ChannelItem";
+import MoreButton from "../modules/MoreButton";
 import { mainMenuItems } from "../../settings";
 import { fetchChannel, clearError } from "../../actions/app";
 
@@ -15,27 +16,53 @@ class Channel extends React.Component {
     error: null
   };
 
-  componentDidMount = async () => {
-    await this.props.fetchChannel();
+  componentDidMount = () => {
+    this.fetchChannelData();
+  };
+
+  componentWillUnmount = () => {
+    this.props.clearError();
+  };
+
+  fetchChannelData = async (nextPageToken = null) => {
+    await this.props.fetchChannel(nextPageToken);
     if (this.props.errorData) {
+      // Error handling
       this.setState({
         error: this.props.errorData
       });
       return;
     }
     if (this.props.channelData) {
-      this.setState({
-        channels: {
-          pageInfo: this.props.channelData.pageInfo,
-          items: this.props.channelData.items,
-          nextPageToken: this.props.channelData.nextPageToken
+      // Fetch data from API successfully
+      if (nextPageToken) {
+        // If nextPageToken exists, indicating it is fetching next page's data
+        this.setState((state, props) => {
+          return {
+            channels: {
+              pageInfo: props.channelData.pageInfo,
+              items: state.channels.items.concat(props.channelData.items),
+              nextPageToken: props.channelData.nextPageToken
+            }
+          };
+        });
+      } else {
+        // Otherwise it is fetching the first page's data
+        if (this.props.channelData.items.length === 0) {
+          this.setState({
+            error: "No channel is found"
+          });
+          return;
         }
-      });
+        this.setState({
+          channels: {
+            pageInfo: this.props.channelData.pageInfo,
+            items: this.props.channelData.items,
+            nextPageToken: this.props.channelData.nextPageToken
+          }
+        });
+      }
     }
-  };
-
-  componentWillUnmount = () => {
-    this.props.clearError();
   };
 
   renderChannelList = () => {
@@ -45,17 +72,8 @@ class Channel extends React.Component {
   };
 
   fetchNextPageChannel = async () => {
-    const { nextPageToken } = this.props.channelData;
-    await this.props.fetchChannel(nextPageToken);
-    this.setState((state, props) => {
-      return {
-        channels: {
-          pageInfo: props.channelData.pageInfo,
-          items: state.channels.items.concat(props.channelData.items),
-          nextPageToken: props.channelData.nextPageToken
-        }
-      };
-    });
+    const { nextPageToken } = this.state.channels;
+    this.fetchChannelData(nextPageToken);
   };
 
   render() {
@@ -83,13 +101,12 @@ class Channel extends React.Component {
             </div>
             <div className="text-center">
               {this.state.channels.nextPageToken && (
-                <button
-                  className="btn btn-danger"
-                  style={{ width: "50%" }}
-                  onClick={this.fetchNextPageChannel}
+                <div
+                  className="mt-3"
+                  style={{ width: "50%", margin: "0 auto" }}
                 >
-                  More...
-                </button>
+                  <MoreButton onClickMore={this.fetchNextPageChannel} />
+                </div>
               )}
             </div>
           </div>
