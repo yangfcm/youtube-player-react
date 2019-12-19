@@ -17,9 +17,9 @@ class Channel extends React.Component {
 
   componentDidMount = async () => {
     await this.props.fetchChannel();
-    if (this.props.error) {
+    if (this.props.errorData) {
       this.setState({
-        error: this.props.error
+        error: this.props.errorData
       });
       return;
     }

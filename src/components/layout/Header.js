@@ -22,6 +22,9 @@ class Header extends React.Component {
 
   handleSearch = e => {
     e.preventDefault();
+    if (this.state.search.trim() === "") {
+      return;
+    }
     this.props.history.push(`/results?q=${this.state.search}`);
     this.setState({
       search: ""
@@ -53,7 +56,9 @@ class Header extends React.Component {
               type="text"
               placeholder="Search video..."
               className="form-control"
-              onInput={this.handleInput}
+              name="search"
+              value={this.state.search}
+              onChange={this.handleInput}
             />
             <button className="btn btn-outline-dark mx-2" type="submit">
               <FontAwesomeIcon icon="search" />

@@ -12,7 +12,7 @@ import {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const cnofigStore = () => {
+const configStore = () => {
   const store = createStore(
     combineReducers({
       channel: channelReducer,
@@ -28,5 +28,5 @@ const cnofigStore = () => {
   return store;
 };
 
-const store = cnofigStore();
+const store = configStore();
 export default store;
