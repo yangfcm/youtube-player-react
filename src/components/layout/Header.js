@@ -18,7 +18,26 @@ class Header extends React.Component {
     });
   };
 
-  componentDidMount = () => {};
+  closeDropdownMenu = () => {
+    this.setState(prevState => {
+      if (prevState.showDropdownMenu) {
+        return {
+          showDropdownMenu: false
+        };
+      }
+    });
+  };
+
+  handleToggleDropdown = e => {
+    this.toggleDropdownMenu();
+    e.stopPropagation();
+  };
+
+  componentDidMount = () => {
+    window.addEventListener("click", () => {
+      this.closeDropdownMenu();
+    });
+  };
 
   handleSearch = e => {
     e.preventDefault();
@@ -68,7 +87,8 @@ class Header extends React.Component {
             <button
               className="btn btn-secondary"
               type="button"
-              onClick={this.toggleDropdownMenu}
+              id="dropdown"
+              onClick={this.handleToggleDropdown}
             >
               Menu{"      "}
               <FontAwesomeIcon icon="chevron-circle-down" />
