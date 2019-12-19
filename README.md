@@ -25,7 +25,7 @@ My personal Youtube video watch app built by React and Google Youtube Data API.
 * Run `npm start` to run it on local machine.
 
 ## Deployment
-* The app is deployed at Netlify.
+* The app is deployed at [Netlify](https://www.netlify.com/).
 
 ## Available Scripts
 
