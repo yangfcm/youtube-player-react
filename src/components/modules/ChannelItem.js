@@ -10,7 +10,7 @@ const ChannelItem = ({ channel }) => {
             src={channel.snippet.thumbnails.medium.url}
             alt={channel.title}
             className="card-img-top rounded-circle"
-            style={{ width: "80%", height: "auto" }}
+            style={{ maxWidth: "180px", height: "auto" }}
           />
         </div>
       </Link>
