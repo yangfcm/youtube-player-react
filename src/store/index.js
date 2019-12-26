@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import {
   channelReducer,
@@ -10,7 +10,7 @@ import {
   errorReducer
 } from "../reducers/app";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configStore = () => {
   const store = createStore(
@@ -23,7 +23,7 @@ const configStore = () => {
       videos: videosReducer,
       comments: commentsReducer
     }),
-    composeEnhancers(applyMiddleware(thunk))
+    applyMiddleware(thunk)
   );
   return store;
 };
