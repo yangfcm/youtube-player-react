@@ -4,7 +4,8 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const VideoListItem = ({ video, playlistId }) => {
-  let linkUrl = `/video/${video.id.videoId}`;
+  // console.log(video);
+  let linkUrl = `/video/${video.contentDetails.videoId}`;
   if (playlistId) linkUrl += `?playlistId=${playlistId}`;
   return (
     <div className="d-flex flex-md-row my-2">

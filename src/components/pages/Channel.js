@@ -79,7 +79,7 @@ class Channel extends React.Component {
   render() {
     const channelListStyle = {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(12rem, 1fr))",
+      gridTemplateColumns: "repeat(auto-fill, minmax(10rem, 1fr))",
       gap: "1.2rem"
     };
 

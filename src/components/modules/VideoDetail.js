@@ -15,21 +15,20 @@ const VideoDetail = ({ video }) => {
         </Link>
       </div>
 
-      <div className="d-flex justify-content-between text-muted">
+      <div className="d-flex flex-column flex-sm-row justify-content-between text-muted">
         <div>
-          Published at{" "}
+          <FontAwesomeIcon icon="user-clock" />{" "}
           {moment(video.snippet.publishedAt).format("D MMM YYYY k:mm")} |{" "}
-          {separateNumber(video.statistics.viewCount)} Views
+          <FontAwesomeIcon icon="eye" />{" "}
+          {separateNumber(video.statistics.viewCount)}
         </div>
         <div>
           <span className="mr-3">
-            <FontAwesomeIcon icon="thumbs-up" />
-            &nbsp;
+            <FontAwesomeIcon icon="thumbs-up" />{" "}
             {separateNumber(video.statistics.likeCount)}{" "}
           </span>
           <span>
-            <FontAwesomeIcon icon="thumbs-down" />
-            &nbsp;
+            <FontAwesomeIcon icon="thumbs-down" />{" "}
             {separateNumber(video.statistics.dislikeCount)}
           </span>
         </div>
