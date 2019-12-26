@@ -47,8 +47,8 @@ class ChannelIntro extends React.Component {
         {!this.state.error && this.state.channelIntro && (
           <div className="mt-3 row justify-content-center">
             <div className="col-md-10 col-lg-9">
-              <div className="d-flex">
-                <div className="mr-3 my-3">
+              <div className="d-flex flex-column flex-sm-row">
+                <div className="mr-3 my-3 text-center">
                   <img
                     className="rounded-circle"
                     style={{ maxWidth: "120px", height: "auto" }}

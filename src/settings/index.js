@@ -7,7 +7,7 @@ export const defAxios = axios.create({
   timeout: 10000
 });
 
-export const defaultName = "Fan Yang";
+export const defaultName = "Y Fan";
 export const mainMenuItems = [
   { link: "/", exact: true, name: "Recommend" },
   { link: "/channel", exact: false, name: "Channel" },

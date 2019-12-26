@@ -132,7 +132,7 @@ export const fetchPlaylist = (
     try {
       const response = await axios.get("/playlists", {
         params: {
-          part: "snippet,contentDetails",
+          part: "snippet,contentDetails,status",
           maxResults,
           channelId,
           pageToken,
@@ -158,7 +158,7 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
     try {
       const response = await axios.get("/playlistItems", {
         params: {
-          part: "snippet,contentDetails",
+          part: "snippet,contentDetails,status",
           maxResults: 8,
           key: process.env.REACT_APP_API_KEY,
           playlistId,

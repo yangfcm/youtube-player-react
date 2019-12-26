@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const PlayListItem = ({ playlist }) => {
+  // console.log(playlist);
   return (
     <div className="card">
       <Link to={`/playlist/${playlist.id}`}>

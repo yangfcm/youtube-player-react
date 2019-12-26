@@ -22,16 +22,18 @@ const VideoDetail = ({ video }) => {
           <FontAwesomeIcon icon="eye" />{" "}
           {separateNumber(video.statistics.viewCount)}
         </div>
-        <div>
-          <span className="mr-3">
-            <FontAwesomeIcon icon="thumbs-up" />{" "}
-            {separateNumber(video.statistics.likeCount)}{" "}
-          </span>
-          <span>
-            <FontAwesomeIcon icon="thumbs-down" />{" "}
-            {separateNumber(video.statistics.dislikeCount)}
-          </span>
-        </div>
+        {video.statistics.likeCount && video.statistics.dislikeCount && (
+          <div>
+            <span className="mr-3">
+              <FontAwesomeIcon icon="thumbs-up" />{" "}
+              {separateNumber(video.statistics.likeCount)}{" "}
+            </span>
+            <span>
+              <FontAwesomeIcon icon="thumbs-down" />{" "}
+              {separateNumber(video.statistics.dislikeCount)}
+            </span>
+          </div>
+        )}
       </div>
       <hr />
       <p
