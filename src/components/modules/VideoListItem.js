@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const VideoListItem = ({ video, playlistId }) => {
   // console.log(video);
-  let linkUrl = `/video/${video.contentDetails.videoId}`;
+  let linkUrl = video.contentDetails
+    ? `/video/${video.contentDetails.videoId}`
+    : `/video/${video.id.videoId}`;
   if (playlistId) linkUrl += `?playlistId=${playlistId}`;
   return (
     <div className="d-flex flex-md-row my-2">

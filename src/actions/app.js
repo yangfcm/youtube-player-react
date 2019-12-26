@@ -45,7 +45,7 @@ export const fetchVideos = (filter, pageToken) => {
       const response = await axios.get("/videos", {
         params: {
           ...filter,
-          part: "snippet,statistics",
+          part: "snippet,statistics,contentDetails",
           key: process.env.REACT_APP_API_KEY,
           maxResults: 15,
           pageToken

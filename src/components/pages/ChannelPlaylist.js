@@ -72,9 +72,9 @@ class PlayList extends React.Component {
 
     return (
       <div>
-        {!this.props.error && !this.state.playlist && <Loading />}
+        {!this.state.error && !this.state.playlist && <Loading />}
 
-        {this.props.error && <ErrorMessage message={this.props.error} />}
+        {this.state.error && <ErrorMessage message={this.state.error} />}
 
         {this.state.playlist && (
           <div className="mt-3">

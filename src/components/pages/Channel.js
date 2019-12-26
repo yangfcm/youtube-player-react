@@ -66,7 +66,7 @@ class Channel extends React.Component {
   };
 
   renderChannelList = () => {
-    console.log(this.state.channels.items);
+    // console.log(this.state.channels.items);
     return this.state.channels.items
       .sort((a, b) => {
         return a.snippet.title < b.snippet.title ? -1 : 1;
