@@ -5,7 +5,7 @@ const ChannelItem = ({ channel }) => {
   return (
     <div className="card">
       <Link to={`/channel/${channel.snippet.resourceId.channelId}`}>
-        <div className="p-3 d-flex justify-content-center">
+        <div className="p-3 text-center">
           <img
             src={channel.snippet.thumbnails.medium.url}
             alt={channel.title}

@@ -66,9 +66,14 @@ class Channel extends React.Component {
   };
 
   renderChannelList = () => {
-    return this.state.channels.items.map(item => {
-      return <ChannelItem channel={item} key={item.id} />;
-    });
+    console.log(this.state.channels.items);
+    return this.state.channels.items
+      .sort((a, b) => {
+        return a.snippet.title < b.snippet.title ? -1 : 1;
+      })
+      .map(item => {
+        return <ChannelItem channel={item} key={item.id} />;
+      });
   };
 
   fetchNextPageChannel = async () => {
@@ -80,7 +85,7 @@ class Channel extends React.Component {
     const channelListStyle = {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill, minmax(10rem, 1fr))",
-      gap: "1.2rem"
+      gap: "0.5rem"
     };
 
     return (
