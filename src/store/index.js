@@ -7,8 +7,9 @@ import {
   videoReducer,
   videosReducer,
   commentsReducer,
-  errorReducer
+  errorReducer,
 } from "../reducers/app";
+import { authReducer } from "../reducers/auth";
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,8 @@ const configStore = () => {
       playlistDetail: playlistDetailReducer,
       video: videoReducer,
       videos: videosReducer,
-      comments: commentsReducer
+      comments: commentsReducer,
+      auth: authReducer,
     }),
     applyMiddleware(thunk)
   );

@@ -9,3 +9,5 @@ export const FETCH_COMMENTS = "FETCH_COMMENTS";
 export const FETCH_COMMENTS_DISABLED = "FETCH_COMMENTS_DISABLED";
 export const CATCH_ERROR = "CATCH_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
+export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";
