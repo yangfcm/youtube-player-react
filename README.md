@@ -1,33 +1,35 @@
 # My Youtube
 
 ## Intro
+
 My personal Youtube video watch app built by React and Google Youtube Data API.
 
 ## Features & Functionality
-* Display channel lists subscribed by the user.
-* Display play list created by user.
-* View channel details and play list.
-* Play video and see video comments.
-* Browse recommended videos.
-* All videos are Ad free!
+
+- Display channel lists subscribed by the user.
+- Display play list created by user.
+- View channel details and play list.
+- Play video and see video comments.
+- Browse recommended videos.
+- All videos are Ad free!
 
 ## Development setup
-* Install Node.js and NPM.
-* Under project root directory, run `npm install` to install packages.
-* Create `.env.development` file to specify API key and user's channel id:
-	```
-	REACT_APP_API_KEY=your_key_value
-	REACT_APP_MY_CHANNEL_ID=your_channel_id_value
-	```
-	To get API key, you need to sign up on Google cloud platform, create a new project and create a new credential under the project so that you can get API key.
 
-	To get your channel id, you need to first signup as a youtube user and navigate to your channel. You can get your channel id in URL: `https://www.youtube.com/channel/your_channel_id?view_as=subscriber`
-* Run `npm start` to run it on local machine.
+- Install Node.js and NPM.
+- Under project root directory, run `npm install` to install packages.
+- Create `.env` file under project root directory to specify API key and user's channel id:
+  `REACT_APP_API_KEY=your_key_value REACT_APP_MY_CHANNEL_ID=your_channel_id_value`
+  To get API key, you need to sign up on Google cloud platform, create a new project and create a new credential under the project so that you can get API key.
+
+      	To get your channel id, you need to first signup as a youtube user and navigate to your channel. You can get your channel id in URL: `https://www.youtube.com/channel/your_channel_id?view_as=subscriber`
+
+- Run `npm start` to run it on local machine.
 
 ## Deployment
-* The app is deployed at [Netlify](https://www.netlify.com/) using CI/CD provided by Netlify.
-* To make the app work on Netlify, specify environment variables of `REACT_APP_API_KEY` and `REACT_APP_MY_CHANNEL_ID`.
-* Issue - Page Not Found on Netlify with React Router. When you go to the home page and navigate between pages, routing works well. But if you go to a specific route(not root route), Netlify will return 404 error because SPA's routing is configured on the client while Netlify as a server will first handle the route(which doesn't exist on server). To fix it create a file `.redirects` under public directory with the content: `/* /index.html 200` to tell Netlify pass on any route handling to `index.html`. Reference: https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps
+
+- The app is deployed at [Netlify](https://www.netlify.com/) using CI/CD provided by Netlify.
+- To make the app work on Netlify, specify environment variables of `REACT_APP_API_KEY` and `REACT_APP_MY_CHANNEL_ID`.
+- Issue - Page Not Found on Netlify with React Router. When you go to the home page and navigate between pages, routing works well. But if you go to a specific route(not root route), Netlify will return 404 error because SPA's routing is configured on the client while Netlify as a server will first handle the route(which doesn't exist on server). To fix it create a file `.redirects` under public directory with the content: `/* /index.html 200` to tell Netlify pass on any route handling to `index.html`. Reference: https://docs.netlify.com/routing/redirects/rewrites-proxies/#history-pushstate-and-single-page-apps
 
 ## Available Scripts
 
