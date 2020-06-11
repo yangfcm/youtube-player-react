@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import {
   channelReducer,
@@ -11,7 +11,7 @@ import {
 } from "../reducers/app";
 import { authReducer } from "../reducers/auth";
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configStore = () => {
   const store = createStore(
@@ -25,7 +25,7 @@ const configStore = () => {
       comments: commentsReducer,
       auth: authReducer,
     }),
-    applyMiddleware(thunk)
+    composeEnhancers(applyMiddleware(thunk))
   );
   return store;
 };

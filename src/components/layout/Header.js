@@ -2,33 +2,34 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DropdownMenu from "../common/DropdownMenu";
+import GoogleAuth from "../modules/GoogleAuth";
 import { mainMenuItems } from "../../settings";
 
 class Header extends React.Component {
   state = {
     showDropdownMenu: false,
-    search: ""
+    search: "",
   };
 
   toggleDropdownMenu = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return {
-        showDropdownMenu: !prevState.showDropdownMenu
+        showDropdownMenu: !prevState.showDropdownMenu,
       };
     });
   };
 
   closeDropdownMenu = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       if (prevState.showDropdownMenu) {
         return {
-          showDropdownMenu: false
+          showDropdownMenu: false,
         };
       }
     });
   };
 
-  handleToggleDropdown = e => {
+  handleToggleDropdown = (e) => {
     this.toggleDropdownMenu();
     e.stopPropagation();
   };
@@ -39,20 +40,20 @@ class Header extends React.Component {
     });
   };
 
-  handleSearch = e => {
+  handleSearch = (e) => {
     e.preventDefault();
     if (this.state.search.trim() === "") {
       return;
     }
     this.props.history.push(`/results?q=${this.state.search}`);
     this.setState({
-      search: ""
+      search: "",
     });
   };
 
-  handleInput = e => {
+  handleInput = (e) => {
     this.setState({
-      search: e.target.value
+      search: e.target.value,
     });
   };
 
@@ -83,7 +84,7 @@ class Header extends React.Component {
               <FontAwesomeIcon icon="search" />
             </button>
           </form>
-          <div style={{ position: "relative" }}>
+          <div style={{ position: "relative" }} className="mr-2">
             <button
               className="btn btn-secondary"
               type="button"
@@ -98,12 +99,14 @@ class Header extends React.Component {
                 position: "absolute",
                 right: "0",
                 zIndex: 100,
-                display: this.state.showDropdownMenu ? "block" : "none"
+                display: this.state.showDropdownMenu ? "block" : "none",
               }}
             >
               <DropdownMenu menuItems={mainMenuItems} />
             </div>
           </div>
+
+          <GoogleAuth />
         </div>
       </nav>
     );

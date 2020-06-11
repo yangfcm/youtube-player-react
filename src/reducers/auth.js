@@ -1,9 +1,6 @@
 import { SIGN_IN, SIGN_OUT } from "../actions/types";
 
-export const authReducer = (
-  state = { signedIn: false, user: null },
-  action
-) => {
+export const authReducer = (state = { signedIn: null, user: null }, action) => {
   switch (action.type) {
     case SIGN_IN:
       return {
