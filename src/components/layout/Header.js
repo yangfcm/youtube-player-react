@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DropdownMenu from "../common/DropdownMenu";
@@ -9,6 +10,7 @@ class Header extends React.Component {
   state = {
     showDropdownMenu: false,
     search: "",
+    user: null,
   };
 
   toggleDropdownMenu = () => {
@@ -84,33 +86,51 @@ class Header extends React.Component {
               <FontAwesomeIcon icon="search" />
             </button>
           </form>
-          <div style={{ position: "relative" }} className="mr-2">
-            <button
-              className="btn btn-secondary"
-              type="button"
-              id="dropdown"
-              onClick={this.handleToggleDropdown}
-            >
-              Menu{"      "}
-              <FontAwesomeIcon icon="chevron-circle-down" />
-            </button>
-            <div
-              style={{
-                position: "absolute",
-                right: "0",
-                zIndex: 100,
-                display: this.state.showDropdownMenu ? "block" : "none",
-              }}
-            >
-              <DropdownMenu menuItems={mainMenuItems} />
+          {this.props.auth.signedIn ? (
+            <div style={{ position: "relative" }} className="mr-2">
+              <div
+                className="btn btn-secondary"
+                style={{ border: "none", height: "55px" }}
+                type="button"
+                id="dropdown"
+                onClick={this.handleToggleDropdown}
+              >
+                {"      "}
+                <img
+                  style={{ borderRadius: "50%", maxHeight: "100%" }}
+                  src={this.props.auth.user.avatar}
+                  alt={this.props.auth.user.username}
+                />
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  right: "0",
+                  zIndex: 100,
+                  display: this.state.showDropdownMenu ? "block" : "none",
+                }}
+              >
+                <DropdownMenu menuItems={mainMenuItems} />
+              </div>
             </div>
-          </div>
-
-          <GoogleAuth />
+          ) : (
+            <div
+              style={{ height: "55px" }}
+              className="d-flex align-items-center"
+            >
+              <GoogleAuth />
+            </div>
+          )}
         </div>
       </nav>
     );
   }
 }
 
-export default withRouter(Header);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(Header));

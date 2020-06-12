@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import GoogleAuth from "../modules/GoogleAuth";
 
 const DropdownMenu = ({ menuItems = [] }) => {
   return (
     <div className="list-group">
-      {menuItems.map(item => {
+      {menuItems.map((item) => {
         return (
           <Link
             key={item.name}
@@ -15,6 +16,7 @@ const DropdownMenu = ({ menuItems = [] }) => {
           </Link>
         );
       })}
+      <GoogleAuth />
     </div>
   );
 };

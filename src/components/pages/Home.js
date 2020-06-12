@@ -13,14 +13,14 @@ import { fetchVideos, clearError } from "../../actions/app";
 class Home extends React.Component {
   state = {
     videos: null,
-    error: null
+    error: null,
   };
 
   componentDidMount = async () => {
     await this.props.fetchVideos({ chart: "mostPopular" });
     if (this.props.error) {
       this.setState({
-        error: this.props.error
+        error: this.props.error,
       });
       return;
     }
@@ -30,12 +30,12 @@ class Home extends React.Component {
           videos: {
             pageInfo: this.props.videos.pageInfo,
             items: this.props.videos.items,
-            nextPageToken: this.props.videos.nextPageToken
-          }
+            nextPageToken: this.props.videos.nextPageToken,
+          },
         });
       } else {
         this.setState({
-          error: "No video recommended"
+          error: "No video recommended",
         });
       }
     }
@@ -53,8 +53,8 @@ class Home extends React.Component {
         videos: {
           pageInfo: props.videos.pageInfo,
           items: state.videos.items.concat(props.videos.items),
-          nextPageToken: props.videos.nextPageToken
-        }
+          nextPageToken: props.videos.nextPageToken,
+        },
       };
     });
   };
@@ -82,10 +82,10 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     videos: state.videos,
-    error: state.error
+    error: state.error,
   };
 };
 
