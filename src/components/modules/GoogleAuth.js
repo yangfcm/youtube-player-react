@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn, signOut } from "../../actions/auth";
 
 class GoogleAuth extends React.Component {
@@ -46,12 +47,16 @@ class GoogleAuth extends React.Component {
           className="list-group-item list-group-item-danger"
           onClick={this.handleSignout}
         >
+          <FontAwesomeIcon icon="share" />
+          {"   "}
           Sign out
         </li>
       );
     } else {
       return (
-        <button className="btn btn-danger" onClick={this.handleSignin}>
+        <button className="btn btn-primary" onClick={this.handleSignin}>
+          <FontAwesomeIcon icon="user" />
+          {"   "}
           Sign in
         </button>
       );
