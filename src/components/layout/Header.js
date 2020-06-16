@@ -72,7 +72,7 @@ class Header extends React.Component {
             FanTube{" "}
           </span>
         </Link>
-        <div className="d-flex align-items-center">
+        <div className="flex-grow-1 d-flex align-items-center justify-content-end">
           <form className="d-flex" onSubmit={this.handleSearch}>
             <input
               type="text"

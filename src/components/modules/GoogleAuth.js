@@ -60,7 +60,7 @@ class GoogleAuth extends React.Component {
         <button className="btn btn-primary" onClick={this.handleSignin}>
           <FontAwesomeIcon icon="sign-in-alt" />
           {"   "}
-          Sign in
+          Sign In
         </button>
       );
     }
