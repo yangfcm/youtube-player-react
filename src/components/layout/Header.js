@@ -107,7 +107,7 @@ class Header extends React.Component {
                   position: "absolute",
                   right: "0",
                   zIndex: 100,
-                  minWidth: "140px",
+                  minWidth: "150px",
                   display: this.state.showDropdownMenu ? "block" : "none",
                 }}
               >

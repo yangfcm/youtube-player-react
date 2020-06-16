@@ -65,10 +65,15 @@ class Home extends React.Component {
         <Banner />
         <Menu menuItems={mainMenuItems} />
         <div className="mb-3"></div>
+
         {!this.state.error && !this.state.videos && <Loading />}
         {this.state.error && <ErrorMessage message={this.props.error} />}
         {this.state.videos && (
           <div>
+            {" "}
+            <h3 className="mb-2 text-primary font-weight-bold">
+              Recommended Videos
+            </h3>
             <VideoGrid videos={this.state.videos.items} />
             {this.state.videos.nextPageToken && (
               <div className="mt-3" style={{ width: "50%", margin: "0 auto" }}>

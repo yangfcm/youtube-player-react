@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Menu = ({ menuItems = [] }) => {
   return (
     <div>
       <nav className="nav nav-tabs nav-fill">
-        {menuItems.map(item => {
+        {menuItems.map((item) => {
           return (
             <NavLink
               key={item.name}
@@ -14,6 +15,8 @@ const Menu = ({ menuItems = [] }) => {
               className="nav-item nav-link"
               activeClassName="active"
             >
+              <FontAwesomeIcon icon={item.icon} />
+              {"   "}
               {item.name}
             </NavLink>
           );

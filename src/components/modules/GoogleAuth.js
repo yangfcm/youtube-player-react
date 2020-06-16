@@ -5,6 +5,9 @@ import { signIn, signOut } from "../../actions/auth";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
+    if (!window.gapi) {
+      return;
+    }
     window.gapi.load("client:auth2", () => {
       window.gapi.client
         .init({
@@ -47,7 +50,7 @@ class GoogleAuth extends React.Component {
           className="list-group-item list-group-item-danger"
           onClick={this.handleSignout}
         >
-          <FontAwesomeIcon icon="share" />
+          <FontAwesomeIcon icon="sign-out-alt" />
           {"   "}
           Sign out
         </li>

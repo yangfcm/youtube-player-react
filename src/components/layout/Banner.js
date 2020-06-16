@@ -1,14 +1,39 @@
 import React from "react";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { defaultName } from "../../settings";
 
-const Banner = props => {
+const Banner = ({ auth }) => {
+  const { signedIn, user } = auth;
+  // console.log(signedIn, user);
   return (
     <div className="d-flex align-items-center mb-2">
-      <FontAwesomeIcon icon="user-astronaut" size="3x"></FontAwesomeIcon>
-      <h3 className="display-4 mx-3">{props.name || defaultName}</h3>
+      <div style={{ height: "65px" }} className="d-flex align-items-center">
+        {signedIn === null ? (
+          ""
+        ) : signedIn === true ? (
+          <img
+            style={{ borderRadius: "50%", maxHeight: "100%" }}
+            src={user.avatar}
+            alt={user.username}
+          />
+        ) : (
+          <FontAwesomeIcon icon="user-astronaut" size="3x"></FontAwesomeIcon>
+        )}
+      </div>
+      <h3 className="display-6 mx-3">
+        {signedIn === null
+          ? ""
+          : signedIn === true
+          ? `Welcome, ${user.username}`
+          : "Welcome"}
+      </h3>
     </div>
   );
 };
 
-export default Banner;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+export default connect(mapStateToProps)(Banner);

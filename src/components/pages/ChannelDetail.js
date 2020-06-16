@@ -12,9 +12,14 @@ class ChannelDetail extends React.Component {
   render() {
     const { path, url } = this.props.match;
     const channelMenuItems = [
-      { link: `${url}/videos`, exact: false, name: "Videos" },
-      { link: `${url}/playlist`, exact: false, name: "Playlist" },
-      { link: `${url}/intro`, exact: false, name: "Channel Intro" }
+      { link: `${url}/videos`, exact: false, name: "Videos", icon: "video" },
+      { link: `${url}/playlist`, exact: false, name: "Playlist", icon: "list" },
+      {
+        link: `${url}/intro`,
+        exact: false,
+        name: "Channel Intro",
+        icon: "info-circle",
+      },
     ];
     return (
       <div>
