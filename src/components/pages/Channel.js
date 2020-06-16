@@ -7,18 +7,37 @@ import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import ChannelItem from "../modules/ChannelItem";
 import MoreButton from "../modules/MoreButton";
+import NoSignedIn from "../common/NoSignIn";
 import { mainMenuItems } from "../../settings";
 import { fetchChannel, clearError } from "../../actions/app";
 
 class Channel extends React.Component {
   state = {
     channels: null,
-    error: null
+    error: null,
   };
 
   componentDidMount = () => {
-    this.fetchChannelData();
+    // if (this.props.auth.signedIn) {
+    //   this.fetchChannelData();
+    // }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    /** Switch to sign in */
+    if (this.props.auth.signedIn && !prevProps.auth.signedIn) {
+      this.fetchChannelData();
+    }
+
+    /** Sign out */
+    if (!this.props.auth.signedIn && prevProps.auth.signedIn) {
+      this.setState(() => {
+        return {
+          channels: null,
+        };
+      });
+    }
+  }
 
   componentWillUnmount = () => {
     this.props.clearError();
@@ -29,7 +48,7 @@ class Channel extends React.Component {
     if (this.props.errorData) {
       // Error handling
       this.setState({
-        error: this.props.errorData
+        error: this.props.errorData,
       });
       return;
     }
@@ -42,15 +61,15 @@ class Channel extends React.Component {
             channels: {
               pageInfo: props.channelData.pageInfo,
               items: state.channels.items.concat(props.channelData.items),
-              nextPageToken: props.channelData.nextPageToken
-            }
+              nextPageToken: props.channelData.nextPageToken,
+            },
           };
         });
       } else {
         // Otherwise it is fetching the first page's data
         if (this.props.channelData.items.length === 0) {
           this.setState({
-            error: "No channel is found"
+            error: "No channel is found",
           });
           return;
         }
@@ -58,8 +77,8 @@ class Channel extends React.Component {
           channels: {
             pageInfo: this.props.channelData.pageInfo,
             items: this.props.channelData.items,
-            nextPageToken: this.props.channelData.nextPageToken
-          }
+            nextPageToken: this.props.channelData.nextPageToken,
+          },
         });
       }
     }
@@ -71,7 +90,7 @@ class Channel extends React.Component {
       .sort((a, b) => {
         return a.snippet.title < b.snippet.title ? -1 : 1;
       })
-      .map(item => {
+      .map((item) => {
         return <ChannelItem channel={item} key={item.id} />;
       });
   };
@@ -85,16 +104,24 @@ class Channel extends React.Component {
     const channelListStyle = {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill, minmax(10rem, 1fr))",
-      gap: "0.5rem"
+      gap: "0.5rem",
     };
+
+    const { signedIn } = this.props.auth;
 
     return (
       <div>
         <Banner />
         <Menu menuItems={mainMenuItems} />
-        {!this.state.error && !this.state.channels && <Loading />}{" "}
+        {signedIn === null && ""}
+        {signedIn === false && <NoSignedIn />}
+        {signedIn && !this.state.error && !this.state.channels && (
+          <Loading />
+        )}{" "}
         {/* Loading */}
-        {this.state.error && <ErrorMessage message={this.state.error} />}{" "}
+        {signedIn && this.state.error && (
+          <ErrorMessage message={this.state.error} />
+        )}{" "}
         {/* Error message */}
         {this.state.channels && (
           <div className="mt-3">
@@ -122,10 +149,11 @@ class Channel extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     channelData: state.channel,
-    errorData: state.error
+    errorData: state.error,
+    auth: state.auth,
   };
 };
 
