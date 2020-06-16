@@ -18,9 +18,9 @@ class Channel extends React.Component {
   };
 
   componentDidMount = () => {
-    // if (this.props.auth.signedIn) {
-    //   this.fetchChannelData();
-    // }
+    if (this.props.auth.signedIn) {
+      this.fetchChannelData();
+    }
   };
 
   componentDidUpdate(prevProps, prevState) {

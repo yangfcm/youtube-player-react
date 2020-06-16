@@ -7,19 +7,46 @@ import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import PlayListItem from "../modules/PlayListItem";
 import MoreButton from "../modules/MoreButton";
+import NoSignedIn from "../common/NoSignIn";
 import { mainMenuItems } from "../../settings";
 import { fetchPlaylist, clearError } from "../../actions/app";
 
 class PlayList extends React.Component {
   state = {
     playlist: null,
-    error: null
+    error: null,
   };
   componentDidMount = async () => {
+    if (this.props.auth.signedIn) {
+      this.fetchPlaylistData();
+    }
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    /** Switch to sign in */
+    if (this.props.auth.signedIn && !prevProps.auth.signedIn) {
+      this.fetchPlaylistData();
+    }
+
+    /** Sign out */
+    if (!this.props.auth.signedIn && prevProps.auth.signedIn) {
+      this.setState(() => {
+        return {
+          playlist: null,
+        };
+      });
+    }
+  }
+
+  componentWillUnmount = () => {
+    this.props.clearError();
+  };
+
+  fetchPlaylistData = async (nextPageToken = null) => {
     await this.props.fetchPlaylist();
     if (this.props.error) {
       this.setState({
-        error: this.props.error
+        error: this.props.error,
       });
       return;
     }
@@ -29,19 +56,15 @@ class PlayList extends React.Component {
           playlist: {
             pageInfo: this.props.playlist.pageInfo,
             items: this.props.playlist.items,
-            nextPageToken: this.props.playlist.nextPageToken
-          }
+            nextPageToken: this.props.playlist.nextPageToken,
+          },
         });
       } else {
         this.setState({
-          error: "No Playlist in this channel"
+          error: "No Playlist in this channel",
         });
       }
     }
-  };
-
-  componentWillUnmount = () => {
-    this.props.clearError();
   };
 
   renderPlayList = () => {
@@ -58,8 +81,8 @@ class PlayList extends React.Component {
         playlist: {
           pageInfo: props.playlist.pageInfo,
           items: state.playlist.items.concat(props.playlist.items),
-          nextPageToken: props.playlist.nextPageToken
-        }
+          nextPageToken: props.playlist.nextPageToken,
+        },
       };
     });
   };
@@ -68,16 +91,21 @@ class PlayList extends React.Component {
     const playlistStyle = {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill, minmax(15rem, 1fr))",
-      gap: "1.2rem"
+      gap: "1.2rem",
     };
+    const { signedIn } = this.props.auth;
 
     return (
       <div>
         <Banner />
         <Menu menuItems={mainMenuItems} />
-        {!this.props.error && !this.state.playlist && <Loading />}
+        {signedIn === null && ""}
+        {signedIn === false && <NoSignedIn />}
+        {signedIn && !this.props.error && !this.state.playlist && <Loading />}
 
-        {this.props.error && <ErrorMessage message={this.props.error} />}
+        {signedIn && this.props.error && (
+          <ErrorMessage message={this.props.error} />
+        )}
 
         {this.state.playlist && (
           <div className="mt-3">
@@ -102,10 +130,11 @@ class PlayList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     playlist: state.playlist,
-    error: state.error
+    error: state.error,
+    auth: state.auth,
   };
 };
 
