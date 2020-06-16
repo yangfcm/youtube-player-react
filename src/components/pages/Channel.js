@@ -44,7 +44,9 @@ class Channel extends React.Component {
   };
 
   fetchChannelData = async (nextPageToken = null) => {
-    await this.props.fetchChannel(nextPageToken);
+    const accessToken = localStorage.getItem("access_token");
+    // console.log(accessToken);
+    await this.props.fetchChannel(nextPageToken, accessToken);
     if (this.props.errorData) {
       // Error handling
       this.setState({
@@ -69,7 +71,7 @@ class Channel extends React.Component {
         // Otherwise it is fetching the first page's data
         if (this.props.channelData.items.length === 0) {
           this.setState({
-            error: "No channel is found",
+            error: "No subscription is found",
           });
           return;
         }

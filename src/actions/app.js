@@ -10,11 +10,11 @@ import {
   FETCH_COMMENTS,
   FETCH_COMMENTS_DISABLED,
   CATCH_ERROR,
-  CLEAR_ERROR
+  CLEAR_ERROR,
 } from "./types";
 
 export const searchVideos = (filter, pageToken) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const response = await axios.get("/search", {
         params: {
@@ -23,24 +23,24 @@ export const searchVideos = (filter, pageToken) => {
           key: process.env.REACT_APP_API_KEY,
           maxResults: 15,
           pageToken,
-          type: "video"
-        }
+          type: "video",
+        },
       });
       dispatch({
         type: SEARCH_VIDEOS,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: "Failed to fetch videos list"
+        payload: "Failed to fetch videos list",
       });
     }
   };
 };
 
 export const fetchVideos = (filter, pageToken) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const response = await axios.get("/videos", {
         params: {
@@ -48,17 +48,17 @@ export const fetchVideos = (filter, pageToken) => {
           part: "snippet,statistics,contentDetails",
           key: process.env.REACT_APP_API_KEY,
           maxResults: 15,
-          pageToken
-        }
+          pageToken,
+        },
       });
       dispatch({
         type: FETCH_VIDEOS,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: "Failed to fetch videos list"
+        payload: "Failed to fetch videos list",
       });
     }
   };
@@ -66,7 +66,7 @@ export const fetchVideos = (filter, pageToken) => {
 
 /** Fetch comments by video id */
 export const fetchComments = (videoId, pageToken) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const response = await axios.get("/commentThreads", {
         params: {
@@ -74,12 +74,12 @@ export const fetchComments = (videoId, pageToken) => {
           key: process.env.REACT_APP_API_KEY,
           videoId,
           maxResults,
-          pageToken
-        }
+          pageToken,
+        },
       });
       dispatch({
         type: FETCH_COMMENTS,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       const errorReason = e.response.data.error.errors[0].reason;
@@ -87,12 +87,12 @@ export const fetchComments = (videoId, pageToken) => {
         // Consider comment is disabled by publisher.
         dispatch({
           type: FETCH_COMMENTS_DISABLED,
-          payload: errorReason
+          payload: errorReason,
         });
       } else {
         dispatch({
           type: CATCH_ERROR,
-          payload: "Failed to fetch comments"
+          payload: "Failed to fetch comments",
         });
       }
     }
@@ -100,53 +100,67 @@ export const fetchComments = (videoId, pageToken) => {
 };
 
 /** Fetch a vidoe by id */
-export const fetchVideo = videoId => {
-  return async dispatch => {
+export const fetchVideo = (videoId) => {
+  return async (dispatch) => {
     try {
       const response = await axios.get("/videos", {
         params: {
           part: "snippet,statistics",
           key: process.env.REACT_APP_API_KEY,
-          id: videoId
-        }
+          id: videoId,
+        },
       });
       dispatch({
         type: FETCH_VIDEO,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: "Failed to fetch video"
+        payload: "Failed to fetch video",
       });
     }
   };
 };
 
-/** Fetch playlist by ChannelId*/
-export const fetchPlaylist = (
-  pageToken,
-  channelId = process.env.REACT_APP_MY_CHANNEL_ID
-) => {
-  return async dispatch => {
+/** Fetch playlist by ChannelId, if channel id is not provided, fetch the playlist of the log-in user*/
+export const fetchPlaylist = (pageToken, channelId = "") => {
+  return async (dispatch) => {
     try {
-      const response = await axios.get("/playlists", {
-        params: {
-          part: "snippet,contentDetails,status",
-          maxResults,
-          channelId,
-          pageToken,
-          key: process.env.REACT_APP_API_KEY
-        }
-      });
+      let response;
+      if (channelId) {
+        response = await axios.get("/playlists", {
+          params: {
+            part: "snippet,contentDetails,status",
+            maxResults,
+            channelId,
+            pageToken,
+            key: process.env.REACT_APP_API_KEY,
+          },
+        });
+      } else {
+        const accessToken = localStorage.getItem("access_token");
+        response = await axios.get("/playlists", {
+          headers: {
+            Authorization: accessToken,
+          },
+          params: {
+            part: "snippet,contentDetails,status",
+            maxResults,
+            pageToken,
+            key: process.env.REACT_APP_API_KEY,
+            mine: true,
+          },
+        });
+      }
       dispatch({
         type: FETCH_PLAY_LIST,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: "Failed to fetch playlist"
+        payload: "Failed to fetch playlist",
       });
     }
   };
@@ -154,7 +168,7 @@ export const fetchPlaylist = (
 
 /** Fetch play list detail */
 export const fetchPlaylistDetail = (playlistId, pageToken) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const response = await axios.get("/playlistItems", {
         params: {
@@ -162,68 +176,74 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
           maxResults: 8,
           key: process.env.REACT_APP_API_KEY,
           playlistId,
-          pageToken
-        }
+          pageToken,
+        },
       });
       dispatch({
         type: FETCH_PLAY_LIST_DETAIL,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: "Failed to fetch playlist"
+        payload: "Failed to fetch playlist",
       });
     }
   };
 };
 
 /** Fetch subscribed channels */
-export const fetchChannel = pageToken => {
-  return async dispatch => {
+export const fetchChannel = (pageToken) => {
+  const accessToken = localStorage.getItem("access_token");
+
+  return async (dispatch) => {
     try {
       const response = await axios.get("/subscriptions", {
+        headers: {
+          Authorization: accessToken,
+        },
         params: {
           part: "snippet",
           maxResults: 50,
-          channelId: process.env.REACT_APP_MY_CHANNEL_ID,
+          // channelId: process.env.REACT_APP_MY_CHANNEL_ID,
           key: process.env.REACT_APP_API_KEY,
           pageToken,
-          order: "alphabetical"
-        }
+          order: "alphabetical",
+          mine: true,
+        },
       });
       dispatch({
         type: FETCH_CHANNEL,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: "Failed to fetch channels"
+        payload: "Failed to fetch channels",
       });
     }
   };
 };
 
 /** Fetch channel intro */
-export const fetchChannelIntro = channelId => {
-  return async dispatch => {
+export const fetchChannelIntro = (channelId) => {
+  return async (dispatch) => {
     try {
       const response = await axios.get(`/channels`, {
         params: {
           part: "snippet,statistics",
           id: channelId,
-          key: process.env.REACT_APP_API_KEY
-        }
+          key: process.env.REACT_APP_API_KEY,
+        },
       });
       dispatch({
         type: FETCH_CHANNEL_INTRO,
-        payload: response.data
+        payload: response.data,
       });
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: "Failed to fetch channel's intro"
+        payload: "Failed to fetch channel's intro",
       });
     }
   };
@@ -231,9 +251,9 @@ export const fetchChannelIntro = channelId => {
 
 /** Clear Error */
 export const clearError = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
-      type: CLEAR_ERROR
+      type: CLEAR_ERROR,
     });
   };
 };
