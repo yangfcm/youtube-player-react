@@ -17,9 +17,7 @@ class PlayList extends React.Component {
     error: null,
   };
   componentDidMount = () => {
-    console.log("did mount", this.props.auth);
     if (this.props.auth.signedIn) {
-      console.log("did mount, fetch data");
       this.fetchPlaylistData();
     }
   };
