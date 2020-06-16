@@ -11,7 +11,7 @@ import { fetchPlaylistDetail, clearError } from "../../actions/app";
 
 class PlayListDetail extends React.Component {
   state = {
-    playlistDetail: null
+    playlistDetail: null,
   };
 
   componentDidMount = async () => {
@@ -21,8 +21,8 @@ class PlayListDetail extends React.Component {
         playlistDetail: {
           pageInfo: this.props.playlistDetail.pageInfo,
           items: this.props.playlistDetail.items,
-          nextPageToken: this.props.playlistDetail.nextPageToken
-        }
+          nextPageToken: this.props.playlistDetail.nextPageToken,
+        },
       });
     } else {
       this.props.history.push("/not-found");
@@ -32,7 +32,7 @@ class PlayListDetail extends React.Component {
   componentWillUnmount = () => {
     this.props.clearError();
     this.setState({
-      playlistDetail: null
+      playlistDetail: null,
     });
   };
 
@@ -47,8 +47,8 @@ class PlayListDetail extends React.Component {
         playlistDetail: {
           pageInfo: props.playlistDetail.pageInfo,
           items: state.playlistDetail.items.concat(props.playlistDetail.items),
-          nextPageToken: props.playlistDetail.nextPageToken
-        }
+          nextPageToken: props.playlistDetail.nextPageToken,
+        },
       };
     });
   };
@@ -63,20 +63,20 @@ class PlayListDetail extends React.Component {
         )}
 
         {this.state.playlistDetail && (
-          <div className="row justify-content-center">
-            <div className="col col-md-8">
-              <div className="mb-3 ">
-                <h5 className="font-weight-bold">Playlist Videos</h5>
-              </div>
-              <VideoList
-                videoList={this.state.playlistDetail.items}
-                playlistId={this.props.match.params.id}
-              />
-
-              {this.state.playlistDetail.nextPageToken && (
-                <MoreButton onClickMore={this.fetchNextPagePlaylist} />
-              )}
+          <div>
+            <div className="mb-3 ">
+              <h5 className="font-weight-bold">Playlist Videos</h5>
             </div>
+            <VideoList
+              videoList={this.state.playlistDetail.items}
+              playlistId={this.props.match.params.id}
+            />
+
+            {this.state.playlistDetail.nextPageToken && (
+              <div style={{ width: "50%", margin: "0 auto" }}>
+                <MoreButton onClickMore={this.fetchNextPagePlaylist} />
+              </div>
+            )}
           </div>
         )}
       </React.Fragment>
@@ -84,10 +84,10 @@ class PlayListDetail extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     playlistDetail: state.playlistDetail,
-    error: state.error
+    error: state.error,
   };
 };
 

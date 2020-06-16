@@ -23,7 +23,6 @@ export const searchVideos = (filter, pageToken) => {
           key: process.env.REACT_APP_API_KEY,
           maxResults: 15,
           pageToken,
-          type: "video",
         },
       });
       dispatch({

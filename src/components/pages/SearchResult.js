@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import VideoList from "../modules/VideoList";
+import SearchResultList from "../modules/SearchResultList";
 import MoreButton from "../modules/MoreButton";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
@@ -11,14 +11,14 @@ import { searchVideos, clearError } from "../../actions/app";
 class SearchResult extends React.Component {
   state = {
     videos: null,
-    error: null
+    error: null,
   };
 
-  searchVideos = async q => {
+  searchVideos = async (q) => {
     await this.props.searchVideos({ q });
     if (this.props.error) {
       this.setState({
-        error: this.props.error
+        error: this.props.error,
       });
       return;
     }
@@ -28,12 +28,12 @@ class SearchResult extends React.Component {
           videos: {
             pageInfo: this.props.videos.pageInfo,
             items: this.props.videos.items,
-            nextPageToken: this.props.videos.nextPageToken
-          }
+            nextPageToken: this.props.videos.nextPageToken,
+          },
         });
       } else {
         this.setState({
-          error: `No video found with the key word: ${q}`
+          error: `No video found with the key word: ${q}`,
         });
       }
     }
@@ -44,13 +44,13 @@ class SearchResult extends React.Component {
     this.searchVideos(q);
   };
 
-  componentDidUpdate = async prevProps => {
+  componentDidUpdate = async (prevProps) => {
     const prevq = queryString.parse(prevProps.location.search).q;
     const { q } = queryString.parse(this.props.location.search);
     if (prevq !== q) {
       this.setState({
         videos: null,
-        error: null
+        error: null,
       });
       this.searchVideos(q);
     }
@@ -69,8 +69,8 @@ class SearchResult extends React.Component {
         videos: {
           pageInfo: props.videos.pageInfo,
           items: state.videos.items.concat(props.videos.items),
-          nextPageToken: props.videos.nextPageToken
-        }
+          nextPageToken: props.videos.nextPageToken,
+        },
       };
     });
   };
@@ -88,7 +88,7 @@ class SearchResult extends React.Component {
                 {queryString.parse(this.props.location.search).q}
               </span>
             </h3>
-            <VideoList videoList={this.state.videos.items} />
+            <SearchResultList searchResultList={this.state.videos.items} />
 
             {this.state.videos.nextPageToken && (
               <div style={{ width: "50%", margin: "0 auto" }}>
@@ -102,10 +102,10 @@ class SearchResult extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     videos: state.videos,
-    error: state.error
+    error: state.error,
   };
 };
 export default connect(mapStateToProps, { searchVideos, clearError })(

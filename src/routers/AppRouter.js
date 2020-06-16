@@ -22,7 +22,7 @@ const AppRouter = () => {
           <Header />
           <div className="container-fluid">
             <div className="row justify-content-center">
-              <div className="col-md-11">
+              <div className="col-md-10">
                 <Switch>
                   <Route path="/video/:id" component={Video} />
                   <Route path="/channel/:id" component={ChannelDetail} />
