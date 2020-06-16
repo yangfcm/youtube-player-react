@@ -20,7 +20,6 @@ class Channel extends React.Component {
   componentDidMount = () => {
     // console.log("did mount", this.props.auth);
     if (this.props.auth.signedIn) {
-      console.log("did mount, fetch data");
       this.fetchChannelData();
     }
   };

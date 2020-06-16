@@ -48,7 +48,7 @@ class GoogleAuth extends React.Component {
       return (
         <li
           style={{ cursor: "pointer" }}
-          className="list-group-item list-group-item-danger"
+          className="list-group-item list-group-item-warning"
           onClick={this.handleSignout}
         >
           <FontAwesomeIcon icon="sign-out-alt" />
