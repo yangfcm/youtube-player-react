@@ -12,7 +12,8 @@ class GoogleAuth extends React.Component {
       window.gapi.client
         .init({
           clientId: process.env.REACT_APP_CLIENT_ID,
-          scope: "email https://www.googleapis.com/auth/youtube.readonly",
+          scope:
+            "email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube.readonly ",
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();

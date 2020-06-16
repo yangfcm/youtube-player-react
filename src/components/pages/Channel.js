@@ -18,26 +18,28 @@ class Channel extends React.Component {
   };
 
   componentDidMount = () => {
+    console.log("did mount", this.props.auth);
     if (this.props.auth.signedIn) {
+      console.log("did mount, fetch data");
       this.fetchChannelData();
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate = (prevProps, prevState) => {
     /** Switch to sign in */
     if (this.props.auth.signedIn && !prevProps.auth.signedIn) {
+      this.props.clearError();
       this.fetchChannelData();
     }
 
     /** Sign out */
     if (!this.props.auth.signedIn && prevProps.auth.signedIn) {
-      this.setState(() => {
-        return {
-          channels: null,
-        };
+      this.setState({
+        channels: null,
+        error: null,
       });
     }
-  }
+  };
 
   componentWillUnmount = () => {
     this.props.clearError();

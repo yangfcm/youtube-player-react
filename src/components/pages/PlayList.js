@@ -16,27 +16,29 @@ class PlayList extends React.Component {
     playlist: null,
     error: null,
   };
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    console.log("did mount", this.props.auth);
     if (this.props.auth.signedIn) {
+      console.log("did mount, fetch data");
       this.fetchPlaylistData();
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate = (prevProps, prevState) => {
     /** Switch to sign in */
     if (this.props.auth.signedIn && !prevProps.auth.signedIn) {
+      this.props.clearError();
       this.fetchPlaylistData();
     }
 
     /** Sign out */
     if (!this.props.auth.signedIn && prevProps.auth.signedIn) {
-      this.setState(() => {
-        return {
-          playlist: null,
-        };
+      this.setState({
+        playlist: null,
+        error: null,
       });
     }
-  }
+  };
 
   componentWillUnmount = () => {
     this.props.clearError();
