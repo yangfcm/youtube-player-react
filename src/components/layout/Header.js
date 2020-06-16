@@ -89,9 +89,7 @@ class Header extends React.Component {
           {this.props.auth.signedIn ? (
             <div style={{ position: "relative" }} className="mr-2">
               <div
-                className="btn btn-secondary"
-                style={{ border: "none", height: "55px" }}
-                type="button"
+                style={{ height: "55px", cursor: "pointer" }}
                 id="dropdown"
                 onClick={this.handleToggleDropdown}
               >

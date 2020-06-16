@@ -58,7 +58,7 @@ class GoogleAuth extends React.Component {
     } else {
       return (
         <button className="btn btn-primary" onClick={this.handleSignin}>
-          <FontAwesomeIcon icon="user" />
+          <FontAwesomeIcon icon="sign-in-alt" />
           {"   "}
           Sign in
         </button>
