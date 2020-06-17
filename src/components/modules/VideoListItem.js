@@ -15,9 +15,10 @@ const VideoListItem = ({ video, playlistId }) => {
         <Link to={linkUrl}>
           <img
             src={
-              video.snippet.thumbnails && video.snippet.thumbnails.default.url
+              video.snippet.thumbnails && video.snippet.thumbnails.medium.url
             }
             alt={video.title}
+            style={{ maxWidth: "140px" }}
           />
         </Link>
       </div>
