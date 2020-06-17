@@ -1,6 +1,7 @@
 import { defAxios as axios, maxResults } from "../settings";
 import {
   FETCH_CHANNEL,
+  FETCH_CHANNEL_SUBSCRIPTION,
   FETCH_PLAY_LIST,
   FETCH_VIDEOS,
   SEARCH_VIDEOS,
@@ -226,6 +227,42 @@ export const fetchChannel = (pageToken) => {
       dispatch({
         type: CATCH_ERROR,
         payload: "Failed to fetch channels",
+      });
+    }
+  };
+};
+
+/** Given a channel id if it is subscribed by the user with access token, return the channel. Otherwise, return null */
+export const fetchChannelSubscription = (channelId) => {
+  const accessToken = localStorage.getItem("access_token");
+  if (!accessToken) {
+    return {
+      type: FETCH_CHANNEL_SUBSCRIPTION,
+      payload: null,
+    };
+  }
+
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("/subscriptions", {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          part: "snippet",
+          forChannelId: channelId,
+          key: process.env.REACT_APP_API_KEY,
+          mine: true,
+        },
+      });
+      dispatch({
+        type: FETCH_CHANNEL_SUBSCRIPTION,
+        payload: response.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch channel's subscription",
       });
     }
   };

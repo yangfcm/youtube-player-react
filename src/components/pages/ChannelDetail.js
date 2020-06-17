@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Banner from "../layout/Banner";
 import Menu from "../layout/Menu";
 
 import ChannelIntro from "./ChannelIntro";
