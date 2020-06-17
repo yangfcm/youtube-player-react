@@ -11,25 +11,25 @@ import { separateNumber } from "../../utils/helper";
 class ChannelIntro extends React.Component {
   state = {
     channelIntro: null,
-    error: null
+    error: null,
   };
   componentDidMount = async () => {
     const { channelId } = this.props;
     await this.props.fetchChannelIntro(channelId);
     if (this.props.error) {
       this.setState({
-        error: this.props.error
+        error: this.props.error,
       });
       return;
     }
     if (this.props.channel) {
-      if (this.props.channel.items[0]) {
+      if (this.props.channel.items && this.props.channel.items[0]) {
         this.setState({
-          channelIntro: this.props.channel.items[0]
+          channelIntro: this.props.channel.items[0],
         });
       } else {
         this.setState({
-          error: "The channel doesn't exist."
+          error: "The channel doesn't exist.",
         });
       }
     }
@@ -99,9 +99,10 @@ class ChannelIntro extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    channel: state.channel
+    channel: state.channel,
+    error: state.error,
   };
 };
 export default connect(mapStateToProps, { fetchChannelIntro, clearError })(

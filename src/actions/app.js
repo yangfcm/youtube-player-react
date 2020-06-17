@@ -160,7 +160,7 @@ export const fetchPlaylist = (pageToken, channelId = "") => {
       if (e.response.data.error && e.response.data.error.code === 404) {
         dispatch({
           type: CATCH_ERROR,
-          payload: "You haven't created any playlist",
+          payload: "No playlist in this channel",
         });
         return;
       }

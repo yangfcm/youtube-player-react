@@ -6,7 +6,7 @@ import Menu from "../layout/Menu";
 import ChannelIntro from "./ChannelIntro";
 import ChannelVideos from "./ChannelVideos";
 import ChannelPlaylist from "./ChannelPlaylist";
-import NotFound from "./NotFound";
+import ChannelBanner from "../layout/ChannelBanner";
 
 class ChannelDetail extends React.Component {
   render() {
@@ -23,7 +23,7 @@ class ChannelDetail extends React.Component {
     ];
     return (
       <div>
-        <Banner />
+        <ChannelBanner channelId={this.props.match.params.id} />
         <Menu menuItems={channelMenuItems} />
         <Switch>
           <Route path={`${path}/videos`}>
@@ -39,7 +39,7 @@ class ChannelDetail extends React.Component {
             <Redirect to={`${url}/videos`} />
           </Route>
           <Route path={`${path}/*`}>
-            <NotFound />
+            <Redirect to="/not-found" />
           </Route>
         </Switch>
       </div>
