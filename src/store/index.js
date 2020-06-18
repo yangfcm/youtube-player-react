@@ -7,6 +7,7 @@ import {
   videoReducer,
   videosReducer,
   commentsReducer,
+  subscriptionReducer,
   errorReducer,
 } from "../reducers/app";
 import { authReducer } from "../reducers/auth";
@@ -23,6 +24,7 @@ const configStore = () => {
       video: videoReducer,
       videos: videosReducer,
       comments: commentsReducer,
+      subscription: subscriptionReducer,
       auth: authReducer,
     }),
     composeEnhancers(applyMiddleware(thunk))

@@ -12,6 +12,8 @@ import {
   FETCH_COMMENTS_DISABLED,
   CATCH_ERROR,
   CLEAR_ERROR,
+  SUBSCRIBE_CHANNEL,
+  UNSUBSCRIBE_CHANNEL,
 } from "./types";
 
 export const searchVideos = (filter, pageToken) => {
@@ -255,7 +257,7 @@ export const fetchChannelSubscription = (channelId, accessToken) => {
           mine: true,
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data.items.length === 0) {
         // If the channel is not subscribed by the current authorized user
         dispatch({
@@ -298,6 +300,65 @@ export const fetchChannelIntro = (channelId) => {
       dispatch({
         type: CATCH_ERROR,
         payload: "Failed to fetch channel's intro",
+      });
+    }
+  };
+};
+
+/** Subscribe a channel */
+export const subscribeChannel = (channelId, accessToken) => {
+  return async (dispatch) => {
+    const response = await axios.post(
+      "/subscriptions",
+      {
+        snippet: {
+          resourceId: {
+            kind: "youtube#channel",
+            channelId: channelId,
+          },
+        },
+      },
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          part: "id",
+        },
+      }
+    );
+    dispatch({
+      type: SUBSCRIBE_CHANNEL,
+      payload: response.data,
+    });
+    try {
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to subscribe channel",
+      });
+    }
+  };
+};
+
+export const unsubscribeChannel = (subscriptionId, accessToken) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete("/subscriptions", {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          id: subscriptionId,
+        },
+      });
+      dispatch({
+        type: UNSUBSCRIBE_CHANNEL,
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to unsubscribe channel",
       });
     }
   };

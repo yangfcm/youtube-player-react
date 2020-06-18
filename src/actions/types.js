@@ -12,3 +12,5 @@ export const CATCH_ERROR = "CATCH_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
+export const SUBSCRIBE_CHANNEL = "SUBSCRIBE_CHANNEL";
+export const UNSUBSCRIBE_CHANNEL = "UNSUBSCRIBE_CHANNEL";

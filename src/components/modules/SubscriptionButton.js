@@ -7,7 +7,7 @@ class SubscriptionButton extends React.Component {
   };
 
   componentDidMount = async () => {
-    console.log(this.props.auth);
+    // console.log(this.props.auth);
     if (!this.props.auth.signedIn) return;
     this.fetchSubscriptionStatus();
   };
@@ -34,12 +34,56 @@ class SubscriptionButton extends React.Component {
     });
   };
 
+  handleSubscribe = (channelId) => {
+    console.log(channelId);
+  };
+  handleUnsubscribe = () => {};
+
+  handleToggleButtonText = (e) => {
+    const buttonText = e.target.innerText;
+    let newButtonText = buttonText;
+    switch (buttonText) {
+      case "Subscribed":
+        newButtonText = "Unsubscribe";
+        break;
+      case "Unsubscribed":
+        newButtonText = "Subscribe";
+        break;
+      case "Subscribe":
+        newButtonText = "Unsubscribed";
+        break;
+      case "Unsubscribe":
+        newButtonText = "Subscribed";
+        break;
+      default:
+        newButtonText = buttonText;
+    }
+    e.target.innerText = newButtonText;
+    console.log(e.target);
+  };
+
   render() {
     const { isSubscribed } = this.state;
     return isSubscribed === true ? (
-      <button className="btn btn-danger">Subscribed</button>
+      <button
+        className="btn btn-outline-danger"
+        onClick={this.handleUnsubscribe}
+        onMouseOver={this.handleToggleButtonText}
+        onMouseLeave={this.handleToggleButtonText}
+        style={{ width: "120px" }}
+      >
+        Subscribed
+      </button>
     ) : isSubscribed === false ? (
-      <button className="btn btn-dark">Unsubscribed</button>
+      <button
+        className="btn btn-outline-dark"
+        onClick={() => this.handleSubscribe(this.props.channelId)}
+        onMouseOver={this.handleToggleButtonText}
+        onMouseLeave={this.handleToggleButtonText}
+        style={{ width: "120px" }}
+      >
+        Unsubscribed
+      </button>
     ) : (
       ""
     );

@@ -11,6 +11,8 @@ import {
   FETCH_COMMENTS_DISABLED,
   CATCH_ERROR,
   CLEAR_ERROR,
+  SUBSCRIBE_CHANNEL,
+  UNSUBSCRIBE_CHANNEL,
 } from "../actions/types";
 
 export const commentsReducer = (state = null, action) => {
@@ -88,6 +90,17 @@ export const channelReducer = (state = null, action) => {
         ...state,
         isSubscribed: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+export const subscriptionReducer = (state = null, action) => {
+  switch (action.type) {
+    case SUBSCRIBE_CHANNEL:
+      return action.payload;
+    case UNSUBSCRIBE_CHANNEL:
+      return null;
     default:
       return state;
   }
