@@ -323,7 +323,7 @@ export const subscribeChannel = (channelId, accessToken) => {
           Authorization: accessToken,
         },
         params: {
-          part: "id",
+          part: "snippet",
         },
       }
     );

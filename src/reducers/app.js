@@ -73,7 +73,7 @@ export const playlistReducer = (state = null, action) => {
   }
 };
 
-export const channelReducer = (state = null, action) => {
+export const channelReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_CHANNEL:
       return {

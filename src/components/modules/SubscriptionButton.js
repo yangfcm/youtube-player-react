@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchChannelSubscription } from "../../actions/app";
+import { subscribeChannel, unsubscribeChannel } from "../../actions/app";
+
 class SubscriptionButton extends React.Component {
   state = {
     isSubscribed: null,
@@ -34,8 +36,19 @@ class SubscriptionButton extends React.Component {
     });
   };
 
-  handleSubscribe = (channelId) => {
-    console.log(channelId);
+  handleSubscribe = async () => {
+    const accessToken = localStorage.getItem("access_token");
+    await this.props.subscribeChannel(this.props.channelId, accessToken);
+    console.log(this.props.subscription);
+    if (
+      this.props.subscription &&
+      this.props.subscription.snippet.resourceId.channelId ===
+        this.props.channelId
+    ) {
+      this.setState({
+        isSubscribed: true,
+      });
+    }
   };
   handleUnsubscribe = () => {};
 
@@ -59,7 +72,7 @@ class SubscriptionButton extends React.Component {
         newButtonText = buttonText;
     }
     e.target.innerText = newButtonText;
-    console.log(e.target);
+    // console.log(e.target);
   };
 
   render() {
@@ -77,7 +90,7 @@ class SubscriptionButton extends React.Component {
     ) : isSubscribed === false ? (
       <button
         className="btn btn-outline-dark"
-        onClick={() => this.handleSubscribe(this.props.channelId)}
+        onClick={this.handleSubscribe}
         onMouseOver={this.handleToggleButtonText}
         onMouseLeave={this.handleToggleButtonText}
         style={{ width: "120px" }}
@@ -94,8 +107,11 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     channel: state.channel,
+    subscription: state.subscription,
   };
 };
 export default connect(mapStateToProps, {
   fetchChannelSubscription,
+  subscribeChannel,
+  unsubscribeChannel,
 })(SubscriptionButton);
