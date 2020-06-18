@@ -6,6 +6,8 @@ import { subscribeChannel, unsubscribeChannel } from "../../actions/app";
 class SubscriptionButton extends React.Component {
   state = {
     isSubscribed: null,
+    isLoading: false,
+    buttonText: "",
   };
 
   componentDidMount = async () => {
@@ -33,81 +35,99 @@ class SubscriptionButton extends React.Component {
     );
     this.setState({
       isSubscribed: this.props.channel.isSubscribed,
+      buttonText: this.props.channel.isSubscribed
+        ? "Subscribed"
+        : "Unsubscribed",
     });
   };
 
   handleSubscribe = async () => {
     const accessToken = localStorage.getItem("access_token");
-    await this.props.subscribeChannel(this.props.channelId, accessToken);
-    // console.log(this.props.subscription);
-    if (
-      this.props.subscription &&
-      this.props.subscription.snippet.resourceId.channelId ===
-        this.props.channelId
-    ) {
+    this.setState({
+      isLoading: true,
+    });
+    try {
+      await this.props.subscribeChannel(this.props.channelId, accessToken);
+      // console.log(this.props.subscription);
+      if (
+        this.props.subscription &&
+        this.props.subscription.snippet.resourceId.channelId ===
+          this.props.channelId
+      ) {
+        this.setState({
+          isSubscribed: true,
+          buttonText: "Subscribed",
+        });
+      }
+    } finally {
       this.setState({
-        isSubscribed: true,
+        isLoading: false,
       });
     }
   };
 
   handleUnsubscribe = async () => {
     const accessToken = localStorage.getItem("access_token");
-    await this.props.unsubscribeChannel(this.props.channelId, accessToken);
-    if (!this.props.subscription) {
+    this.setState({
+      isLoading: true,
+    });
+    try {
+      await this.props.unsubscribeChannel(this.props.channelId, accessToken);
+      if (!this.props.subscription) {
+        this.setState({
+          isSubscribed: false,
+          buttonText: "Unsubscribed",
+        });
+      }
+    } finally {
       this.setState({
-        isSubscribed: false,
+        isLoading: false,
       });
     }
   };
 
-  handleToggleButtonText = (e) => {
-    const buttonText = e.target.innerText;
-    let newButtonText = buttonText;
-    switch (buttonText) {
-      case "Subscribed":
-        newButtonText = "Unsubscribe";
-        break;
-      case "Unsubscribed":
-        newButtonText = "Subscribe";
-        break;
-      case "Subscribe":
-        newButtonText = "Unsubscribed";
-        break;
-      case "Unsubscribe":
-        newButtonText = "Subscribed";
-        break;
-      default:
-        newButtonText = buttonText;
+  handleToggleButtonTextOnHover = () => {
+    if (this.state.buttonText === "Subscribed") {
+      this.setState({
+        buttonText: "Unsubscribe",
+      });
     }
-    e.target.innerText = newButtonText;
-    // console.log(e.target);
+    if (this.state.buttonText === "Unsubscribed") {
+      this.setState({
+        buttonText: "Subscribe",
+      });
+    }
+  };
+
+  handleToggleButtonTextOnLeave = () => {
+    if (this.state.isSubscribed === true) {
+      this.setState({
+        buttonText: "Subscribed",
+      });
+    } else {
+      this.setState({
+        buttonText: "Unsubscribed",
+      });
+    }
   };
 
   render() {
-    const { isSubscribed } = this.state;
-    return isSubscribed === true ? (
-      <button
-        className="btn btn-outline-danger"
-        onClick={this.handleUnsubscribe}
-        onMouseOver={this.handleToggleButtonText}
-        onMouseLeave={this.handleToggleButtonText}
-        style={{ width: "120px" }}
-      >
-        Subscribed
-      </button>
-    ) : isSubscribed === false ? (
-      <button
-        className="btn btn-outline-dark"
-        onClick={this.handleSubscribe}
-        onMouseOver={this.handleToggleButtonText}
-        onMouseLeave={this.handleToggleButtonText}
-        style={{ width: "120px" }}
-      >
-        Unsubscribed
-      </button>
+    const { isSubscribed, isLoading, buttonText } = this.state;
+    return isSubscribed === null ? (
+      " "
     ) : (
-      ""
+      <button
+        className={`btn ${
+          isSubscribed ? "btn-outline-danger" : "btn-outline-dark"
+        }`}
+        onMouseOver={this.handleToggleButtonTextOnHover}
+        onMouseLeave={this.handleToggleButtonTextOnLeave}
+        onClick={isSubscribed ? this.handleUnsubscribe : this.handleSubscribe}
+        style={{ width: "120px" }}
+        disabled={isLoading}
+      >
+        {buttonText}
+      </button>
     );
   }
 }
