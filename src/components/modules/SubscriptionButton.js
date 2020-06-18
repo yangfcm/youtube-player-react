@@ -50,14 +50,14 @@ class SubscriptionButton extends React.Component {
       });
     }
   };
-  
-  handleUnsubscribe = () => {
-    const accessToken = localStorage.getItem('access_token');
+
+  handleUnsubscribe = async () => {
+    const accessToken = localStorage.getItem("access_token");
     await this.props.unsubscribeChannel(this.props.channelId, accessToken);
-    if(!this.props.subscription) {
+    if (!this.props.subscription) {
       this.setState({
-        isSubscribed: false
-      })
+        isSubscribed: false,
+      });
     }
   };
 
