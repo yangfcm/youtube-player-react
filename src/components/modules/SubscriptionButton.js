@@ -39,7 +39,7 @@ class SubscriptionButton extends React.Component {
   handleSubscribe = async () => {
     const accessToken = localStorage.getItem("access_token");
     await this.props.subscribeChannel(this.props.channelId, accessToken);
-    console.log(this.props.subscription);
+    // console.log(this.props.subscription);
     if (
       this.props.subscription &&
       this.props.subscription.snippet.resourceId.channelId ===
@@ -50,7 +50,16 @@ class SubscriptionButton extends React.Component {
       });
     }
   };
-  handleUnsubscribe = () => {};
+  
+  handleUnsubscribe = () => {
+    const accessToken = localStorage.getItem('access_token');
+    await this.props.unsubscribeChannel(this.props.channelId, accessToken);
+    if(!this.props.subscription) {
+      this.setState({
+        isSubscribed: false
+      })
+    }
+  };
 
   handleToggleButtonText = (e) => {
     const buttonText = e.target.innerText;

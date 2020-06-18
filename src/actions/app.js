@@ -341,9 +341,27 @@ export const subscribeChannel = (channelId, accessToken) => {
   };
 };
 
-export const unsubscribeChannel = (subscriptionId, accessToken) => {
+export const unsubscribeChannel = (channelId, accessToken) => {
   return async (dispatch) => {
     try {
+      /** Use channelId to get subscription id */
+      const subscriptionRes = await axios.get("/subscriptions#list", {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          part: "snippet",
+          forChannelId: channelId,
+          key: process.env.REACT_APP_API_KEY,
+          mine: true,
+        },
+      });
+
+      if (subscriptionRes.data.items.length === 0) {
+        throw Error("Channel not subscribed");
+      }
+      const subscriptionId = response.data.items[0].id;
+
       await axios.delete("/subscriptions", {
         headers: {
           Authorization: accessToken,
