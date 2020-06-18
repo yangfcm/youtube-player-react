@@ -17,21 +17,22 @@ class ChannelBanner extends React.Component {
       }
     }
   };
+
   render() {
-    console.log(this.state.channelIntro);
+    const { channelIntro } = this.state;
     return (
-      this.state.channelIntro && (
+      channelIntro && (
         <div className="d-flex align-items-center mb-2">
-          <div style={{ height: "65px" }} className="d-flex align-items-center">
+          <div style={{ height: "80px" }} className="d-flex align-items-center">
             {" "}
             <img
               style={{ borderRadius: "50%", maxHeight: "100%" }}
-              src={this.state.channelIntro.snippet.thumbnails.default.url}
-              alt={this.state.channelIntro.snippet.title}
+              src={channelIntro.snippet.thumbnails.medium.url}
+              alt={channelIntro.snippet.title}
             />
           </div>
-          <h3 className="display-6 mx-3">
-            {this.state.channelIntro.snippet.title}
+          <h3 className="display-6 mx-3 text-primary font-weight-bold ">
+            {channelIntro.snippet.title}
           </h3>
         </div>
       )

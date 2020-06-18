@@ -47,50 +47,43 @@ class ChannelIntro extends React.Component {
         {!this.state.error && this.state.channelIntro && (
           <div className="mt-3 row justify-content-center">
             <div className="col-md-10 col-lg-9">
-              <div className="d-flex flex-column flex-sm-row">
-                <div className="mr-3 my-3 text-center">
+              {/* <div className="d-flex justify-content-center align-items-center mb-3">
+                <div className="mr-3">
                   <img
                     className="rounded-circle"
-                    style={{ maxWidth: "120px", height: "auto" }}
-                    src={channelIntro.snippet.thumbnails.medium.url}
+                    style={{ width: "50px", height: "50px" }}
+                    src={channelIntro.snippet.thumbnails.default.url}
                     alt={channelIntro.snippet.title}
                   />
                 </div>
-                <div className="flex-grow-1">
-                  <div className="d-flex justify-content-center flex-column">
-                    <h3 className="my-3 text-center font-weight-bold text-primary">
-                      {channelIntro.snippet.title}
-                    </h3>
-                    <ul className="list-group">
-                      <li className="list-group-item">
-                        <FontAwesomeIcon icon="calendar-day" /> Published on{" "}
-                        {moment(channelIntro.snippet.publishedAt).format(
-                          "D MMM YYYY"
-                        )}
-                      </li>
-                      {channelIntro.snippet.description && (
-                        <li className="list-group-item">
-                          {" "}
-                          <FontAwesomeIcon icon="envelope-open-text" />{" "}
-                          Description - {channelIntro.snippet.description}
-                        </li>
-                      )}
-                      <li className="list-group-item">
-                        <FontAwesomeIcon icon="user-friends" />{" "}
-                        {separateNumber(
-                          channelIntro.statistics.subscriberCount
-                        )}{" "}
-                        Subscribers
-                      </li>
-                      <li className="list-group-item">
-                        <FontAwesomeIcon icon="eye" />{" "}
-                        {separateNumber(channelIntro.statistics.viewCount)}{" "}
-                        Views
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                <h3 className="my-3 text-center font-weight-bold text-primary">
+                  {channelIntro.snippet.title}
+                </h3>
+              </div> */}
+              <ul className="list-group">
+                <li className="list-group-item">
+                  <FontAwesomeIcon icon="calendar-day" /> Published on{" "}
+                  {moment(channelIntro.snippet.publishedAt).format(
+                    "D MMM YYYY"
+                  )}
+                </li>
+                {channelIntro.snippet.description && (
+                  <li className="list-group-item">
+                    {" "}
+                    <FontAwesomeIcon icon="envelope-open-text" /> Description -{" "}
+                    {channelIntro.snippet.description}
+                  </li>
+                )}
+                <li className="list-group-item">
+                  <FontAwesomeIcon icon="user-friends" />{" "}
+                  {separateNumber(channelIntro.statistics.subscriberCount)}{" "}
+                  Subscribers
+                </li>
+                <li className="list-group-item">
+                  <FontAwesomeIcon icon="eye" />{" "}
+                  {separateNumber(channelIntro.statistics.viewCount)} Views
+                </li>
+              </ul>
             </div>
           </div>
         )}

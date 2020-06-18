@@ -7,7 +7,7 @@ const Banner = ({ auth }) => {
   // console.log(signedIn, user);
   return (
     <div className="d-flex align-items-center mb-2">
-      <div style={{ height: "65px" }} className="d-flex align-items-center">
+      <div style={{ height: "80px" }} className="d-flex align-items-center">
         {signedIn === null ? (
           ""
         ) : signedIn === true ? (
