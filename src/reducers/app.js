@@ -1,5 +1,6 @@
 import {
   FETCH_CHANNEL,
+  FETCH_CHANNEL_SUBSCRIPTION,
   FETCH_PLAY_LIST,
   FETCH_VIDEOS,
   SEARCH_VIDEOS,
@@ -9,7 +10,7 @@ import {
   FETCH_COMMENTS,
   FETCH_COMMENTS_DISABLED,
   CATCH_ERROR,
-  CLEAR_ERROR
+  CLEAR_ERROR,
 } from "../actions/types";
 
 export const commentsReducer = (state = null, action) => {
@@ -49,7 +50,7 @@ export const playlistDetailReducer = (state = null, action) => {
       return {
         pageInfo: action.payload.pageInfo,
         items: action.payload.items,
-        nextPageToken: action.payload.nextPageToken
+        nextPageToken: action.payload.nextPageToken,
       };
     default:
       return state;
@@ -62,7 +63,7 @@ export const playlistReducer = (state = null, action) => {
       return {
         pageInfo: action.payload.pageInfo,
         items: action.payload.items,
-        nextPageToken: action.payload.nextPageToken
+        nextPageToken: action.payload.nextPageToken,
       };
 
     default:
@@ -76,11 +77,16 @@ export const channelReducer = (state = null, action) => {
       return {
         pageInfo: action.payload.pageInfo,
         items: action.payload.items,
-        nextPageToken: action.payload.nextPageToken
+        nextPageToken: action.payload.nextPageToken,
       };
     case FETCH_CHANNEL_INTRO:
       return {
-        items: action.payload.items
+        items: action.payload.items,
+      };
+    case FETCH_CHANNEL_SUBSCRIPTION:
+      return {
+        ...state,
+        isSubscribed: action.payload,
       };
     default:
       return state;

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchChannelIntro } from "../../actions/app";
+import SubscriptionButton from "../modules/SubscriptionButton";
 
 class ChannelBanner extends React.Component {
   state = {
@@ -31,9 +32,14 @@ class ChannelBanner extends React.Component {
               alt={channelIntro.snippet.title}
             />
           </div>
-          <h3 className="display-6 mx-3 text-primary font-weight-bold ">
-            {channelIntro.snippet.title}
-          </h3>
+          <div className="flex-grow-1 d-flex justify-content-between align-items-center flex-wrap">
+            <h3 className="display-6 mx-3 text-primary font-weight-bold ">
+              {channelIntro.snippet.title}
+            </h3>
+            <div className="flex-grow-1 d-flex justify-content-end">
+              <SubscriptionButton channelId={this.props.channelId} />
+            </div>
+          </div>
         </div>
       )
     );

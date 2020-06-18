@@ -199,7 +199,7 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
   };
 };
 
-/** Fetch subscribed channels */
+/** Fetch subscribed channels by the current authorized user */
 export const fetchChannel = (pageToken) => {
   const accessToken = localStorage.getItem("access_token");
 
@@ -233,18 +233,18 @@ export const fetchChannel = (pageToken) => {
 };
 
 /** Given a channel id if it is subscribed by the user with access token, return the channel. Otherwise, return null */
-export const fetchChannelSubscription = (channelId) => {
-  const accessToken = localStorage.getItem("access_token");
-  if (!accessToken) {
-    return {
-      type: FETCH_CHANNEL_SUBSCRIPTION,
-      payload: null,
-    };
-  }
+export const fetchChannelSubscription = (channelId, accessToken) => {
+  // const accessToken = localStorage.getItem("access_token");
+  // if (!accessToken) {
+  //   return {
+  //     type: FETCH_CHANNEL_SUBSCRIPTION,
+  //     payload: null,
+  //   };
+  // }
 
   return async (dispatch) => {
     try {
-      const response = await axios.get("/subscriptions", {
+      const response = await axios.get("/subscriptions#list", {
         headers: {
           Authorization: accessToken,
         },
@@ -255,10 +255,21 @@ export const fetchChannelSubscription = (channelId) => {
           mine: true,
         },
       });
-      dispatch({
-        type: FETCH_CHANNEL_SUBSCRIPTION,
-        payload: response.data,
-      });
+      console.log(response.data);
+      if (response.data.items.length === 0) {
+        // If the channel is not subscribed by the current authorized user
+        dispatch({
+          type: FETCH_CHANNEL_SUBSCRIPTION,
+          payload: false,
+        });
+      } else {
+        // If the channel is not subscribed by the current authorized user
+
+        dispatch({
+          type: FETCH_CHANNEL_SUBSCRIPTION,
+          payload: true,
+        });
+      }
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
