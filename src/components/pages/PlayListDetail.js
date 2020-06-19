@@ -64,7 +64,7 @@ class PlayListDetail extends React.Component {
 
         {this.state.playlistDetail && (
           <div className="d-flex justify-content-center">
-            <div className="col-lg-8">
+            <div className="col-lg-9">
               <div className="mb-3">
                 <h5 className="font-weight-bold">Playlist Videos</h5>
               </div>

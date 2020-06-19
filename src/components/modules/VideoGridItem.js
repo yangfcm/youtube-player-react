@@ -20,9 +20,9 @@ const VideoGridItem = ({ video }) => {
         <div
           style={{
             lineHeight: "23px",
-            height: "46px",
+            maxHeight: "46px",
             overflow: "hidden",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
           }}
           className="mb-1"
         >

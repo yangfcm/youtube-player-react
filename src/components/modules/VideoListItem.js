@@ -25,10 +25,10 @@ const VideoListItem = ({ video, playlistId }) => {
       <div className="d-flex flex-column justify-content-center ml-3">
         <Link to={linkUrl} title={video.snippet.title}>
           <div
-            className="text-primary font-weight-bold"
+            className="text-primary font-weight-bold d-flex align-items-center"
             style={{
               lineHeight: "23px",
-              height: "46px",
+              maxHeight: "46px",
               overflow: "hidden",
               textOverflow: "ellipsis",
             }}

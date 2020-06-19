@@ -81,20 +81,22 @@ class SearchResult extends React.Component {
         {!this.state.error && !this.state.videos && <Loading />}
         {this.state.error && <ErrorMessage message={this.state.error} />}
         {!this.state.error && this.state.videos && (
-          <div>
-            <h3 className="mb-3">
-              Search results with keyword:{" "}
-              <span className="text-danger">
-                {queryString.parse(this.props.location.search).q}
-              </span>
-            </h3>
-            <SearchResultList searchResultList={this.state.videos.items} />
+          <div className="d-flex justify-content-center">
+            <div className="col-lg-9">
+              <h3 className="mb-3">
+                Search results with keyword:{" "}
+                <span className="text-danger">
+                  {queryString.parse(this.props.location.search).q}
+                </span>
+              </h3>
+              <SearchResultList searchResultList={this.state.videos.items} />
 
-            {this.state.videos.nextPageToken && (
-              <div style={{ width: "50%", margin: "0 auto" }}>
-                <MoreButton onClickMore={this.fetchNextPageVideos} />
-              </div>
-            )}
+              {this.state.videos.nextPageToken && (
+                <div style={{ width: "50%", margin: "0 auto" }}>
+                  <MoreButton onClickMore={this.fetchNextPageVideos} />
+                </div>
+              )}
+            </div>
           </div>
         )}
       </React.Fragment>
