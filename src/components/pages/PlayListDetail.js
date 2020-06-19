@@ -63,20 +63,22 @@ class PlayListDetail extends React.Component {
         )}
 
         {this.state.playlistDetail && (
-          <div>
-            <div className="mb-3 ">
-              <h5 className="font-weight-bold">Playlist Videos</h5>
-            </div>
-            <VideoList
-              videoList={this.state.playlistDetail.items}
-              playlistId={this.props.match.params.id}
-            />
-
-            {this.state.playlistDetail.nextPageToken && (
-              <div style={{ width: "50%", margin: "0 auto" }}>
-                <MoreButton onClickMore={this.fetchNextPagePlaylist} />
+          <div className="d-flex justify-content-center">
+            <div className="col-lg-8">
+              <div className="mb-3">
+                <h5 className="font-weight-bold">Playlist Videos</h5>
               </div>
-            )}
+              <VideoList
+                videoList={this.state.playlistDetail.items}
+                playlistId={this.props.match.params.id}
+              />
+
+              {this.state.playlistDetail.nextPageToken && (
+                <div style={{ width: "50%", margin: "0 auto" }}>
+                  <MoreButton onClickMore={this.fetchNextPagePlaylist} />
+                </div>
+              )}
+            </div>
           </div>
         )}
       </React.Fragment>

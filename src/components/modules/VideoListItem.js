@@ -23,10 +23,18 @@ const VideoListItem = ({ video, playlistId }) => {
         </Link>
       </div>
       <div className="d-flex flex-column justify-content-center ml-3">
-        <Link to={linkUrl}>
-          <h6 className="text-primary font-weight-bold">
+        <Link to={linkUrl} title={video.snippet.title}>
+          <div
+            className="text-primary font-weight-bold"
+            style={{
+              lineHeight: "23px",
+              height: "46px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
             {video.snippet.title}
-          </h6>
+          </div>
         </Link>
         <Link to={`/channel/${video.snippet.channelId}`}>
           {" "}

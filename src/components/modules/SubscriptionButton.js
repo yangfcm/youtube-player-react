@@ -45,6 +45,7 @@ class SubscriptionButton extends React.Component {
     const accessToken = localStorage.getItem("access_token");
     this.setState({
       isLoading: true,
+      buttonText: "Subscribing...",
     });
     try {
       await this.props.subscribeChannel(this.props.channelId, accessToken);
@@ -70,6 +71,7 @@ class SubscriptionButton extends React.Component {
     const accessToken = localStorage.getItem("access_token");
     this.setState({
       isLoading: true,
+      buttonText: "Unsubscribing...",
     });
     try {
       await this.props.unsubscribeChannel(this.props.channelId, accessToken);
