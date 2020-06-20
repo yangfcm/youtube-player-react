@@ -14,6 +14,7 @@ import {
   CLEAR_ERROR,
   SUBSCRIBE_CHANNEL,
   UNSUBSCRIBE_CHANNEL,
+  FETCH_REPLIES,
 } from "./types";
 
 export const searchVideos = (filter, pageToken) => {
@@ -77,6 +78,7 @@ export const fetchComments = (videoId, pageToken) => {
           videoId,
           maxResults,
           pageToken,
+          order: "relevance",
         },
       });
       dispatch({
@@ -97,6 +99,32 @@ export const fetchComments = (videoId, pageToken) => {
           payload: "Failed to fetch comments",
         });
       }
+    }
+  };
+};
+
+/** Fetch replies to a comment */
+export const fetchCommentReplies = (commentId, pageToken) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("/comments", {
+        params: {
+          part: "snippet",
+          key: process.env.REACT_APP_API_KEY,
+          id: commentId,
+          maxResults,
+          pageToken,
+        },
+      });
+      dispatch({
+        type: FETCH_REPLIES,
+        payload: response.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to fetch replies",
+      });
     }
   };
 };

@@ -14,3 +14,4 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 export const SUBSCRIBE_CHANNEL = "SUBSCRIBE_CHANNEL";
 export const UNSUBSCRIBE_CHANNEL = "UNSUBSCRIBE_CHANNEL";
+export const FETCH_REPLIES = "FETCH_REPLIES";

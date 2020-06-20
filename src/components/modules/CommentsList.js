@@ -6,10 +6,11 @@ import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import CommentItem from "./CommentItem";
 import MoreButton from "./MoreButton";
+import CommentReplyList from "../modules/CommentReplyList";
 
 class CommentsList extends React.Component {
   state = {
-    comments: null
+    comments: null,
   };
   componentDidMount = async () => {
     await this.props.fetchComments(this.props.videoId);
@@ -20,8 +21,8 @@ class CommentsList extends React.Component {
       this.setState({
         comments: {
           items: [],
-          disabled: true
-        }
+          disabled: true,
+        },
       });
     } else {
       this.setState({
@@ -29,13 +30,13 @@ class CommentsList extends React.Component {
           pageInfo: this.props.comments.pageInfo,
           items: this.props.comments.items,
           nextPageToken: this.props.comments.nextPageToken,
-          disabled: false
-        }
+          disabled: false,
+        },
       });
     }
   };
 
-  componentDidUpdate = async prevProps => {
+  componentDidUpdate = async (prevProps) => {
     if (prevProps.videoId !== this.props.videoId) {
       await this.props.fetchComments(this.props.videoId);
       if (this.props.error) {
@@ -45,8 +46,8 @@ class CommentsList extends React.Component {
         this.setState({
           comments: {
             items: [],
-            disabled: true
-          }
+            disabled: true,
+          },
         });
       } else {
         this.setState({
@@ -54,8 +55,8 @@ class CommentsList extends React.Component {
             pageInfo: this.props.comments.pageInfo,
             items: this.props.comments.items,
             nextPageToken: this.props.comments.nextPageToken,
-            disabled: false
-          }
+            disabled: false,
+          },
         });
       }
     }
@@ -72,8 +73,8 @@ class CommentsList extends React.Component {
         comments: {
           pageInfo: props.comments.pageInfo,
           items: state.comments.items.concat(props.comments.items),
-          nextPageToken: props.comments.nextPageToken
-        }
+          nextPageToken: props.comments.nextPageToken,
+        },
       };
     });
   };
@@ -95,8 +96,16 @@ class CommentsList extends React.Component {
                   : "No comment"}
               </div>
             )}
-            {this.state.comments.items.map(item => {
-              return <CommentItem comment={item} key={item.id} />;
+            {this.state.comments.items.map((item) => {
+              return (
+                <React.Fragment key={item.id}>
+                  <CommentItem comment={item} />
+                  <CommentReplyList comment={item} />
+                  <div className="my-2">
+                    <hr />
+                  </div>
+                </React.Fragment>
+              );
             })}
             {this.state.comments && this.state.comments.nextPageToken && (
               <MoreButton onClickMore={this.fetchNextPageComments} />
@@ -108,10 +117,10 @@ class CommentsList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     comments: state.comments,
-    error: state.error
+    error: state.error,
   };
 };
 export default connect(mapStateToProps, { fetchComments, clearError })(

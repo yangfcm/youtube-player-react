@@ -27,7 +27,6 @@ const CommentItem = ({ comment }) => {
           ></div>
         </div>
       </div>
-      <hr />
     </React.Fragment>
   );
 };
