@@ -1,6 +1,6 @@
 import React from "react";
 
-const MoreButton = ({ onClickMore }) => {
+const MoreButton = ({ onClickMore, children }) => {
   return (
     <div className="text-center">
       <button
@@ -8,7 +8,7 @@ const MoreButton = ({ onClickMore }) => {
         style={{ width: "100%" }}
         onClick={onClickMore}
       >
-        <span className="text-dark">More...</span>
+        <span className="text-dark">{children ? children : "More..."}</span>
       </button>
     </div>
   );

@@ -92,7 +92,9 @@ class CommentReplyList extends React.Component {
             })}
             {this.state.replies.nextPageToken && (
               <div style={{ width: "60%", margin: "0 auto" }}>
-                <MoreButton onClickMore={this.handleFetchNextPageReplies} />
+                <MoreButton onClickMore={this.handleFetchNextPageReplies}>
+                  More Replies
+                </MoreButton>
               </div>
             )}
           </div>

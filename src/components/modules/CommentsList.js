@@ -110,7 +110,9 @@ class CommentsList extends React.Component {
               );
             })}
             {this.state.comments && this.state.comments.nextPageToken && (
-              <MoreButton onClickMore={this.fetchNextPageComments} />
+              <MoreButton onClickMore={this.fetchNextPageComments}>
+                More Comments
+              </MoreButton>
             )}
           </div>
         )}
