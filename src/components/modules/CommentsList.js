@@ -99,8 +99,10 @@ class CommentsList extends React.Component {
             {this.state.comments.items.map((item) => {
               return (
                 <React.Fragment key={item.id}>
-                  <CommentItem comment={item} />
-                  <CommentReplyList comment={item} />
+                  <CommentItem comment={item.snippet.topLevelComment.snippet} />
+                  <div className="pl-4">
+                    <CommentReplyList comment={item} />
+                  </div>
                   <div className="my-2">
                     <hr />
                   </div>

@@ -111,7 +111,7 @@ export const fetchCommentReplies = (commentId, pageToken) => {
         params: {
           part: "snippet",
           key: process.env.REACT_APP_API_KEY,
-          id: commentId,
+          parentId: commentId,
           maxResults,
           pageToken,
         },
