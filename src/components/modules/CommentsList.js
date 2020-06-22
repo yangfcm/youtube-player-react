@@ -74,7 +74,8 @@ class CommentsList extends React.Component {
         });
       }
     }
-    console.log(prevProps.comments.myComments);
+    // console.log(prevProps.comments.myComments);
+    // console.log(this.props.comments.myComments);
   };
 
   fetchNextPageComments = async () => {
@@ -123,6 +124,22 @@ class CommentsList extends React.Component {
                   : "No comment"}
               </div>
             )}
+            {this.props.comments.myComments &&
+              this.props.comments.myComments.map((item) => {
+                return (
+                  <React.Fragment key={item.id}>
+                    <CommentItem
+                      comment={item.snippet.topLevelComment.snippet}
+                    />
+                    <div className="pl-4">
+                      <CommentReplyList comment={item} />
+                    </div>
+                    <div className="my-2">
+                      <hr />
+                    </div>
+                  </React.Fragment>
+                );
+              })}
             {this.state.comments.items.map((item) => {
               return (
                 <React.Fragment key={item.id}>

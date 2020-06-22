@@ -38,8 +38,8 @@ class CommentForm extends React.Component {
     this.setState({
       isPublishing: true,
     });
-    console.log(this.props.video.id, this.props.video.snippet.channelId);
-    console.log("publish comment", this.state.comment.trim());
+    // console.log(this.props.video.id, this.props.video.snippet.channelId);
+    // console.log("publish comment", this.state.comment.trim());
     await this.props.addComment(
       this.props.video.channelId,
       this.props.video.id,
