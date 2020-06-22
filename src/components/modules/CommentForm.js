@@ -113,7 +113,7 @@ class CommentForm extends React.Component {
             <button
               type="submit"
               className="btn btn-info mr-3"
-              disabled={!this.state.comment.trim() && this.state.isPublishing}
+              disabled={!this.state.comment.trim() || this.state.isPublishing}
             >
               {this.state.isPublishing ? "Publishing..." : "Comment"}
             </button>
