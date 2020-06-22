@@ -72,10 +72,13 @@ export const fetchVideos = (filter, pageToken) => {
 };
 
 /** Fetch comments by video id */
-export const fetchComments = (videoId, pageToken) => {
+export const fetchComments = (videoId, pageToken, accessToken) => {
   return async (dispatch) => {
     try {
       const response = await axios.get("/commentThreads", {
+        headers: {
+          Authorization: accessToken,
+        },
         params: {
           part: "snippet",
           key: process.env.REACT_APP_API_KEY,

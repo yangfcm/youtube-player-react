@@ -14,7 +14,8 @@ class CommentsList extends React.Component {
     error: "",
   };
   componentDidMount = async () => {
-    await this.props.fetchComments(this.props.videoId);
+    const accessToken = localStorage.getItem("access_token");
+    await this.props.fetchComments(this.props.videoId, null, accessToken);
     if (this.props.error) {
       this.setState({
         error: this.props.error,
@@ -43,9 +44,10 @@ class CommentsList extends React.Component {
   };
 
   componentDidUpdate = async (prevProps) => {
+    const accessToken = localStorage.getItem("access_token");
     if (prevProps.videoId !== this.props.videoId) {
       // If video changes, fetch the comments of new video
-      await this.props.fetchComments(this.props.videoId);
+      await this.props.fetchComments(this.props.videoId, null, accessToken);
       if (this.props.error) {
         this.setState({
           error: this.props.error,
@@ -80,7 +82,12 @@ class CommentsList extends React.Component {
     if (!nextPageToken) {
       return;
     }
-    await this.props.fetchComments(this.props.videoId, nextPageToken);
+    const accessToken = localStorage.getItem("access_token");
+    await this.props.fetchComments(
+      this.props.videoId,
+      nextPageToken,
+      accessToken
+    );
     if (this.props.error) {
       this.setState({
         error: this.props.error,
