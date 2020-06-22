@@ -13,7 +13,7 @@ class GoogleAuth extends React.Component {
         .init({
           clientId: process.env.REACT_APP_CLIENT_ID,
           scope:
-            "email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube",
+            "email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl",
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();

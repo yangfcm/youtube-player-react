@@ -11,10 +11,14 @@ import CommentReplyList from "../modules/CommentReplyList";
 class CommentsList extends React.Component {
   state = {
     comments: null,
+    error: "",
   };
   componentDidMount = async () => {
     await this.props.fetchComments(this.props.videoId);
     if (this.props.error) {
+      this.setState({
+        error: this.props.error,
+      });
       return;
     }
     if (this.props.comments === "commentsDisabled") {
@@ -23,6 +27,7 @@ class CommentsList extends React.Component {
           items: [],
           disabled: true,
         },
+        error: "",
       });
     } else {
       this.setState({
@@ -32,14 +37,19 @@ class CommentsList extends React.Component {
           nextPageToken: this.props.comments.nextPageToken,
           disabled: false,
         },
+        error: "",
       });
     }
   };
 
   componentDidUpdate = async (prevProps) => {
     if (prevProps.videoId !== this.props.videoId) {
+      // If video changes, fetch the comments of new video
       await this.props.fetchComments(this.props.videoId);
       if (this.props.error) {
+        this.setState({
+          error: this.props.error,
+        });
         return;
       }
       if (this.props.comments === "commentsDisabled") {
@@ -48,6 +58,7 @@ class CommentsList extends React.Component {
             items: [],
             disabled: true,
           },
+          error: "",
         });
       } else {
         this.setState({
@@ -57,9 +68,11 @@ class CommentsList extends React.Component {
             nextPageToken: this.props.comments.nextPageToken,
             disabled: false,
           },
+          error: "",
         });
       }
     }
+    console.log(prevProps.comments.myComments);
   };
 
   fetchNextPageComments = async () => {
@@ -68,6 +81,12 @@ class CommentsList extends React.Component {
       return;
     }
     await this.props.fetchComments(this.props.videoId, nextPageToken);
+    if (this.props.error) {
+      this.setState({
+        error: this.props.error,
+      });
+      return;
+    }
     this.setState((state, props) => {
       return {
         comments: {
@@ -75,6 +94,7 @@ class CommentsList extends React.Component {
           items: state.comments.items.concat(props.comments.items),
           nextPageToken: props.comments.nextPageToken,
         },
+        error: "",
       };
     });
   };
@@ -82,9 +102,9 @@ class CommentsList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {!this.props.error && !this.state.comments && <Loading />}
-        {this.props.error && <ErrorMessage message={this.props.error} />}
-        {!this.props.error && this.state.comments && (
+        {!this.state.error && !this.state.comments && <Loading />}
+        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {!this.state.error && this.state.comments && (
           <div className="mb-3">
             <h5 className="mb-3">
               <FontAwesomeIcon icon="comments" /> Comments
