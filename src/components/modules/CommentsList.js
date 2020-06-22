@@ -6,22 +6,29 @@ import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import CommentItem from "./CommentItem";
 import MoreButton from "./MoreButton";
+import CommentReplyList from "../modules/CommentReplyList";
 
 class CommentsList extends React.Component {
   state = {
-    comments: null
+    comments: null,
+    error: "",
   };
   componentDidMount = async () => {
-    await this.props.fetchComments(this.props.videoId);
+    const accessToken = localStorage.getItem("access_token");
+    await this.props.fetchComments(this.props.videoId, null, accessToken);
     if (this.props.error) {
+      this.setState({
+        error: this.props.error,
+      });
       return;
     }
     if (this.props.comments === "commentsDisabled") {
       this.setState({
         comments: {
           items: [],
-          disabled: true
-        }
+          disabled: true,
+        },
+        error: "",
       });
     } else {
       this.setState({
@@ -29,24 +36,31 @@ class CommentsList extends React.Component {
           pageInfo: this.props.comments.pageInfo,
           items: this.props.comments.items,
           nextPageToken: this.props.comments.nextPageToken,
-          disabled: false
-        }
+          disabled: false,
+        },
+        error: "",
       });
     }
   };
 
-  componentDidUpdate = async prevProps => {
+  componentDidUpdate = async (prevProps) => {
+    const accessToken = localStorage.getItem("access_token");
     if (prevProps.videoId !== this.props.videoId) {
-      await this.props.fetchComments(this.props.videoId);
+      // If video changes, fetch the comments of new video
+      await this.props.fetchComments(this.props.videoId, null, accessToken);
       if (this.props.error) {
+        this.setState({
+          error: this.props.error,
+        });
         return;
       }
       if (this.props.comments === "commentsDisabled") {
         this.setState({
           comments: {
             items: [],
-            disabled: true
-          }
+            disabled: true,
+          },
+          error: "",
         });
       } else {
         this.setState({
@@ -54,11 +68,14 @@ class CommentsList extends React.Component {
             pageInfo: this.props.comments.pageInfo,
             items: this.props.comments.items,
             nextPageToken: this.props.comments.nextPageToken,
-            disabled: false
-          }
+            disabled: false,
+          },
+          error: "",
         });
       }
     }
+    // console.log(prevProps.comments.myComments);
+    // console.log(this.props.comments.myComments);
   };
 
   fetchNextPageComments = async () => {
@@ -66,14 +83,26 @@ class CommentsList extends React.Component {
     if (!nextPageToken) {
       return;
     }
-    await this.props.fetchComments(this.props.videoId, nextPageToken);
+    const accessToken = localStorage.getItem("access_token");
+    await this.props.fetchComments(
+      this.props.videoId,
+      nextPageToken,
+      accessToken
+    );
+    if (this.props.error) {
+      this.setState({
+        error: this.props.error,
+      });
+      return;
+    }
     this.setState((state, props) => {
       return {
         comments: {
           pageInfo: props.comments.pageInfo,
           items: state.comments.items.concat(props.comments.items),
-          nextPageToken: props.comments.nextPageToken
-        }
+          nextPageToken: props.comments.nextPageToken,
+        },
+        error: "",
       };
     });
   };
@@ -81,9 +110,9 @@ class CommentsList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {!this.props.error && !this.state.comments && <Loading />}
-        {this.props.error && <ErrorMessage message={this.props.error} />}
-        {!this.props.error && this.state.comments && (
+        {!this.state.error && !this.state.comments && <Loading />}
+        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {!this.state.error && this.state.comments && (
           <div className="mb-3">
             <h5 className="mb-3">
               <FontAwesomeIcon icon="comments" /> Comments
@@ -95,11 +124,39 @@ class CommentsList extends React.Component {
                   : "No comment"}
               </div>
             )}
-            {this.state.comments.items.map(item => {
-              return <CommentItem comment={item} key={item.id} />;
+            {this.props.comments.myComments &&
+              this.props.comments.myComments.map((item) => {
+                return (
+                  <React.Fragment key={item.id}>
+                    <CommentItem
+                      comment={item.snippet.topLevelComment.snippet}
+                    />
+                    <div className="pl-4">
+                      <CommentReplyList comment={item} />
+                    </div>
+                    <div className="my-2">
+                      <hr />
+                    </div>
+                  </React.Fragment>
+                );
+              })}
+            {this.state.comments.items.map((item) => {
+              return (
+                <React.Fragment key={item.id}>
+                  <CommentItem comment={item.snippet.topLevelComment.snippet} />
+                  <div className="pl-4">
+                    <CommentReplyList comment={item} />
+                  </div>
+                  <div className="my-2">
+                    <hr />
+                  </div>
+                </React.Fragment>
+              );
             })}
             {this.state.comments && this.state.comments.nextPageToken && (
-              <MoreButton onClickMore={this.fetchNextPageComments} />
+              <MoreButton onClickMore={this.fetchNextPageComments}>
+                More Comments
+              </MoreButton>
             )}
           </div>
         )}
@@ -108,10 +165,10 @@ class CommentsList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     comments: state.comments,
-    error: state.error
+    error: state.error,
   };
 };
 export default connect(mapStateToProps, { fetchComments, clearError })(

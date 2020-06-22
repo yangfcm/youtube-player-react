@@ -4,6 +4,7 @@ import queryString from "query-string";
 import VideoPlayer from "../modules/VideoPlayer";
 import VideoDetail from "../modules/VideoDetail";
 import VideoList from "../modules/VideoList";
+import CommentForm from "../modules/CommentForm";
 import CommentsList from "../modules/CommentsList";
 import MoreButton from "../modules/MoreButton";
 import ErrorMessage from "../common/ErrorMessage";
@@ -155,6 +156,9 @@ class Video extends React.Component {
               )}
               {this.state.video && <VideoDetail video={this.state.video} />}
 
+              {this.props.auth.signedIn && this.state.video && (
+                <CommentForm video={this.state.video} />
+              )}
               {this.state.videoId && (
                 <CommentsList videoId={this.state.videoId} />
               )}
@@ -183,6 +187,7 @@ const mapStateToProps = (state) => {
     playlistDetail: state.playlistDetail,
     videos: state.videos,
     video: state.video,
+    auth: state.auth,
     error: state.error,
   };
 };

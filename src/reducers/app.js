@@ -9,18 +9,42 @@ import {
   FETCH_VIDEO,
   FETCH_COMMENTS,
   FETCH_COMMENTS_DISABLED,
+  ADD_COMMENT,
+  REPLY_COMMENT,
+  // UPDATE_COMMENT,
+  // DELETE_COMMENT,
   CATCH_ERROR,
   CLEAR_ERROR,
   SUBSCRIBE_CHANNEL,
   UNSUBSCRIBE_CHANNEL,
+  FETCH_REPLIES,
 } from "../actions/types";
 
-export const commentsReducer = (state = null, action) => {
+export const commentsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_COMMENTS:
       return action.payload;
     case FETCH_COMMENTS_DISABLED:
       return action.payload;
+    case FETCH_REPLIES:
+      return {
+        ...state,
+        replies: action.payload,
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        myComments: state.myComments
+          ? [action.payload, ...state.myComments]
+          : [action.payload],
+      };
+    case REPLY_COMMENT:
+      return {
+        ...state,
+        myReplies: state.myReplies
+          ? [action.payload, ...state.myReplies]
+          : [action.payload],
+      };
     default:
       return state;
   }
