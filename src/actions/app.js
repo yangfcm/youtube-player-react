@@ -10,6 +10,10 @@ import {
   FETCH_VIDEO,
   FETCH_COMMENTS,
   FETCH_COMMENTS_DISABLED,
+  ADD_COMMENT,
+  REPLY_COMMENT,
+  UPDATE_COMMENT,
+  DELETE_COMMENT,
   CATCH_ERROR,
   CLEAR_ERROR,
   SUBSCRIBE_CHANNEL,
@@ -129,6 +133,132 @@ export const fetchCommentReplies = (commentId, pageToken) => {
   };
 };
 
+/** Add a comment */
+export const addComment = (channelId, videoId, comment, accessToken) => {
+  return async (dispatch) => {
+    try {
+      const requestBody = {
+        snippet: {
+          channelId,
+          videoId,
+          topLevelComment: {
+            snippet: {
+              textOriginal: comment,
+            },
+          },
+        },
+      };
+      const response = await axios.post("/commentThreads", requestBody, {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          part: "snippet",
+          key: process.env.REACT_APP_API_KEY,
+        },
+      });
+      dispatch({
+        type: ADD_COMMENT,
+        payload: response.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to add a comment",
+      });
+    }
+  };
+};
+
+/** Reply a comment */
+export const replyComment = (commentToReplyId, comment, accessToken) => {
+  return async (dispatch) => {
+    try {
+      const requestBody = {
+        snippet: {
+          parentId: commentToReplyId,
+          textOriginal: comment,
+        },
+      };
+      const response = await axios.post("/comments", requestBody, {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          part: "snippet",
+          key: process.env.REACT_APP_API_KEY,
+        },
+      });
+      dispatch({
+        type: REPLY_COMMENT,
+        payload: response.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to add a comment",
+      });
+    }
+  };
+};
+
+/** Update a comment */
+export const updateComment = (commentId, comment, accessToken) => {
+  return async (dispatch) => {
+    try {
+      const requestBody = {
+        id: commentId,
+        snippet: {
+          textOriginal: comment,
+        },
+      };
+      const response = await axios.put("/comments", requestBody, {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          part: "snippet",
+          key: process.env.REACT_APP_API_KEY,
+        },
+      });
+      dispatch({
+        type: UPDATE_COMMENT,
+        payload: response.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to add a comment",
+      });
+    }
+  };
+};
+
+/** Delete a comment */
+export const deleteComment = (commentId, accessToken) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete("/comments", {
+        headers: {
+          Authorization: accessToken,
+        },
+        params: {
+          id: commentId,
+          key: process.env.REACT_APP_API_KEY,
+        },
+      });
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: response.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: CATCH_ERROR,
+        payload: "Failed to add a comment",
+      });
+    }
+  };
+};
 /** Fetch a vidoe by id */
 export const fetchVideo = (videoId) => {
   return async (dispatch) => {

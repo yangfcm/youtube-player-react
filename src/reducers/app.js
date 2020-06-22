@@ -9,6 +9,10 @@ import {
   FETCH_VIDEO,
   FETCH_COMMENTS,
   FETCH_COMMENTS_DISABLED,
+  ADD_COMMENT,
+  REPLY_COMMENT,
+  UPDATE_COMMENT,
+  DELETE_COMMENT,
   CATCH_ERROR,
   CLEAR_ERROR,
   SUBSCRIBE_CHANNEL,
@@ -26,6 +30,14 @@ export const commentsReducer = (state = {}, action) => {
       return {
         ...state,
         replies: action.payload,
+      };
+    case ADD_COMMENT:
+    case REPLY_COMMENT:
+    case UPDATE_COMMENT:
+    case DELTE_COMMENT:
+      return {
+        ...state,
+        updatedComment: action.payload,
       };
     default:
       return state;
