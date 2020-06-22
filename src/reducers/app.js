@@ -34,7 +34,7 @@ export const commentsReducer = (state = {}, action) => {
     case ADD_COMMENT:
     case REPLY_COMMENT:
     case UPDATE_COMMENT:
-    case DELTE_COMMENT:
+    case DELETE_COMMENT:
       return {
         ...state,
         updatedComment: action.payload,
