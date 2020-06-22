@@ -17,6 +17,7 @@ class CommentForm extends React.Component {
   };
 
   componentDidMount = () => {
+    // console.log("did mount", this.props);
     if (this.props.video) {
       this.setState({
         mode: "comment",
@@ -31,6 +32,7 @@ class CommentForm extends React.Component {
         comment: this.props.comment,
       });
     }
+    // console.log(this.state.mode);
   };
 
   addComment = async () => {

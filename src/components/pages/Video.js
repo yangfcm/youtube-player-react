@@ -156,7 +156,7 @@ class Video extends React.Component {
               )}
               {this.state.video && <VideoDetail video={this.state.video} />}
 
-              {this.props.auth.signedIn && (
+              {this.props.auth.signedIn && this.state.video && (
                 <CommentForm video={this.state.video} />
               )}
               {this.state.videoId && (
