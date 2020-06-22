@@ -11,8 +11,8 @@ import {
   FETCH_COMMENTS_DISABLED,
   ADD_COMMENT,
   REPLY_COMMENT,
-  UPDATE_COMMENT,
-  DELETE_COMMENT,
+  // UPDATE_COMMENT,
+  // DELETE_COMMENT,
   CATCH_ERROR,
   CLEAR_ERROR,
   SUBSCRIBE_CHANNEL,
@@ -32,13 +32,17 @@ export const commentsReducer = (state = {}, action) => {
         replies: action.payload,
       };
     case ADD_COMMENT:
-    case REPLY_COMMENT:
-    case UPDATE_COMMENT:
-    case DELETE_COMMENT:
       return {
         ...state,
         myComments: state.myComments
           ? [action.payload, ...state.myComments]
+          : [action.payload],
+      };
+    case REPLY_COMMENT:
+      return {
+        ...state,
+        myReplies: state.myReplies
+          ? [action.payload, ...state.myReplies]
           : [action.payload],
       };
     default:

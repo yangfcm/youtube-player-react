@@ -64,25 +64,22 @@ class CommentForm extends React.Component {
     }
   };
 
-  replyComment = () => {};
-  updateComment = () => {};
+  // replyComment = () => {};
+  // updateComment = () => {};
 
   handlePublishComment = (e) => {
     e.preventDefault();
     if (this.state.mode === "reply") {
       // Reply a comment
-      console.log(this.props.commentId);
-      console.log("reply comment", this.state.comment.trim());
     } else if (this.state.mode === "comment") {
       // Add a comment on video
       this.addComment();
     } else if (this.state.mode === "update") {
       // Update a comment/reply
-      console.log(this.props.comment);
-      console.log("update comment", this.state.comment.trim());
     }
     this.props.clearError();
   };
+
   handleCancel = () => {
     this.setState({
       comment: "",
