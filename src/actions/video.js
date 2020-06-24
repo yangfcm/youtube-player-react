@@ -1,6 +1,5 @@
 import { defAxios as axios } from "../settings";
 import { FETCH_VIDEOS, FETCH_VIDEO, CATCH_ERROR } from "./types";
-import { DEFAULT_ERROR_MSG } from "./default-error-msg";
 
 /**
  * Get a set of videos based on filter,
@@ -24,9 +23,7 @@ export const fetchVideos = (filter, pageToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response
-          ? e.response.data
-          : DEFAULT_ERROR_MSG.FAILED_TO_FETCH_VIDEO,
+        payload: e.response.data.error,
       });
     }
   };
@@ -51,9 +48,7 @@ export const fetchVideo = (videoId) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response
-          ? e.response.data
-          : DEFAULT_ERROR_MSG.FAILED_TO_FETCH_VIDEO,
+        payload: e.response.data.error,
       });
     }
   };

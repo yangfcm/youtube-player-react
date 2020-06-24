@@ -1,4 +1,4 @@
-import { FETCH_VIDEOS, SEARCH_VIDEOS, FETCH_VIDEO } from "../actions/types";
+import { FETCH_VIDEOS, FETCH_VIDEO } from "../actions/types";
 
 export const videosReducer = (state = {}, action) => {
   switch (action.type) {

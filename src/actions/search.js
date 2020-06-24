@@ -1,6 +1,5 @@
 import { defAxios as axios } from "../settings";
 import { SEARCH, CATCH_ERROR } from "./types";
-import { DEFAULT_ERROR_MSG } from "./default-error-msg";
 
 /**
  * Search resources (including videos, channels, play lists)
@@ -23,9 +22,7 @@ export const searchVideos = (filter, pageToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response
-          ? e.response.data
-          : DEFAULT_ERROR_MSG.FAILED_TO_FETCH_VIDEO,
+        payload: e.response.data.error,
       });
     }
   };
