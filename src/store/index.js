@@ -10,6 +10,7 @@ import {
   subscriptionReducer,
   errorReducer,
 } from "../reducers/app";
+// import { videosReducer } from "../reducers/video";
 import { authReducer } from "../reducers/auth";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

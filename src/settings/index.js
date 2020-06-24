@@ -5,6 +5,9 @@ export const apiBaseUrl = "https://www.googleapis.com/youtube/v3";
 export const defAxios = axios.create({
   baseURL: apiBaseUrl,
   timeout: 10000,
+  params: {
+    key: process.env.REACT.APP_API_KEY,
+  },
 });
 
 export const defaultName = "Y Fan";
