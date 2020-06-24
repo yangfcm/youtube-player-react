@@ -6,7 +6,7 @@ export const defAxios = axios.create({
   baseURL: apiBaseUrl,
   timeout: 10000,
   params: {
-    key: process.env.REACT.APP_API_KEY,
+    key: process.env.REACT_APP_API_KEY,
   },
 });
 
