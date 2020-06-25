@@ -1,6 +1,6 @@
 import { FETCH_VIDEOS, FETCH_VIDEO } from "../actions/types";
 
-export const videosReducer = (state = {}, action) => {
+export const videoReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_VIDEOS:
       return { ...state, videos: action.payload };

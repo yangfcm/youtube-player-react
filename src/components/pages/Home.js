@@ -7,8 +7,9 @@ import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import MoreButton from "../modules/MoreButton";
 import { mainMenuItems } from "../../settings";
-
-import { fetchVideos, clearError } from "../../actions/app";
+import { fetchVideos } from "../../actions/video";
+import { clearError } from "../../actions/error";
+// import { fetchVideos, clearError } from "../../actions/app";
 
 class Home extends React.Component {
   state = {
@@ -25,19 +26,13 @@ class Home extends React.Component {
       return;
     }
     if (this.props.videos) {
-      if (this.props.videos.items.length > 0) {
-        this.setState({
-          videos: {
-            pageInfo: this.props.videos.pageInfo,
-            items: this.props.videos.items,
-            nextPageToken: this.props.videos.nextPageToken,
-          },
-        });
-      } else {
-        this.setState({
-          error: "No video recommended",
-        });
-      }
+      this.setState({
+        videos: {
+          pageInfo: this.props.videos.pageInfo,
+          items: this.props.videos.items,
+          nextPageToken: this.props.videos.nextPageToken,
+        },
+      });
     }
   };
 
@@ -67,7 +62,7 @@ class Home extends React.Component {
         <div className="mb-3"></div>
 
         {!this.state.error && !this.state.videos && <Loading />}
-        {this.state.error && <ErrorMessage message={this.props.error} />}
+        {this.state.error && <ErrorMessage error={this.state.error} />}
         {this.state.videos && (
           <div>
             {" "}
@@ -89,7 +84,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    videos: state.videos,
+    videos: state.video.videos,
     error: state.error,
   };
 };
