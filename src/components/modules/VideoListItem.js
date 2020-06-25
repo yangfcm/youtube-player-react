@@ -39,12 +39,10 @@ const VideoListItem = ({ video, playlistId }) => {
             {video.snippet.title}
           </div>
         </Link>
-        <div>
-          <span className="text-info">
-            <FontAwesomeIcon icon="at" />
-            {video.snippet.channelTitle}
-          </span>
-        </div>
+        <Link to={`/channel/${video.snippet.channelId}`}>
+          {" "}
+          {video.snippet.channelTitle}
+        </Link>
         <p className="font-weight-light">
           <FontAwesomeIcon icon="user-clock" />{" "}
           {moment(video.snippet.publishedAt).format("D MMM YYYY k:mm")}
