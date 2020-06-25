@@ -4,12 +4,13 @@ import VideoGrid from "../modules/VideoGrid";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import MoreButton from "../modules/MoreButton";
-import { searchVideos, clearError } from "../../actions/app";
+import { searchVideos } from "../../actions/search";
+import { clearError } from "../../actions/error";
 
 class ChannelVideos extends React.Component {
   state = {
     videos: null,
-    error: null
+    error: null,
   };
 
   componentDidMount = async () => {
@@ -17,7 +18,7 @@ class ChannelVideos extends React.Component {
     await this.props.searchVideos({ channelId, order: "date" });
     if (this.props.error) {
       this.setState({
-        error: this.props.error
+        error: this.props.error,
       });
       return;
     }
@@ -28,12 +29,12 @@ class ChannelVideos extends React.Component {
           videos: {
             pageInfo: this.props.videos.pageInfo,
             items: this.props.videos.items,
-            nextPageToken: this.props.videos.nextPageToken
-          }
+            nextPageToken: this.props.videos.nextPageToken,
+          },
         });
       } else {
         this.setState({
-          error: "No video in this channel"
+          error: "No video in this channel",
         });
       }
     }
@@ -51,8 +52,8 @@ class ChannelVideos extends React.Component {
       return {
         videos: {
           items: state.videos.items.concat(props.videos.items),
-          nextPageToken: props.videos.nextPageToken
-        }
+          nextPageToken: props.videos.nextPageToken,
+        },
       };
     });
   };
@@ -62,7 +63,7 @@ class ChannelVideos extends React.Component {
     return (
       <React.Fragment>
         {!this.state.error && !this.state.videos && <Loading />}
-        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {this.state.error && <ErrorMessage error={this.state.error} />}
         {this.state.videos && (
           <div className="mt-3">
             <h3 className="text-primary font-weight-bold mb-2">
@@ -81,10 +82,10 @@ class ChannelVideos extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    videos: state.videos,
-    error: state.error
+    videos: state.search.searchResults,
+    error: state.error,
   };
 };
 export default connect(mapStateToProps, { searchVideos, clearError })(

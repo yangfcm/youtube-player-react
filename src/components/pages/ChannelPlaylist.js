@@ -5,19 +5,20 @@ import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import PlayListItem from "../modules/PlayListItem";
 import MoreButton from "../modules/MoreButton";
-import { fetchPlaylist, clearError } from "../../actions/app";
+import { fetchPlaylist } from "../../actions/playlist";
+import { clearError } from "../../actions/error";
 
 class PlayList extends React.Component {
   state = {
     playlist: null,
-    error: null
+    error: null,
   };
   componentDidMount = async () => {
     const { channelId } = this.props;
     await this.props.fetchPlaylist(null, channelId);
     if (this.props.error) {
       this.setState({
-        error: this.props.error
+        error: this.props.error,
       });
       return;
     }
@@ -27,12 +28,12 @@ class PlayList extends React.Component {
           playlist: {
             pageInfo: this.props.playlist.pageInfo,
             items: this.props.playlist.items,
-            nextPageToken: this.props.playlist.nextPageToken
-          }
+            nextPageToken: this.props.playlist.nextPageToken,
+          },
         });
       } else {
         this.setState({
-          error: "No Playlist in this channel"
+          error: { displayMessage: "No Playlist in this channel" },
         });
       }
     }
@@ -43,7 +44,7 @@ class PlayList extends React.Component {
   };
 
   renderPlayList = () => {
-    return this.state.playlist.items.map(item => {
+    return this.state.playlist.items.map((item) => {
       return <PlayListItem playlist={item} key={item.id} />;
     });
   };
@@ -57,8 +58,8 @@ class PlayList extends React.Component {
         playlist: {
           pageInfo: props.playlist.pageInfo,
           items: state.playlist.items.concat(props.playlist.items),
-          nextPageToken: props.playlist.nextPageToken
-        }
+          nextPageToken: props.playlist.nextPageToken,
+        },
       };
     });
   };
@@ -67,14 +68,14 @@ class PlayList extends React.Component {
     const playlistStyle = {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill, minmax(15rem, 1fr))",
-      gap: "1.2rem"
+      gap: "1.2rem",
     };
 
     return (
       <div>
         {!this.state.error && !this.state.playlist && <Loading />}
 
-        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {this.state.error && <ErrorMessage error={this.state.error} />}
 
         {this.state.playlist && (
           <div className="mt-3">
@@ -101,10 +102,10 @@ class PlayList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    playlist: state.playlist,
-    error: state.error
+    playlist: state.playlist.playlist,
+    error: state.error,
   };
 };
 

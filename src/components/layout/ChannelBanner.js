@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchChannelIntro } from "../../actions/app";
+import { fetchChannelIntro } from "../../actions/channel";
 import SubscriptionButton from "../modules/SubscriptionButton";
 
 class ChannelBanner extends React.Component {
@@ -48,7 +48,7 @@ class ChannelBanner extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    channel: state.channel,
+    channel: state.channel.channelIntro,
   };
 };
 export default connect(mapStateToProps, {

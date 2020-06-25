@@ -5,7 +5,8 @@ import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { fetchChannelIntro, clearError } from "../../actions/app";
+import { fetchChannelIntro } from "../../actions/channel";
+import { clearError } from "../../actions/error";
 import { separateNumber } from "../../utils/helper";
 
 class ChannelIntro extends React.Component {
@@ -29,7 +30,7 @@ class ChannelIntro extends React.Component {
         });
       } else {
         this.setState({
-          error: "The channel doesn't exist.",
+          error: { displayMessage: "The channel doesn't exist." },
         });
       }
     }
@@ -43,7 +44,7 @@ class ChannelIntro extends React.Component {
     return (
       <React.Fragment>
         {!this.state.error && !this.state.channelIntro && <Loading />}
-        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {this.state.error && <ErrorMessage error={this.state.error} />}
         {!this.state.error && this.state.channelIntro && (
           <div className="mt-3 row justify-content-center">
             <div className="col-md-10 col-lg-9">
@@ -94,7 +95,7 @@ class ChannelIntro extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    channel: state.channel,
+    channel: state.channel.channelIntro,
     error: state.error,
   };
 };

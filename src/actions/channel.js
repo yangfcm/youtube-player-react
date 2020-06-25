@@ -18,6 +18,7 @@ export const fetchChannel = (pageToken, accessToken) => {
           Authorization: accessToken,
         },
         params: {
+          ...axios.defaults.params,
           part: "snippet",
           maxResults: 50,
           pageToken,
@@ -52,6 +53,7 @@ export const fetchChannelSubscription = (channelId, accessToken) => {
           Authorization: accessToken,
         },
         params: {
+          ...axios.defaults.params,
           part: "snippet",
           forChannelId: channelId,
           mine: true,
@@ -88,11 +90,12 @@ export const fetchChannelSubscription = (channelId, accessToken) => {
 };
 
 /** Fetch channel intro */
-export const fetchChannelInfo = (channelId) => {
+export const fetchChannelIntro = (channelId) => {
   return async (dispatch) => {
     try {
       const response = await axios.get("/channels", {
         params: {
+          ...axios.defaults.params,
           part: "snippet,statistics",
           id: channelId,
         },

@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchChannelSubscription } from "../../actions/app";
-import { subscribeChannel, unsubscribeChannel } from "../../actions/app";
+import {
+  subscribeChannel,
+  unsubscribeChannel,
+  fetchChannelSubscription,
+} from "../../actions/channel";
 
 class SubscriptionButton extends React.Component {
   state = {
@@ -138,7 +141,7 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     channel: state.channel,
-    subscription: state.subscription,
+    subscription: state.channel.subscribedChannel,
   };
 };
 export default connect(mapStateToProps, {
