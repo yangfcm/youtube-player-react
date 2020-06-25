@@ -6,7 +6,8 @@ import MoreButton from "../modules/MoreButton";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 
-import { searchVideos, clearError } from "../../actions/app";
+import { searchVideos } from "../../actions/search";
+import { clearError } from "../../actions/error";
 
 class SearchResult extends React.Component {
   state = {
@@ -33,7 +34,7 @@ class SearchResult extends React.Component {
         });
       } else {
         this.setState({
-          error: `No video found with the key word: ${q}`,
+          error: { displayMessage: `No video found with the key word: ${q}` },
         });
       }
     }
@@ -79,7 +80,7 @@ class SearchResult extends React.Component {
     return (
       <React.Fragment>
         {!this.state.error && !this.state.videos && <Loading />}
-        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {this.state.error && <ErrorMessage error={this.state.error} />}
         {!this.state.error && this.state.videos && (
           <div className="d-flex justify-content-center">
             <div className="col-lg-9">
@@ -106,7 +107,7 @@ class SearchResult extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    videos: state.videos,
+    videos: state.search.searchResults,
     error: state.error,
   };
 };
