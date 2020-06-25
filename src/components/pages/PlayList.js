@@ -9,7 +9,8 @@ import PlayListItem from "../modules/PlayListItem";
 import MoreButton from "../modules/MoreButton";
 import NoSignedIn from "../common/NoSignIn";
 import { mainMenuItems } from "../../settings";
-import { fetchPlaylist, clearError } from "../../actions/app";
+import { fetchPlaylist } from "../../actions/playlist";
+import { clearError } from "../../actions/error";
 
 class PlayList extends React.Component {
   state = {
@@ -43,7 +44,8 @@ class PlayList extends React.Component {
   };
 
   fetchPlaylistData = async (nextPageToken = null) => {
-    await this.props.fetchPlaylist();
+    const accessToken = localStorage.getItem("access_token");
+    await this.props.fetchPlaylist(null, null, accessToken);
     if (this.props.error) {
       this.setState({
         error: this.props.error,
@@ -61,7 +63,7 @@ class PlayList extends React.Component {
         });
       } else {
         this.setState({
-          error: "No Playlist in this channel",
+          error: { displayMessage: "No Playlist in this channel" },
         });
       }
     }
@@ -101,10 +103,10 @@ class PlayList extends React.Component {
         <Menu menuItems={mainMenuItems} />
         {signedIn === null && ""}
         {signedIn === false && <NoSignedIn />}
-        {signedIn && !this.props.error && !this.state.playlist && <Loading />}
+        {signedIn && !this.state.error && !this.state.playlist && <Loading />}
 
-        {signedIn && this.props.error && (
-          <ErrorMessage message={this.props.error} />
+        {signedIn && this.state.error && (
+          <ErrorMessage error={this.state.error} />
         )}
 
         {this.state.playlist && (
@@ -132,7 +134,7 @@ class PlayList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    playlist: state.playlist,
+    playlist: state.playlist.playlist,
     error: state.error,
     auth: state.auth,
   };

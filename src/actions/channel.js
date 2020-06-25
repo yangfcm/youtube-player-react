@@ -7,6 +7,7 @@ import {
   UNSUBSCRIBE_CHANNEL,
   CATCH_ERROR,
 } from "./types";
+import { DEFAULT_ERROR_MSG } from "./default-error-msg";
 
 /** Fetch subscribed channels by the current authorized user */
 export const fetchChannel = (pageToken, accessToken) => {
@@ -31,7 +32,10 @@ export const fetchChannel = (pageToken, accessToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data.error,
+        payload: {
+          ...e.response.data.error,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_CHANNEL,
+        },
       });
     }
   };
@@ -73,7 +77,11 @@ export const fetchChannelSubscription = (channelId, accessToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data.error,
+        payload: {
+          ...e.response.data.error,
+          displayMessage:
+            DEFAULT_ERROR_MSG.FAILED_TO_FETCH_CHANNEL_SUBSCRIPTION,
+        },
       });
     }
   };
@@ -96,7 +104,10 @@ export const fetchChannelInfo = (channelId) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data.error,
+        payload: {
+          ...e.response.data.error,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_CHANNEL,
+        },
       });
     }
   };
@@ -132,7 +143,10 @@ export const subscribeChannel = (channelId, accessToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data.error,
+        payload: {
+          ...e.response.data.error,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_SUBSCRIBE,
+        },
       });
     }
   };
@@ -171,7 +185,10 @@ export const unsubscribeChannel = (channelId, accessToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response ? e.response.data.error : e.message,
+        payload: {
+          ...e.response.data.error,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_UNSUBSCRIBE,
+        },
       });
     }
   };

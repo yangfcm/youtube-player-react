@@ -70,7 +70,7 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
       dispatch({
         type: CATCH_ERROR,
         payload: {
-          ...e.response.data,
+          ...e.response.data.error,
           displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_PLAYLIST_DETAIL,
         },
       });

@@ -9,7 +9,8 @@ import ChannelItem from "../modules/ChannelItem";
 import MoreButton from "../modules/MoreButton";
 import NoSignedIn from "../common/NoSignIn";
 import { mainMenuItems } from "../../settings";
-import { fetchChannel, clearError } from "../../actions/app";
+import { fetchChannel } from "../../actions/channel";
+import { clearError } from "../../actions/error";
 
 class Channel extends React.Component {
   state = {
@@ -20,7 +21,17 @@ class Channel extends React.Component {
   componentDidMount = () => {
     // console.log("did mount", this.props.auth);
     if (this.props.auth.signedIn) {
-      this.fetchChannelData();
+      if (this.props.channelData) {
+        this.setState({
+          channels: {
+            pageInfo: this.props.channelData.pageInfo,
+            items: this.props.channelData.items,
+            nextPageToken: this.props.channelData.nextPageToken,
+          },
+        });
+      } else {
+        this.fetchChannelData();
+      }
     }
   };
 
@@ -72,7 +83,7 @@ class Channel extends React.Component {
         // Otherwise it is fetching the first page's data
         if (this.props.channelData.items.length === 0) {
           this.setState({
-            error: "No subscription is found",
+            error: { displayMessage: "You haven't subscribed any channel" },
           });
           return;
         }
@@ -123,7 +134,7 @@ class Channel extends React.Component {
         )}{" "}
         {/* Loading */}
         {signedIn && this.state.error && (
-          <ErrorMessage message={this.state.error} />
+          <ErrorMessage error={this.state.error} />
         )}{" "}
         {/* Error message */}
         {this.state.channels && (
@@ -154,7 +165,7 @@ class Channel extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    channelData: state.channel,
+    channelData: state.channel.channels,
     errorData: state.error,
     auth: state.auth,
   };
