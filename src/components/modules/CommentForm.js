@@ -1,11 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  addComment,
-  replyComment,
-  updateComment,
-  clearError,
-} from "../../actions/app";
+import { addComment } from "../../actions/app";
+import { clearError } from "../../actions/error";
 
 class CommentForm extends React.Component {
   state = {
@@ -137,12 +133,10 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     error: state.error,
-    myComments: state.comments.myComments,
+    myComments: state.comment.myComments,
   };
 };
 export default connect(mapStateToProps, {
   addComment,
-  replyComment,
-  updateComment,
   clearError,
 })(CommentForm);

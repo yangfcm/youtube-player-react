@@ -25,6 +25,7 @@ export const fetchComments = (
           Authorization: accessToken,
         },
         params: {
+          ...axios.defaults.params,
           part: "snippet",
           videoId,
           maxResults,
@@ -37,23 +38,18 @@ export const fetchComments = (
         payload: response.data,
       });
     } catch (e) {
-      if (!e.response) {
-        dispatch({
-          type: CATCH_ERROR,
-          payload: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_COMMENTS,
-        });
-        return;
-      }
       if (e.response.data.error.errors[0].reason === "commentsDisabled") {
         // Comment is disabled.
         dispatch({
           type: FETCH_COMMENTS_DISABLED,
-          payload: DEFAULT_ERROR_MSG.COMMENT_DISABLED,
         });
       } else {
         dispatch({
           type: CATCH_ERROR,
-          payload: e.response.data.error,
+          payload: {
+            ...e.response.data.error,
+            displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_COMMENTS,
+          },
         });
       }
     }
@@ -64,7 +60,7 @@ export const fetchComments = (
 export const addComment = (channelId, videoId, commentText, accessToken) => {
   return async (dispatch) => {
     try {
-      const requestBdody = {
+      const requestBody = {
         snippet: {
           channelId,
           videoId,
@@ -80,6 +76,7 @@ export const addComment = (channelId, videoId, commentText, accessToken) => {
           Authorization: accessToken,
         },
         params: {
+          ...axios.defaults.params,
           part: "snippet",
         },
       });
@@ -90,7 +87,10 @@ export const addComment = (channelId, videoId, commentText, accessToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data.error,
+        payload: {
+          ...e.response.data.error,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_ADD_COMMENT,
+        },
       });
     }
   };
@@ -102,6 +102,7 @@ export const fetchCommentReplies = (commentId, pageToken) => {
     try {
       const response = await axios.get("/comments", {
         params: {
+          ...axios.defaults.params,
           part: "snippet",
           parentId: commentId,
           maxResults,
@@ -115,7 +116,10 @@ export const fetchCommentReplies = (commentId, pageToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data.error,
+        payload: {
+          ...e.response.data.error,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_REPLIES,
+        },
       });
     }
   };

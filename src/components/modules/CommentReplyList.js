@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCommentReplies, clearError } from "../../actions/app";
 import Loading from "../common/Loading";
 import CommentItem from "./CommentItem";
 import MoreButton from "./MoreButton";
+import { fetchCommentReplies } from "../../actions/comment";
+import { clearError } from "../../actions/error";
 
 class CommentReplyList extends React.Component {
   state = {
@@ -106,7 +107,7 @@ class CommentReplyList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    replies: state.comments.replies,
+    replies: state.comment.replies,
     error: state.error,
   };
 };

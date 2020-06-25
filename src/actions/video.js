@@ -42,6 +42,7 @@ export const fetchVideo = (videoId) => {
     try {
       const response = await axios.get("/videos", {
         params: {
+          ...axios.defaults.params,
           part: "snippet,statistics",
           id: videoId,
         },

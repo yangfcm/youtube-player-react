@@ -5,19 +5,24 @@ import {
   FETCH_COMMENTS_DISABLED,
 } from "../actions/types";
 
-export const commentReducer = (state = { isDisabled: false }, action) => {
+export const commentReducer = (
+  state = { isDisabled: false, myComments: [] },
+  action
+) => {
   switch (action.type) {
     case FETCH_COMMENTS:
       return {
         ...state,
         comments: action.payload,
         isDisabled: false,
+        myComments: [],
       };
     case FETCH_COMMENTS_DISABLED:
       return {
         ...state,
         isDisabled: true,
         comments: null,
+        myComments: [],
       };
     case FETCH_REPLIES:
       return {
@@ -27,7 +32,7 @@ export const commentReducer = (state = { isDisabled: false }, action) => {
     case ADD_COMMENT:
       return {
         ...state,
-        addedComment: action.payload,
+        myComments: [action.payload, ...state.myComments],
       };
     default:
       return state;

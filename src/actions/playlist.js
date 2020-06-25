@@ -1,5 +1,6 @@
-import { defAxios as axios } from "../settings";
+import { defAxios as axios, maxResults } from "../settings";
 import { FETCH_PLAY_LIST, FETCH_PLAY_LIST_DETAIL, CATCH_ERROR } from "./types";
+import { DEFAULT_ERROR_MSG } from "./default-error-msg";
 
 /** Fetch playlists under a particular channel or
  * the playlists under the channel of the authorized user
@@ -11,6 +12,7 @@ export const fetchPlaylist = (pageToken, channelId, accessToken) => {
       if (channelId) {
         response = await axios.get("/playlists", {
           params: {
+            ...axios.defaults.params,
             part: "snippet,contentDetails,status",
             maxResults,
             channelId,
@@ -38,7 +40,10 @@ export const fetchPlaylist = (pageToken, channelId, accessToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data,
+        payload: {
+          ...e.response.data.error,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_PLAYLIST,
+        },
       });
     }
   };
@@ -50,6 +55,7 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
     try {
       const response = await axios.get("/playlistItems", {
         params: {
+          ...axios.defaults.params,
           part: "snippet,contentDetails,status",
           maxResults: 8,
           playlistId,
@@ -63,7 +69,10 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
     } catch (e) {
       dispatch({
         type: CATCH_ERROR,
-        payload: e.response.data,
+        payload: {
+          ...e.response.data,
+          displayMessage: DEFAULT_ERROR_MSG.FAILED_TO_FETCH_PLAYLIST_DETAIL,
+        },
       });
     }
   };

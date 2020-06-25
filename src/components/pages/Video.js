@@ -9,12 +9,10 @@ import CommentsList from "../modules/CommentsList";
 import MoreButton from "../modules/MoreButton";
 import ErrorMessage from "../common/ErrorMessage";
 
-import {
-  fetchVideo,
-  fetchPlaylistDetail,
-  searchVideos,
-  clearError,
-} from "../../actions/app";
+import { fetchVideo } from "../../actions/video";
+import { searchVideos } from "../../actions/search";
+import { fetchPlaylistDetail } from "../../actions/playlist";
+import { clearError } from "../../actions/error";
 
 class Video extends React.Component {
   state = {
@@ -147,7 +145,7 @@ class Video extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {this.state.error && <ErrorMessage error={this.state.error} />}
         {!this.state.error && (
           <div className="row justify-content-center">
             <div className="col-lg-8">
@@ -184,9 +182,9 @@ class Video extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    playlistDetail: state.playlistDetail,
-    videos: state.videos,
-    video: state.video,
+    playlistDetail: state.playlist.playlistDetail,
+    videos: state.search.searchResults,
+    video: state.video.video,
     auth: state.auth,
     error: state.error,
   };

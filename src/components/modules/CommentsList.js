@@ -1,19 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchComments, clearError } from "../../actions/app";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 import CommentItem from "./CommentItem";
 import MoreButton from "./MoreButton";
 import CommentReplyList from "../modules/CommentReplyList";
+import { fetchComments } from "../../actions/comment";
+import { clearError } from "../../actions/error";
 
 class CommentsList extends React.Component {
   state = {
     comments: null,
     error: "",
   };
-  componentDidMount = async () => {
+
+  fetchComments = async () => {
     const accessToken = localStorage.getItem("access_token");
     await this.props.fetchComments(this.props.videoId, null, accessToken);
     if (this.props.error) {
@@ -22,7 +24,7 @@ class CommentsList extends React.Component {
       });
       return;
     }
-    if (this.props.comments === "commentsDisabled") {
+    if (this.props.isDisabled) {
       this.setState({
         comments: {
           items: [],
@@ -43,39 +45,21 @@ class CommentsList extends React.Component {
     }
   };
 
+  componentDidMount = async () => {
+    await this.fetchComments();
+  };
+
   componentDidUpdate = async (prevProps) => {
-    const accessToken = localStorage.getItem("access_token");
     if (prevProps.videoId !== this.props.videoId) {
       // If video changes, fetch the comments of new video
-      await this.props.fetchComments(this.props.videoId, null, accessToken);
-      if (this.props.error) {
-        this.setState({
-          error: this.props.error,
-        });
-        return;
-      }
-      if (this.props.comments === "commentsDisabled") {
-        this.setState({
-          comments: {
-            items: [],
-            disabled: true,
-          },
-          error: "",
-        });
-      } else {
-        this.setState({
-          comments: {
-            pageInfo: this.props.comments.pageInfo,
-            items: this.props.comments.items,
-            nextPageToken: this.props.comments.nextPageToken,
-            disabled: false,
-          },
-          error: "",
-        });
-      }
+      this.fetchComments();
+      // console.log(prevProps.comments.myComments);
+      // console.log(this.props.comments.myComments);
     }
-    // console.log(prevProps.comments.myComments);
-    // console.log(this.props.comments.myComments);
+  };
+
+  componentWillUnmount = () => {
+    this.props.clearError();
   };
 
   fetchNextPageComments = async () => {
@@ -111,7 +95,7 @@ class CommentsList extends React.Component {
     return (
       <React.Fragment>
         {!this.state.error && !this.state.comments && <Loading />}
-        {this.state.error && <ErrorMessage message={this.state.error} />}
+        {this.state.error && <ErrorMessage error={this.state.error} />}
         {!this.state.error && this.state.comments && (
           <div className="mb-3">
             <h5 className="mb-3">
@@ -124,8 +108,8 @@ class CommentsList extends React.Component {
                   : "No comment"}
               </div>
             )}
-            {this.props.comments.myComments &&
-              this.props.comments.myComments.map((item) => {
+            {this.props.myComments &&
+              this.props.myComments.map((item) => {
                 return (
                   <React.Fragment key={item.id}>
                     <CommentItem
@@ -167,7 +151,9 @@ class CommentsList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    comments: state.comments,
+    comments: state.comment.comments,
+    myComments: state.comment.myComments,
+    isDisabled: state.comment.isDisabled,
     error: state.error,
   };
 };
