@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import videoPlaceholder from "../../images/video-placeholder.png";
 
 const VideoListItem = ({ video, playlistId }) => {
   // console.log(video);
@@ -15,7 +16,9 @@ const VideoListItem = ({ video, playlistId }) => {
         <Link to={linkUrl}>
           <img
             src={
-              video.snippet.thumbnails && video.snippet.thumbnails.medium.url
+              video.snippet.thumbnails.medium
+                ? video.snippet.thumbnails.medium.url
+                : videoPlaceholder
             }
             alt={video.title}
             style={{ maxWidth: "140px" }}
