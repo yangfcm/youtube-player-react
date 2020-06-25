@@ -7,15 +7,23 @@ import MoreButton from "../modules/MoreButton";
 import Loading from "../common/Loading";
 import ErrorMessage from "../common/ErrorMessage";
 
-import { fetchPlaylistDetail, clearError } from "../../actions/app";
+import { fetchPlaylistDetail } from "../../actions/playlist";
+import { clearError } from "../../actions/error";
 
 class PlayListDetail extends React.Component {
   state = {
     playlistDetail: null,
+    error: null,
   };
 
   componentDidMount = async () => {
     await this.props.fetchPlaylistDetail(this.props.match.params.id);
+    if (this.props.error) {
+      this.setState({
+        error: this.props.error,
+      });
+      return;
+    }
     if (this.props.playlistDetail) {
       this.setState({
         playlistDetail: {
@@ -42,6 +50,12 @@ class PlayListDetail extends React.Component {
       this.props.match.params.id,
       nextPageToken
     );
+    if (this.props.error) {
+      this.setState({
+        error: this.props.error,
+      });
+      return;
+    }
     this.setState((state, props) => {
       return {
         playlistDetail: {
@@ -56,11 +70,9 @@ class PlayListDetail extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {!this.props.errorData && !this.state.playlistDetail && <Loading />}
+        {!this.state.error && !this.state.playlistDetail && <Loading />}
 
-        {this.props.errorData && (
-          <ErrorMessage message={this.props.errorData} />
-        )}
+        {this.state.error && <ErrorMessage error={this.props.error} />}
 
         {this.state.playlistDetail && (
           <div className="d-flex justify-content-center">
@@ -88,7 +100,7 @@ class PlayListDetail extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    playlistDetail: state.playlistDetail,
+    playlistDetail: state.playlist.playlistDetail,
     error: state.error,
   };
 };
