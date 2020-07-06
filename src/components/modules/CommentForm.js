@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addComment } from "../../actions/app";
+import { addComment } from "../../actions/comment";
 import { clearError } from "../../actions/error";
 
 class CommentForm extends React.Component {
