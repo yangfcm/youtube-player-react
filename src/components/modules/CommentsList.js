@@ -6,6 +6,7 @@ import ErrorMessage from "../common/ErrorMessage";
 import CommentItem from "./CommentItem";
 import MoreButton from "./MoreButton";
 import CommentReplyList from "../modules/CommentReplyList";
+import CommentForm from "../modules/CommentForm";
 import { fetchComments } from "../../actions/comment";
 import { clearError } from "../../actions/error";
 
@@ -101,12 +102,15 @@ class CommentsList extends React.Component {
             <h5 className="mb-3">
               <FontAwesomeIcon icon="comments" /> Comments
             </h5>
-            {this.state.comments.items.length === 0 && (
-              <div className="text-muted text-center">
-                {this.state.comments.disabled
-                  ? "Comment is disabled"
-                  : "No comment"}
-              </div>
+            {this.state.comments.disabled && (
+              <div className="text-muted text-center">Comment is disabled</div>
+            )}
+            {!this.state.comments.disabled &&
+              this.state.comments.items.length === 0 && (
+                <div className="text-muted text-center"> No comment</div>
+              )}
+            {!this.state.comments.disabled && (
+              <CommentForm video={this.props.video} />
             )}
             {this.props.myComments &&
               this.props.myComments.map((item) => {
