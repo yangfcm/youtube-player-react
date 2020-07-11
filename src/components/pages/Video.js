@@ -45,7 +45,6 @@ class Video extends React.Component {
     const videoId = this.props.match.params.id;
     const { playlistId } = this.state;
     if (prevVideoId !== videoId) {
-      await this.props.fetchVideo(videoId);
       if (this.props.error) {
         this.setState({
           error: this.props.error,

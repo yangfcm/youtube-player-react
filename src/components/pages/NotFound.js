@@ -7,7 +7,9 @@ class NotFound extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Error message="The page you requested doesn't exist" />
+        <Error
+          error={{ displayMessage: "The page you requested doesn't exist" }}
+        />
         <div className="text-center">
           <Link to="/" className="btn btn-outline-info">
             <FontAwesomeIcon icon={"home"} />
