@@ -10,7 +10,6 @@ export const defAxios = axios.create({
   },
 });
 
-export const defaultName = "Y Fan";
 export const mainMenuItems = [
   { link: "/", exact: true, name: "Recommend", icon: "thumbs-up" },
   { link: "/channel", exact: false, name: "Subscriptions", icon: "user-plus" },
