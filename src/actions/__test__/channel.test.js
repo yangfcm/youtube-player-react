@@ -23,10 +23,15 @@ import { DEFAULT_ERROR_MSG } from "../default-error-msg";
 const mockStore = configMockStore([thunk]);
 
 describe("Test channel action", () => {
+  let store, accessToken;
+
+  beforeEach(() => {
+    store = mockStore();
+    accessToken = "test_user_access_token";
+  });
+
   it("FetchChannel action should get subscribed channels by authorized user", async (done) => {
-    const store = mockStore({});
     const pageToken = null;
-    const accessToken = "test_user_access_token";
     axios.get.mockResolvedValue({
       data: subscriptions,
     });
@@ -52,7 +57,6 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannel action can handle error", async (done) => {
-    const store = mockStore();
     axios.get.mockRejectedValue(error);
     await store.dispatch(fetchChannel(null, "access_token"));
     expect(store.getActions()[0]).toEqual({
@@ -66,9 +70,7 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannelSubscription action can fetch subscribed status and dispatch action", async (done) => {
-    const store = mockStore();
     const channelId = channelItem1.snippet.resourceId.channelId;
-    const accessToken = "test_user_access_token";
     axios.get.mockResolvedValue({
       data: {
         items: [channelItem1],
@@ -96,9 +98,7 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannelSubscription action can fetch unsubscribed status and dispatch action", async (done) => {
-    const store = mockStore();
     const channelId = channelItem1.snippet.resourceId.channelId;
-    const accessToken = "test_user_access_token";
     axios.get.mockResolvedValue({
       data: {
         items: [],
@@ -126,9 +126,7 @@ describe("Test channel action", () => {
   });
 
   it("subscribeChannel action can return data and dispatch action", async (done) => {
-    const store = mockStore();
     const channelId = channelItem1.snippet.resourceId.channelId;
-    const accessToken = "test_user_access_token";
     const requestData = {
       snippet: {
         resourceId: {
@@ -155,9 +153,7 @@ describe("Test channel action", () => {
   });
 
   it("unsubscribeChannel action can return data and dispatch action", async (done) => {
-    const store = mockStore();
     const channelId = channelItem1.snippet.resourceId.channelId;
-    const accessToken = "test_user_access_token";
     const requestData = {
       snippet: {
         resourceId: {
@@ -195,7 +191,6 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannelIntro action should get channel intro from API", async (done) => {
-    const store = mockStore({});
     axios.get.mockResolvedValue({ data: channelIntro });
     await store.dispatch(fetchChannelIntro(fetchChannelIntro.channelId));
     expect(axios.get).toHaveBeenCalledWith("/channels", {
@@ -213,7 +208,6 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannelIntro action should handle error", async (done) => {
-    const store = mockStore({});
     axios.get.mockRejectedValue(error);
     await store.dispatch(fetchChannelIntro(channelIntro.channelId));
     expect(store.getActions()[0]).toEqual({
