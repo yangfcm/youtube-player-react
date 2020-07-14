@@ -170,9 +170,6 @@ export const unsubscribeChannel = (channelId, accessToken) => {
           mine: true,
         },
       });
-      if (subscriptionRes.data.items.length === 0) {
-        throw Error("Channel not subscribed");
-      }
       const subscriptionId = subscriptionRes.data.items[0].id;
       await axios.delete("/subscriptions", {
         headers: {
