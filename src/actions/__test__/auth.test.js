@@ -1,5 +1,5 @@
 import { SIGN_IN, SIGN_OUT, CATCH_ERROR } from "../types";
-import { defAxios as axios } from "../../settings";
+// import { defAxios as axios } from "../../settings";
 import { signIn, signOut } from "../auth";
 
 test.todo("signIn action should work");
