@@ -59,6 +59,10 @@ class Header extends React.Component {
     });
   };
 
+  handleSignin = () => {
+    this.props.googleSignin();
+  };
+
   render() {
     return (
       <nav className="navbar navbar-light bg-light mb-4">
@@ -86,7 +90,7 @@ class Header extends React.Component {
               <FontAwesomeIcon icon="search" />
             </button>
           </form>
-          {this.props.auth.signedIn ? (
+          {this.props.auth.signedIn === true && (
             <div style={{ position: "relative" }} className="mr-2">
               <div
                 style={{ height: "55px", cursor: "pointer" }}
@@ -112,12 +116,17 @@ class Header extends React.Component {
                 <DropdownMenu menuItems={mainMenuItems} />
               </div>
             </div>
-          ) : (
+          )}
+          {this.props.auth.signedIn === false && (
             <div
               style={{ height: "55px" }}
               className="d-flex align-items-center"
             >
-              <GoogleAuth />
+              <button className="btn btn-primary" onClick={this.handleSignin}>
+                <FontAwesomeIcon icon="sign-in-alt" />
+                {"   "}
+                Sign In
+              </button>
             </div>
           )}
         </div>
@@ -132,4 +141,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(Header));
+export default connect(mapStateToProps)(withRouter(GoogleAuth(Header)));
