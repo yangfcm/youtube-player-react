@@ -12,10 +12,7 @@ const renderError = (error) => {
 
 const ErrorMessage = ({ error }) => {
   // console.log(process.env);
-  if (
-    process.env.NODE_ENV === "development" ||
-    process.env.NODE_ENV === "test"
-  ) {
+  if (process.env.NODE_ENV === "development") {
     console.log(error);
   }
   return renderError(error);

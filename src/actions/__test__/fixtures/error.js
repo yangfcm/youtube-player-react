@@ -2,15 +2,17 @@ export const error = {
   response: {
     data: {
       error: {
-        code: 401,
+        code: 400,
         message:
-          "The request uses the \u003ccode\u003emine\u003c/code\u003e parameter but is not properly authorized.",
+          "No filter selected. Expected one of: managedByMe, id, forUsername, mySubscribers, mine, categoryId",
         errors: [
           {
             message:
-              "The request uses the \u003ccode\u003emine\u003c/code\u003e parameter but is not properly authorized.",
+              "'No filter selected. Expected one of: managedByMe, id, forUsername, mySubscribers, mine, categoryId'",
             domain: "youtube.parameter",
-            reason: "authorizationRequired",
+            reason: "missingRequiredParameter",
+            location: "parameters.",
+            locationType: "other",
           },
         ],
       },

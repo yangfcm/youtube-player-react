@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test ErrorMessage component should render ErrorMessage component correctly 1`] = `
+<div
+  className="text-danger text-center my-3 py-3"
+>
+  <FontAwesomeIcon
+    border={false}
+    className="mx-2"
+    fixedWidth={false}
+    flip={null}
+    icon="exclamation-triangle"
+    inverse={false}
+    listItem={false}
+    mask={null}
+    pull={null}
+    pulse={false}
+    rotation={null}
+    size={null}
+    spin={false}
+    swapOpacity={false}
+    symbol={false}
+    title=""
+    transform={null}
+  />
+  Failed to fetch video
+</div>
+`;
