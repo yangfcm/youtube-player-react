@@ -124,7 +124,7 @@ class CommentForm extends React.Component {
         </form>
       </div>
     ) : (
-      <div className="text-danger text-center py-3">
+      <div className="text-danger text-center py-3 my-3">
         You are not signed in. Sign in to publish your comment
       </div>
     );
