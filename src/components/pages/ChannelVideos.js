@@ -15,7 +15,7 @@ class ChannelVideos extends React.Component {
 
   componentDidMount = async () => {
     const { channelId } = this.props;
-    await this.props.searchVideos({ channelId, order: "date" });
+    await this.props.searchVideos({ channelId, order: "date", type: "video" });
     if (this.props.error) {
       this.setState({
         error: this.props.error,
