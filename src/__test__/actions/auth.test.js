@@ -1,6 +1,6 @@
-import { SIGN_IN, SIGN_OUT, CATCH_ERROR } from "../types";
-// import { defAxios as axios } from "../../settings";
-import { signIn, signOut } from "../auth";
+import { SIGN_IN, SIGN_OUT, CATCH_ERROR } from "actions/types";
+// import { defAxios as axios } from "settings";
+import { signIn, signOut } from "actions/auth";
 
 test.todo("signIn action should work");
 

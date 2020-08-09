@@ -1,16 +1,16 @@
-import { channelReducer } from "../channel";
+import { channelReducer } from "reducers/channel";
 import {
   subscriptions,
   channelIntro,
   channelItem1,
-} from "../../actions/__test__/fixtures/channel";
+} from "__test__/fixtures/channel";
 import {
   FETCH_CHANNEL,
   FETCH_CHANNEL_INTRO,
   FETCH_CHANNEL_SUBSCRIPTION,
   SUBSCRIBE_CHANNEL,
   UNSUBSCRIBE_CHANNEL,
-} from "../../actions/types";
+} from "actions/types";
 
 describe("test channel reducer", () => {
   it("reducer can set default state", () => {

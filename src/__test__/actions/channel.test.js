@@ -1,6 +1,6 @@
 import configMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { defAxios as axios } from "../../settings";
+import { defAxios as axios } from "settings";
 import {
   FETCH_CHANNEL,
   FETCH_CHANNEL_SUBSCRIPTION,
@@ -8,17 +8,21 @@ import {
   SUBSCRIBE_CHANNEL,
   UNSUBSCRIBE_CHANNEL,
   CATCH_ERROR,
-} from "../types";
+} from "actions/types";
 import {
   fetchChannel,
   fetchChannelSubscription,
   subscribeChannel,
   unsubscribeChannel,
   fetchChannelIntro,
-} from "../channel";
-import { channelIntro, subscriptions, channelItem1 } from "./fixtures/channel";
-import { error } from "./fixtures/error";
-import { DEFAULT_ERROR_MSG } from "../default-error-msg";
+} from "actions/channel";
+import { DEFAULT_ERROR_MSG } from "actions/default-error-msg";
+import {
+  channelIntro,
+  subscriptions,
+  channelItem1,
+} from "__test__/fixtures/channel";
+import { error } from "__test__/fixtures/error";
 
 const mockStore = configMockStore([thunk]);
 
