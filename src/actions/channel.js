@@ -171,6 +171,7 @@ export const unsubscribeChannel = (channelId, accessToken) => {
         },
       });
       const subscriptionId = subscriptionRes.data.items[0].id;
+      /** With subscription id fetched, can unsubscribe the channel */
       await axios.delete("/subscriptions", {
         headers: {
           Authorization: accessToken,

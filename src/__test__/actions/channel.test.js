@@ -18,9 +18,11 @@ import {
 } from "actions/channel";
 import { DEFAULT_ERROR_MSG } from "actions/default-error-msg";
 import {
-  channelIntro,
-  subscriptions,
-  channelItem1,
+  channelIntroData,
+  myChannelsData,
+  channelSubscriptionData,
+  channelUnsubscriptionData,
+  channelSubscribeSuccessResponse,
 } from "__test__/fixtures/channel";
 import { error } from "__test__/fixtures/error";
 
@@ -34,10 +36,10 @@ describe("Test channel action", () => {
     accessToken = "test_user_access_token";
   });
 
-  it("FetchChannel action should get subscribed channels by authorized user", async (done) => {
+  it("FetchChannel action should get channels subscribed by authorized user", async (done) => {
     const pageToken = null;
     axios.get.mockResolvedValue({
-      data: subscriptions,
+      data: myChannelsData,
     });
     await store.dispatch(fetchChannel(pageToken, accessToken));
     expect(axios.get).toHaveBeenCalledWith("/subscriptions", {
@@ -55,7 +57,7 @@ describe("Test channel action", () => {
     });
     expect(store.getActions()[0]).toEqual({
       type: FETCH_CHANNEL,
-      payload: subscriptions,
+      payload: myChannelsData,
     });
     done();
   });
@@ -74,12 +76,9 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannelSubscription action can fetch subscribed status and dispatch action", async (done) => {
-    const channelId = channelItem1.snippet.resourceId.channelId;
-    axios.get.mockResolvedValue({
-      data: {
-        items: [channelItem1],
-      },
-    });
+    const channelId =
+      channelSubscriptionData.items[0].snippet.resourceId.channelId;
+    axios.get.mockResolvedValue({ data: channelSubscriptionData });
     await store.dispatch(fetchChannelSubscription(channelId, accessToken));
     expect(axios.get).toHaveBeenCalledWith("/subscriptions", {
       headers: {
@@ -102,11 +101,9 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannelSubscription action can fetch unsubscribed status and dispatch action", async (done) => {
-    const channelId = channelItem1.snippet.resourceId.channelId;
+    const channelId = "any-channel-id";
     axios.get.mockResolvedValue({
-      data: {
-        items: [],
-      },
+      data: channelUnsubscriptionData,
     });
     await store.dispatch(fetchChannelSubscription(channelId, accessToken));
     expect(axios.get).toHaveBeenCalledWith("/subscriptions", {
@@ -130,7 +127,8 @@ describe("Test channel action", () => {
   });
 
   it("subscribeChannel action can return data and dispatch action", async (done) => {
-    const channelId = channelItem1.snippet.resourceId.channelId;
+    const channelId =
+      channelSubscribeSuccessResponse.snippet.resourceId.channelId;
     const requestData = {
       snippet: {
         resourceId: {
@@ -139,7 +137,7 @@ describe("Test channel action", () => {
         },
       },
     };
-    axios.post.mockResolvedValue({ data: channelItem1 });
+    axios.post.mockResolvedValue({ data: channelSubscribeSuccessResponse });
     await store.dispatch(subscribeChannel(channelId, accessToken));
     expect(axios.post).toHaveBeenCalledWith("/subscriptions", requestData, {
       headers: {
@@ -151,13 +149,14 @@ describe("Test channel action", () => {
     });
     expect(store.getActions()[0]).toEqual({
       type: SUBSCRIBE_CHANNEL,
-      payload: channelItem1,
+      payload: channelSubscribeSuccessResponse,
     });
     done();
   });
 
   it("unsubscribeChannel action can return data and dispatch action", async (done) => {
-    const channelId = channelItem1.snippet.resourceId.channelId;
+    const channelId =
+      channelSubscriptionData.items[0].snippet.resourceId.channelId;
     const requestData = {
       snippet: {
         resourceId: {
@@ -166,18 +165,20 @@ describe("Test channel action", () => {
         },
       },
     };
-    const subscriptionId = channelItem1.id;
+    const subscriptionId = channelSubscriptionData.items[0].id;
     axios.get.mockResolvedValue({
-      data: { items: [channelItem1] },
+      data: channelSubscriptionData,
     });
     axios.delete.mockResolvedValue();
     await store.dispatch(unsubscribeChannel(channelId, accessToken));
-    expect(axios.post).toHaveBeenCalledWith("/subscriptions", requestData, {
+    expect(axios.get).toHaveBeenCalledWith("/subscriptions", {
       headers: {
         Authorization: accessToken,
       },
       params: {
         part: "snippet",
+        forChannelId: channelId,
+        mine: true,
       },
     });
     expect(axios.delete).toHaveBeenCalledWith("/subscriptions", {
@@ -195,25 +196,27 @@ describe("Test channel action", () => {
   });
 
   it("fetchChannelIntro action should get channel intro from API", async (done) => {
-    axios.get.mockResolvedValue({ data: channelIntro });
-    await store.dispatch(fetchChannelIntro(fetchChannelIntro.channelId));
+    const channelId = channelIntroData.items[0].id;
+    axios.get.mockResolvedValue({ data: channelIntroData });
+    await store.dispatch(fetchChannelIntro(channelId));
     expect(axios.get).toHaveBeenCalledWith("/channels", {
       params: {
         key: process.env.REACT_APP_API_KEY,
         part: "snippet,statistics",
-        id: fetchChannelIntro.channelId,
+        id: channelId,
       },
     });
     expect(store.getActions()[0]).toEqual({
       type: FETCH_CHANNEL_INTRO,
-      payload: channelIntro,
+      payload: channelIntroData,
     });
     done();
   });
 
   it("fetchChannelIntro action should handle error", async (done) => {
+    const channelId = channelIntroData.items[0].id;
     axios.get.mockRejectedValue(error);
-    await store.dispatch(fetchChannelIntro(channelIntro.channelId));
+    await store.dispatch(fetchChannelIntro(channelId));
     expect(store.getActions()[0]).toEqual({
       type: CATCH_ERROR,
       payload: {
