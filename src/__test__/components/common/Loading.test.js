@@ -3,8 +3,11 @@ import { shallow } from "enzyme";
 import Loading from "components/common/Loading";
 
 describe("Test Loading component", () => {
-  it("should render Loading component correctly", () => {
-    const wrapper = shallow(<Loading />);
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<Loading />);
+  });
+  it("should match snapshot", () => {
     expect(wrapper).toMatchSnapshot();
   });
 });

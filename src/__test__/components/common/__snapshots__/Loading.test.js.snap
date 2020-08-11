@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Test Loading component should match snapshot 1`] = `
+<div
+  className="text-center my-3 py-3"
+>
+  <div
+    className="spinner-border text-center"
+    role="status"
+  >
+    <span
+      className="sr-only"
+    >
+      Loading...
+    </span>
+  </div>
+  <div>
+    Loading...
+  </div>
+</div>
+`;
+
 exports[`Test Loading component should render Loading component correctly 1`] = `
 <div
   className="text-center my-3 py-3"

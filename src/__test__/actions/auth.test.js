@@ -2,7 +2,6 @@ import configMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { defAxios as axios } from "settings";
 import { SIGN_IN, SIGN_OUT, CATCH_ERROR } from "actions/types";
-// import { defAxios as axios } from "settings";
 import { signIn, signOut } from "actions/auth";
 import { userTokenData, userInfoData } from "../fixtures/auth";
 
@@ -13,7 +12,7 @@ describe("Test auth action", () => {
     store = mockStore();
   });
 
-  it("signIn action should work", async (done) => {
+  it("signIn action should work with authorized user", async (done) => {
     axios.get.mockResolvedValue({
       data: userInfoData,
     });
@@ -39,6 +38,15 @@ describe("Test auth action", () => {
         firstName: userInfoData.given_name,
         avatar: userInfoData.picture,
       },
+    });
+    done();
+  });
+
+  it("signIn action should handle error", async (done) => {
+    await store.dispatch(signIn());
+    expect(store.getActions()[0]).toEqual({
+      type: CATCH_ERROR,
+      payload: "Authorization failed",
     });
     done();
   });

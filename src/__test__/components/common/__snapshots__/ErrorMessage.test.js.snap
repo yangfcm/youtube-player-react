@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test ErrorMessage component should render ErrorMessage component correctly 1`] = `
+exports[`Test ErrorMessage component should match snapshot 1`] = `
 <div
   className="text-danger text-center my-3 py-3"
 >
