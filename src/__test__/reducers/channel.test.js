@@ -1,8 +1,8 @@
 import { channelReducer } from "reducers/channel";
 import {
-  subscriptions,
-  channelIntro,
-  channelItem1,
+  channelIntroData,
+  myChannelsData,
+  channelSubscribeSuccessResponse,
 } from "__test__/fixtures/channel";
 import {
   FETCH_CHANNEL,
@@ -23,11 +23,11 @@ describe("test channel reducer", () => {
       {},
       {
         type: FETCH_CHANNEL,
-        payload: subscriptions,
+        payload: myChannelsData,
       }
     );
     expect(state).toEqual({
-      channels: subscriptions,
+      channels: myChannelsData,
     });
   });
 
@@ -36,73 +36,67 @@ describe("test channel reducer", () => {
       {},
       {
         type: FETCH_CHANNEL_INTRO,
-        payload: channelIntro,
+        payload: channelIntroData,
       }
     );
     expect(state).toEqual({
-      channelIntro,
+      channelIntro: channelIntroData,
     });
   });
 
   it("reducer can set channel subscription status as true", () => {
     const state = channelReducer(
-      { channelIntro },
+      { channelIntro: channelIntroData },
       {
         type: FETCH_CHANNEL_SUBSCRIPTION,
         payload: { isSubscribed: true },
       }
     );
     expect(state).toEqual({
-      channelIntro,
+      channelIntro: channelIntroData,
       isSubscribed: true,
     });
   });
 
   it("reducer can set channel subscription status as false", () => {
     const state = channelReducer(
-      { channelIntro },
+      { channelIntro: channelIntroData },
       {
         type: FETCH_CHANNEL_SUBSCRIPTION,
         payload: { isSubscribed: false },
       }
     );
     expect(state).toEqual({
-      channelIntro,
+      channelIntro: channelIntroData,
       isSubscribed: false,
     });
   });
 
   it("reducer can respond to subscribing channel", () => {
-    const channelToSubscribeIntro = {
-      items: [channelItem1],
-    };
+    const channelToSubscribeIntro = channelIntroData;
     const state = channelReducer(
-      { channelIntro: channelToSubscribeIntro, isSubscribed: false },
+      { channelIntro: channelToSubscribeIntro },
       {
         type: SUBSCRIBE_CHANNEL,
-        payload: channelItem1,
+        payload: channelSubscribeSuccessResponse,
       }
     );
     expect(state).toEqual({
       channelIntro: channelToSubscribeIntro,
-      isSubscribed: false,
-      subscribedChannel: channelItem1,
+      subscribedChannel: channelSubscribeSuccessResponse,
     });
   });
 
   it("reducer can respond to unsubscribing channel", () => {
-    const channelToUnsubscribeIntro = {
-      items: [channelItem1],
-    };
+    const channelToUnsubscribeIntro = channelIntroData;
     const state = channelReducer(
-      { channelIntro: channelToUnsubscribeIntro, isSubscribed: true },
+      { channelIntro: channelToUnsubscribeIntro },
       {
         type: UNSUBSCRIBE_CHANNEL,
       }
     );
     expect(state).toEqual({
       channelIntro: channelToUnsubscribeIntro,
-      isSubscribed: true,
       subscribedChannel: null,
     });
   });
