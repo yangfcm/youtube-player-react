@@ -1,11 +1,11 @@
-export const userTokenData = {
+const userTokenData = {
   wc: {
     token_type: "Bearer",
     access_token: "mock_access_token",
   },
 };
 
-export const userInfoData = {
+const userInfoData = {
   id: "1234567",
   email: "test@gmail.com",
   verified_email: true,
@@ -16,3 +16,5 @@ export const userInfoData = {
     "https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna",
   locale: "zh-CN",
 };
+
+export { userTokenData, userInfoData };

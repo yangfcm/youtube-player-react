@@ -1,4 +1,4 @@
-export const channelIntroData = {
+const channelIntroData = {
   kind: "youtube#channelListResponse",
   etag: "aae1ifi5jpFWqfJ5AnNSBdWJsPw",
   pageInfo: {
@@ -54,7 +54,7 @@ export const channelIntroData = {
   ],
 };
 
-export const myChannelsData = {
+const myChannelsData = {
   kind: "youtube#SubscriptionListResponse",
   etag: "xQawwtykWrMaWFxk9SosNsDSUxM",
   pageInfo: {
@@ -485,7 +485,7 @@ export const myChannelsData = {
   ],
 };
 
-export const channelSubscriptionData = {
+const channelSubscriptionData = {
   kind: "youtube#SubscriptionListResponse",
   etag: "0Hjy1B71d36MbpgMHJBsYZI1cPU",
   pageInfo: {
@@ -526,7 +526,7 @@ export const channelSubscriptionData = {
   ],
 };
 
-export const channelUnsubscriptionData = {
+const channelUnsubscriptionData = {
   kind: "youtube#SubscriptionListResponse",
   etag: "RhypvyzdCbJ_-or4wF5qNY4nwIw",
   pageInfo: {
@@ -536,7 +536,7 @@ export const channelUnsubscriptionData = {
   items: [],
 };
 
-export const channelSubscribeSuccessResponse = {
+const channelSubscribeSuccessResponse = {
   kind: "youtube#subscription",
   etag: "XfRhQFeIxeUEkmtfUZWYN_jxL3I",
   id: "EsU196kr7oUmVy38tJbmsXRlwm-aQpqW9fjPqstLIYk",
@@ -565,4 +565,12 @@ export const channelSubscribeSuccessResponse = {
       },
     },
   },
+};
+
+export {
+  channelIntroData,
+  myChannelsData,
+  channelSubscriptionData,
+  channelUnsubscriptionData,
+  channelSubscribeSuccessResponse,
 };
