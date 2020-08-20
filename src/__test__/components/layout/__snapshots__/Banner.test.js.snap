@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Banner component Test Banner component with no auth data should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Banner)>
+    <Banner
+      auth={
+        Object {
+          "signedIn": null,
+          "user": null,
+        }
+      }
+      dispatch={[Function]}
+    >
+      <div
+        className="d-flex align-items-center mb-2"
+      >
+        <div
+          className="d-flex align-items-center"
+          style={
+            Object {
+              "height": "80px",
+            }
+          }
+        />
+        <h3
+          className="display-6 mx-3"
+        />
+      </div>
+    </Banner>
+  </Connect(Banner)>
+</Provider>
+`;
+
+exports[`Test Banner component Test Banner component with no user logged in should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Banner)>
+    <Banner
+      auth={
+        Object {
+          "signedIn": false,
+          "user": null,
+        }
+      }
+      dispatch={[Function]}
+    >
+      <div
+        className="d-flex align-items-center mb-2"
+      >
+        <div
+          className="d-flex align-items-center"
+          style={
+            Object {
+              "height": "80px",
+            }
+          }
+        >
+          <FontAwesomeIcon
+            border={false}
+            className=""
+            fixedWidth={false}
+            flip={null}
+            icon="user-astronaut"
+            inverse={false}
+            listItem={false}
+            mask={null}
+            pull={null}
+            pulse={false}
+            rotation={null}
+            size="3x"
+            spin={false}
+            swapOpacity={false}
+            symbol={false}
+            title=""
+            transform={null}
+          >
+            <svg
+              aria-hidden="true"
+              className="svg-inline--fa fa-user-astronaut fa-w-14 fa-3x "
+              data-icon="user-astronaut"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              style={Object {}}
+              viewBox="0 0 448 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M64 224h13.5c24.7 56.5 80.9 96 146.5 96s121.8-39.5 146.5-96H384c8.8 0 16-7.2 16-16v-96c0-8.8-7.2-16-16-16h-13.5C345.8 39.5 289.6 0 224 0S102.2 39.5 77.5 96H64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16zm40-88c0-22.1 21.5-40 48-40h144c26.5 0 48 17.9 48 40v24c0 53-43 96-96 96h-48c-53 0-96-43-96-96v-24zm72 72l12-36 36-12-36-12-12-36-12 36-36 12 36 12 12 36zm151.6 113.4C297.7 340.7 262.2 352 224 352s-73.7-11.3-103.6-30.6C52.9 328.5 0 385 0 454.4v9.6c0 26.5 21.5 48 48 48h80v-64c0-17.7 14.3-32 32-32h128c17.7 0 32 14.3 32 32v64h80c26.5 0 48-21.5 48-48v-9.6c0-69.4-52.9-125.9-120.4-133zM272 448c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm-96 0c-8.8 0-16 7.2-16 16v48h32v-48c0-8.8-7.2-16-16-16z"
+                fill="currentColor"
+                style={Object {}}
+              />
+            </svg>
+          </FontAwesomeIcon>
+        </div>
+        <h3
+          className="display-6 mx-3"
+        >
+          Welcome
+        </h3>
+      </div>
+    </Banner>
+  </Connect(Banner)>
+</Provider>
+`;
+
+exports[`Test Banner component Test Banner component with user logged in should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Banner)>
+    <Banner
+      auth={
+        Object {
+          "signedIn": true,
+          "user": Object {
+            "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna",
+            "email": "test@gmail.com",
+            "firstName": "Test",
+            "lastName": "Test",
+            "username": "Test Test",
+          },
+        }
+      }
+      dispatch={[Function]}
+    >
+      <div
+        className="d-flex align-items-center mb-2"
+      >
+        <div
+          className="d-flex align-items-center"
+          style={
+            Object {
+              "height": "80px",
+            }
+          }
+        >
+          <img
+            alt="Test Test"
+            src="https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna"
+            style={
+              Object {
+                "borderRadius": "50%",
+                "maxHeight": "100%",
+              }
+            }
+          />
+        </div>
+        <h3
+          className="display-6 mx-3"
+        >
+          Welcome, Test Test
+        </h3>
+      </div>
+    </Banner>
+  </Connect(Banner)>
+</Provider>
+`;

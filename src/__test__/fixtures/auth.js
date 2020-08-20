@@ -17,4 +17,12 @@ const userInfoData = {
   locale: "zh-CN",
 };
 
-export { userTokenData, userInfoData };
+const authedUser = {
+  email: userInfoData.email,
+  username: userInfoData.name,
+  lastName: userInfoData.family_name,
+  firstName: userInfoData.given_name,
+  avatar: userInfoData.picture,
+};
+
+export { userTokenData, userInfoData, authedUser };

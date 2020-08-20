@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { fetchChannelIntro } from "../../actions/channel";
 import SubscriptionButton from "../modules/SubscriptionButton";
 
@@ -15,6 +16,8 @@ class ChannelBanner extends React.Component {
         this.setState({
           channelIntro: this.props.channel.items[0],
         });
+      } else {
+        this.props.history.push("/page-not-found");
       }
     }
   };
@@ -53,4 +56,4 @@ const mapStateToProps = (state) => {
 };
 export default connect(mapStateToProps, {
   fetchChannelIntro,
-})(ChannelBanner);
+})(withRouter(ChannelBanner));

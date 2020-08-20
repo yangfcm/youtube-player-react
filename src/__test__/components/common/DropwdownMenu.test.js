@@ -26,6 +26,8 @@ describe("Test DropdownMenu component", () => {
     );
   });
 
+  afterEach(() => wrapper.unmount());
+
   it("should render DropdownMenu component", () => {
     expect(wrapper).toMatchSnapshot();
   });
