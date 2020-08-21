@@ -1,32 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserImage from "../common/UserImage";
+import SearchForm from "../common/SearchForm";
 import GoogleAuth from "../modules/GoogleAuth";
 
 class Header extends React.Component {
   state = {
-    showDropdownMenu: false,
-    search: "",
     user: null,
-  };
-
-  handleSearch = (e) => {
-    e.preventDefault();
-    if (this.state.search.trim() === "") {
-      return;
-    }
-    this.props.history.push(`/results?q=${this.state.search}`);
-    this.setState({
-      search: "",
-    });
-  };
-
-  handleInput = (e) => {
-    this.setState({
-      search: e.target.value,
-    });
   };
 
   handleSignin = () => {
@@ -47,19 +29,7 @@ class Header extends React.Component {
           </span>
         </Link>
         <div className="flex-grow-1 d-flex align-items-center justify-content-end">
-          <form className="d-flex" onSubmit={this.handleSearch}>
-            <input
-              type="text"
-              placeholder="Search video..."
-              className="form-control"
-              name="search"
-              value={this.state.search}
-              onChange={this.handleInput}
-            />
-            <button className="btn btn-outline-dark mx-2" type="submit">
-              <FontAwesomeIcon icon="search" />
-            </button>
-          </form>
+          <SearchForm />
           {this.props.auth.signedIn === true && (
             <UserImage user={this.props.auth.user} />
           )}
@@ -87,4 +57,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(GoogleAuth(Header)));
+export default connect(mapStateToProps)(GoogleAuth(Header));
