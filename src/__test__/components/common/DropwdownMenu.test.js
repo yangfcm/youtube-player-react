@@ -13,7 +13,7 @@ describe("Test DropdownMenu component", () => {
   const history = createBrowserHistory();
 
   beforeEach(() => {
-    mockStore = configMockStore([]);
+    mockStore = configMockStore();
     wrapper = mount(
       <Provider store={mockStore({})}>
         <Router history={history}>

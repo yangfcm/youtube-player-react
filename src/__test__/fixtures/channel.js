@@ -1,3 +1,11 @@
+const channelIntroEmptyData = {
+  kind: "youtube#channelListResponse",
+  etag: "EsLmBV5WlNI_7ifNNSva2Iuut94",
+  pageInfo: {
+    resultsPerPage: 0,
+  },
+};
+
 const channelIntroData = {
   kind: "youtube#channelListResponse",
   etag: "aae1ifi5jpFWqfJ5AnNSBdWJsPw",
@@ -568,6 +576,7 @@ const channelSubscribeSuccessResponse = {
 };
 
 export {
+  channelIntroEmptyData,
   channelIntroData,
   myChannelsData,
   channelSubscriptionData,

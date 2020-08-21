@@ -41,7 +41,7 @@ describe("Test Banner component", () => {
   });
   describe("Test Banner component with user logged in", () => {
     beforeEach(() => {
-      mockStore = configMockStore([]);
+      mockStore = configMockStore();
       wrapper = mount(
         <Provider
           store={mockStore({

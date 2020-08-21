@@ -2,44 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import DropdownMenu from "../common/DropdownMenu";
+import UserImage from "../common/UserImage";
 import GoogleAuth from "../modules/GoogleAuth";
-import { mainMenuItems } from "../../settings";
 
 class Header extends React.Component {
   state = {
     showDropdownMenu: false,
     search: "",
     user: null,
-  };
-
-  toggleDropdownMenu = () => {
-    this.setState((prevState) => {
-      return {
-        showDropdownMenu: !prevState.showDropdownMenu,
-      };
-    });
-  };
-
-  closeDropdownMenu = () => {
-    this.setState((prevState) => {
-      if (prevState.showDropdownMenu) {
-        return {
-          showDropdownMenu: false,
-        };
-      }
-    });
-  };
-
-  handleToggleDropdown = (e) => {
-    this.toggleDropdownMenu();
-    e.stopPropagation();
-  };
-
-  componentDidMount = () => {
-    window.addEventListener("click", () => {
-      this.closeDropdownMenu();
-    });
   };
 
   handleSearch = (e) => {
@@ -91,31 +61,7 @@ class Header extends React.Component {
             </button>
           </form>
           {this.props.auth.signedIn === true && (
-            <div style={{ position: "relative" }} className="mr-2">
-              <div
-                style={{ height: "55px", cursor: "pointer" }}
-                id="dropdown"
-                onClick={this.handleToggleDropdown}
-              >
-                {"      "}
-                <img
-                  style={{ borderRadius: "50%", maxHeight: "100%" }}
-                  src={this.props.auth.user.avatar}
-                  alt={this.props.auth.user.username}
-                />
-              </div>
-              <div
-                style={{
-                  position: "absolute",
-                  right: "0",
-                  zIndex: 100,
-                  minWidth: "150px",
-                  display: this.state.showDropdownMenu ? "block" : "none",
-                }}
-              >
-                <DropdownMenu menuItems={mainMenuItems} />
-              </div>
-            </div>
+            <UserImage user={this.props.auth.user} />
           )}
           {this.props.auth.signedIn === false && (
             <div

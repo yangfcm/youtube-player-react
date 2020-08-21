@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test ChannelBanner component If channelIntro is fetched should render component  1`] = `
+<div
+  className="d-flex align-items-center mb-2"
+>
+  <div
+    className="d-flex align-items-center"
+    style={
+      Object {
+        "height": "80px",
+      }
+    }
+  >
+     
+    <img
+      alt="Mark Rober"
+      src="https://yt3.ggpht.com/a/AATXAJxOeBwKmjYvfuLwFuTuD3zFTffWCZbT5b5ufr8=s240-c-k-c0xffffffff-no-rj-mo"
+      style={
+        Object {
+          "borderRadius": "50%",
+          "maxHeight": "100%",
+        }
+      }
+    />
+  </div>
+  <div
+    className="flex-grow-1 d-flex justify-content-between align-items-center flex-wrap"
+  >
+    <h3
+      className="display-6 mx-3 text-primary font-weight-bold "
+    >
+      Mark Rober
+    </h3>
+    <div
+      className="flex-grow-1 d-flex justify-content-end"
+    >
+      <Connect(SubscriptionButton)
+        channelId="UCY1kMZp36IQSyNx_9h4mpCg"
+      />
+    </div>
+  </div>
+</div>
+`;

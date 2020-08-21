@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { fetchChannelIntro } from "../../actions/channel";
 import SubscriptionButton from "../modules/SubscriptionButton";
 
-class ChannelBanner extends React.Component {
+export class ChannelBanner extends React.Component {
   state = {
     channelIntro: null,
   };
@@ -12,14 +12,28 @@ class ChannelBanner extends React.Component {
     const { channelId } = this.props;
     await this.props.fetchChannelIntro(channelId);
     if (this.props.channel) {
-      if (this.props.channel.items && this.props.channel.items[0]) {
-        this.setState({
-          channelIntro: this.props.channel.items[0],
-        });
-      } else {
-        this.props.history.push("/page-not-found");
+      if (this.channelNotFound) {
+        this.navigateToNotFound();
+        return;
       }
+      this.setState({
+        channelIntro: this.props.channel.items[0],
+      });
     }
+  };
+
+  componentDidUpdate = () => {
+    if (this.channelNotFound) {
+      this.navigateToNotFound();
+    }
+  };
+
+  get channelNotFound() {
+    return this.props.channel && !this.props.channel.items;
+  }
+
+  navigateToNotFound = () => {
+    this.props.history.push("/page-not-found");
   };
 
   render() {

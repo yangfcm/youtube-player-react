@@ -1,0 +1,1435 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Header component Test Header when there is no user auth info returned should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(withRouter(Connect(GoogleAuthWrapper)))>
+        <withRouter(Connect(GoogleAuthWrapper))
+          auth={
+            Object {
+              "signedIn": null,
+              "user": null,
+            }
+          }
+          dispatch={[Function]}
+        >
+          <Connect(GoogleAuthWrapper)
+            auth={
+              Object {
+                "signedIn": null,
+                "user": null,
+              }
+            }
+            dispatch={[Function]}
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <GoogleAuthWrapper
+              auth={
+                Object {
+                  "signedIn": null,
+                  "user": null,
+                }
+              }
+              dispatch={[Function]}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              signIn={[Function]}
+              signOut={[Function]}
+            >
+              <Header
+                auth={
+                  Object {
+                    "signedIn": null,
+                    "user": null,
+                  }
+                }
+                dispatch={[Function]}
+                googleSignin={[Function]}
+                googleSignout={[Function]}
+                googleUser={null}
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "createHref": [Function],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
+                      "hash": "",
+                      "pathname": "/",
+                      "search": "",
+                      "state": undefined,
+                    },
+                    "push": [Function],
+                    "replace": [Function],
+                  }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  }
+                }
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {},
+                    "path": "/",
+                    "url": "/",
+                  }
+                }
+                signIn={[Function]}
+                signOut={[Function]}
+              >
+                <nav
+                  className="navbar navbar-light bg-light mb-4"
+                >
+                  <Link
+                    className="navbar-brand"
+                    to="/"
+                  >
+                    <LinkAnchor
+                      className="navbar-brand"
+                      href="/"
+                      navigate={[Function]}
+                    >
+                      <a
+                        className="navbar-brand"
+                        href="/"
+                        onClick={[Function]}
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon="video"
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size="lg"
+                          spin={false}
+                          style={
+                            Object {
+                              "color": "#FF0101",
+                            }
+                          }
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-video fa-w-18 fa-lg "
+                            data-icon="video"
+                            data-prefix="fas"
+                            focusable="false"
+                            role="img"
+                            style={
+                              Object {
+                                "color": "#FF0101",
+                              }
+                            }
+                            viewBox="0 0 576 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"
+                              fill="currentColor"
+                              style={Object {}}
+                            />
+                          </svg>
+                        </FontAwesomeIcon>
+                        <span
+                          className="font-weight-bold mx-2 d-none d-sm-inline"
+                        >
+                          FanTube
+                           
+                        </span>
+                      </a>
+                    </LinkAnchor>
+                  </Link>
+                  <div
+                    className="flex-grow-1 d-flex align-items-center justify-content-end"
+                  >
+                    <form
+                      className="d-flex"
+                      onSubmit={[Function]}
+                    >
+                      <input
+                        className="form-control"
+                        name="search"
+                        onChange={[Function]}
+                        placeholder="Search video..."
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        className="btn btn-outline-dark mx-2"
+                        type="submit"
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon="search"
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size={null}
+                          spin={false}
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-search fa-w-16 "
+                            data-icon="search"
+                            data-prefix="fas"
+                            focusable="false"
+                            role="img"
+                            style={Object {}}
+                            viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+                              fill="currentColor"
+                              style={Object {}}
+                            />
+                          </svg>
+                        </FontAwesomeIcon>
+                      </button>
+                    </form>
+                  </div>
+                </nav>
+              </Header>
+            </GoogleAuthWrapper>
+          </Connect(GoogleAuthWrapper)>
+        </withRouter(Connect(GoogleAuthWrapper))>
+      </Connect(withRouter(Connect(GoogleAuthWrapper)))>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;
+
+exports[`Test Header component Test Header when user is logged in should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(withRouter(Connect(GoogleAuthWrapper)))>
+        <withRouter(Connect(GoogleAuthWrapper))
+          auth={
+            Object {
+              "signedIn": true,
+              "user": Object {
+                "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna",
+                "email": "test@gmail.com",
+                "firstName": "Test",
+                "lastName": "Test",
+                "username": "Test Test",
+              },
+            }
+          }
+          dispatch={[Function]}
+        >
+          <Connect(GoogleAuthWrapper)
+            auth={
+              Object {
+                "signedIn": true,
+                "user": Object {
+                  "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna",
+                  "email": "test@gmail.com",
+                  "firstName": "Test",
+                  "lastName": "Test",
+                  "username": "Test Test",
+                },
+              }
+            }
+            dispatch={[Function]}
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <GoogleAuthWrapper
+              auth={
+                Object {
+                  "signedIn": true,
+                  "user": Object {
+                    "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna",
+                    "email": "test@gmail.com",
+                    "firstName": "Test",
+                    "lastName": "Test",
+                    "username": "Test Test",
+                  },
+                }
+              }
+              dispatch={[Function]}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              signIn={[Function]}
+              signOut={[Function]}
+            >
+              <Header
+                auth={
+                  Object {
+                    "signedIn": true,
+                    "user": Object {
+                      "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna",
+                      "email": "test@gmail.com",
+                      "firstName": "Test",
+                      "lastName": "Test",
+                      "username": "Test Test",
+                    },
+                  }
+                }
+                dispatch={[Function]}
+                googleSignin={[Function]}
+                googleSignout={[Function]}
+                googleUser={null}
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "createHref": [Function],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
+                      "hash": "",
+                      "pathname": "/",
+                      "search": "",
+                      "state": undefined,
+                    },
+                    "push": [Function],
+                    "replace": [Function],
+                  }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  }
+                }
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {},
+                    "path": "/",
+                    "url": "/",
+                  }
+                }
+                signIn={[Function]}
+                signOut={[Function]}
+              >
+                <nav
+                  className="navbar navbar-light bg-light mb-4"
+                >
+                  <Link
+                    className="navbar-brand"
+                    to="/"
+                  >
+                    <LinkAnchor
+                      className="navbar-brand"
+                      href="/"
+                      navigate={[Function]}
+                    >
+                      <a
+                        className="navbar-brand"
+                        href="/"
+                        onClick={[Function]}
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon="video"
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size="lg"
+                          spin={false}
+                          style={
+                            Object {
+                              "color": "#FF0101",
+                            }
+                          }
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-video fa-w-18 fa-lg "
+                            data-icon="video"
+                            data-prefix="fas"
+                            focusable="false"
+                            role="img"
+                            style={
+                              Object {
+                                "color": "#FF0101",
+                              }
+                            }
+                            viewBox="0 0 576 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"
+                              fill="currentColor"
+                              style={Object {}}
+                            />
+                          </svg>
+                        </FontAwesomeIcon>
+                        <span
+                          className="font-weight-bold mx-2 d-none d-sm-inline"
+                        >
+                          FanTube
+                           
+                        </span>
+                      </a>
+                    </LinkAnchor>
+                  </Link>
+                  <div
+                    className="flex-grow-1 d-flex align-items-center justify-content-end"
+                  >
+                    <form
+                      className="d-flex"
+                      onSubmit={[Function]}
+                    >
+                      <input
+                        className="form-control"
+                        name="search"
+                        onChange={[Function]}
+                        placeholder="Search video..."
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        className="btn btn-outline-dark mx-2"
+                        type="submit"
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon="search"
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size={null}
+                          spin={false}
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-search fa-w-16 "
+                            data-icon="search"
+                            data-prefix="fas"
+                            focusable="false"
+                            role="img"
+                            style={Object {}}
+                            viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+                              fill="currentColor"
+                              style={Object {}}
+                            />
+                          </svg>
+                        </FontAwesomeIcon>
+                      </button>
+                    </form>
+                    <UserImage
+                      user={
+                        Object {
+                          "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna",
+                          "email": "test@gmail.com",
+                          "firstName": "Test",
+                          "lastName": "Test",
+                          "username": "Test Test",
+                        }
+                      }
+                    >
+                      <div
+                        className="mr-2"
+                        style={
+                          Object {
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <div
+                          id="dropdown"
+                          onClick={[Function]}
+                          style={
+                            Object {
+                              "cursor": "pointer",
+                              "height": "55px",
+                            }
+                          }
+                        >
+                                
+                          <img
+                            alt="Test Test"
+                            src="https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna"
+                            style={
+                              Object {
+                                "borderRadius": "50%",
+                                "maxHeight": "100%",
+                              }
+                            }
+                          />
+                        </div>
+                        <div
+                          id="dropdown-container"
+                          style={
+                            Object {
+                              "display": "none",
+                              "minWidth": "150px",
+                              "position": "absolute",
+                              "right": "0",
+                              "zIndex": 100,
+                            }
+                          }
+                        >
+                          <Connect(GoogleAuthWrapper)
+                            menuItems={
+                              Array [
+                                Object {
+                                  "exact": true,
+                                  "icon": "thumbs-up",
+                                  "link": "/",
+                                  "name": "Recommend",
+                                },
+                                Object {
+                                  "exact": false,
+                                  "icon": "user-plus",
+                                  "link": "/channel",
+                                  "name": "Subscriptions",
+                                },
+                                Object {
+                                  "exact": false,
+                                  "icon": "list",
+                                  "link": "/playlist",
+                                  "name": "Play List",
+                                },
+                              ]
+                            }
+                          >
+                            <GoogleAuthWrapper
+                              menuItems={
+                                Array [
+                                  Object {
+                                    "exact": true,
+                                    "icon": "thumbs-up",
+                                    "link": "/",
+                                    "name": "Recommend",
+                                  },
+                                  Object {
+                                    "exact": false,
+                                    "icon": "user-plus",
+                                    "link": "/channel",
+                                    "name": "Subscriptions",
+                                  },
+                                  Object {
+                                    "exact": false,
+                                    "icon": "list",
+                                    "link": "/playlist",
+                                    "name": "Play List",
+                                  },
+                                ]
+                              }
+                              signIn={[Function]}
+                              signOut={[Function]}
+                            >
+                              <DropdownMenu
+                                googleSignin={[Function]}
+                                googleSignout={[Function]}
+                                googleUser={null}
+                                menuItems={
+                                  Array [
+                                    Object {
+                                      "exact": true,
+                                      "icon": "thumbs-up",
+                                      "link": "/",
+                                      "name": "Recommend",
+                                    },
+                                    Object {
+                                      "exact": false,
+                                      "icon": "user-plus",
+                                      "link": "/channel",
+                                      "name": "Subscriptions",
+                                    },
+                                    Object {
+                                      "exact": false,
+                                      "icon": "list",
+                                      "link": "/playlist",
+                                      "name": "Play List",
+                                    },
+                                  ]
+                                }
+                                signIn={[Function]}
+                                signOut={[Function]}
+                              >
+                                <div
+                                  className="list-group"
+                                >
+                                  <Link
+                                    className="list-group-item list-group-item-action"
+                                    key="Recommend"
+                                    to="/"
+                                  >
+                                    <LinkAnchor
+                                      className="list-group-item list-group-item-action"
+                                      href="/"
+                                      navigate={[Function]}
+                                    >
+                                      <a
+                                        className="list-group-item list-group-item-action"
+                                        href="/"
+                                        onClick={[Function]}
+                                      >
+                                        <FontAwesomeIcon
+                                          border={false}
+                                          className=""
+                                          fixedWidth={false}
+                                          flip={null}
+                                          icon="thumbs-up"
+                                          inverse={false}
+                                          listItem={false}
+                                          mask={null}
+                                          pull={null}
+                                          pulse={false}
+                                          rotation={null}
+                                          size={null}
+                                          spin={false}
+                                          swapOpacity={false}
+                                          symbol={false}
+                                          title=""
+                                          transform={null}
+                                        >
+                                          <svg
+                                            aria-hidden="true"
+                                            className="svg-inline--fa fa-thumbs-up fa-w-16 "
+                                            data-icon="thumbs-up"
+                                            data-prefix="fas"
+                                            focusable="false"
+                                            role="img"
+                                            style={Object {}}
+                                            viewBox="0 0 512 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"
+                                              fill="currentColor"
+                                              style={Object {}}
+                                            />
+                                          </svg>
+                                        </FontAwesomeIcon>
+                                           
+                                        Recommend
+                                      </a>
+                                    </LinkAnchor>
+                                  </Link>
+                                  <Link
+                                    className="list-group-item list-group-item-action"
+                                    key="Subscriptions"
+                                    to="/channel"
+                                  >
+                                    <LinkAnchor
+                                      className="list-group-item list-group-item-action"
+                                      href="/channel"
+                                      navigate={[Function]}
+                                    >
+                                      <a
+                                        className="list-group-item list-group-item-action"
+                                        href="/channel"
+                                        onClick={[Function]}
+                                      >
+                                        <FontAwesomeIcon
+                                          border={false}
+                                          className=""
+                                          fixedWidth={false}
+                                          flip={null}
+                                          icon="user-plus"
+                                          inverse={false}
+                                          listItem={false}
+                                          mask={null}
+                                          pull={null}
+                                          pulse={false}
+                                          rotation={null}
+                                          size={null}
+                                          spin={false}
+                                          swapOpacity={false}
+                                          symbol={false}
+                                          title=""
+                                          transform={null}
+                                        >
+                                          <svg
+                                            aria-hidden="true"
+                                            className="svg-inline--fa fa-user-plus fa-w-20 "
+                                            data-icon="user-plus"
+                                            data-prefix="fas"
+                                            focusable="false"
+                                            role="img"
+                                            style={Object {}}
+                                            viewBox="0 0 640 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+                                              fill="currentColor"
+                                              style={Object {}}
+                                            />
+                                          </svg>
+                                        </FontAwesomeIcon>
+                                           
+                                        Subscriptions
+                                      </a>
+                                    </LinkAnchor>
+                                  </Link>
+                                  <Link
+                                    className="list-group-item list-group-item-action"
+                                    key="Play List"
+                                    to="/playlist"
+                                  >
+                                    <LinkAnchor
+                                      className="list-group-item list-group-item-action"
+                                      href="/playlist"
+                                      navigate={[Function]}
+                                    >
+                                      <a
+                                        className="list-group-item list-group-item-action"
+                                        href="/playlist"
+                                        onClick={[Function]}
+                                      >
+                                        <FontAwesomeIcon
+                                          border={false}
+                                          className=""
+                                          fixedWidth={false}
+                                          flip={null}
+                                          icon="list"
+                                          inverse={false}
+                                          listItem={false}
+                                          mask={null}
+                                          pull={null}
+                                          pulse={false}
+                                          rotation={null}
+                                          size={null}
+                                          spin={false}
+                                          swapOpacity={false}
+                                          symbol={false}
+                                          title=""
+                                          transform={null}
+                                        >
+                                          <svg
+                                            aria-hidden="true"
+                                            className="svg-inline--fa fa-list fa-w-16 "
+                                            data-icon="list"
+                                            data-prefix="fas"
+                                            focusable="false"
+                                            role="img"
+                                            style={Object {}}
+                                            viewBox="0 0 512 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"
+                                              fill="currentColor"
+                                              style={Object {}}
+                                            />
+                                          </svg>
+                                        </FontAwesomeIcon>
+                                           
+                                        Play List
+                                      </a>
+                                    </LinkAnchor>
+                                  </Link>
+                                  <li
+                                    className="list-group-item list-group-item-warning"
+                                    onClick={[Function]}
+                                    style={
+                                      Object {
+                                        "cursor": "pointer",
+                                      }
+                                    }
+                                  >
+                                    <FontAwesomeIcon
+                                      border={false}
+                                      className=""
+                                      fixedWidth={false}
+                                      flip={null}
+                                      icon="sign-out-alt"
+                                      inverse={false}
+                                      listItem={false}
+                                      mask={null}
+                                      pull={null}
+                                      pulse={false}
+                                      rotation={null}
+                                      size={null}
+                                      spin={false}
+                                      swapOpacity={false}
+                                      symbol={false}
+                                      title=""
+                                      transform={null}
+                                    >
+                                      <svg
+                                        aria-hidden="true"
+                                        className="svg-inline--fa fa-sign-out-alt fa-w-16 "
+                                        data-icon="sign-out-alt"
+                                        data-prefix="fas"
+                                        focusable="false"
+                                        role="img"
+                                        style={Object {}}
+                                        viewBox="0 0 512 512"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"
+                                          fill="currentColor"
+                                          style={Object {}}
+                                        />
+                                      </svg>
+                                    </FontAwesomeIcon>
+                                       
+                                    Sign out
+                                  </li>
+                                </div>
+                              </DropdownMenu>
+                            </GoogleAuthWrapper>
+                          </Connect(GoogleAuthWrapper)>
+                        </div>
+                      </div>
+                    </UserImage>
+                  </div>
+                </nav>
+              </Header>
+            </GoogleAuthWrapper>
+          </Connect(GoogleAuthWrapper)>
+        </withRouter(Connect(GoogleAuthWrapper))>
+      </Connect(withRouter(Connect(GoogleAuthWrapper)))>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;
+
+exports[`Test Header component Test Header when user is not logged in should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(withRouter(Connect(GoogleAuthWrapper)))
+        googleSignin={[MockFunction]}
+      >
+        <withRouter(Connect(GoogleAuthWrapper))
+          auth={
+            Object {
+              "signedIn": false,
+              "user": null,
+            }
+          }
+          dispatch={[Function]}
+          googleSignin={[MockFunction]}
+        >
+          <Connect(GoogleAuthWrapper)
+            auth={
+              Object {
+                "signedIn": false,
+                "user": null,
+              }
+            }
+            dispatch={[Function]}
+            googleSignin={[MockFunction]}
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <GoogleAuthWrapper
+              auth={
+                Object {
+                  "signedIn": false,
+                  "user": null,
+                }
+              }
+              dispatch={[Function]}
+              googleSignin={[MockFunction]}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              signIn={[Function]}
+              signOut={[Function]}
+            >
+              <Header
+                auth={
+                  Object {
+                    "signedIn": false,
+                    "user": null,
+                  }
+                }
+                dispatch={[Function]}
+                googleSignin={[MockFunction]}
+                googleSignout={[Function]}
+                googleUser={null}
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "createHref": [Function],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
+                      "hash": "",
+                      "pathname": "/",
+                      "search": "",
+                      "state": undefined,
+                    },
+                    "push": [Function],
+                    "replace": [Function],
+                  }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  }
+                }
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {},
+                    "path": "/",
+                    "url": "/",
+                  }
+                }
+                signIn={[Function]}
+                signOut={[Function]}
+              >
+                <nav
+                  className="navbar navbar-light bg-light mb-4"
+                >
+                  <Link
+                    className="navbar-brand"
+                    to="/"
+                  >
+                    <LinkAnchor
+                      className="navbar-brand"
+                      href="/"
+                      navigate={[Function]}
+                    >
+                      <a
+                        className="navbar-brand"
+                        href="/"
+                        onClick={[Function]}
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon="video"
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size="lg"
+                          spin={false}
+                          style={
+                            Object {
+                              "color": "#FF0101",
+                            }
+                          }
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-video fa-w-18 fa-lg "
+                            data-icon="video"
+                            data-prefix="fas"
+                            focusable="false"
+                            role="img"
+                            style={
+                              Object {
+                                "color": "#FF0101",
+                              }
+                            }
+                            viewBox="0 0 576 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"
+                              fill="currentColor"
+                              style={Object {}}
+                            />
+                          </svg>
+                        </FontAwesomeIcon>
+                        <span
+                          className="font-weight-bold mx-2 d-none d-sm-inline"
+                        >
+                          FanTube
+                           
+                        </span>
+                      </a>
+                    </LinkAnchor>
+                  </Link>
+                  <div
+                    className="flex-grow-1 d-flex align-items-center justify-content-end"
+                  >
+                    <form
+                      className="d-flex"
+                      onSubmit={[Function]}
+                    >
+                      <input
+                        className="form-control"
+                        name="search"
+                        onChange={[Function]}
+                        placeholder="Search video..."
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        className="btn btn-outline-dark mx-2"
+                        type="submit"
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon="search"
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size={null}
+                          spin={false}
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-search fa-w-16 "
+                            data-icon="search"
+                            data-prefix="fas"
+                            focusable="false"
+                            role="img"
+                            style={Object {}}
+                            viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+                              fill="currentColor"
+                              style={Object {}}
+                            />
+                          </svg>
+                        </FontAwesomeIcon>
+                      </button>
+                    </form>
+                    <div
+                      className="d-flex align-items-center"
+                      style={
+                        Object {
+                          "height": "55px",
+                        }
+                      }
+                    >
+                      <button
+                        className="btn btn-primary"
+                        onClick={[Function]}
+                      >
+                        <FontAwesomeIcon
+                          border={false}
+                          className=""
+                          fixedWidth={false}
+                          flip={null}
+                          icon="sign-in-alt"
+                          inverse={false}
+                          listItem={false}
+                          mask={null}
+                          pull={null}
+                          pulse={false}
+                          rotation={null}
+                          size={null}
+                          spin={false}
+                          swapOpacity={false}
+                          symbol={false}
+                          title=""
+                          transform={null}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-sign-in-alt fa-w-16 "
+                            data-icon="sign-in-alt"
+                            data-prefix="fas"
+                            focusable="false"
+                            role="img"
+                            style={Object {}}
+                            viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"
+                              fill="currentColor"
+                              style={Object {}}
+                            />
+                          </svg>
+                        </FontAwesomeIcon>
+                           
+                        Sign In
+                      </button>
+                    </div>
+                  </div>
+                </nav>
+              </Header>
+            </GoogleAuthWrapper>
+          </Connect(GoogleAuthWrapper)>
+        </withRouter(Connect(GoogleAuthWrapper))>
+      </Connect(withRouter(Connect(GoogleAuthWrapper)))>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;
