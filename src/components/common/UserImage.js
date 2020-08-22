@@ -55,18 +55,19 @@ class UserImage extends React.Component {
             alt={user.username}
           />
         </div>
-        <div
-          id="dropdown-container"
-          style={{
-            position: "absolute",
-            right: "0",
-            zIndex: 100,
-            minWidth: "150px",
-            display: this.state.showDropdownMenu ? "block" : "none",
-          }}
-        >
-          <DropdownMenu menuItems={mainMenuItems} />
-        </div>
+        {this.state.showDropdownMenu && (
+          <div
+            id="dropdown-container"
+            style={{
+              position: "absolute",
+              right: "0",
+              zIndex: 100,
+              minWidth: "150px",
+            }}
+          >
+            <DropdownMenu menuItems={mainMenuItems} />
+          </div>
+        )}
       </div>
     );
   }
