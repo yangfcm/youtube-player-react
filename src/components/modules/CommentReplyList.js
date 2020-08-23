@@ -6,7 +6,7 @@ import MoreButton from "./MoreButton";
 import { fetchCommentReplies } from "../../actions/comment";
 import { clearError } from "../../actions/error";
 
-class CommentReplyList extends React.Component {
+export class CommentReplyList extends React.Component {
   state = {
     replies: null,
     showReplies: false,
@@ -82,7 +82,7 @@ class CommentReplyList extends React.Component {
         )}
         {this.state.showReplies && this.state.isLoading && <Loading />}
         {this.state.showReplies && !this.state.isLoading && this.state.replies && (
-          <div>
+          <div id="reply-list">
             {this.state.replies.items.map((item) => {
               return (
                 <div className="my-3" key={item.id}>

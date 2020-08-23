@@ -5,9 +5,10 @@ import { commentItem } from "__test__/fixtures/comment";
 
 describe("Test CommentItem component", () => {
   let wrapper;
+  const comment = commentItem.snippet.topLevelComment.snippet;
 
   beforeEach(() => {
-    wrapper = shallow(<CommentItem comment={commentItem} />);
+    wrapper = shallow(<CommentItem comment={comment} />);
   });
 
   afterEach(() => {
@@ -19,20 +20,18 @@ describe("Test CommentItem component", () => {
   });
 
   it("should render author's avatar", () => {
-    expect(wrapper.find("img").prop("src")).toBe(
-      commentItem.authorProfileImageUrl
-    );
+    expect(wrapper.find("img").prop("src")).toBe(comment.authorProfileImageUrl);
   });
 
   it("should render author's username", () => {
     expect(wrapper.find("span.font-weight-bold").text()).toContain(
-      commentItem.authorDisplayName
+      comment.authorDisplayName
     );
   });
 
   it("should render comment text", () => {
     expect(
       wrapper.find("div#comment-text").prop("dangerouslySetInnerHTML").__html
-    ).toContain(commentItem.textDisplay);
+    ).toContain(comment.textDisplay);
   });
 });

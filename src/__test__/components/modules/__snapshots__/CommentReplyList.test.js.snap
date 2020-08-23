@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test CommentReplyList component should render component 1`] = `
+<Fragment>
+  <button
+    className="btn btn-link"
+    onClick={[Function]}
+    style={
+      Object {
+        "padding": "0",
+      }
+    }
+  >
+    View
+     
+    5 replies
+  </button>
+</Fragment>
+`;

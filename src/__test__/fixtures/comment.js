@@ -521,7 +521,7 @@ const commentsResponse = {
   ],
 };
 
-const commentItem = commentsResponse.items[0].snippet.topLevelComment.snippet;
+const commentItem = commentsResponse.items[0];
 
 const repliesResponse = {
   kind: "youtube#commentListResponse",
