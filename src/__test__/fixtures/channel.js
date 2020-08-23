@@ -493,6 +493,8 @@ const myChannelsData = {
   ],
 };
 
+const channelItemData = myChannelsData.items[0];
+
 const channelSubscriptionData = {
   kind: "youtube#SubscriptionListResponse",
   etag: "0Hjy1B71d36MbpgMHJBsYZI1cPU",
@@ -579,6 +581,7 @@ export {
   channelIntroEmptyData,
   channelIntroData,
   myChannelsData,
+  channelItemData,
   channelSubscriptionData,
   channelUnsubscriptionData,
   channelSubscribeSuccessResponse,

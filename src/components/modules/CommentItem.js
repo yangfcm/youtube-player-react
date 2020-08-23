@@ -21,7 +21,10 @@ const CommentItem = ({ comment }) => {
               {moment(comment.publishedAt).fromNow()}
             </span>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: comment.textDisplay }}></div>
+          <div
+            id="comment-text"
+            dangerouslySetInnerHTML={{ __html: comment.textDisplay }}
+          ></div>
         </div>
       </div>
     </React.Fragment>

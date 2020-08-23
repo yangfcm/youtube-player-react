@@ -520,6 +520,9 @@ const commentsResponse = {
     },
   ],
 };
+
+const commentItem = commentsResponse.items[0].snippet.topLevelComment.snippet;
+
 const repliesResponse = {
   kind: "youtube#commentListResponse",
   etag: "mCDewh3b8pmAJR5ivfwgi-6NkW8",
@@ -661,5 +664,6 @@ export {
   commentDisabledErrorResponse,
   addedCommentResponse,
   commentsResponse,
+  commentItem,
   repliesResponse,
 };
