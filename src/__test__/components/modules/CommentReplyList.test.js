@@ -3,27 +3,36 @@ import { shallow } from "enzyme";
 import { CommentReplyList } from "components/modules/CommentReplyList";
 import Loading from "components/common/Loading";
 import CommentItem from "components/modules/CommentItem";
-import MoreButton from "components/modules/MoreButton";
-import { commentItem, repliesResponse } from "__test__/fixtures/comment";
+import {
+  commentItem,
+  commentItemNoReply,
+  repliesResponse,
+} from "__test__/fixtures/comment";
 
 describe("Test CommentReplyList component", () => {
   let wrapper;
   const mockFetchCommentReplies = jest.fn();
+
   beforeEach(() => {
     wrapper = shallow(
       <CommentReplyList
-        replies={null}
         comment={commentItem}
         fetchCommentReplies={mockFetchCommentReplies}
       />
     );
+    afterEach(() => {
+      wrapper.unmount();
+    });
   });
-  afterEach(() => {
-    wrapper.unmount();
-  });
-
   it("should render component", () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it("should not render button if there is no reply for the comment", () => {
+    const noReplyWrapper = shallow(
+      <CommentReplyList comment={commentItemNoReply} />
+    );
+    expect(noReplyWrapper.find("button.btn-link").exists()).toBe(false);
   });
 
   it("should render the count and replies and no replies initially", () => {

@@ -1,0 +1,935 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test CommentsList component If there is no comment for the video should render component 1`] = `
+<Fragment>
+  <div
+    className="mb-3"
+  >
+    <h5
+      className="mb-3"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="comments"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       Comments
+    </h5>
+    <div
+      className="text-muted text-center"
+    >
+       No comment
+    </div>
+    <Connect(CommentForm) />
+  </div>
+</Fragment>
+`;
+
+exports[`Test CommentsList component When comment is disabled should render component 1`] = `
+<Fragment>
+  <div
+    className="mb-3"
+  >
+    <h5
+      className="mb-3"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="comments"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       Comments
+    </h5>
+    <div
+      className="text-muted text-center"
+    >
+      Comment is disabled
+    </div>
+  </div>
+</Fragment>
+`;
+
+exports[`Test CommentsList component When comments are successfully fetched should render component 1`] = `
+<Fragment>
+  <div
+    className="mb-3"
+  >
+    <h5
+      className="mb-3"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="comments"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       Comments
+    </h5>
+    <Connect(CommentForm) />
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCrHjC2bL9t2C4555ebY0MCQ",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCrHjC2bL9t2C4555ebY0MCQ",
+          "authorDisplayName": "Lucia Lakpor",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJxSLxDsYIuligoT4HSSVXBAEKk-MbmjBa4O606L=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 162,
+          "publishedAt": "2020-07-17T20:42:13Z",
+          "textDisplay": "She only wanted to be president, she and her children stole everything and left the country in poverty and in the hands of another criminal, we basically have no country to go to, Liberia is now the poorest in the world. Yes I said it she’s a criminal.",
+          "textOriginal": "She only wanted to be president, she and her children stole everything and left the country in poverty and in the hands of another criminal, we basically have no country to go to, Liberia is now the poorest in the world. Yes I said it she’s a criminal.",
+          "updatedAt": "2020-07-17T21:35:42Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "3C6S-WEYMVGm8IfBtRjDA-i2lmM",
+            "id": "UgyQOgj_e7mQTILEmpV4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "cYTw8bXEWD0yu6UZtWDv4Ynjs7w",
+                "id": "UgyQOgj_e7mQTILEmpV4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCrHjC2bL9t2C4555ebY0MCQ",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCrHjC2bL9t2C4555ebY0MCQ",
+                  "authorDisplayName": "Lucia Lakpor",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJxSLxDsYIuligoT4HSSVXBAEKk-MbmjBa4O606L=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 162,
+                  "publishedAt": "2020-07-17T20:42:13Z",
+                  "textDisplay": "She only wanted to be president, she and her children stole everything and left the country in poverty and in the hands of another criminal, we basically have no country to go to, Liberia is now the poorest in the world. Yes I said it she’s a criminal.",
+                  "textOriginal": "She only wanted to be president, she and her children stole everything and left the country in poverty and in the hands of another criminal, we basically have no country to go to, Liberia is now the poorest in the world. Yes I said it she’s a criminal.",
+                  "updatedAt": "2020-07-17T21:35:42Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 5,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCrRGdEGQ1qbfI0m0eFz2oAQ",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCrRGdEGQ1qbfI0m0eFz2oAQ",
+          "authorDisplayName": "Daniel Deautriell",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJzX-6ruQAsLcVG43hBtGShrrd2X6UYc45majA=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 49,
+          "publishedAt": "2020-07-18T03:17:18Z",
+          "textDisplay": "War doesn&#39;t discriminate. War ruins all lives; men, women, children, soldiers, civilians - get your facts straight.",
+          "textOriginal": "War doesn't discriminate. War ruins all lives; men, women, children, soldiers, civilians - get your facts straight.",
+          "updatedAt": "2020-07-18T03:17:18Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "J3b6twnZIImIJHK6jxRKRbJy8_I",
+            "id": "UgwRr_8HJggfix5b2NF4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "f3erE_10um0CSZ4jf6BVqA-K3Uc",
+                "id": "UgwRr_8HJggfix5b2NF4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCrRGdEGQ1qbfI0m0eFz2oAQ",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCrRGdEGQ1qbfI0m0eFz2oAQ",
+                  "authorDisplayName": "Daniel Deautriell",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJzX-6ruQAsLcVG43hBtGShrrd2X6UYc45majA=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 49,
+                  "publishedAt": "2020-07-18T03:17:18Z",
+                  "textDisplay": "War doesn&#39;t discriminate. War ruins all lives; men, women, children, soldiers, civilians - get your facts straight.",
+                  "textOriginal": "War doesn't discriminate. War ruins all lives; men, women, children, soldiers, civilians - get your facts straight.",
+                  "updatedAt": "2020-07-18T03:17:18Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCtJWDaA70mMtjE7onJGaGNA",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCtJWDaA70mMtjE7onJGaGNA",
+          "authorDisplayName": "rebeltoo37",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJyw4AiDUS0lo0sKMsY62XWgJu102OA-rdXuOw=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 7,
+          "publishedAt": "2020-07-18T15:12:39Z",
+          "textDisplay": "Uhm? “UNICEF Liberia” shows 1 in 10 children die before age 5. 1/3 are malnourished. just read it. Certainly has a lot to brag about! Authoritarian thought police states. NZ, Germany, etc.",
+          "textOriginal": "Uhm? “UNICEF Liberia” shows 1 in 10 children die before age 5. 1/3 are malnourished. just read it. Certainly has a lot to brag about! Authoritarian thought police states. NZ, Germany, etc.",
+          "updatedAt": "2020-07-18T15:12:39Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "LlcWLuamhBE8Lal46ODzXED076c",
+            "id": "Ugze3Sr0BWjSISutl014AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "YqlNlvFjClAQqOzkg-rhfFCXRCM",
+                "id": "Ugze3Sr0BWjSISutl014AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCtJWDaA70mMtjE7onJGaGNA",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCtJWDaA70mMtjE7onJGaGNA",
+                  "authorDisplayName": "rebeltoo37",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJyw4AiDUS0lo0sKMsY62XWgJu102OA-rdXuOw=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 7,
+                  "publishedAt": "2020-07-18T15:12:39Z",
+                  "textDisplay": "Uhm? “UNICEF Liberia” shows 1 in 10 children die before age 5. 1/3 are malnourished. just read it. Certainly has a lot to brag about! Authoritarian thought police states. NZ, Germany, etc.",
+                  "textOriginal": "Uhm? “UNICEF Liberia” shows 1 in 10 children die before age 5. 1/3 are malnourished. just read it. Certainly has a lot to brag about! Authoritarian thought police states. NZ, Germany, etc.",
+                  "updatedAt": "2020-07-18T15:12:39Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCdjLoUoCfSF54o_irk9M4Sw",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCdjLoUoCfSF54o_irk9M4Sw",
+          "authorDisplayName": "Jack You",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwXawxz9-hLhjPiNj8xJMpxdUW2qgaTbH9jaA=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 2,
+          "publishedAt": "2020-07-19T07:46:15Z",
+          "textDisplay": "This is sexist.  Had a man said this everyone would be up in arms.",
+          "textOriginal": "This is sexist.  Had a man said this everyone would be up in arms.",
+          "updatedAt": "2020-07-19T07:46:15Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "AAcL8shhZTFEnY8UEQKPC9n1ixI",
+            "id": "UgxWkrUm7rU9QWHFBYB4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "jjoFuKYNyo026Qrx9ocNvZUrnsQ",
+                "id": "UgxWkrUm7rU9QWHFBYB4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCdjLoUoCfSF54o_irk9M4Sw",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCdjLoUoCfSF54o_irk9M4Sw",
+                  "authorDisplayName": "Jack You",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwXawxz9-hLhjPiNj8xJMpxdUW2qgaTbH9jaA=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 2,
+                  "publishedAt": "2020-07-19T07:46:15Z",
+                  "textDisplay": "This is sexist.  Had a man said this everyone would be up in arms.",
+                  "textOriginal": "This is sexist.  Had a man said this everyone would be up in arms.",
+                  "updatedAt": "2020-07-19T07:46:15Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCY_USsb9JWzwsdl90RmMV1w",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCY_USsb9JWzwsdl90RmMV1w",
+          "authorDisplayName": "WATCH ME",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwnQUfGVd8D4MD1N0URrOyqWuteZt4TEA-boqNrOg=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 46,
+          "publishedAt": "2020-07-17T20:02:22Z",
+          "textDisplay": "Don’t wait around for others to experience life with you. Take the lead, go out, and get the most out of life. Eventually, you’ll have more company than you can handle.",
+          "textOriginal": "Don’t wait around for others to experience life with you. Take the lead, go out, and get the most out of life. Eventually, you’ll have more company than you can handle.",
+          "updatedAt": "2020-07-17T20:02:22Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "j8h2r4Tjw0SUUWd-5MyBwOGEKcA",
+            "id": "Ugx7jjnXbe49WBkTkyN4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "imEZogsxFg_eQw04VovZyWQjVGw",
+                "id": "Ugx7jjnXbe49WBkTkyN4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCY_USsb9JWzwsdl90RmMV1w",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCY_USsb9JWzwsdl90RmMV1w",
+                  "authorDisplayName": "WATCH ME",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwnQUfGVd8D4MD1N0URrOyqWuteZt4TEA-boqNrOg=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 46,
+                  "publishedAt": "2020-07-17T20:02:22Z",
+                  "textDisplay": "Don’t wait around for others to experience life with you. Take the lead, go out, and get the most out of life. Eventually, you’ll have more company than you can handle.",
+                  "textOriginal": "Don’t wait around for others to experience life with you. Take the lead, go out, and get the most out of life. Eventually, you’ll have more company than you can handle.",
+                  "updatedAt": "2020-07-17T20:02:22Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 1,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCtD8zXJLmw-ZSIxzY6QQI9w",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCtD8zXJLmw-ZSIxzY6QQI9w",
+          "authorDisplayName": "Monkeyheadtpc",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJxEn7QATboAUIS_OWGfETi-Vp3uYV9Qc_3CYKL4=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 38,
+          "publishedAt": "2020-07-18T11:36:00Z",
+          "textDisplay": "&quot;The CEOs of four of the five biggest defense contractors are women.&quot;<br /><br />Thanks, women!",
+          "textOriginal": "\\"The CEOs of four of the five biggest defense contractors are women.\\"
+
+Thanks, women!",
+          "updatedAt": "2020-07-18T11:36:00Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "42DwcmQy9otfdDc5ujaJN_5Cxw4",
+            "id": "UgzUnoJr7_2BDkMcYqV4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "Fg_Uixq0JzRlSXszR3NBnoK5DrI",
+                "id": "UgzUnoJr7_2BDkMcYqV4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCtD8zXJLmw-ZSIxzY6QQI9w",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCtD8zXJLmw-ZSIxzY6QQI9w",
+                  "authorDisplayName": "Monkeyheadtpc",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJxEn7QATboAUIS_OWGfETi-Vp3uYV9Qc_3CYKL4=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 38,
+                  "publishedAt": "2020-07-18T11:36:00Z",
+                  "textDisplay": "&quot;The CEOs of four of the five biggest defense contractors are women.&quot;<br /><br />Thanks, women!",
+                  "textOriginal": "\\"The CEOs of four of the five biggest defense contractors are women.\\"
+
+Thanks, women!",
+                  "updatedAt": "2020-07-18T11:36:00Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCniqD16Scuc8DIH2uo5Ou_w",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCniqD16Scuc8DIH2uo5Ou_w",
+          "authorDisplayName": "Malcolm Jones",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJxl6_oh67NUT4TlKU7az57KdrAVjZ4dKbJe4p99=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 3,
+          "publishedAt": "2020-07-19T01:46:20Z",
+          "textDisplay": "More Identity politics.  TED has become WOKE.  Divided we fall, united we stand.  ALL LIVES MATTER.",
+          "textOriginal": "More Identity politics.  TED has become WOKE.  Divided we fall, united we stand.  ALL LIVES MATTER.",
+          "updatedAt": "2020-07-19T01:46:20Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "xSdzrQy8OlZ9fDFZxsgHV6fJ4ws",
+            "id": "UgwI0UPyAluOiQGV7VB4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "6_8tZzs5v8XI8TY5uAsPf7Ac8xU",
+                "id": "UgwI0UPyAluOiQGV7VB4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCniqD16Scuc8DIH2uo5Ou_w",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCniqD16Scuc8DIH2uo5Ou_w",
+                  "authorDisplayName": "Malcolm Jones",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJxl6_oh67NUT4TlKU7az57KdrAVjZ4dKbJe4p99=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 3,
+                  "publishedAt": "2020-07-19T01:46:20Z",
+                  "textDisplay": "More Identity politics.  TED has become WOKE.  Divided we fall, united we stand.  ALL LIVES MATTER.",
+                  "textOriginal": "More Identity politics.  TED has become WOKE.  Divided we fall, united we stand.  ALL LIVES MATTER.",
+                  "updatedAt": "2020-07-19T01:46:20Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCkEHzMnsBHZFo-1leoEIXyw",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCkEHzMnsBHZFo-1leoEIXyw",
+          "authorDisplayName": "Deicide",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJzRTIhE_8xjcsyaic53H3duILW6IaZTfoODuGJa=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 24,
+          "publishedAt": "2020-07-18T05:03:09Z",
+          "textDisplay": "Feminist clap trap.",
+          "textOriginal": "Feminist clap trap.",
+          "updatedAt": "2020-07-18T05:03:09Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "sPipIcE3dF0A5XWjbvhNSsmNKig",
+            "id": "Ugy3qdXzXIj50hESk294AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "3k5rSdk_y0x6i9hNE0YdnFtxILI",
+                "id": "Ugy3qdXzXIj50hESk294AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCkEHzMnsBHZFo-1leoEIXyw",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCkEHzMnsBHZFo-1leoEIXyw",
+                  "authorDisplayName": "Deicide",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJzRTIhE_8xjcsyaic53H3duILW6IaZTfoODuGJa=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 24,
+                  "publishedAt": "2020-07-18T05:03:09Z",
+                  "textDisplay": "Feminist clap trap.",
+                  "textOriginal": "Feminist clap trap.",
+                  "updatedAt": "2020-07-18T05:03:09Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCWi0a4AUfFPsx-LvRqdrsrA",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCWi0a4AUfFPsx-LvRqdrsrA",
+          "authorDisplayName": "Shada",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwl3E3Uyleve8FtX8wYf7wqfEWEu6IjzsXwQxmWNQ=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 6,
+          "publishedAt": "2020-07-17T23:49:37Z",
+          "textDisplay": "My only worry with this kind of attitude is that it is a lot easier to just become part of the status quo than it is to actually change anything. The girlboss attitude that Liberalism tends to build through attempts to work within the system is just as repressive as a full, unmodified patriarchy. Let us never forget that the problems of our world lay within as well as without, so we can never forget to criticize our own points of view",
+          "textOriginal": "My only worry with this kind of attitude is that it is a lot easier to just become part of the status quo than it is to actually change anything. The girlboss attitude that Liberalism tends to build through attempts to work within the system is just as repressive as a full, unmodified patriarchy. Let us never forget that the problems of our world lay within as well as without, so we can never forget to criticize our own points of view",
+          "updatedAt": "2020-07-17T23:49:37Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "2JNTTAQ1h3UAECfPXxZtqRnfkME",
+            "id": "UgzkO1tFtezWIvQi0xh4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "lgrqXgKjOlnwdUTDcoMcQDQzfis",
+                "id": "UgzkO1tFtezWIvQi0xh4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCWi0a4AUfFPsx-LvRqdrsrA",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCWi0a4AUfFPsx-LvRqdrsrA",
+                  "authorDisplayName": "Shada",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwl3E3Uyleve8FtX8wYf7wqfEWEu6IjzsXwQxmWNQ=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 6,
+                  "publishedAt": "2020-07-17T23:49:37Z",
+                  "textDisplay": "My only worry with this kind of attitude is that it is a lot easier to just become part of the status quo than it is to actually change anything. The girlboss attitude that Liberalism tends to build through attempts to work within the system is just as repressive as a full, unmodified patriarchy. Let us never forget that the problems of our world lay within as well as without, so we can never forget to criticize our own points of view",
+                  "textOriginal": "My only worry with this kind of attitude is that it is a lot easier to just become part of the status quo than it is to actually change anything. The girlboss attitude that Liberalism tends to build through attempts to work within the system is just as repressive as a full, unmodified patriarchy. Let us never forget that the problems of our world lay within as well as without, so we can never forget to criticize our own points of view",
+                  "updatedAt": "2020-07-17T23:49:37Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCdT-k5DB6gcsIw2RT3DM8WA",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCdT-k5DB6gcsIw2RT3DM8WA",
+          "authorDisplayName": "Stellular Nebulla",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJyhDK6PWEI0IjMzI5bd4snKpRKh3sb5VCuNx9jirg=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 79,
+          "publishedAt": "2020-07-18T01:14:06Z",
+          "textDisplay": "Clicked just to see like to dislike ratio.  Wasn&#39;t surprised 😂",
+          "textOriginal": "Clicked just to see like to dislike ratio.  Wasn't surprised 😂",
+          "updatedAt": "2020-07-18T01:14:06Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "t5D4tm6AZG_HToGkXOhlZw2wwsE",
+            "id": "UgyHVt0daPmReX0Yu6t4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "AfN5H8eyDORxTi1YaNdF5QMvCM8",
+                "id": "UgyHVt0daPmReX0Yu6t4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCdT-k5DB6gcsIw2RT3DM8WA",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCdT-k5DB6gcsIw2RT3DM8WA",
+                  "authorDisplayName": "Stellular Nebulla",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJyhDK6PWEI0IjMzI5bd4snKpRKh3sb5VCuNx9jirg=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 79,
+                  "publishedAt": "2020-07-18T01:14:06Z",
+                  "textDisplay": "Clicked just to see like to dislike ratio.  Wasn&#39;t surprised 😂",
+                  "textOriginal": "Clicked just to see like to dislike ratio.  Wasn't surprised 😂",
+                  "updatedAt": "2020-07-18T01:14:06Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 4,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCDDMIY_PWGXa0Y68p-5tVoQ",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCDDMIY_PWGXa0Y68p-5tVoQ",
+          "authorDisplayName": "League359",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJykMrHHiAKiwhlr4OXPFF0uhvMJ3eetWKx_v2zk=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 25,
+          "publishedAt": "2020-07-18T10:54:11Z",
+          "textDisplay": "Women: &quot;we&#39;ve brought freedom, justice and peace to our new empire&quot; us men: &quot;your new empire?&quot;",
+          "textOriginal": "Women: \\"we've brought freedom, justice and peace to our new empire\\" us men: \\"your new empire?\\"",
+          "updatedAt": "2020-07-18T10:54:11Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "J5rboL8bEX7b3zX0M_cv_y1jutQ",
+            "id": "UgyCKtyB0o2YNb1i-4F4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "zLgGktkrcHX7ZUhmZxwE6RMDPpg",
+                "id": "UgyCKtyB0o2YNb1i-4F4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCDDMIY_PWGXa0Y68p-5tVoQ",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCDDMIY_PWGXa0Y68p-5tVoQ",
+                  "authorDisplayName": "League359",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJykMrHHiAKiwhlr4OXPFF0uhvMJ3eetWKx_v2zk=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 25,
+                  "publishedAt": "2020-07-18T10:54:11Z",
+                  "textDisplay": "Women: &quot;we&#39;ve brought freedom, justice and peace to our new empire&quot; us men: &quot;your new empire?&quot;",
+                  "textOriginal": "Women: \\"we've brought freedom, justice and peace to our new empire\\" us men: \\"your new empire?\\"",
+                  "updatedAt": "2020-07-18T10:54:11Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 3,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <CommentItem
+      comment={
+        Object {
+          "authorChannelId": Object {
+            "value": "UCeMGLGUCZ-otQet4DGRL8SQ",
+          },
+          "authorChannelUrl": "http://www.youtube.com/channel/UCeMGLGUCZ-otQet4DGRL8SQ",
+          "authorDisplayName": "Xo1o",
+          "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwbx5XCNdfwnf5kucJVodoGKgFqvh9THOCols5K=s48-c-k-c0xffffffff-no-rj-mo",
+          "canRate": true,
+          "likeCount": 6,
+          "publishedAt": "2020-07-18T08:36:04Z",
+          "textDisplay": "aggressive and dumb title. please try again.",
+          "textOriginal": "aggressive and dumb title. please try again.",
+          "updatedAt": "2020-07-18T08:36:04Z",
+          "videoId": "-uR-iqh1x1Q",
+          "viewerRating": "none",
+        }
+      }
+    />
+    <div
+      className="pl-4"
+    >
+      <Connect(CommentReplyList)
+        comment={
+          Object {
+            "etag": "wfZd3_qycG0uQ63y90c8UhK7RT8",
+            "id": "UgwUljF6GYiSCwts_3l4AaABAg",
+            "kind": "youtube#commentThread",
+            "snippet": Object {
+              "canReply": true,
+              "isPublic": true,
+              "topLevelComment": Object {
+                "etag": "EKY4yrqnzW_LpaLzbRdhJsctWns",
+                "id": "UgwUljF6GYiSCwts_3l4AaABAg",
+                "kind": "youtube#comment",
+                "snippet": Object {
+                  "authorChannelId": Object {
+                    "value": "UCeMGLGUCZ-otQet4DGRL8SQ",
+                  },
+                  "authorChannelUrl": "http://www.youtube.com/channel/UCeMGLGUCZ-otQet4DGRL8SQ",
+                  "authorDisplayName": "Xo1o",
+                  "authorProfileImageUrl": "https://yt3.ggpht.com/a/AATXAJwbx5XCNdfwnf5kucJVodoGKgFqvh9THOCols5K=s48-c-k-c0xffffffff-no-rj-mo",
+                  "canRate": true,
+                  "likeCount": 6,
+                  "publishedAt": "2020-07-18T08:36:04Z",
+                  "textDisplay": "aggressive and dumb title. please try again.",
+                  "textOriginal": "aggressive and dumb title. please try again.",
+                  "updatedAt": "2020-07-18T08:36:04Z",
+                  "videoId": "-uR-iqh1x1Q",
+                  "viewerRating": "none",
+                },
+              },
+              "totalReplyCount": 0,
+              "videoId": "-uR-iqh1x1Q",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="my-2"
+    >
+      <hr />
+    </div>
+    <MoreButton
+      onClickMore={[Function]}
+    >
+      More Comments
+    </MoreButton>
+  </div>
+</Fragment>
+`;
+
+exports[`Test CommentsList component When component is initially rendered should render Loading component 1`] = `
+<Fragment>
+  <Loading />
+</Fragment>
+`;
+
+exports[`Test CommentsList component When error occurs... should render component 1`] = `
+<Fragment>
+  <ErrorMessage
+    error={
+      Object {
+        "response": Object {
+          "data": Object {
+            "error": Object {
+              "code": 400,
+              "errors": Array [
+                Object {
+                  "domain": "youtube.parameter",
+                  "location": "parameters.",
+                  "locationType": "other",
+                  "message": "'No filter selected. Expected one of: channelId, allThreadsRelatedToChannelId, videoId, id'",
+                  "reason": "missingRequiredParameter",
+                },
+              ],
+              "message": "'No filter selected. Expected one of: channelId, allThreadsRelatedToChannelId, videoId, id'",
+            },
+          },
+        },
+      }
+    }
+  />
+</Fragment>
+`;

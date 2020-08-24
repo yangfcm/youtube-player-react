@@ -522,6 +522,7 @@ const commentsResponse = {
 };
 
 const commentItem = commentsResponse.items[0];
+const commentItemNoReply = commentsResponse.items[1];
 
 const repliesResponse = {
   kind: "youtube#commentListResponse",
@@ -656,6 +657,16 @@ const repliesResponse = {
   ],
 };
 
+const emptyCommentResponse = {
+  kind: "youtube#commentThreadListResponse",
+  etag: "rflL0PcsjHSAUceM3O6ZQlDV30U",
+  pageInfo: {
+    totalResults: 0,
+    resultsPerPage: 12,
+  },
+  items: [],
+};
+
 export {
   videoId,
   commentId,
@@ -664,6 +675,8 @@ export {
   commentDisabledErrorResponse,
   addedCommentResponse,
   commentsResponse,
+  emptyCommentResponse,
   commentItem,
+  commentItemNoReply,
   repliesResponse,
 };

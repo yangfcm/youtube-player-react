@@ -10,7 +10,7 @@ import CommentForm from "../modules/CommentForm";
 import { fetchComments } from "../../actions/comment";
 import { clearError } from "../../actions/error";
 
-class CommentsList extends React.Component {
+export class CommentsList extends React.Component {
   state = {
     comments: null,
     error: "",
@@ -34,6 +34,9 @@ class CommentsList extends React.Component {
         error: "",
       });
     } else {
+      if (!this.props.comments) {
+        return;
+      }
       this.setState({
         comments: {
           pageInfo: this.props.comments.pageInfo,
