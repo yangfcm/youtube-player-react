@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test NotFound page should render component 1`] = `
+<Fragment>
+  <ErrorMessage
+    error={
+      Object {
+        "displayMessage": "The page you requested doesn't exist",
+      }
+    }
+  />
+  <div
+    className="text-center"
+  >
+    <Link
+      className="btn btn-outline-info"
+      to="/"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="home"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+         
+      Back to Homepage
+    </Link>
+  </div>
+</Fragment>
+`;

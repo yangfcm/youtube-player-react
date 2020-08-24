@@ -977,6 +977,8 @@ const playlistResponse = {
   ],
 };
 
+const playlistItemData = playlistResponse.items[0];
+
 const playlistDetailResponse = {
   kind: "youtube#playlistItemListResponse",
   etag: "dLJ3NYk2o2R68bjvUnBcZvrxk7k",
@@ -1448,6 +1450,7 @@ export {
   myPlaylistResponse,
   playlistEmptyResponse,
   playlistResponse,
+  playlistItemData,
   playlistDetailResponse,
   playlistErrorResponse,
 };

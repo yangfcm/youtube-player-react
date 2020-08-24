@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test SearchItem component When searched item is video should render component 1`] = `
+<Fragment>
+  <VideoListItem
+    video={
+      Object {
+        "etag": "fUy83ga9B0qPSeFNWMj7RhWuLUY",
+        "id": Object {
+          "kind": "youtube#video",
+          "videoId": "H89hKw06iWs",
+        },
+        "kind": "youtube#searchResult",
+        "snippet": Object {
+          "channelId": "UCnUYZLuoy1rq1aVMwx4aTzw",
+          "channelTitle": "Google Chrome Developers",
+          "description": "Join us for day 1 of web.dev LIVE as we head to the Americas timezone to provide helpful content on Performance and Discovery through Search. Enjoy the ...",
+          "liveBroadcastContent": "none",
+          "publishTime": "2020-06-30T16:00:10Z",
+          "publishedAt": "2020-06-30T16:00:10Z",
+          "thumbnails": Object {
+            "default": Object {
+              "height": 90,
+              "url": "https://i.ytimg.com/vi/H89hKw06iWs/default.jpg",
+              "width": 120,
+            },
+            "high": Object {
+              "height": 360,
+              "url": "https://i.ytimg.com/vi/H89hKw06iWs/hqdefault.jpg",
+              "width": 480,
+            },
+            "medium": Object {
+              "height": 180,
+              "url": "https://i.ytimg.com/vi/H89hKw06iWs/mqdefault.jpg",
+              "width": 320,
+            },
+          },
+          "title": "web.dev LIVE 2020: Day One",
+        },
+      }
+    }
+  />
+</Fragment>
+`;
+
+exports[`Test SearchItem component When searchedItem is channel should render component 1`] = `
+<Fragment>
+  <div
+    className="d-flex flex-md-row my-3"
+  >
+    <div
+      className=" d-flex align-items-center justify-content-center"
+    >
+      <Link
+        to="/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+      >
+        <img
+          src="https://yt3.ggpht.com/-Fgp8KFpgQqE/AAAAAAAAAAI/AAAAAAAAAAA/Wyh1vV5Up0I/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+          style={
+            Object {
+              "borderRadius": "50%",
+              "maxWidth": "120px",
+            }
+          }
+        />
+      </Link>
+    </div>
+    <div
+      className=" d-flex flex-column justify-content-center ml-3"
+    >
+      <Link
+        to="/channel/UC_x5XG1OV2P6uZZ5FSM9Ttw"
+      >
+        <h6
+          className="text-primary font-weight-bold"
+        >
+          Google Developers
+        </h6>
+      </Link>
+      <p
+        className="font-weight-light"
+      >
+        The Google Developers channel features talks from events, educational series, best practices, tips, and the latest updates across our products and platforms.
+      </p>
+    </div>
+  </div>
+</Fragment>
+`;
+
+exports[`Test SearchItem component When serachedItem is playlist should render component 1`] = `
+<Fragment>
+  <div
+    className="d-flex flex-md-row my-2"
+  >
+    <div
+      className="d-flex align-items-center"
+      style={
+        Object {
+          "position": "relative",
+        }
+      }
+    >
+      <Link
+        to="/playlist/IDZyZMYn3H0"
+      >
+        <img
+          src="https://i.ytimg.com/vi/IDZyZMYn3H0/mqdefault.jpg"
+          style={
+            Object {
+              "maxWidth": "140px",
+            }
+          }
+        />
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={
+            Object {
+              "background": "rgba(0,0,0, .4)",
+              "color": "white",
+              "height": "100%",
+              "position": "absolute",
+              "top": "0",
+              "width": "100%",
+              "zIndex": "10",
+            }
+          }
+        >
+           
+          <FontAwesomeIcon
+            border={false}
+            className=""
+            fixedWidth={false}
+            flip={null}
+            icon="list"
+            inverse={false}
+            listItem={false}
+            mask={null}
+            pull={null}
+            pulse={false}
+            rotation={null}
+            size={null}
+            spin={false}
+            swapOpacity={false}
+            symbol={false}
+            title=""
+            transform={null}
+          />
+            
+           Play List
+        </div>
+      </Link>
+    </div>
+    <div
+      className="d-flex flex-column justify-content-center ml-3"
+    >
+      <Link
+        to="/playlist/IDZyZMYn3H0"
+      >
+        <h6
+          className="text-primary font-weight-bold"
+        >
+          How to Become a Google Developer Expert (GDE)
+        </h6>
+      </Link>
+      <Link
+        to="/channel/UCsBjURrPoezykLs9EqgamOA"
+      >
+         
+        Fireship
+      </Link>
+    </div>
+  </div>
+</Fragment>
+`;

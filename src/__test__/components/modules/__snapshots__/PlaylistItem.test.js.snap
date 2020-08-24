@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test PlaylistItem component should render component 1`] = `
+<div
+  className="card"
+>
+  <Link
+    to="/playlist/PLOGi5-fAu8bH35xe7UG-nvk_Yf2Zp11Ds"
+  >
+    <img
+      alt="TED Connects: Community and Hope"
+      className="card-img-top"
+      src="https://i.ytimg.com/vi/f0jETLKTW7w/mqdefault.jpg"
+    />
+  </Link>
+  <div
+    className="card-body"
+  >
+    <Link
+      to="/playlist/PLOGi5-fAu8bH35xe7UG-nvk_Yf2Zp11Ds"
+    >
+      <p
+        className="card-text"
+      >
+        TED Connects: Community and Hope
+         
+        <br />
+        <span
+          className="badge badge-primary badge-pill"
+        >
+          15
+           videos
+        </span>
+      </p>
+    </Link>
+  </div>
+</div>
+`;
