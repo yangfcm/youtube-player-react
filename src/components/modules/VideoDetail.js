@@ -16,14 +16,14 @@ const VideoDetail = ({ video }) => {
       </div>
 
       <div className="d-flex flex-column flex-sm-row justify-content-between text-muted">
-        <div>
+        <div id="video-mega-info">
           <FontAwesomeIcon icon="user-clock" />{" "}
           {moment(video.snippet.publishedAt).format("D MMM YYYY k:mm")} |{" "}
           <FontAwesomeIcon icon="eye" />{" "}
           {separateNumber(video.statistics.viewCount)}
         </div>
         {video.statistics.likeCount && video.statistics.dislikeCount && (
-          <div>
+          <div id="video-stat-info">
             <span className="mr-3">
               <FontAwesomeIcon icon="thumbs-up" />{" "}
               {separateNumber(video.statistics.likeCount)}{" "}
@@ -37,6 +37,7 @@ const VideoDetail = ({ video }) => {
       </div>
       <hr />
       <p
+        id="video-description"
         dangerouslySetInnerHTML={{ __html: video.snippet.description }}
         style={{ overflow: "hidden" }}
       ></p>

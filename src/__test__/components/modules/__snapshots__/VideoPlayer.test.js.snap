@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test VideoPlayer component should render component 1`] = `
+<div>
+  <div
+    className="mb-3"
+    style={
+      Object {
+        "background": "#dcddde",
+        "height": "0",
+        "maxWidth": "100%",
+        "overflow": "hidden",
+        "paddingBottom": "62%",
+        "position": "relative",
+      }
+    }
+  >
+    <iframe
+      alt="video"
+      src="https://www.youtube.com/embed/hQq7ZSgvhtU"
+      style={
+        Object {
+          "height": "100%",
+          "position": "absolute",
+          "width": "100%",
+        }
+      }
+      title="video player"
+    />
+  </div>
+</div>
+`;

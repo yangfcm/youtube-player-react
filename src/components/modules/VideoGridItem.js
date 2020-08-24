@@ -38,14 +38,12 @@ const VideoGridItem = ({ video }) => {
             <span className="text-secondary">{video.snippet.channelTitle}</span>
           </Link>
         </div>
-        {
-          <div className="text-muted">
-            {video.statistics && (
-              <span>{separateNumber(video.statistics.viewCount)} Views |</span>
-            )}{" "}
-            {moment(video.snippet.publishedAt).fromNow()}
-          </div>
-        }
+        <div className="text-muted">
+          {video.statistics && (
+            <span>{separateNumber(video.statistics.viewCount)} Views |</span>
+          )}{" "}
+          {moment(video.snippet.publishedAt).fromNow()}
+        </div>
       </div>
     </div>
   );

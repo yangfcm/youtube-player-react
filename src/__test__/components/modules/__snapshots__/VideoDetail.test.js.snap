@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test videoDetail component should render component 1`] = `
+<div>
+  <div
+    className="mb-3"
+  >
+    <h3
+      className="text-primary"
+    >
+      Democratic National Convention: Day 1
+    </h3>
+    <Link
+      to="/channel/UC8ZLJkQZMENy8CoS8zYczBA"
+    >
+      2020 Democratic National Convention
+    </Link>
+  </div>
+  <div
+    className="d-flex flex-column flex-sm-row justify-content-between text-muted"
+  >
+    <div
+      id="video-mega-info"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="user-clock"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       
+      18 Aug 2020 12:56
+       |
+       
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="eye"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       
+      662,594
+    </div>
+    <div
+      id="video-stat-info"
+    >
+      <span
+        className="mr-3"
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon="thumbs-up"
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+         
+        14,471
+         
+      </span>
+      <span>
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon="thumbs-down"
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+         
+        8,452
+      </span>
+    </div>
+  </div>
+  <hr />
+  <p
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "Tune in on Monday, August 17 from 9-11 PM ET for the first night of the 2020 Democratic National Convention, where we’ll hear from the many Americans who are rising up to take on the crises facing our country.
+
+Featuring: Former First Lady Michelle Obama, Sen. Bernie Sanders, Sen. Catherine Cortez Masto, Gov. Andrew Cuomo, Gov. Gretchen Whitmer, Rep. Jim Clyburn, Convention Chairman Rep. Bennie Thompson, Rep. Gwen Moore, Former Gov. John Kasich, Sen. Doug Jones, and Sen. Amy Klobuchar.
+
+Follow the Democratic National Convention online:
+Facebook: https://www.facebook.com/DemConvention
+Twitter: https://twitter.com/DemConvention
+Instagram: https://www.instagram.com/demconvention
+Website: https://www.demconvention.com",
+      }
+    }
+    id="video-description"
+    style={
+      Object {
+        "overflow": "hidden",
+      }
+    }
+  />
+</div>
+`;
