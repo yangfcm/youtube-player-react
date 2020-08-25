@@ -12,7 +12,7 @@ import { mainMenuItems } from "../../settings";
 import { fetchPlaylist } from "../../actions/playlist";
 import { clearError } from "../../actions/error";
 
-class PlayList extends React.Component {
+export class PlayList extends React.Component {
   state = {
     playlist: null,
     error: null,
@@ -45,7 +45,7 @@ class PlayList extends React.Component {
 
   fetchPlaylistData = async (nextPageToken = null) => {
     const accessToken = localStorage.getItem("access_token");
-    await this.props.fetchPlaylist(null, null, accessToken);
+    await this.props.fetchPlaylist(nextPageToken, null, accessToken);
     if (this.props.error) {
       this.setState({
         error: this.props.error,
@@ -53,18 +53,30 @@ class PlayList extends React.Component {
       return;
     }
     if (this.props.playlist) {
-      if (this.props.playlist.items.length > 0) {
-        this.setState({
-          playlist: {
-            pageInfo: this.props.playlist.pageInfo,
-            items: this.props.playlist.items,
-            nextPageToken: this.props.playlist.nextPageToken,
-          },
+      if (nextPageToken) {
+        this.setState((state, props) => {
+          return {
+            playlist: {
+              pageInfo: props.playlist.pageInfo,
+              items: state.playlist.items.concat(props.playlist.items),
+              nextPageToken: props.playlist.nextPageToken,
+            },
+          };
         });
       } else {
-        this.setState({
-          error: { displayMessage: "No Playlist in this channel" },
-        });
+        if (this.props.playlist.items.length === 0) {
+          this.setState({
+            error: { displayMessage: "No Playlist in this channel" },
+          });
+        } else {
+          this.setState({
+            playlist: {
+              pageInfo: this.props.playlist.pageInfo,
+              items: this.props.playlist.items,
+              nextPageToken: this.props.playlist.nextPageToken,
+            },
+          });
+        }
       }
     }
   };
@@ -76,17 +88,8 @@ class PlayList extends React.Component {
   };
 
   fetchNextPagePlayList = async () => {
-    const { nextPageToken } = this.props.playlistData;
-    await this.props.fetchPlaylist(nextPageToken);
-    this.setState((state, props) => {
-      return {
-        playlist: {
-          pageInfo: props.playlist.pageInfo,
-          items: state.playlist.items.concat(props.playlist.items),
-          nextPageToken: props.playlist.nextPageToken,
-        },
-      };
-    });
+    const { nextPageToken } = this.state.playlist;
+    await this.fetchPlaylistData(nextPageToken);
   };
 
   render() {

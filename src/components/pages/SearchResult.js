@@ -9,7 +9,7 @@ import ErrorMessage from "../common/ErrorMessage";
 import { searchVideos } from "../../actions/search";
 import { clearError } from "../../actions/error";
 
-class SearchResult extends React.Component {
+export class SearchResult extends React.Component {
   state = {
     videos: null,
     error: null,

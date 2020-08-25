@@ -10,7 +10,7 @@ import ErrorMessage from "../common/ErrorMessage";
 import { fetchPlaylistDetail } from "../../actions/playlist";
 import { clearError } from "../../actions/error";
 
-class PlayListDetail extends React.Component {
+export class PlayListDetail extends React.Component {
   state = {
     playlistDetail: null,
     error: null,
@@ -32,8 +32,6 @@ class PlayListDetail extends React.Component {
           nextPageToken: this.props.playlistDetail.nextPageToken,
         },
       });
-    } else {
-      this.props.history.push("/not-found");
     }
   };
 
