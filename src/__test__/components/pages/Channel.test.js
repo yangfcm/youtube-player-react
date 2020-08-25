@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, ReactWrapper } from "enzyme";
+import { shallow } from "enzyme";
 import { Channel } from "components/pages/Channel";
 import Banner from "components/layout/Banner";
 import Menu from "components/layout/Menu";

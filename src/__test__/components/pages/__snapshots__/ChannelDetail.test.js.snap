@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test ChannelDetail component Test component at route /channel/:id should render component 1`] = `
+<div>
+  <Connect(withRouter(ChannelBanner))
+    channelId="channel_id"
+  />
+  <Menu
+    menuItems={
+      Array [
+        Object {
+          "exact": false,
+          "icon": "video",
+          "link": "/channel/channel_id/videos",
+          "name": "Videos",
+        },
+        Object {
+          "exact": false,
+          "icon": "list",
+          "link": "/channel/channel_id/playlist",
+          "name": "Playlist",
+        },
+        Object {
+          "exact": false,
+          "icon": "info-circle",
+          "link": "/channel/channel_id/intro",
+          "name": "Channel Intro",
+        },
+      ]
+    }
+  />
+  <Switch>
+    <Route
+      path="/channel/:id/videos"
+    >
+      <Connect(ChannelVideos)
+        channelId="channel_id"
+      />
+    </Route>
+    <Route
+      path="/channel/:id/playlist"
+    >
+      <Connect(ChannelPlaylist)
+        channelId="channel_id"
+      />
+    </Route>
+    <Route
+      path="/channel/:id/intro"
+    >
+      <Connect(withRouter(ChannelIntro))
+        channelId="channel_id"
+      />
+    </Route>
+    <Route
+      exact={true}
+      path="/channel/:id"
+    >
+      <Redirect
+        to="/channel/channel_id/videos"
+      />
+    </Route>
+    <Route
+      path="/channel/:id/*"
+    >
+      <Redirect
+        to="/not-found"
+      />
+    </Route>
+  </Switch>
+</div>
+`;

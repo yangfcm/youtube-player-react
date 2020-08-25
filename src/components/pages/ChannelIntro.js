@@ -9,7 +9,7 @@ import { fetchChannelIntro } from "../../actions/channel";
 import { clearError } from "../../actions/error";
 import { separateNumber } from "../../utils/helper";
 
-class ChannelIntro extends React.Component {
+export class ChannelIntro extends React.Component {
   state = {
     channelIntro: null,
     error: null,

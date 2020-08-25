@@ -7,7 +7,7 @@ import ChannelVideos from "./ChannelVideos";
 import ChannelPlaylist from "./ChannelPlaylist";
 import ChannelBanner from "../layout/ChannelBanner";
 
-class ChannelDetail extends React.Component {
+export class ChannelDetail extends React.Component {
   render() {
     const { path, url } = this.props.match;
     const channelMenuItems = [

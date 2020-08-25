@@ -8,7 +8,7 @@ import MoreButton from "../modules/MoreButton";
 import { fetchPlaylist } from "../../actions/playlist";
 import { clearError } from "../../actions/error";
 
-class PlayList extends React.Component {
+export class ChannelPlaylist extends React.Component {
   state = {
     playlist: null,
     error: null,
@@ -110,5 +110,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchPlaylist, clearError })(
-  PlayList
+  ChannelPlaylist
 );

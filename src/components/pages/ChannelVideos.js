@@ -7,7 +7,7 @@ import MoreButton from "../modules/MoreButton";
 import { searchVideos } from "../../actions/search";
 import { clearError } from "../../actions/error";
 
-class ChannelVideos extends React.Component {
+export class ChannelVideos extends React.Component {
   state = {
     videos: null,
     error: null,

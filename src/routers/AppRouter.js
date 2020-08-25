@@ -14,7 +14,7 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
 const history = createBrowserHistory();
-const AppRouter = () => {
+export const AppRouter = () => {
   return (
     <div className="d-flex flex-column" style={{ height: "100vh" }}>
       <div className="flex-grow-1 mb-4">
