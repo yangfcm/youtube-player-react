@@ -34,7 +34,7 @@ export class ChannelVideos extends React.Component {
         });
       } else {
         this.setState({
-          error: "No video in this channel",
+          error: { displayMessage: "No video in this channel" },
         });
       }
     }

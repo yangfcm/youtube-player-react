@@ -1,4 +1,9 @@
 const videoId = "hQq7ZSgvhtU";
+const videosEmptyResponse = {
+  kind: "youtube#videoListResponse",
+  etag: "QXsiCB6PWrHeezFKK3NOXTrXajQ",
+  items: [],
+};
 const videosResponse = {
   kind: "youtube#videoListResponse",
   etag: "QXsiCB6PWrHeezFKK3NOXTrXajQ",
@@ -1169,4 +1174,10 @@ const videoErrorResponse = {
   },
 };
 
-export { videoId, videosResponse, videoResponse, videoErrorResponse };
+export {
+  videoId,
+  videosResponse,
+  videosEmptyResponse,
+  videoResponse,
+  videoErrorResponse,
+};
