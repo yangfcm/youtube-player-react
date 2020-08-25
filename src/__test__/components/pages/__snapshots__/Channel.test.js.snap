@@ -1,0 +1,757 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Channel component When channels are fetched should render component 1`] = `
+<div>
+  <Connect(Banner) />
+  <Menu
+    menuItems={
+      Array [
+        Object {
+          "exact": true,
+          "icon": "thumbs-up",
+          "link": "/",
+          "name": "Recommend",
+        },
+        Object {
+          "exact": false,
+          "icon": "user-plus",
+          "link": "/channel",
+          "name": "Subscriptions",
+        },
+        Object {
+          "exact": false,
+          "icon": "list",
+          "link": "/playlist",
+          "name": "Play List",
+        },
+      ]
+    }
+  />
+   
+   
+  <div
+    className="mt-3"
+  >
+    <h3
+      className="mb-2 text-primary font-weight-bold"
+    >
+      My Subscriptions
+    </h3>
+    <div
+      className="mb-3"
+      style={
+        Object {
+          "display": "grid",
+          "gap": "0.5rem",
+          "gridTemplateColumns": "repeat(auto-fill, minmax(10rem, 1fr))",
+        }
+      }
+    >
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "FMgqrK0pDy4dT6ic5n8Ty7gc5m0",
+            "id": "EsU196kr7oWm_nYfN-9khVQF5baDZRJSzulOU6MAm-Q",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Learn Australian English with Aussie English where I show you what life's like Down Under while teaching you English!
+
+* Do you find the Australia accent difficult to understand and want to practice it?
+* Do you want to travel Down Under but don't know common Aussie slang words and expressions?
+* Do you simply have an interest in all things Australia and want to know what life's like here?
+* Do you want English resources aimed at boosting you from intermediate to advanced level in English?
+
+Then you've come to the right place, mate! Aussie English is here to give you more advanced English resources themed around all things Australia! Whether it's our wildlife and tourist attractions, our slang and expressions, or even our funny accent, Aussie English is aimed delivering interesting and REAL English content to help you learn how we speak Down Under.
+
+So, sit back, grab a cuppa and enjoy Aussie English!
+
+http://www.theaussieenglishpodcast.com",
+              "publishedAt": "2020-07-10T11:15:27.503000Z",
+              "resourceId": Object {
+                "channelId": "UCPIAvE0MO9pyWGNh5OoYInQ",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-CwIKK_-YUE4/AAAAAAAAAAI/AAAAAAAAAAA/qt9fyxUhwBM/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-CwIKK_-YUE4/AAAAAAAAAAI/AAAAAAAAAAA/qt9fyxUhwBM/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-CwIKK_-YUE4/AAAAAAAAAAI/AAAAAAAAAAA/qt9fyxUhwBM/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "Aussie English",
+            },
+          }
+        }
+        key="EsU196kr7oWm_nYfN-9khVQF5baDZRJSzulOU6MAm-Q"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "1Gxjb_TTpvkXmTU4nPpY_dkRWMY",
+            "id": "EsU196kr7oUmVy38tJbmsYdgg76uNHp8yUt0EenGyb4",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Learn how to speak English with the BBC. Every day we have a new video to help you learn the English language. We also produce regular 'extra' videos across the week so come back every day to see what's new. 
+
+We like receiving and reading your comments - please use English when you comment. 
+
+For more videos and content that will help you learn English, visit our website: http://www.bbclearningenglish.com",
+              "publishedAt": "2020-07-06T11:40:27.364000Z",
+              "resourceId": Object {
+                "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-RjBlhjWy7Nc/AAAAAAAAAAI/AAAAAAAAAAA/L6TjhoxhuGU/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-RjBlhjWy7Nc/AAAAAAAAAAI/AAAAAAAAAAA/L6TjhoxhuGU/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-RjBlhjWy7Nc/AAAAAAAAAAI/AAAAAAAAAAA/L6TjhoxhuGU/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "BBC Learning English",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsYdgg76uNHp8yUt0EenGyb4"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "Euyqa7IZeNdFvHEyYC4k-zXWJRo",
+            "id": "EsU196kr7oUmVy38tJbmsT4GlevmGKD27iNiMfF4ZVc",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Welcome to the official BBC News YouTube channel. 
+
+Interested in global news with an impartial perspective? Want to see behind-the-scenes clips and footage directly from the front-line? Our YouTube channel has all this and more, bringing you specially selected clips from the world's most trusted news source.
+
+Tune into BBC World News for 24 hour news on TV. Check out BBC News on mobile and download our app for iPhone, Android and Kindle Fire. 
+
+The official BBC News YouTube channel is operated by BBC Global News Ltd which comprises BBC World News the 24hr TV channel and bbc.com/news, the international news website.",
+              "publishedAt": "2020-07-06T12:34:14.555000Z",
+              "resourceId": Object {
+                "channelId": "UC16niRr50-MSBwiO3YDb3RA",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-Em-drWQ3uYI/AAAAAAAAAAI/AAAAAAAAAAA/b-RZ1gDQAIc/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-Em-drWQ3uYI/AAAAAAAAAAI/AAAAAAAAAAA/b-RZ1gDQAIc/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-Em-drWQ3uYI/AAAAAAAAAAI/AAAAAAAAAAA/b-RZ1gDQAIc/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "BBC News",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsT4GlevmGKD27iNiMfF4ZVc"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "ld4q6UQFYTg0Nu5jZN2sny5ifAE",
+            "id": "EsU196kr7oUmVy38tJbmsQpv-c5tE4sRH8pFNw8iZls",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Coding Tech partners with the tech conferences around the world that provided Coding Tech with their EXPLICIT permissions to republish videos on this channel. Here's the list of Conferences that provided Coding Tech with EXPLICIT written publication permissions: PyData, MLConf, Build Stuff, Code::dive, PolyConf, AmsterdamJS, React Amsterdam, ReactiveConf, Jazoon Tech Days, SFNode, CppCon, Infinite Red, GDG Lviv, Mibuso.com, You Gotta Love Frontend, React Native EU, Node Summit, NodeConfEU, ConFoo, Pixels Camp, JavaScriptLA, The Linux Foundation, Oredev Conference, Techlahoma, fitcevents. Coding Tech also re-posts content which was originally published with the Creative Commons Attribution license (reuse allowed).
+
+For business inquiries, please connect on Twitter: https://twitter.com/yuriymatso",
+              "publishedAt": "2019-07-28T09:50:27.165000Z",
+              "resourceId": Object {
+                "channelId": "UCtxCXg-UvSnTKPOzLH4wJaQ",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-J7Tp0Nkyqlw/AAAAAAAAAAI/AAAAAAAAAAA/ss3YKeInU_M/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-J7Tp0Nkyqlw/AAAAAAAAAAI/AAAAAAAAAAA/ss3YKeInU_M/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-J7Tp0Nkyqlw/AAAAAAAAAAI/AAAAAAAAAAA/ss3YKeInU_M/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "Coding Tech",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsQpv-c5tE4sRH8pFNw8iZls"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "dkjx4QWW6ihlLwkboOtChGL1LqY",
+            "id": "EsU196kr7oWm_nYfN-9khb--XK_9CfN5_boyw7MHcVk",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Are you ready to have a lot of fun learning real life English with \\"Learn English with TV Series?\\"
+
+On this channel, we will practice and improve our listening comprehension, using your favorite TV shows, movies, and talk shows, to learn to understand native English without getting lost, without missing the jokes, and without subtitles. 
+
+We will teach you how native speakers really speak, with dynamic English lessons, full of humor, jokes, and real life examples of English pronunciation, vocabulary, cultural tips, and grammar. 
+
+Whether you’re a teacher or a learner, these short, fun lessons are the perfect way to start or end your classes. We also offer free PDF lessons with the full transcript, and explanations of all intermediate vocabulary, native pronunciation, cultural tips, and grammar.  http://reallifeglobal.com/lewtv-compilation/
+
+We also offer a full 11 month English course covering Friends season 1 & 2 at https://reallifeglobal.com/lewtv-fluentwithfriends/",
+              "publishedAt": "2019-07-30T10:57:05.823000Z",
+              "resourceId": Object {
+                "channelId": "UCKgpamMlm872zkGDcBJHYDg",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-Uw8WRVUrPnQ/AAAAAAAAAAI/AAAAAAAAAAA/uNkKHM81UMA/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-Uw8WRVUrPnQ/AAAAAAAAAAI/AAAAAAAAAAA/uNkKHM81UMA/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-Uw8WRVUrPnQ/AAAAAAAAAAI/AAAAAAAAAAA/uNkKHM81UMA/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "Learn English With TV Series",
+            },
+          }
+        }
+        key="EsU196kr7oWm_nYfN-9khb--XK_9CfN5_boyw7MHcVk"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "XkXtHhVRmkB2-iqWLWIujI9D2s8",
+            "id": "EsU196kr7oUmVy38tJbmsY5wn8anl2Bfqj3P0xjR4Pw",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Maaaxter English is my safe space to share my passion with you. I love using real life experience to teach English and make the process as fun as possible! Comment under any videos to request what you want to watch next. 
+
+Get script and content summary for each video on Patreon: https://www.patreon.com/maaaxterenglish
+
+Let's have fun!
+
+Follow me on Instagram @thisismaggiemm
+Facebook: Maaaxter English
+Weibo: Maaaxter
+Bilibili: Maaaxter_English",
+              "publishedAt": "2018-07-29T22:24:11.106000Z",
+              "resourceId": Object {
+                "channelId": "UCO8GewbsHFFmJn4kLLq1WXQ",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-btf44-Zd6SE/AAAAAAAAAAI/AAAAAAAAAAA/vxORxe2Y-_U/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-btf44-Zd6SE/AAAAAAAAAAI/AAAAAAAAAAA/vxORxe2Y-_U/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-btf44-Zd6SE/AAAAAAAAAAI/AAAAAAAAAAA/vxORxe2Y-_U/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "Maaaxter English",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsY5wn8anl2Bfqj3P0xjR4Pw"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "fFgDveoGZ2daddKc9GbkYMPxGT4",
+            "id": "EsU196kr7oWm_nYfN-9khTbHvLpAD6sVAdeTraDZV30",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Our mission is to inspire, educate and help students of all ages with both lack of motivation and mental health awareness. We work with motivational speakers to create life changing motivational videos to help us achieve this goal.
+
+Subscribe for a new Motivational Video on Success, Study Tips, and/or Mental Health every Sunday!",
+              "publishedAt": "2019-07-25T06:56:00.664000Z",
+              "resourceId": Object {
+                "channelId": "UC8PICQUP0a_HsrA9S4IIgWw",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-y2nrJaO3dYI/AAAAAAAAAAI/AAAAAAAAAAA/7qOuYZKPn4o/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-y2nrJaO3dYI/AAAAAAAAAAI/AAAAAAAAAAA/7qOuYZKPn4o/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-y2nrJaO3dYI/AAAAAAAAAAI/AAAAAAAAAAA/7qOuYZKPn4o/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "Motivation2Study",
+            },
+          }
+        }
+        key="EsU196kr7oWm_nYfN-9khTbHvLpAD6sVAdeTraDZV30"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "6pK0NOSs5nrkD18pwxrMJfW4V3s",
+            "id": "EsU196kr7oUmVy38tJbmseoTMfoOwDJ60HsMDRwK97A",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "The TED Talks channel features the best talks and performances from the TED Conference, where the world's leading thinkers and doers give the talk of their lives in 18 minutes (or less). Look for talks on Technology, Entertainment and Design -- plus science, business, global issues, the arts and more. You're welcome to link to or embed these videos, forward them to others and share these ideas with people you know. For more information on using TED for commercial purposes (e.g. employee learning, in a film or online course), please submit a Media Request here: https://media-requests.ted.com. We also encourage you to join our online community at TED.com. Any other questions? Email contact@ted.com.",
+              "publishedAt": "2018-03-13T04:03:56.053000Z",
+              "resourceId": Object {
+                "channelId": "UCAuUUnT6oDeKwE6v1NGQxug",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-bonZt347bMc/AAAAAAAAAAI/AAAAAAAAAAA/lR8QEKnqqHk/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-bonZt347bMc/AAAAAAAAAAI/AAAAAAAAAAA/lR8QEKnqqHk/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-bonZt347bMc/AAAAAAAAAAI/AAAAAAAAAAA/lR8QEKnqqHk/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "TED",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmseoTMfoOwDJ60HsMDRwK97A"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "roGs2i6kmH1wJkHOZ5ODyUBx_xI",
+            "id": "EsU196kr7oUmVy38tJbmsc9gOfaKB-Gm0wQO6b63jQo",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Every Thursday The Economist posts videos that give authoritative insight and opinion on international news, politics, business, finance, science, technology and the connections between them.
+
+We're also producing full films such as The Disrupters, an original series exploring how major industries—from music and cars to hospitality—are currently being disrupted by the latest wave of digital innovation. As well as enjoying privileged access into the world biggest tech start ups we show how industry giants respond when faced with such tech-driven innovation—do they adapt—or die?
+
+Subscribe to our channel to be among the first to see the new films in the series when we post them.",
+              "publishedAt": "2019-12-23T21:40:25.631000Z",
+              "resourceId": Object {
+                "channelId": "UC0p5jTq6Xx_DosDFxVXnWaQ",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-NFUs-UbAeN8/AAAAAAAAAAI/AAAAAAAAAAA/il0ogU2uCkk/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-NFUs-UbAeN8/AAAAAAAAAAI/AAAAAAAAAAA/il0ogU2uCkk/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-NFUs-UbAeN8/AAAAAAAAAAI/AAAAAAAAAAA/il0ogU2uCkk/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "The Economist",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsc9gOfaKB-Gm0wQO6b63jQo"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "6jVkZuQCcSldQHpLpfK5lf9EFNg",
+            "id": "EsU196kr7oWm_nYfN-9khWQ2XqQthHREBbOsgryvMh8",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Hey,
+
+Are you a non-native English speaker who is using English to reach your personal & professional goals? Great! I made this channel for YOU. 
+
+Here you will learn…
+
+-How to Improve your fluency & confidence in English
+-Tips for professional networking & communication 
+-Interesting facts about American culture
+-Language learning advice based on REAL experience
+-How my students improve their English quickly & easily
+
+And you’ll be able to…
+
+-Improve your listening comprehension 
+-Pick up lots of new vocabulary (in context!)
+-Get FREE resources (linked in video descriptions)
+-Find inspiration in the success stories of my students
+
+Want more support with your English?
+
+Go to my website at EnglishFullTime.com and sign up for my email newsletter where I send daily tips, stories, information & promotional offers. 
+
+NOTE: You should only join this newsletter if you are serious about improving & investing $$$ in your English and professional development",
+              "publishedAt": "2018-12-31T02:33:20.765000Z",
+              "resourceId": Object {
+                "channelId": "UC-g0gSStENkYPXFRsKrlvyA",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-YIegMh2qLSM/AAAAAAAAAAI/AAAAAAAAAAA/zzFRydmWomQ/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-YIegMh2qLSM/AAAAAAAAAAI/AAAAAAAAAAA/zzFRydmWomQ/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-YIegMh2qLSM/AAAAAAAAAAI/AAAAAAAAAAA/zzFRydmWomQ/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "The English Coach",
+            },
+          }
+        }
+        key="EsU196kr7oWm_nYfN-9khWQ2XqQthHREBbOsgryvMh8"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "z3z3kSiH-wLWdYqoqKOMDiyOGTw",
+            "id": "EsU196kr7oUmVy38tJbmsa9pJ-lxZnm1vH91SbmZXNs",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Traversy Media features the best online web development and programming tutorials for all of the latest web technologies including Node.js, Angular 2, React.js, PHP, Rails, HTML, CSS and much more",
+              "publishedAt": "2018-07-29T12:01:09.241000Z",
+              "resourceId": Object {
+                "channelId": "UC29ju8bIPH5as8OGnQzwJyA",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-OsgBxXITFdg/AAAAAAAAAAI/AAAAAAAAAAA/gDaUV_aSb2Q/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-OsgBxXITFdg/AAAAAAAAAAI/AAAAAAAAAAA/gDaUV_aSb2Q/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-OsgBxXITFdg/AAAAAAAAAAI/AAAAAAAAAAA/gDaUV_aSb2Q/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "Traversy Media",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsa9pJ-lxZnm1vH91SbmZXNs"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "vN2nG-a6hE112D1tnWyMoloTbwo",
+            "id": "EsU196kr7oUmVy38tJbmsSMxIHqNnARNsW__TVt5IVM",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "We're an open source community of busy people who learn to code and build projects for nonprofits.",
+              "publishedAt": "2019-07-22T14:41:56.384000Z",
+              "resourceId": Object {
+                "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-bWUaHwGz7To/AAAAAAAAAAI/AAAAAAAAAAA/xEUD6X5iT2Y/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-bWUaHwGz7To/AAAAAAAAAAI/AAAAAAAAAAA/xEUD6X5iT2Y/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-bWUaHwGz7To/AAAAAAAAAAI/AAAAAAAAAAA/xEUD6X5iT2Y/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "freeCodeCamp.org",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsSMxIHqNnARNsW__TVt5IVM"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "CK6AHCS0-B4o4XJGzOH1bzAlNgA",
+            "id": "EsU196kr7oUmVy38tJbmsTIR9NE6baVX0E6vQPBWI-o",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Hey there! I am an entrepreneur and YouTuber. One day I realized I want to move to California, got my company LinguaTrip into a top Silicon Valley incubator 500 startups and got an O1 visa sticker in my passport. 
+
+Here are a quick few links to get in touch:
+
+1. If you want to book a language course abroad, sign up for a free consultation here - http://bit.ly/336tIZU
+2. If you want to order an ad on one of my channels, please reach out to sales@marinamogilko.co
+3. If you need to check your text in English instantly - https://fluent.express
+4. If you want to take part in my YouTube course - marinamogilko.co
+5. Download my English Workbook - https://www.english.online/
+6. My assistant - marina@marinamogilko.co",
+              "publishedAt": "2018-12-26T13:00:36.883000Z",
+              "resourceId": Object {
+                "channelId": "UCAQg09FkoobmLquNNoO4ulg",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-G1Rpdw5JRcE/AAAAAAAAAAI/AAAAAAAAAAA/NuYyXos_iJI/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-G1Rpdw5JRcE/AAAAAAAAAAI/AAAAAAAAAAA/NuYyXos_iJI/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-G1Rpdw5JRcE/AAAAAAAAAAI/AAAAAAAAAAA/NuYyXos_iJI/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "linguamarina",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsTIR9NE6baVX0E6vQPBWI-o"
+      />
+      <ChannelItem
+        channel={
+          Object {
+            "etag": "zfNS2z1eQYOL85NzfFvnr48WbeU",
+            "id": "EsU196kr7oUmVy38tJbmsSnEqRJTwTsinR8jnpD5wjU",
+            "kind": "youtube#subscription",
+            "snippet": Object {
+              "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+              "description": "Hello! I'm Emma, your YouTube English Coach! Welcome to mmmEnglish! 
+
+My channel is about helping you to build the skills and confidence you need to speak in English and have great conversations. 
+
+SUBSCRIBE to support my channel and get new lessons every Friday! 
+
+You can watch them all on the mmmEnglish blog: https://www.mmmenglish.com/blog/
+And study with me here: https://www.mmmenglish.com/studywithme/ 
+
+I'm also the founder of The Ladies' Project, an online community for women to build their confidence and thrive as English speakers: http://bit.ly/TheLadiesProject
+
+Find out more here: 
+Website: http://bit.ly/mmmEnglish
+Facebook: http://bit.ly/mmmEnglishFB
+Instagram: http://bit.ly/mmmEnglishInsta
+Twitter: http://bit.ly/TweetMmmEnglish",
+              "publishedAt": "2018-12-26T13:05:46.117000Z",
+              "resourceId": Object {
+                "channelId": "UCrRiVfHqBIIvSgKmgnSY66g",
+                "kind": "youtube#channel",
+              },
+              "thumbnails": Object {
+                "default": Object {
+                  "url": "https://yt3.ggpht.com/-Btt2jWL7kkE/AAAAAAAAAAI/AAAAAAAAAAA/7XjLacQl2iY/s88-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "high": Object {
+                  "url": "https://yt3.ggpht.com/-Btt2jWL7kkE/AAAAAAAAAAI/AAAAAAAAAAA/7XjLacQl2iY/s800-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+                "medium": Object {
+                  "url": "https://yt3.ggpht.com/-Btt2jWL7kkE/AAAAAAAAAAI/AAAAAAAAAAA/7XjLacQl2iY/s240-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                },
+              },
+              "title": "mmmEnglish",
+            },
+          }
+        }
+        key="EsU196kr7oUmVy38tJbmsSnEqRJTwTsinR8jnpD5wjU"
+      />
+    </div>
+    <div
+      className="text-center"
+    >
+      <div
+        className="mt-3"
+        style={
+          Object {
+            "margin": "0 auto",
+            "width": "50%",
+          }
+        }
+      >
+        <MoreButton
+          onClickMore={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Test Channel component When error occurs when fetching channel should render component 1`] = `
+<div>
+  <Connect(Banner) />
+  <Menu
+    menuItems={
+      Array [
+        Object {
+          "exact": true,
+          "icon": "thumbs-up",
+          "link": "/",
+          "name": "Recommend",
+        },
+        Object {
+          "exact": false,
+          "icon": "user-plus",
+          "link": "/channel",
+          "name": "Subscriptions",
+        },
+        Object {
+          "exact": false,
+          "icon": "list",
+          "link": "/playlist",
+          "name": "Play List",
+        },
+      ]
+    }
+  />
+   
+  <ErrorMessage
+    error={
+      Object {
+        "response": Object {
+          "data": Object {
+            "error": Object {
+              "code": 400,
+              "errors": Array [
+                Object {
+                  "domain": "youtube.parameter",
+                  "location": "parameters.",
+                  "locationType": "other",
+                  "message": "'No filter selected. Expected one of: managedByMe, id, forUsername, mySubscribers, mine, categoryId'",
+                  "reason": "missingRequiredParameter",
+                },
+              ],
+              "message": "No filter selected. Expected one of: managedByMe, id, forUsername, mySubscribers, mine, categoryId",
+            },
+          },
+        },
+      }
+    }
+  />
+   
+</div>
+`;
+
+exports[`Test Channel component When user doesn't subscribe any channel should render component 1`] = `
+<div>
+  <Connect(Banner) />
+  <Menu
+    menuItems={
+      Array [
+        Object {
+          "exact": true,
+          "icon": "thumbs-up",
+          "link": "/",
+          "name": "Recommend",
+        },
+        Object {
+          "exact": false,
+          "icon": "user-plus",
+          "link": "/channel",
+          "name": "Subscriptions",
+        },
+        Object {
+          "exact": false,
+          "icon": "list",
+          "link": "/playlist",
+          "name": "Play List",
+        },
+      ]
+    }
+  />
+   
+  <ErrorMessage
+    error={
+      Object {
+        "displayMessage": "You haven't subscribed any channel",
+      }
+    }
+  />
+   
+</div>
+`;
+
+exports[`Test Channel component When user is not logged in should render component 1`] = `
+<div>
+  <Connect(Banner) />
+  <Menu
+    menuItems={
+      Array [
+        Object {
+          "exact": true,
+          "icon": "thumbs-up",
+          "link": "/",
+          "name": "Recommend",
+        },
+        Object {
+          "exact": false,
+          "icon": "user-plus",
+          "link": "/channel",
+          "name": "Subscriptions",
+        },
+        Object {
+          "exact": false,
+          "icon": "list",
+          "link": "/playlist",
+          "name": "Play List",
+        },
+      ]
+    }
+  />
+  <Connect(GoogleAuthWrapper) />
+   
+   
+</div>
+`;
+
+exports[`Test Channel component When user is signed in and component is initially rendered should render component 1`] = `
+<div>
+  <Connect(Banner) />
+  <Menu
+    menuItems={
+      Array [
+        Object {
+          "exact": true,
+          "icon": "thumbs-up",
+          "link": "/",
+          "name": "Recommend",
+        },
+        Object {
+          "exact": false,
+          "icon": "user-plus",
+          "link": "/channel",
+          "name": "Subscriptions",
+        },
+        Object {
+          "exact": false,
+          "icon": "list",
+          "link": "/playlist",
+          "name": "Play List",
+        },
+      ]
+    }
+  />
+  <Loading />
+   
+   
+</div>
+`;

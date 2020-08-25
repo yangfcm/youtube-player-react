@@ -11,7 +11,7 @@ import { fetchVideos } from "../../actions/video";
 import { clearError } from "../../actions/error";
 // import { fetchVideos, clearError } from "../../actions/app";
 
-class Home extends React.Component {
+export class Home extends React.Component {
   state = {
     videos: null,
     error: null,

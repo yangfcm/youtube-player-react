@@ -62,6 +62,12 @@ const channelIntroData = {
   ],
 };
 
+const myChannelsEmptyData = {
+  kind: "youtube#SubscriptionListResponse",
+  etag: "xQawwtykWrMaWFxk9SosNsDSUxM",
+  items: [],
+};
+
 const myChannelsData = {
   kind: "youtube#SubscriptionListResponse",
   etag: "xQawwtykWrMaWFxk9SosNsDSUxM",
@@ -69,6 +75,7 @@ const myChannelsData = {
     totalResults: 14,
     resultsPerPage: 50,
   },
+  nextPageToken: "NEXT_PAGE_TOKEN",
   items: [
     {
       kind: "youtube#subscription",
@@ -585,4 +592,5 @@ export {
   channelSubscriptionData,
   channelUnsubscriptionData,
   channelSubscribeSuccessResponse,
+  myChannelsEmptyData,
 };

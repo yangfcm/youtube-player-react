@@ -12,7 +12,7 @@ import { mainMenuItems } from "../../settings";
 import { fetchChannel } from "../../actions/channel";
 import { clearError } from "../../actions/error";
 
-class Channel extends React.Component {
+export class Channel extends React.Component {
   state = {
     channels: null,
     error: null,
@@ -21,17 +21,7 @@ class Channel extends React.Component {
   componentDidMount = () => {
     // console.log("did mount", this.props.auth);
     if (this.props.auth.signedIn) {
-      if (this.props.channelData) {
-        this.setState({
-          channels: {
-            pageInfo: this.props.channelData.pageInfo,
-            items: this.props.channelData.items,
-            nextPageToken: this.props.channelData.nextPageToken,
-          },
-        });
-      } else {
-        this.fetchChannelData();
-      }
+      this.fetchChannelData();
     }
   };
 
@@ -59,10 +49,10 @@ class Channel extends React.Component {
     const accessToken = localStorage.getItem("access_token");
     // console.log(accessToken);
     await this.props.fetchChannel(nextPageToken, accessToken);
-    if (this.props.errorData) {
+    if (this.props.error) {
       // Error handling
       this.setState({
-        error: this.props.errorData,
+        error: this.props.error,
       });
       return;
     }
@@ -166,7 +156,7 @@ class Channel extends React.Component {
 const mapStateToProps = (state) => {
   return {
     channelData: state.channel.channels,
-    errorData: state.error,
+    error: state.error,
     auth: state.auth,
   };
 };
