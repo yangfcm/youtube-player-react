@@ -5,6 +5,7 @@ import VideoPlayer from "../modules/VideoPlayer";
 import VideoDetail from "../modules/VideoDetail";
 import VideoList from "../modules/VideoList";
 import CommentsList from "../modules/CommentsList";
+import Loading from "../common/Loading";
 import MoreButton from "../modules/MoreButton";
 import ErrorMessage from "../common/ErrorMessage";
 
@@ -13,7 +14,7 @@ import { searchVideos } from "../../actions/search";
 import { fetchPlaylistDetail } from "../../actions/playlist";
 import { clearError } from "../../actions/error";
 
-class Video extends React.Component {
+export class Video extends React.Component {
   state = {
     playlistDetail: null,
     video: null,
@@ -25,6 +26,10 @@ class Video extends React.Component {
   componentDidMount = async () => {
     const videoId = this.props.match.params.id;
     const playlistId = queryString.parse(this.props.location.search).playlistId;
+    this.setState({
+      videoId,
+      playlistId,
+    });
     await this.props.fetchVideo(videoId);
     if (this.props.error) {
       this.setState({
@@ -32,11 +37,11 @@ class Video extends React.Component {
       });
       return;
     }
-    this.setState({
-      videoId,
-      playlistId,
-      video: this.props.video.items[0],
-    });
+    if (this.props.video) {
+      this.setState({
+        video: this.props.video.items[0],
+      });
+    }
     await this.fetchSidebarVideos();
   };
 
@@ -45,6 +50,7 @@ class Video extends React.Component {
     const videoId = this.props.match.params.id;
     const { playlistId } = this.state;
     if (prevVideoId !== videoId) {
+      await this.props.fetchVideo(videoId);
       if (this.props.error) {
         this.setState({
           error: this.props.error,
@@ -143,8 +149,9 @@ class Video extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {!this.state.error && !this.state.video && <Loading />}
         {this.state.error && <ErrorMessage error={this.state.error} />}
-        {!this.state.error && (
+        {!this.state.error && this.state.video && (
           <div className="row justify-content-center">
             <div className="col-lg-8">
               {this.state.videoId && (
