@@ -8,7 +8,7 @@ export const signIn = (user) => {
       if (!user) {
         throw Error("Authorization failed");
       }
-      const accessToken = `${user.wc.token_type} ${user.wc.access_token}`;
+      const accessToken = `${user.xc.token_type} ${user.xc.access_token}`;
       localStorage.setItem("access_token", accessToken);
       const response = await axios.get(
         "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
