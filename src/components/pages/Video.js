@@ -171,11 +171,15 @@ export class Video extends React.Component {
             </div>
             {this.state.playlistDetail && (
               <div className="col-lg-4">
-                <VideoList
-                  videoList={this.state.playlistDetail.items}
-                  playlistId={this.state.playlistId}
-                />
-
+                <div
+                  style={{ maxHeight: "80vh", overflow: "auto" }}
+                  className="mb-2"
+                >
+                  <VideoList
+                    videoList={this.state.playlistDetail.items}
+                    playlistId={this.state.playlistId}
+                  />
+                </div>
                 {this.state.playlistDetail.nextPageToken && (
                   <MoreButton onClickMore={this.fetchNextPagePlaylist} />
                 )}

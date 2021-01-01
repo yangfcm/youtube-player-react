@@ -57,7 +57,7 @@ export const fetchPlaylistDetail = (playlistId, pageToken) => {
         params: {
           ...axios.defaults.params,
           part: "snippet,contentDetails,status",
-          maxResults: 8,
+          maxResults: 50,
           playlistId,
           pageToken,
         },

@@ -30,8 +30,8 @@ const VideoListItem = ({ video, playlistId }) => {
           <div
             className="text-primary font-weight-bold"
             style={{
-              lineHeight: "23px",
-              maxHeight: "46px",
+              lineHeight: "20px",
+              maxHeight: "40px",
               overflow: "hidden",
               textOverflow: "ellipsis",
             }}
