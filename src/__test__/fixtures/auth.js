@@ -1,5 +1,5 @@
 const userTokenData = {
-  xc: {
+  uc: {
     token_type: "Bearer",
     access_token: "mock_access_token",
   },

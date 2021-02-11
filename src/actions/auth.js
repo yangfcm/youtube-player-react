@@ -1,5 +1,5 @@
 import { SIGN_IN, SIGN_OUT, CATCH_ERROR } from "./types";
-import { defAxios as axios } from "../settings";
+import axios from "axios";
 
 export const signIn = (user) => {
   return async (dispatch) => {
@@ -8,7 +8,10 @@ export const signIn = (user) => {
       if (!user) {
         throw Error("Authorization failed");
       }
-      const accessToken = `${user.xc.token_type} ${user.xc.access_token}`;
+      console.log(user);
+      const accessToken = `${
+        user[process.env.REACT_APP_TOKEN_KEY].token_type
+      } ${user[process.env.REACT_APP_TOKEN_KEY].access_token}`;
       localStorage.setItem("access_token", accessToken);
       const response = await axios.get(
         "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",

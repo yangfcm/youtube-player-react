@@ -89,11 +89,11 @@ describe("Test playlist action", () => {
     expect(axios.get).toHaveBeenCalledWith("/playlistItems", {
       params: {
         ...axios.defaults.params,
-        part: "snippet,contentDetails,status",
-        maxResults: 8,
-        playlistId,
-        pageToken: null,
       },
+      part: "snippet,contentDetails,status",
+      maxResults: 12,
+      playlistId,
+      pageToken: null,
     });
     expect(store.getActions()[0]).toEqual({
       type: FETCH_PLAY_LIST_DETAIL,

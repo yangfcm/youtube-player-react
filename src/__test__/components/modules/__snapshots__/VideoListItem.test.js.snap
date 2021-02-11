@@ -31,8 +31,8 @@ exports[`Test VideoListItem component should render component 1`] = `
         className="text-primary font-weight-bold"
         style={
           Object {
-            "lineHeight": "23px",
-            "maxHeight": "46px",
+            "lineHeight": "20px",
+            "maxHeight": "40px",
             "overflow": "hidden",
             "textOverflow": "ellipsis",
           }

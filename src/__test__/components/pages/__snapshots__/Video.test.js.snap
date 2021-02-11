@@ -200,22 +200,31 @@ Website: https://www.demconvention.com",
     <div
       className="col-lg-4"
     >
-      <VideoList
-        playlistId="PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG"
-        videoList={
-          Array [
-            Object {
-              "contentDetails": Object {
-                "videoId": "SqrbIlUwR0U",
-                "videoPublishedAt": "2018-09-18T20:17:43Z",
-              },
-              "etag": "y9NNPhfiMScskVn1q-6fsAqr1OI",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy41NkI0NEY2RDEwNTU3Q0M2",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "In this crash course we will get started with the Go programming language. There is no prior knowledge of Go required. We will setup a workspace and look at fundamentals like variables, slices, conditionals, maps, structs and more
+      <div
+        className="mb-2"
+        style={
+          Object {
+            "maxHeight": "80vh",
+            "overflow": "auto",
+          }
+        }
+      >
+        <VideoList
+          playlistId="PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG"
+          videoList={
+            Array [
+              Object {
+                "contentDetails": Object {
+                  "videoId": "SqrbIlUwR0U",
+                  "videoPublishedAt": "2018-09-18T20:17:43Z",
+                },
+                "etag": "y9NNPhfiMScskVn1q-6fsAqr1OI",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy41NkI0NEY2RDEwNTU3Q0M2",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "In this crash course we will get started with the Go programming language. There is no prior knowledge of Go required. We will setup a workspace and look at fundamentals like variables, slices, conditionals, maps, structs and more
 
 Workspace - 1:35
 Hello World - 7:37
@@ -252,58 +261,58 @@ Follow Traversy Media:
 https://www.facebook.com/traversymedia
 https://www.twitter.com/traversymedia
 https://www.instagram.com/traversymedia",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 0,
-                "publishedAt": "2018-09-21T12:15:42Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "SqrbIlUwR0U",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 0,
+                  "publishedAt": "2018-09-21T12:15:42Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "SqrbIlUwR0U",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "Go / Golang Crash Course",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/SqrbIlUwR0U/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "Go / Golang Crash Course",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-            Object {
-              "contentDetails": Object {
-                "videoId": "PoRJizFvM7s",
-                "videoPublishedAt": "2018-06-22T13:13:12Z",
-              },
-              "etag": "hbbvSOez96ehPNfM_N9X8PoqK7Y",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4yODlGNEE0NkRGMEEzMEQy",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "In this crash course we will look at asynchronous JavaScript and cover callbacks, promises including promise.all as well as the async / await syntax.
+              Object {
+                "contentDetails": Object {
+                  "videoId": "PoRJizFvM7s",
+                  "videoPublishedAt": "2018-06-22T13:13:12Z",
+                },
+                "etag": "hbbvSOez96ehPNfM_N9X8PoqK7Y",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4yODlGNEE0NkRGMEEzMEQy",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "In this crash course we will look at asynchronous JavaScript and cover callbacks, promises including promise.all as well as the async / await syntax.
 
 FULL JS COURSE (Just 10 Bucks!!!!):
 https://www.udemy.com/modern-javascript-from-the-beginning/?couponCode=YOUTUBE10
@@ -318,58 +327,58 @@ Follow Traversy Media:
 http://www.facebook.com/traversymedia
 http://www.twitter.com/traversymedia
 http://www.instagram.com/traversymedia",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 1,
-                "publishedAt": "2018-09-21T12:25:16Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "PoRJizFvM7s",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 1,
+                  "publishedAt": "2018-09-21T12:25:16Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "PoRJizFvM7s",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/PoRJizFvM7s/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/PoRJizFvM7s/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/PoRJizFvM7s/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/PoRJizFvM7s/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/PoRJizFvM7s/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "Async JS Crash Course - Callbacks, Promises, Async Await",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/PoRJizFvM7s/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/PoRJizFvM7s/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/PoRJizFvM7s/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/PoRJizFvM7s/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/PoRJizFvM7s/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "Async JS Crash Course - Callbacks, Promises, Async Await",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-            Object {
-              "contentDetails": Object {
-                "videoId": "bjVUqvcCnxM",
-                "videoPublishedAt": "2018-09-29T14:28:45Z",
-              },
-              "etag": "_IG8Ximangw3SLpnFPLe8EZWQxw",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4wMTcyMDhGQUE4NTIzM0Y5",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "In this video I will show you how to deploy a website or frontend application to Netlify which is a fantastic service for hosting with free SSL, server-side functions and even built in form functionality. This video is NOT sponsored by Netlify in any way
+              Object {
+                "contentDetails": Object {
+                  "videoId": "bjVUqvcCnxM",
+                  "videoPublishedAt": "2018-09-29T14:28:45Z",
+                },
+                "etag": "_IG8Ximangw3SLpnFPLe8EZWQxw",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4wMTcyMDhGQUE4NTIzM0Y5",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "In this video I will show you how to deploy a website or frontend application to Netlify which is a fantastic service for hosting with free SSL, server-side functions and even built in form functionality. This video is NOT sponsored by Netlify in any way
 
 Sponsor: Freelancer Bundle (Use \\"brad25\\" for 25% off)
 https://studywebdevelopment.com/freelancing.html
@@ -384,58 +393,58 @@ Follow Traversy Media:
 https://www.facebook.com/traversymedia
 https://www.twitter.com/traversymedia
 https://www.instagram.com/traversymedia",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 2,
-                "publishedAt": "2018-10-02T14:09:53Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "bjVUqvcCnxM",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 2,
+                  "publishedAt": "2018-10-02T14:09:53Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "bjVUqvcCnxM",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "Deploy Websites In Seconds With Netlify",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/bjVUqvcCnxM/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "Deploy Websites In Seconds With Netlify",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-            Object {
-              "contentDetails": Object {
-                "videoId": "SKXkC4SqtRk",
-                "videoPublishedAt": "2018-09-11T16:30:26Z",
-              },
-              "etag": "rvyHu2dXrV0Mvlr6yIMIH1C16Ik",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy41MjE1MkI0OTQ2QzJGNzNG",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "In this video we will use the gh-pages npm module to easily deploy any frontend app or website to Github pages. We will do a static site and a React app. I will also show you how to connect a domain name.
+              Object {
+                "contentDetails": Object {
+                  "videoId": "SKXkC4SqtRk",
+                  "videoPublishedAt": "2018-09-11T16:30:26Z",
+                },
+                "etag": "rvyHu2dXrV0Mvlr6yIMIH1C16Ik",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy41MjE1MkI0OTQ2QzJGNzNG",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "In this video we will use the gh-pages npm module to easily deploy any frontend app or website to Github pages. We will do a static site and a React app. I will also show you how to connect a domain name.
 
 Sponsor: DevMountain Bootcamp
 https://goo.gl/6q0dEa
@@ -462,58 +471,58 @@ Follow Traversy Media:
 https://www.facebook.com/traversymedia
 https://www.twitter.com/traversymedia
 https://www.instagram.com/traversymedia",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 3,
-                "publishedAt": "2018-10-02T14:10:39Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "SKXkC4SqtRk",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 3,
+                  "publishedAt": "2018-10-02T14:10:39Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "SKXkC4SqtRk",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "GitHub Pages Deploy & Domain",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/SKXkC4SqtRk/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "GitHub Pages Deploy & Domain",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-            Object {
-              "contentDetails": Object {
-                "videoId": "ubCNZRNjhyo",
-                "videoPublishedAt": "2017-06-08T15:00:04Z",
-              },
-              "etag": "JOKYLGidCqLQkK_YYwhoTmmFNfE",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4wOTA3OTZBNzVEMTUzOTMy",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "Let's dive right into the basics of AWS so that you get a quick overview over what AWS actually is and what you can do with it.
+              Object {
+                "contentDetails": Object {
+                  "videoId": "ubCNZRNjhyo",
+                  "videoPublishedAt": "2017-06-08T15:00:04Z",
+                },
+                "etag": "JOKYLGidCqLQkK_YYwhoTmmFNfE",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4wOTA3OTZBNzVEMTUzOTMy",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "Let's dive right into the basics of AWS so that you get a quick overview over what AWS actually is and what you can do with it.
 Join the full AWS Serverless course: https://acad.link/aws-serverless
 Join our Academind Community on Discord for free: https://discord.gg/gxvEWGU
 
@@ -575,58 +584,58 @@ Want to get some 1-on-1 coaching with experienced developers? Have a look at Sav
 You can follow me on Twitter (@maxedapps), Facebook (https://www.facebook.com/academindchannel/) or visit our Website (https://www.academind.com).
 
 See you in the videos!",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 4,
-                "publishedAt": "2018-12-04T10:17:22Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "ubCNZRNjhyo",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 4,
+                  "publishedAt": "2018-12-04T10:17:22Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "ubCNZRNjhyo",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "Getting Started with AWS | Amazon Web Services BASICS",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/ubCNZRNjhyo/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "Getting Started with AWS | Amazon Web Services BASICS",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-            Object {
-              "contentDetails": Object {
-                "videoId": "UnTQVlqmDQ0",
-                "videoPublishedAt": "2018-12-20T14:19:56Z",
-              },
-              "etag": "IIXKZ9HPoWQoJxlni5uyNY9v_tM",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4xMkVGQjNCMUM1N0RFNEUx",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "This is my yearly step by step guide to becoming a web developer in 2019. We will look at nearly all aspects of web technology including the necessities as well as some of the new trends for 2019.
+              Object {
+                "contentDetails": Object {
+                  "videoId": "UnTQVlqmDQ0",
+                  "videoPublishedAt": "2018-12-20T14:19:56Z",
+                },
+                "etag": "IIXKZ9HPoWQoJxlni5uyNY9v_tM",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy4xMkVGQjNCMUM1N0RFNEUx",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "This is my yearly step by step guide to becoming a web developer in 2019. We will look at nearly all aspects of web technology including the necessities as well as some of the new trends for 2019.
 
 New 2020 Guide - https://www.youtube.com/watch?v=0pThnRneDjw&t=2s
 
@@ -646,58 +655,58 @@ https://inmotion-hosting.evyy.net/c/396530/260033/4222
 
 Cheap Domain Names:
 https://namecheap.pxf.io/c/1299552/386170/5618",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 5,
-                "publishedAt": "2018-12-20T20:03:30Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "UnTQVlqmDQ0",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 5,
+                  "publishedAt": "2018-12-20T20:03:30Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "UnTQVlqmDQ0",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "Web Development In 2019 - A Practical Guide",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/UnTQVlqmDQ0/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "Web Development In 2019 - A Practical Guide",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-            Object {
-              "contentDetails": Object {
-                "videoId": "PK30-hguZ_Y",
-                "videoPublishedAt": "2018-06-15T11:30:00Z",
-              },
-              "etag": "in_BF70Y7EmJwulKPlR-GfJz9Os",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy41MzJCQjBCNDIyRkJDN0VD",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "NEW UPDATED YOAST TUTORIAL HERE (OCTOBER 2019) https://www.youtube.com/watch?v=ihymaUI1ErY&t=192s
+              Object {
+                "contentDetails": Object {
+                  "videoId": "PK30-hguZ_Y",
+                  "videoPublishedAt": "2018-06-15T11:30:00Z",
+                },
+                "etag": "in_BF70Y7EmJwulKPlR-GfJz9Os",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy41MzJCQjBCNDIyRkJDN0VD",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "NEW UPDATED YOAST TUTORIAL HERE (OCTOBER 2019) https://www.youtube.com/watch?v=ihymaUI1ErY&t=192s
 LEARN HOW TO MAKE A WORDPRESS WEBSITE FOR 2019 HERE -- https://www.youtube.com/watch?v=rCcd6IcmA64
 NEW Coupon Code For Yoast Courses: DW6762-15% ( enter coupon code at checkout)
 Join The 1st Wordpress Social Platform! Register NOW: https://www.wpfriends.com
@@ -728,58 +737,58 @@ You can change the way your website appears in the search engines. It can really
 The yoast plugin also has features for people to share and identify your website with image sharing, another great way to get more exposure! 
 
 For more tutorials like this, visit my website at http://www.darrelwilson.com",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 6,
-                "publishedAt": "2019-03-19T13:33:19Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "PK30-hguZ_Y",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 6,
+                  "publishedAt": "2019-03-19T13:33:19Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "PK30-hguZ_Y",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "Yoast Seo Tutorial 2020 - How To Setup Yoast SEO Plugin - Wordpress SEO By Yoast",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/PK30-hguZ_Y/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "Yoast Seo Tutorial 2020 - How To Setup Yoast SEO Plugin - Wordpress SEO By Yoast",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-            Object {
-              "contentDetails": Object {
-                "videoId": "b6Oe2puTdMQ",
-                "videoPublishedAt": "2019-04-10T11:50:19Z",
-              },
-              "etag": "o9h5Vi8rI2i5ld4o41AySHRgfio",
-              "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy5DQUNERDQ2NkIzRUQxNTY1",
-              "kind": "youtube#playlistItem",
-              "snippet": Object {
-                "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
-                "channelTitle": "Fan Yang",
-                "description": "In this project we will build a full stack file upload with React and Express. We will construct the UI with a Bootstrap elements and make them function
+              Object {
+                "contentDetails": Object {
+                  "videoId": "b6Oe2puTdMQ",
+                  "videoPublishedAt": "2019-04-10T11:50:19Z",
+                },
+                "etag": "o9h5Vi8rI2i5ld4o41AySHRgfio",
+                "id": "UExsN195bG80Y0hBU01CSzFWNVdFZ3dvZzVJb01ORUxVRy5DQUNERDQ2NkIzRUQxNTY1",
+                "kind": "youtube#playlistItem",
+                "snippet": Object {
+                  "channelId": "UC4ZrkawfeduKHUrm_K1RUag",
+                  "channelTitle": "Fan Yang",
+                  "description": "In this project we will build a full stack file upload with React and Express. We will construct the UI with a Bootstrap elements and make them function
 
 Sponsor: DevMountain Bootcamp
 https://goo.gl/6q0dEa
@@ -797,49 +806,50 @@ Follow Traversy Media:
 https://www.facebook.com/traversymedia
 https://www.twitter.com/traversymedia
 https://www.instagram.com/traversymedia",
-                "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
-                "position": 7,
-                "publishedAt": "2019-04-10T21:51:22Z",
-                "resourceId": Object {
-                  "kind": "youtube#video",
-                  "videoId": "b6Oe2puTdMQ",
+                  "playlistId": "PLl7_ylo4cHASMBK1V5WEgwog5IoMNELUG",
+                  "position": 7,
+                  "publishedAt": "2019-04-10T21:51:22Z",
+                  "resourceId": Object {
+                    "kind": "youtube#video",
+                    "videoId": "b6Oe2puTdMQ",
+                  },
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
+                  "title": "React File Uploader With Express (Using React Hooks)",
                 },
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/b6Oe2puTdMQ/sddefault.jpg",
-                    "width": 640,
-                  },
+                "status": Object {
+                  "privacyStatus": "public",
                 },
-                "title": "React File Uploader With Express (Using React Hooks)",
               },
-              "status": Object {
-                "privacyStatus": "public",
-              },
-            },
-          ]
-        }
-      />
+            ]
+          }
+        />
+      </div>
       <MoreButton
         onClickMore={[Function]}
       />
@@ -1008,81 +1018,28 @@ Website: https://www.demconvention.com",
     <div
       className="col-lg-4"
     >
-      <VideoList
-        videoList={
-          Array [
-            Object {
-              "etag": "wC0WsfW-LgI56vO5OSSEdnLAO9I",
-              "id": "oxoWhyS9buA",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "10",
-                "channelId": "UC3IZKseVpdzPSBaWxBxundA",
-                "channelTitle": "Big Hit Labels",
-                "defaultAudioLanguage": "en",
-                "defaultLanguage": "ko",
-                "description": "BTS (방탄소년단) 'Dynamite' Official Teaser
-
-BTS (방탄소년단) 'Dynamite' Official MV will be released at 1PM(KST), 12AM(EST) on August 21, 2020
-
-
-Credits:
-Director: Yong Seok Choi (Lumpens)
-Assistant Director: Jihye Yoon (Lumpens)
-
-Director of Photography: Hyunwoo Nam (GDW)
-B Camera Operator: Eumko
-Focus Puller: Sangwoo Yun, Youngwoo Lee
-2nd AC: Eunki Kim
-3rd AC: Kyuwon Seo
-DIT: Eunil Lee
-
-Gaffer: Song Hyunsuk
-Lighting Crew: Choi Jung Hyun, Hwang Uigyu, Kim Hyun Ju, Park Cheonil, Park Yeonghwan, Yeom Jaehyeok
-
-Jimmy Jib Operator: Youngjung Kim
-Jimmy Jib Assistant: Hyun in Kim, Sung Hoon Kim
-
-Art Director: Bona Kim, Jinsil Park (MU:E)
-Assistant Art Team: Yeri Kang (MU:E)
-Art-team Manager: ilho Heo (MU:E)
-
-Producer: Emma Sungeun Kim (GE Production)
-Location Manager: Ji Hoon Han
-
-VFX STUDIO: PLASTIC BEACH
-VFX Supervisor: Ohzeon
-VFX Assistant Supervisor: Jojeem
-VFX Project Manager: Chanyoung Song, Jieun Jeong
-VFX Producer: Kyutae Jang
-3D Artist: Kwangwon Lee, Doyeon Kim, Jeonghwa Lee, Jiwon Jeon
-2D Artist: Gihoon Jang, Hyunjun Lee
-
-Visual Creative: Nu Kim, Sabinne Cheon, Lee Sun Kyoung, Kim Ga Eun, Jung Su Jung
-Performance Directing: Son Sung Deuk, Lee Ga Hun, Lee Byung Eun, Hyewon Park
-Artist Management: Kim Shin Gyu, Kim Su Bin, Kim Dae Young, Park Jun Tae, An Da Sol, Ahn Jong Hun, Yun Tae Woong, Lee Seung Byeong, Lee Jung Min
-
-Big Hit Entertainment. Rights are reserved selectively in the video. Unauthorized reproduction is a violation of applicable laws. Manufactured by Big Hit Entertainment, Seoul, Korea.
-
-Connect with BTS: 
-https://ibighit.com/bts 
-http://twitter.com/BTS_bighit
-http://twitter.com/BTS_twt 
-http://www.facebook.com/bangtan.official 
-https://www.youtube.com/user/BANGTANTV 
-http://instagram.com/BTS.bighitofficial 
-https://channels.vlive.tv/FE619 
-https://www.tiktok.com/@bts_official_bighit
-https://weverse.onelink.me/qt3S/94808190
-https://www.weibo.com/BTSbighit
-https://www.weibo.com/BTSmembers 
-http://i.youku.com/btsofficial 
-http://btsblog.ibighit.com
-
-
-#BTS #방탄소년단 #BTS_Dynamite #Dynamite #Teaser",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+      <div
+        className="mb-2"
+        style={
+          Object {
+            "maxHeight": "80vh",
+            "overflow": "auto",
+          }
+        }
+      >
+        <VideoList
+          videoList={
+            Array [
+              Object {
+                "etag": "wC0WsfW-LgI56vO5OSSEdnLAO9I",
+                "id": "oxoWhyS9buA",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "10",
+                  "channelId": "UC3IZKseVpdzPSBaWxBxundA",
+                  "channelTitle": "Big Hit Labels",
+                  "defaultAudioLanguage": "en",
+                  "defaultLanguage": "ko",
                   "description": "BTS (방탄소년단) 'Dynamite' Official Teaser
 
 BTS (방탄소년단) 'Dynamite' Official MV will be released at 1PM(KST), 12AM(EST) on August 21, 2020
@@ -1143,108 +1100,125 @@ http://btsblog.ibighit.com
 
 
 #BTS #방탄소년단 #BTS_Dynamite #Dynamite #Teaser",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "BTS (방탄소년단) 'Dynamite' Official Teaser
+
+BTS (방탄소년단) 'Dynamite' Official MV will be released at 1PM(KST), 12AM(EST) on August 21, 2020
+
+
+Credits:
+Director: Yong Seok Choi (Lumpens)
+Assistant Director: Jihye Yoon (Lumpens)
+
+Director of Photography: Hyunwoo Nam (GDW)
+B Camera Operator: Eumko
+Focus Puller: Sangwoo Yun, Youngwoo Lee
+2nd AC: Eunki Kim
+3rd AC: Kyuwon Seo
+DIT: Eunil Lee
+
+Gaffer: Song Hyunsuk
+Lighting Crew: Choi Jung Hyun, Hwang Uigyu, Kim Hyun Ju, Park Cheonil, Park Yeonghwan, Yeom Jaehyeok
+
+Jimmy Jib Operator: Youngjung Kim
+Jimmy Jib Assistant: Hyun in Kim, Sung Hoon Kim
+
+Art Director: Bona Kim, Jinsil Park (MU:E)
+Assistant Art Team: Yeri Kang (MU:E)
+Art-team Manager: ilho Heo (MU:E)
+
+Producer: Emma Sungeun Kim (GE Production)
+Location Manager: Ji Hoon Han
+
+VFX STUDIO: PLASTIC BEACH
+VFX Supervisor: Ohzeon
+VFX Assistant Supervisor: Jojeem
+VFX Project Manager: Chanyoung Song, Jieun Jeong
+VFX Producer: Kyutae Jang
+3D Artist: Kwangwon Lee, Doyeon Kim, Jeonghwa Lee, Jiwon Jeon
+2D Artist: Gihoon Jang, Hyunjun Lee
+
+Visual Creative: Nu Kim, Sabinne Cheon, Lee Sun Kyoung, Kim Ga Eun, Jung Su Jung
+Performance Directing: Son Sung Deuk, Lee Ga Hun, Lee Byung Eun, Hyewon Park
+Artist Management: Kim Shin Gyu, Kim Su Bin, Kim Dae Young, Park Jun Tae, An Da Sol, Ahn Jong Hun, Yun Tae Woong, Lee Seung Byeong, Lee Jung Min
+
+Big Hit Entertainment. Rights are reserved selectively in the video. Unauthorized reproduction is a violation of applicable laws. Manufactured by Big Hit Entertainment, Seoul, Korea.
+
+Connect with BTS: 
+https://ibighit.com/bts 
+http://twitter.com/BTS_bighit
+http://twitter.com/BTS_twt 
+http://www.facebook.com/bangtan.official 
+https://www.youtube.com/user/BANGTANTV 
+http://instagram.com/BTS.bighitofficial 
+https://channels.vlive.tv/FE619 
+https://www.tiktok.com/@bts_official_bighit
+https://weverse.onelink.me/qt3S/94808190
+https://www.weibo.com/BTSbighit
+https://www.weibo.com/BTSmembers 
+http://i.youku.com/btsofficial 
+http://btsblog.ibighit.com
+
+
+#BTS #방탄소년단 #BTS_Dynamite #Dynamite #Teaser",
+                    "title": "BTS (방탄소년단) 'Dynamite' Official Teaser",
+                  },
+                  "publishedAt": "2020-08-18T15:00:02Z",
+                  "tags": Array [
+                    "BIGHIT",
+                    "빅히트",
+                    "방탄소년단",
+                    "BTS",
+                    "BANGTAN",
+                    "방탄",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/oxoWhyS9buA/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/oxoWhyS9buA/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/oxoWhyS9buA/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/oxoWhyS9buA/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/oxoWhyS9buA/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "BTS (방탄소년단) 'Dynamite' Official Teaser",
                 },
-                "publishedAt": "2020-08-18T15:00:02Z",
-                "tags": Array [
-                  "BIGHIT",
-                  "빅히트",
-                  "방탄소년단",
-                  "BTS",
-                  "BANGTAN",
-                  "방탄",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/oxoWhyS9buA/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/oxoWhyS9buA/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/oxoWhyS9buA/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/oxoWhyS9buA/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/oxoWhyS9buA/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "692546",
+                  "dislikeCount": "36869",
+                  "favoriteCount": "0",
+                  "likeCount": "3307782",
+                  "viewCount": "22928171",
                 },
-                "title": "BTS (방탄소년단) 'Dynamite' Official Teaser",
               },
-              "statistics": Object {
-                "commentCount": "692546",
-                "dislikeCount": "36869",
-                "favoriteCount": "0",
-                "likeCount": "3307782",
-                "viewCount": "22928171",
-              },
-            },
-            Object {
-              "etag": "I5x5lFqtknYsoBmqSSUpfuLT3Kw",
-              "id": "MqePxS6iyvA",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "17",
-                "channelId": "UCRijo3ddMTht_IHyNSNXpNQ",
-                "channelTitle": "Dude Perfect",
-                "defaultAudioLanguage": "en",
-                "description": "Love 'em or Hate 'em, we all know 'em! Check out all the pool stereotypes
-► Thanks for subscribing! - http://bit.ly/SubDudePerfect
-► Check out our DPG Gaming Channel! - https://dudeperfect.com/dpg/
- 
-NEXT LEVEL STUFF 
--------------------------------------------
-🎒 NEW Merch - http://bit.ly/DPStore
-🎮 Play our FREE iPhone game! - http://smarturl.it/DudePerfect2
-📱 Text us - (469) 205-7005
-🔔 Hit the bell next to Subscribe so you don't miss a video!
-👨🏻‍💻 Watch our newest vids! - http://bit.ly/NewDPVids
-📕 Read our Book - \\"Go Big\\" - http://amzn.to/OYdZ2s
-
-Follow our Instagrams so we can be best friends 
--------------------------------------------
-🏆 http://Instagram.com/DudePerfect
-🧔🏻 http://Instagram.com/TylerNToney
-👱🏻‍♂️ http://Instagram.com/Cody_Jones_
-🙋🏻‍♂️ http://Instagram.com/CobyCotton
-👨‍🦰 http://Instagram.com/GarrettHilbert
-⛹🏻‍♂️ http://Instagram.com/CoryCotton
--------------------------------------------
-Bonus points if you're still reading this! 
-Comment: Which stereotype should we do next?!
-
-Click here to learn more about Dude Perfect:
-http://bit.ly/AboutDudePerfect
-
-As always...Go Big and God Bless!
-- Your friends at Dude Perfect
-
-Business or Media, please contact us at: 
-Dude@DudePerfect.com
-
-------------
-
-5 Best Friends and a Panda.
-If you like Sports + Comedy, come join the Dude Perfect team!
-
-Best known for trick shots, stereotypes, battles, bottle flips, ping pong shots and all-around competitive fun, Dude Perfect prides ourselves in making the absolute best family-friendly entertainment possible! Welcome to the crew! 
-
-Pound it 👊🏻 Noggin 🙇🏻‍♂️ 
-- Dude Perfect",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "I5x5lFqtknYsoBmqSSUpfuLT3Kw",
+                "id": "MqePxS6iyvA",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "17",
+                  "channelId": "UCRijo3ddMTht_IHyNSNXpNQ",
+                  "channelTitle": "Dude Perfect",
+                  "defaultAudioLanguage": "en",
                   "description": "Love 'em or Hate 'em, we all know 'em! Check out all the pool stereotypes
 ► Thanks for subscribing! - http://bit.ly/SubDudePerfect
 ► Check out our DPG Gaming Channel! - https://dudeperfect.com/dpg/
@@ -1288,115 +1262,140 @@ Best known for trick shots, stereotypes, battles, bottle flips, ping pong shots 
 
 Pound it 👊🏻 Noggin 🙇🏻‍♂️ 
 - Dude Perfect",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Love 'em or Hate 'em, we all know 'em! Check out all the pool stereotypes
+► Thanks for subscribing! - http://bit.ly/SubDudePerfect
+► Check out our DPG Gaming Channel! - https://dudeperfect.com/dpg/
+ 
+NEXT LEVEL STUFF 
+-------------------------------------------
+🎒 NEW Merch - http://bit.ly/DPStore
+🎮 Play our FREE iPhone game! - http://smarturl.it/DudePerfect2
+📱 Text us - (469) 205-7005
+🔔 Hit the bell next to Subscribe so you don't miss a video!
+👨🏻‍💻 Watch our newest vids! - http://bit.ly/NewDPVids
+📕 Read our Book - \\"Go Big\\" - http://amzn.to/OYdZ2s
+
+Follow our Instagrams so we can be best friends 
+-------------------------------------------
+🏆 http://Instagram.com/DudePerfect
+🧔🏻 http://Instagram.com/TylerNToney
+👱🏻‍♂️ http://Instagram.com/Cody_Jones_
+🙋🏻‍♂️ http://Instagram.com/CobyCotton
+👨‍🦰 http://Instagram.com/GarrettHilbert
+⛹🏻‍♂️ http://Instagram.com/CoryCotton
+-------------------------------------------
+Bonus points if you're still reading this! 
+Comment: Which stereotype should we do next?!
+
+Click here to learn more about Dude Perfect:
+http://bit.ly/AboutDudePerfect
+
+As always...Go Big and God Bless!
+- Your friends at Dude Perfect
+
+Business or Media, please contact us at: 
+Dude@DudePerfect.com
+
+------------
+
+5 Best Friends and a Panda.
+If you like Sports + Comedy, come join the Dude Perfect team!
+
+Best known for trick shots, stereotypes, battles, bottle flips, ping pong shots and all-around competitive fun, Dude Perfect prides ourselves in making the absolute best family-friendly entertainment possible! Welcome to the crew! 
+
+Pound it 👊🏻 Noggin 🙇🏻‍♂️ 
+- Dude Perfect",
+                    "title": "Swimming Pool Stereotypes",
+                  },
+                  "publishedAt": "2020-08-17T21:59:54Z",
+                  "tags": Array [
+                    "dude perfect",
+                    "dude perfect stereotypes",
+                    "dude perfect water bottle flip",
+                    "bottle flip",
+                    "water bottle flip",
+                    "dude perfect bottle flip",
+                    "dude perfect basketball",
+                    "dp",
+                    "dude perfect world record",
+                    "edition",
+                    "nerf",
+                    "trick shots",
+                    "trick shot",
+                    "family",
+                    "ping pong",
+                    "bowling",
+                    "clean",
+                    "family friendly",
+                    "bubble wrap",
+                    "soccer",
+                    "football",
+                    "spinner",
+                    "spinners",
+                    "fidget spinners",
+                    "dude",
+                    "pool",
+                    "swimming",
+                    "swimming pool",
+                    "water",
+                    "stereotypes",
+                    "funny",
+                    "comedy",
+                    "rage",
+                    "monster",
+                    "sun",
+                    "life",
+                    "guard",
+                    "prank",
+                    "viral",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/MqePxS6iyvA/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/MqePxS6iyvA/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/MqePxS6iyvA/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/MqePxS6iyvA/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/MqePxS6iyvA/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Swimming Pool Stereotypes",
                 },
-                "publishedAt": "2020-08-17T21:59:54Z",
-                "tags": Array [
-                  "dude perfect",
-                  "dude perfect stereotypes",
-                  "dude perfect water bottle flip",
-                  "bottle flip",
-                  "water bottle flip",
-                  "dude perfect bottle flip",
-                  "dude perfect basketball",
-                  "dp",
-                  "dude perfect world record",
-                  "edition",
-                  "nerf",
-                  "trick shots",
-                  "trick shot",
-                  "family",
-                  "ping pong",
-                  "bowling",
-                  "clean",
-                  "family friendly",
-                  "bubble wrap",
-                  "soccer",
-                  "football",
-                  "spinner",
-                  "spinners",
-                  "fidget spinners",
-                  "dude",
-                  "pool",
-                  "swimming",
-                  "swimming pool",
-                  "water",
-                  "stereotypes",
-                  "funny",
-                  "comedy",
-                  "rage",
-                  "monster",
-                  "sun",
-                  "life",
-                  "guard",
-                  "prank",
-                  "viral",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/MqePxS6iyvA/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/MqePxS6iyvA/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/MqePxS6iyvA/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/MqePxS6iyvA/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/MqePxS6iyvA/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "22574",
+                  "dislikeCount": "7195",
+                  "favoriteCount": "0",
+                  "likeCount": "496574",
+                  "viewCount": "9177590",
                 },
-                "title": "Swimming Pool Stereotypes",
               },
-              "statistics": Object {
-                "commentCount": "22574",
-                "dislikeCount": "7195",
-                "favoriteCount": "0",
-                "likeCount": "496574",
-                "viewCount": "9177590",
-              },
-            },
-            Object {
-              "etag": "UR7axN1Hyj2Quuz-CUoJNwXBZ7w",
-              "id": "POMaMQ8wgyk",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "10",
-                "channelId": "UCbg_UMjlHJg_19SZckaKajg",
-                "channelTitle": "XXL",
-                "description": "Subscribe to XXL → http://bit.ly/subscribe-xxl 
-
-Polo G ditches a therapist and talks to the beats in his 2020 XXL Freshman freestyle.
-
-Have you been listening to this Freshman since Day 1? Go to https://day1club.byspotify.com/ and prove it.
-
-Visit Polo G's 2020 XXL Freshman Class page → https://www.xxlmag.com/polo-g/
-
-Credits:
-Directed by @travissatten
-Produced by @ritemediagroup
-
-#PoloG #Freestyle #XXLFreshman #XXLFreshman #HipHop #2020XXLFreshman #PoloGFreestyle
-
-Go here → http://www.xxlmag.com/
-XXL on Facebook → https://www.facebook.com/xxlmag
-XXL on Twitter → https://twitter.com/XXL
-XXL on Instagram → https://instagram.com/xxl/",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "UR7axN1Hyj2Quuz-CUoJNwXBZ7w",
+                "id": "POMaMQ8wgyk",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "10",
+                  "channelId": "UCbg_UMjlHJg_19SZckaKajg",
+                  "channelTitle": "XXL",
                   "description": "Subscribe to XXL → http://bit.ly/subscribe-xxl 
 
 Polo G ditches a therapist and talks to the beats in his 2020 XXL Freshman freestyle.
@@ -1415,128 +1414,97 @@ Go here → http://www.xxlmag.com/
 XXL on Facebook → https://www.facebook.com/xxlmag
 XXL on Twitter → https://twitter.com/XXL
 XXL on Instagram → https://instagram.com/xxl/",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Subscribe to XXL → http://bit.ly/subscribe-xxl 
+
+Polo G ditches a therapist and talks to the beats in his 2020 XXL Freshman freestyle.
+
+Have you been listening to this Freshman since Day 1? Go to https://day1club.byspotify.com/ and prove it.
+
+Visit Polo G's 2020 XXL Freshman Class page → https://www.xxlmag.com/polo-g/
+
+Credits:
+Directed by @travissatten
+Produced by @ritemediagroup
+
+#PoloG #Freestyle #XXLFreshman #XXLFreshman #HipHop #2020XXLFreshman #PoloGFreestyle
+
+Go here → http://www.xxlmag.com/
+XXL on Facebook → https://www.facebook.com/xxlmag
+XXL on Twitter → https://twitter.com/XXL
+XXL on Instagram → https://instagram.com/xxl/",
+                    "title": "Polo G's 2020 XXL Freshman Freestyle",
+                  },
+                  "publishedAt": "2020-08-18T16:01:58Z",
+                  "tags": Array [
+                    "Freestyle",
+                    "polo g",
+                    "rapper",
+                    "rap",
+                    "hip-hop",
+                    "interview",
+                    "2020 xxl freshman",
+                    "2020 xxl freshmen",
+                    "xxl freshman",
+                    "xxl freshmen",
+                    "2020 freshman",
+                    "2020 freshmen",
+                    "xxl",
+                    "xxl magazine",
+                    "freshman",
+                    "freshmen",
+                    "polo g freestyle",
+                    "freestyle",
+                    "hip-hop freestyle",
+                    "rap freestyle",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Polo G's 2020 XXL Freshman Freestyle",
                 },
-                "publishedAt": "2020-08-18T16:01:58Z",
-                "tags": Array [
-                  "Freestyle",
-                  "polo g",
-                  "rapper",
-                  "rap",
-                  "hip-hop",
-                  "interview",
-                  "2020 xxl freshman",
-                  "2020 xxl freshmen",
-                  "xxl freshman",
-                  "xxl freshmen",
-                  "2020 freshman",
-                  "2020 freshmen",
-                  "xxl",
-                  "xxl magazine",
-                  "freshman",
-                  "freshmen",
-                  "polo g freestyle",
-                  "freestyle",
-                  "hip-hop freestyle",
-                  "rap freestyle",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/POMaMQ8wgyk/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "9083",
+                  "dislikeCount": "1111",
+                  "favoriteCount": "0",
+                  "likeCount": "133793",
+                  "viewCount": "1092854",
                 },
-                "title": "Polo G's 2020 XXL Freshman Freestyle",
               },
-              "statistics": Object {
-                "commentCount": "9083",
-                "dislikeCount": "1111",
-                "favoriteCount": "0",
-                "likeCount": "133793",
-                "viewCount": "1092854",
-              },
-            },
-            Object {
-              "etag": "bhND-GvM-ci57sYT2YUQ6QoLlPU",
-              "id": "b1reY72ktEc",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "24",
-                "channelId": "UCNIuvl7V8zACPpTmmNIqP2A",
-                "channelTitle": "OverSimplified",
-                "defaultAudioLanguage": "en",
-                "description": "Join me in Rise of Kingdoms today: https://bit.ly/OverSimplified_ROK
-Use code ConquerROK to treat yourself with 500 Gems
-Thanks to Lilith Games for making this video happen!
-
-MERCH (Russian Revolution merch OUT NOW!) - https://www.oversimplified.tv/merch 
-Support us on Patreon (please): https://www.patreon.com/OverSimple 
-Instagram: https://www.instagram.com/over_simplified
-Twitter: https://twitter.com/over_simplified 
-Reddit: https://www.reddit.com/r/OverSimplified/ 
-Discord: https://discord.gg/zsE9rwM 
-Facebook: https://www.facebook.com/OverSimplified/ 
-
-Thank you to our Patreon Presidents - Alexandra Scoma, Attila Oláh, Bobby Dellinger, Brett Seekely, Dane McAfee, Danny Sprangemeijer, Deyvid Diego, Elliot Lepley, isolwi, John Sandoval, Mark Davenport, MasterGigadrain, Max & Molly, Mike Banerian, Moaath AlUnaizan, Nigel Singer, Sam Ingbar, Sana Zekri, Sarah Gonzales-Hamlin, William, Yan Shen and Yubo Zhang
-
-Want to know how I make these videos? Get Adobe After Effects and Photoshop here - https://goo.gl/zPHcm2 
-
-Copyright disclaimer - We do not give anyone permission to translate and/or reupload our videos or designs on YouTube or other social media platforms.
-
---------------- ATTRIBUTIONS ---------------
-Music (licensed under a Creative Commons license).
-
-Music by Kevin MacLeod:
-Investigations
-Exotic Battle
-Covert Affair
-I Knew A Guy
-Sneaky Snitch
-Minima
-Dances and Dames
-Faceoff
-Enter The Maze
-Hard Boiled
-Marty Gots A Plan
-Fast Talkin
-Infados
-Dark Mystery
-Outfoxing the Fox
-
-
-From Artist:
-LMOP - The Whisper Man
-Ian Post - Eminence Landscapes
-Alon Ohana - Never Give Up
-Stanley Gurvich - Puddles
-Kevin Graham - Autumn
-Stanley Gurvich - At First
-Otis McDonald - Celebration
-
-THANKS FOR WATCHING!",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "bhND-GvM-ci57sYT2YUQ6QoLlPU",
+                "id": "b1reY72ktEc",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "24",
+                  "channelId": "UCNIuvl7V8zACPpTmmNIqP2A",
+                  "channelTitle": "OverSimplified",
+                  "defaultAudioLanguage": "en",
                   "description": "Join me in Rise of Kingdoms today: https://bit.ly/OverSimplified_ROK
 Use code ConquerROK to treat yourself with 500 Gems
 Thanks to Lilith Games for making this video happen!
@@ -1586,107 +1554,111 @@ Stanley Gurvich - At First
 Otis McDonald - Celebration
 
 THANKS FOR WATCHING!",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Join me in Rise of Kingdoms today: https://bit.ly/OverSimplified_ROK
+Use code ConquerROK to treat yourself with 500 Gems
+Thanks to Lilith Games for making this video happen!
+
+MERCH (Russian Revolution merch OUT NOW!) - https://www.oversimplified.tv/merch 
+Support us on Patreon (please): https://www.patreon.com/OverSimple 
+Instagram: https://www.instagram.com/over_simplified
+Twitter: https://twitter.com/over_simplified 
+Reddit: https://www.reddit.com/r/OverSimplified/ 
+Discord: https://discord.gg/zsE9rwM 
+Facebook: https://www.facebook.com/OverSimplified/ 
+
+Thank you to our Patreon Presidents - Alexandra Scoma, Attila Oláh, Bobby Dellinger, Brett Seekely, Dane McAfee, Danny Sprangemeijer, Deyvid Diego, Elliot Lepley, isolwi, John Sandoval, Mark Davenport, MasterGigadrain, Max & Molly, Mike Banerian, Moaath AlUnaizan, Nigel Singer, Sam Ingbar, Sana Zekri, Sarah Gonzales-Hamlin, William, Yan Shen and Yubo Zhang
+
+Want to know how I make these videos? Get Adobe After Effects and Photoshop here - https://goo.gl/zPHcm2 
+
+Copyright disclaimer - We do not give anyone permission to translate and/or reupload our videos or designs on YouTube or other social media platforms.
+
+--------------- ATTRIBUTIONS ---------------
+Music (licensed under a Creative Commons license).
+
+Music by Kevin MacLeod:
+Investigations
+Exotic Battle
+Covert Affair
+I Knew A Guy
+Sneaky Snitch
+Minima
+Dances and Dames
+Faceoff
+Enter The Maze
+Hard Boiled
+Marty Gots A Plan
+Fast Talkin
+Infados
+Dark Mystery
+Outfoxing the Fox
+
+
+From Artist:
+LMOP - The Whisper Man
+Ian Post - Eminence Landscapes
+Alon Ohana - Never Give Up
+Stanley Gurvich - Puddles
+Kevin Graham - Autumn
+Stanley Gurvich - At First
+Otis McDonald - Celebration
+
+THANKS FOR WATCHING!",
+                    "title": "The Russian Revolution - OverSimplified (Part 2)",
+                  },
+                  "publishedAt": "2020-08-18T00:00:10Z",
+                  "tags": Array [
+                    "russian revolution",
+                    "rasputin",
+                    "tsar nicholas",
+                    "romanov",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/b1reY72ktEc/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/b1reY72ktEc/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/b1reY72ktEc/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/b1reY72ktEc/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/b1reY72ktEc/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "The Russian Revolution - OverSimplified (Part 2)",
                 },
-                "publishedAt": "2020-08-18T00:00:10Z",
-                "tags": Array [
-                  "russian revolution",
-                  "rasputin",
-                  "tsar nicholas",
-                  "romanov",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/b1reY72ktEc/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/b1reY72ktEc/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/b1reY72ktEc/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/b1reY72ktEc/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/b1reY72ktEc/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "10151",
+                  "dislikeCount": "1697",
+                  "favoriteCount": "0",
+                  "likeCount": "130145",
+                  "viewCount": "2182593",
                 },
-                "title": "The Russian Revolution - OverSimplified (Part 2)",
               },
-              "statistics": Object {
-                "commentCount": "10151",
-                "dislikeCount": "1697",
-                "favoriteCount": "0",
-                "likeCount": "130145",
-                "viewCount": "2182593",
-              },
-            },
-            Object {
-              "etag": "jubn5kfNs0R908klvFa8TeAu3nE",
-              "id": "jAQ6451SE8A",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "22",
-                "channelId": "UCi3OE-aN09WOcN9d2stCvPg",
-                "channelTitle": "charli d'amelio",
-                "description": "hi everybody! i'm so happy its finally here! the nail polish line that dixie and i got to create together called coastal craze, is out now at https://orosabeauty.com/collections/coastal-craze we got to bring our friends the first vip packages and they were so excited to see!
-
-tell us what your favorite colors from our collection are in the comments. 
-
-the coastal craze individual nail paint bottles are $12 each.
-
-my limited edition collection is $42 for 4 colors including:
--#1 baby (red)
--bahama blue (blue)
--beachy sunset (purple)
--piggy pink (pink)
-
-dixie's limited edition collection includes:
--#1 baby (red)
--bahama blue (blue)
--beachy sunset (purple)
--piggy pink (pink)
-
-there  is also coastal craze set of both of our polishes on sale for $75 for a limited time. 
-
-orosa beauty ships domestically in the u.s. only. 
-
-all orosa nail paint colors are vegan, cruelty-free, gluten-free and 14-free/nope list. 
-(the nope list refers to a group of 14 questionable, harmful, or unethical ingredients that orosa beauty is committed to never using. orosa beauty never uses formaldehyde, dibutyl phthalate (dbp), formaldehyde resin, toluene, camphor, triphenyl phosphate, ethyl tosylamide, xylene, mehq/hq, mit, non-rspo palm oil, parabens, animal-derived ingredients, or gluten.)
-
-follow orosa beauty:
-website:https://orosabeauty.com/
-instagram: https://www.instagram.com/orosabeauty/
-tiktok: https://www.tiktok.com/@orosabeauty
-
-follow me:
-website: https://www.charlidamelio.com/
-tiktok: https://www.tiktok.com/@charlidamelio
-instagram: https://www.instagram.com/charlidamelio/
-youtube: https://www.youtube.com/charlidamelio
-add me on snap: https://www.snapchat.com/add/damelioc
-
-connect with dixie!
-tiktok: https://www.tiktok.com/@dixiedamelio
-instagram: https://www.instagram.com/dixiedamelio
-twitter: https://twitter.com/dixiedamelio
-website: https://www.dixiedamelio.com
-
-
- #charlidamelio #dixiedamelio #orosaxcoastalcraze #orosabeauty  #nailpolish  #nailart #purepopnailart",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "jubn5kfNs0R908klvFa8TeAu3nE",
+                "id": "jAQ6451SE8A",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "22",
+                  "channelId": "UCi3OE-aN09WOcN9d2stCvPg",
+                  "channelTitle": "charli d'amelio",
                   "description": "hi everybody! i'm so happy its finally here! the nail polish line that dixie and i got to create together called coastal craze, is out now at https://orosabeauty.com/collections/coastal-craze we got to bring our friends the first vip packages and they were so excited to see!
 
 tell us what your favorite colors from our collection are in the comments. 
@@ -1732,162 +1704,120 @@ website: https://www.dixiedamelio.com
 
 
  #charlidamelio #dixiedamelio #orosaxcoastalcraze #orosabeauty  #nailpolish  #nailart #purepopnailart",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "hi everybody! i'm so happy its finally here! the nail polish line that dixie and i got to create together called coastal craze, is out now at https://orosabeauty.com/collections/coastal-craze we got to bring our friends the first vip packages and they were so excited to see!
+
+tell us what your favorite colors from our collection are in the comments. 
+
+the coastal craze individual nail paint bottles are $12 each.
+
+my limited edition collection is $42 for 4 colors including:
+-#1 baby (red)
+-bahama blue (blue)
+-beachy sunset (purple)
+-piggy pink (pink)
+
+dixie's limited edition collection includes:
+-#1 baby (red)
+-bahama blue (blue)
+-beachy sunset (purple)
+-piggy pink (pink)
+
+there  is also coastal craze set of both of our polishes on sale for $75 for a limited time. 
+
+orosa beauty ships domestically in the u.s. only. 
+
+all orosa nail paint colors are vegan, cruelty-free, gluten-free and 14-free/nope list. 
+(the nope list refers to a group of 14 questionable, harmful, or unethical ingredients that orosa beauty is committed to never using. orosa beauty never uses formaldehyde, dibutyl phthalate (dbp), formaldehyde resin, toluene, camphor, triphenyl phosphate, ethyl tosylamide, xylene, mehq/hq, mit, non-rspo palm oil, parabens, animal-derived ingredients, or gluten.)
+
+follow orosa beauty:
+website:https://orosabeauty.com/
+instagram: https://www.instagram.com/orosabeauty/
+tiktok: https://www.tiktok.com/@orosabeauty
+
+follow me:
+website: https://www.charlidamelio.com/
+tiktok: https://www.tiktok.com/@charlidamelio
+instagram: https://www.instagram.com/charlidamelio/
+youtube: https://www.youtube.com/charlidamelio
+add me on snap: https://www.snapchat.com/add/damelioc
+
+connect with dixie!
+tiktok: https://www.tiktok.com/@dixiedamelio
+instagram: https://www.instagram.com/dixiedamelio
+twitter: https://twitter.com/dixiedamelio
+website: https://www.dixiedamelio.com
+
+
+ #charlidamelio #dixiedamelio #orosaxcoastalcraze #orosabeauty  #nailpolish  #nailart #purepopnailart",
+                    "title": "Showing My Friends Our  New Collection | Charli D'Amelio",
+                  },
+                  "publishedAt": "2020-08-18T17:00:10Z",
+                  "tags": Array [
+                    "dixie damelio",
+                    "dixie d'amelio",
+                    "dixie",
+                    "damelio",
+                    "tik tok",
+                    "charli damelio",
+                    "charli d'amelio",
+                    "tiktok",
+                    "charli",
+                    "d'amelio",
+                    "exclusive",
+                    "marc d'amelio",
+                    "heidi d'amelio",
+                    "caifornia",
+                    "orosa",
+                    "nail polish",
+                    "coastal craze",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/jAQ6451SE8A/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/jAQ6451SE8A/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/jAQ6451SE8A/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/jAQ6451SE8A/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/jAQ6451SE8A/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Showing My Friends Our  New Collection | Charli D'Amelio",
                 },
-                "publishedAt": "2020-08-18T17:00:10Z",
-                "tags": Array [
-                  "dixie damelio",
-                  "dixie d'amelio",
-                  "dixie",
-                  "damelio",
-                  "tik tok",
-                  "charli damelio",
-                  "charli d'amelio",
-                  "tiktok",
-                  "charli",
-                  "d'amelio",
-                  "exclusive",
-                  "marc d'amelio",
-                  "heidi d'amelio",
-                  "caifornia",
-                  "orosa",
-                  "nail polish",
-                  "coastal craze",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/jAQ6451SE8A/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/jAQ6451SE8A/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/jAQ6451SE8A/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/jAQ6451SE8A/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/jAQ6451SE8A/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "8516",
+                  "dislikeCount": "2679",
+                  "favoriteCount": "0",
+                  "likeCount": "173989",
+                  "viewCount": "2054983",
                 },
-                "title": "Showing My Friends Our  New Collection | Charli D'Amelio",
               },
-              "statistics": Object {
-                "commentCount": "8516",
-                "dislikeCount": "2679",
-                "favoriteCount": "0",
-                "likeCount": "173989",
-                "viewCount": "2054983",
-              },
-            },
-            Object {
-              "etag": "OBY7rBKqG667NH5baLCxDsMSq7o",
-              "id": "qojvO0E0z_Y",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "10",
-                "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
-                "channelTitle": "DrakeVEVO",
-                "description": "Laugh Now Cry Later ft. Lil Durk available everywhere now: http://drake.lnk.to/lncl
-
-Connect with Drake:
-https://www.instagram.com/champagnepapi 
-https://www.facebook.com/Drake 
-https://twitter.com/drake 
-https://www.drakeofficial.com 
-
-Video by Katia Temkin
-
-Lyrics:
-
-Sometimes we laugh and sometimes we cry but I guess you know now
-Baby
-I took a half and she took the whole thing slow down
-Baby
-We took a trip now we on your block and it’s like a ghost town
-Baby 
-Where do these niggas be at when they say they doing all this and all that
-Tired of beefing of bums you can’t even pay me enough me to react 
-
-Been waking up in the crib and sometimes I don’t even know where I’m at
-Please don’t play that niggas songs in this party I can’t even listen to that
-Anytime that I run into somebody it must be a victory lap eh 
-Shawty come sit on my lap eh
-They saying Drizzy just snap
-Distance between us is not like a store this isn’t a close able gap
-I’ve seen some niggas attack
-And don’t end up making it back
-
-I know that they at the crib going crazy down bad what they had didn’t last Damn baby
-Sometimes we laugh and sometimes we cry but I guess you know now
-baby
-I took a half and she took the whole thing slow down
-Baby
-We took a trip now we on your block and it’s like a ghost town
-Baby
-Where do these niggas be at when they say they doing all this and all that 
-
-I’m in the trenches relax
-Can you not play that lil boy in the club cause we do not listen to rats
-We in the line I buy her a wig she tellin me Tay is the best
-Point at that nigga who act like a killer
-But you only want from the neck
-I’m like the baby I’m not just a rapper you play with me you gon get stressed
-Ooooh
-Bring Drake to the hood
-Surround Drake around Drakes
-Even though I got a case
-Imma do what it takes
-
-And I never been embraced
-And the moneys hard to make
-So I bet they on they face right
-
-I know that they at the crib going crazy down bad what they had didn’t last Damn baby
-Sometimes we laugh and sometimes we cry but I guess you know now
-baby
-I took a half and she took the whole thing slow down
-Baby
-We took a trip now we on your block and it’s like a ghost town
-Baby
-Where do these niggas be at when they say they doing all this and all that 
-
-When he tell the story that’s not how it went
-Know they be lying 100 percent 
-Move out the Ritz forgot bout the Bent
-Valet just called to tell me come get it
-I knocked that boy off I don’t want no credit
-If it Was me they wouldn’t regret it
-left me for dead and now they want dead it
-heart is still beating
-My niggas still eating
-The backyard it look like the Garden of Eden
-Pillow talk with Me she spilling the tea and then shawty came back and said she didn’t mean it
-Its hard to believe it
-
-I know that they at the crib going crazy down bad what they had didn’t last Damn baby
-Sometimes we laugh and sometimes we cry but I guess you know now
-baby
-I took a half and she took the whole thing slow down
-Baby
-We took a trip now we on your block and it’s like a ghost town
-Baby
-Where do these niggas be at when they say they doing all this and all that
-
-#Drake #LilDurk #LaughNowCryLater",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "OBY7rBKqG667NH5baLCxDsMSq7o",
+                "id": "qojvO0E0z_Y",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "10",
+                  "channelId": "UCQznUf1SjfDqx65hX3zRDiA",
+                  "channelTitle": "DrakeVEVO",
                   "description": "Laugh Now Cry Later ft. Lil Durk available everywhere now: http://drake.lnk.to/lncl
 
 Connect with Drake:
@@ -1975,111 +1905,156 @@ Baby
 Where do these niggas be at when they say they doing all this and all that
 
 #Drake #LilDurk #LaughNowCryLater",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Laugh Now Cry Later ft. Lil Durk available everywhere now: http://drake.lnk.to/lncl
+
+Connect with Drake:
+https://www.instagram.com/champagnepapi 
+https://www.facebook.com/Drake 
+https://twitter.com/drake 
+https://www.drakeofficial.com 
+
+Video by Katia Temkin
+
+Lyrics:
+
+Sometimes we laugh and sometimes we cry but I guess you know now
+Baby
+I took a half and she took the whole thing slow down
+Baby
+We took a trip now we on your block and it’s like a ghost town
+Baby 
+Where do these niggas be at when they say they doing all this and all that
+Tired of beefing of bums you can’t even pay me enough me to react 
+
+Been waking up in the crib and sometimes I don’t even know where I’m at
+Please don’t play that niggas songs in this party I can’t even listen to that
+Anytime that I run into somebody it must be a victory lap eh 
+Shawty come sit on my lap eh
+They saying Drizzy just snap
+Distance between us is not like a store this isn’t a close able gap
+I’ve seen some niggas attack
+And don’t end up making it back
+
+I know that they at the crib going crazy down bad what they had didn’t last Damn baby
+Sometimes we laugh and sometimes we cry but I guess you know now
+baby
+I took a half and she took the whole thing slow down
+Baby
+We took a trip now we on your block and it’s like a ghost town
+Baby
+Where do these niggas be at when they say they doing all this and all that 
+
+I’m in the trenches relax
+Can you not play that lil boy in the club cause we do not listen to rats
+We in the line I buy her a wig she tellin me Tay is the best
+Point at that nigga who act like a killer
+But you only want from the neck
+I’m like the baby I’m not just a rapper you play with me you gon get stressed
+Ooooh
+Bring Drake to the hood
+Surround Drake around Drakes
+Even though I got a case
+Imma do what it takes
+
+And I never been embraced
+And the moneys hard to make
+So I bet they on they face right
+
+I know that they at the crib going crazy down bad what they had didn’t last Damn baby
+Sometimes we laugh and sometimes we cry but I guess you know now
+baby
+I took a half and she took the whole thing slow down
+Baby
+We took a trip now we on your block and it’s like a ghost town
+Baby
+Where do these niggas be at when they say they doing all this and all that 
+
+When he tell the story that’s not how it went
+Know they be lying 100 percent 
+Move out the Ritz forgot bout the Bent
+Valet just called to tell me come get it
+I knocked that boy off I don’t want no credit
+If it Was me they wouldn’t regret it
+left me for dead and now they want dead it
+heart is still beating
+My niggas still eating
+The backyard it look like the Garden of Eden
+Pillow talk with Me she spilling the tea and then shawty came back and said she didn’t mean it
+Its hard to believe it
+
+I know that they at the crib going crazy down bad what they had didn’t last Damn baby
+Sometimes we laugh and sometimes we cry but I guess you know now
+baby
+I took a half and she took the whole thing slow down
+Baby
+We took a trip now we on your block and it’s like a ghost town
+Baby
+Where do these niggas be at when they say they doing all this and all that
+
+#Drake #LilDurk #LaughNowCryLater",
+                    "title": "Drake - Laugh Now Cry Later (Official Lyric Video) ft. Lil Durk",
+                  },
+                  "publishedAt": "2020-08-18T13:00:13Z",
+                  "tags": Array [
+                    "Drake",
+                    "Laugh",
+                    "Now",
+                    "Cry",
+                    "Later",
+                    "(Lyric",
+                    "Video)",
+                    "OVO",
+                    "Hip",
+                    "Hop",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Drake - Laugh Now Cry Later (Official Lyric Video) ft. Lil Durk",
                 },
-                "publishedAt": "2020-08-18T13:00:13Z",
-                "tags": Array [
-                  "Drake",
-                  "Laugh",
-                  "Now",
-                  "Cry",
-                  "Later",
-                  "(Lyric",
-                  "Video)",
-                  "OVO",
-                  "Hip",
-                  "Hop",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/qojvO0E0z_Y/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "4224",
+                  "dislikeCount": "941",
+                  "favoriteCount": "0",
+                  "likeCount": "73610",
+                  "viewCount": "984566",
                 },
-                "title": "Drake - Laugh Now Cry Later (Official Lyric Video) ft. Lil Durk",
               },
-              "statistics": Object {
-                "commentCount": "4224",
-                "dislikeCount": "941",
-                "favoriteCount": "0",
-                "likeCount": "73610",
-                "viewCount": "984566",
-              },
-            },
-            Object {
-              "etag": "sNupuJsvBFESU1AZ7gTo2MpGWsM",
-              "id": "Cqbleas1mmo",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "24",
-                "channelId": "UCNIuvl7V8zACPpTmmNIqP2A",
-                "channelTitle": "OverSimplified",
-                "defaultAudioLanguage": "en",
-                "description": "Get 68% off NordVPN! Only $3.71/mo, plus you get an additional month FREE at:
-https://nordvpn.com/oversimplified
-Use codeword: oversimplified
-
-MERCH (Russian Revolution merch OUT NOW!) - https://www.oversimplified.tv/merch 
-Support us on Patreon (please): https://www.patreon.com/OverSimple 
-Instagram: https://www.instagram.com/over_simplified
-Twitter: https://twitter.com/over_simplified 
-Reddit: https://www.reddit.com/r/OverSimplified/ 
-Discord: https://discord.gg/zsE9rwM 
-Facebook: https://www.facebook.com/OverSimplified/ 
-
-Thank you to our Patreon Presidents - Alexandra Scoma, Attila Oláh, Bobby Dellinger, Brett Seekely, Dane McAfee, Danny Sprangemeijer, Deyvid Diego, Elliot Lepley, isolwi, John Sandoval, Mark Davenport, MasterGigadrain, Max & Molly, Mike Banerian, Moaath AlUnaizan, Nigel Singer, Sam Ingbar, Sana Zekri, Sarah Gonzales-Hamlin, William, Yan Shen and Yubo Zhang
-
-Want to know how I make these videos? Get Adobe After Effects and Photoshop here - https://goo.gl/zPHcm2 
-
-Copyright disclaimer - We do not give anyone permission to translate and/or reupload our videos or designs on YouTube or other social media platforms.
-
---------------- ATTRIBUTIONS ---------------
-Music (licensed under a Creative Commons license).
-
-Music by Kevin MacLeod:
-Investigations
-Pina Colada
-Covert Affair
-I Knew A Guy
-Sneaky Snitch
-Dances and Dames
-Faceoff
-Marty Gots A Plan
-Fast Talkin
-Infados
-Bumbly March Music To Delight
-Dark Mystery
-
-
-From Artist:
-LMOP - The Whisper Man
-Ian Post - Eminence Landscapes
-Stanley Gurvich - Puddles
-Kevin Graham - Autumn
-Stanley Gurvich - At First",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "sNupuJsvBFESU1AZ7gTo2MpGWsM",
+                "id": "Cqbleas1mmo",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "24",
+                  "channelId": "UCNIuvl7V8zACPpTmmNIqP2A",
+                  "channelTitle": "OverSimplified",
+                  "defaultAudioLanguage": "en",
                   "description": "Get 68% off NordVPN! Only $3.71/mo, plus you get an additional month FREE at:
 https://nordvpn.com/oversimplified
 Use codeword: oversimplified
@@ -2122,94 +2097,107 @@ Ian Post - Eminence Landscapes
 Stanley Gurvich - Puddles
 Kevin Graham - Autumn
 Stanley Gurvich - At First",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Get 68% off NordVPN! Only $3.71/mo, plus you get an additional month FREE at:
+https://nordvpn.com/oversimplified
+Use codeword: oversimplified
+
+MERCH (Russian Revolution merch OUT NOW!) - https://www.oversimplified.tv/merch 
+Support us on Patreon (please): https://www.patreon.com/OverSimple 
+Instagram: https://www.instagram.com/over_simplified
+Twitter: https://twitter.com/over_simplified 
+Reddit: https://www.reddit.com/r/OverSimplified/ 
+Discord: https://discord.gg/zsE9rwM 
+Facebook: https://www.facebook.com/OverSimplified/ 
+
+Thank you to our Patreon Presidents - Alexandra Scoma, Attila Oláh, Bobby Dellinger, Brett Seekely, Dane McAfee, Danny Sprangemeijer, Deyvid Diego, Elliot Lepley, isolwi, John Sandoval, Mark Davenport, MasterGigadrain, Max & Molly, Mike Banerian, Moaath AlUnaizan, Nigel Singer, Sam Ingbar, Sana Zekri, Sarah Gonzales-Hamlin, William, Yan Shen and Yubo Zhang
+
+Want to know how I make these videos? Get Adobe After Effects and Photoshop here - https://goo.gl/zPHcm2 
+
+Copyright disclaimer - We do not give anyone permission to translate and/or reupload our videos or designs on YouTube or other social media platforms.
+
+--------------- ATTRIBUTIONS ---------------
+Music (licensed under a Creative Commons license).
+
+Music by Kevin MacLeod:
+Investigations
+Pina Colada
+Covert Affair
+I Knew A Guy
+Sneaky Snitch
+Dances and Dames
+Faceoff
+Marty Gots A Plan
+Fast Talkin
+Infados
+Bumbly March Music To Delight
+Dark Mystery
+
+
+From Artist:
+LMOP - The Whisper Man
+Ian Post - Eminence Landscapes
+Stanley Gurvich - Puddles
+Kevin Graham - Autumn
+Stanley Gurvich - At First",
+                    "title": "The Russian Revolution - OverSimplified (Part 1)",
+                  },
+                  "publishedAt": "2020-08-17T23:30:09Z",
+                  "tags": Array [
+                    "russian revolution",
+                    "tsar",
+                    "russia",
+                    "nicholas II",
+                    "rasputin",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/Cqbleas1mmo/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/Cqbleas1mmo/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/Cqbleas1mmo/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/Cqbleas1mmo/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/Cqbleas1mmo/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "The Russian Revolution - OverSimplified (Part 1)",
                 },
-                "publishedAt": "2020-08-17T23:30:09Z",
-                "tags": Array [
-                  "russian revolution",
-                  "tsar",
-                  "russia",
-                  "nicholas II",
-                  "rasputin",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/Cqbleas1mmo/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/Cqbleas1mmo/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/Cqbleas1mmo/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/Cqbleas1mmo/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/Cqbleas1mmo/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "16435",
+                  "dislikeCount": "1820",
+                  "favoriteCount": "0",
+                  "likeCount": "173558",
+                  "viewCount": "2191830",
                 },
-                "title": "The Russian Revolution - OverSimplified (Part 1)",
               },
-              "statistics": Object {
-                "commentCount": "16435",
-                "dislikeCount": "1820",
-                "favoriteCount": "0",
-                "likeCount": "173558",
-                "viewCount": "2191830",
-              },
-            },
-            Object {
-              "etag": "jrLjC0gsNNV96oNDP201IFL8sf8",
-              "id": "IGTLRMFrCco",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "1",
-                "channelId": "UCUKi4zY5ETSqrKAjTBgjM-g",
-                "channelTitle": "sWooZie",
-                "defaultAudioLanguage": "en",
-                "defaultLanguage": "en",
-                "description": "If ur smart, u try to avoid confrontation at work. I'm not smart.
-
-(voice) Young Don the Sauce God:
-https://www.youtube.com/c/YoungDonTheSauceGod/featured
-
-Le moi: http://www.instagram.com/swoozie
-
-Animators:
-Abby:  https://twitter.com/memedokies
-
-Jenn: https://twitter.com/jennpadillart
-https://www.instagram.com/jennpadillart/
-
-Matt:  https://twitter.com/qwilman
-
-Richard: https://twitter.com/vimvammer
-https://www.instagram.com/vimvammer/
-
-Sev: https://twitter.com/sevpiehl
-
-Backgrounds:
-Bandit
-
-Thumbnail art:
-https://twitter.com/Zeurel
-
-Shirt: Master's of the Universe // https://www.walmart.com/ip/Masters-Of-The-Universe-What-S-Going-On-Adult-T-Shirt/682920452?wmlspartner=wlpa&selectedSellerId=4749&&adid=22222222227288647097&wl0=&wl1=g&wl2=c&wl3=346726702260&wl4=pla-731365812149&wl5=9060325&wl6=&wl7=&wl8=&wl9=pla&wl10=113945684&wl11=online&wl12=682920452&veh=sem&gclid=Cj0KCQjw-O35BRDVARIsAJU5mQVGhLUCnXoOtSFDP2VyA2TmdH-4bP8e0P3rzeYFd1pP9fq0t6M_FRsaAujCEALw_wcB
-
-Mystery link: https://youtu.be/ZZ5LpwO-An4",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "jrLjC0gsNNV96oNDP201IFL8sf8",
+                "id": "IGTLRMFrCco",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "1",
+                  "channelId": "UCUKi4zY5ETSqrKAjTBgjM-g",
+                  "channelTitle": "sWooZie",
+                  "defaultAudioLanguage": "en",
+                  "defaultLanguage": "en",
                   "description": "If ur smart, u try to avoid confrontation at work. I'm not smart.
 
 (voice) Young Don the Sauce God:
@@ -2239,85 +2227,100 @@ https://twitter.com/Zeurel
 Shirt: Master's of the Universe // https://www.walmart.com/ip/Masters-Of-The-Universe-What-S-Going-On-Adult-T-Shirt/682920452?wmlspartner=wlpa&selectedSellerId=4749&&adid=22222222227288647097&wl0=&wl1=g&wl2=c&wl3=346726702260&wl4=pla-731365812149&wl5=9060325&wl6=&wl7=&wl8=&wl9=pla&wl10=113945684&wl11=online&wl12=682920452&veh=sem&gclid=Cj0KCQjw-O35BRDVARIsAJU5mQVGhLUCnXoOtSFDP2VyA2TmdH-4bP8e0P3rzeYFd1pP9fq0t6M_FRsaAujCEALw_wcB
 
 Mystery link: https://youtu.be/ZZ5LpwO-An4",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "If ur smart, u try to avoid confrontation at work. I'm not smart.
+
+(voice) Young Don the Sauce God:
+https://www.youtube.com/c/YoungDonTheSauceGod/featured
+
+Le moi: http://www.instagram.com/swoozie
+
+Animators:
+Abby:  https://twitter.com/memedokies
+
+Jenn: https://twitter.com/jennpadillart
+https://www.instagram.com/jennpadillart/
+
+Matt:  https://twitter.com/qwilman
+
+Richard: https://twitter.com/vimvammer
+https://www.instagram.com/vimvammer/
+
+Sev: https://twitter.com/sevpiehl
+
+Backgrounds:
+Bandit
+
+Thumbnail art:
+https://twitter.com/Zeurel
+
+Shirt: Master's of the Universe // https://www.walmart.com/ip/Masters-Of-The-Universe-What-S-Going-On-Adult-T-Shirt/682920452?wmlspartner=wlpa&selectedSellerId=4749&&adid=22222222227288647097&wl0=&wl1=g&wl2=c&wl3=346726702260&wl4=pla-731365812149&wl5=9060325&wl6=&wl7=&wl8=&wl9=pla&wl10=113945684&wl11=online&wl12=682920452&veh=sem&gclid=Cj0KCQjw-O35BRDVARIsAJU5mQVGhLUCnXoOtSFDP2VyA2TmdH-4bP8e0P3rzeYFd1pP9fq0t6M_FRsaAujCEALw_wcB
+
+Mystery link: https://youtu.be/ZZ5LpwO-An4",
+                    "title": "I SWEAR TO GUARD!! (ft Young Don)",
+                  },
+                  "publishedAt": "2020-08-18T13:33:56Z",
+                  "tags": Array [
+                    "swoozie",
+                    "adande",
+                    "animation",
+                    "funny",
+                    "2d",
+                    "confrontation",
+                    "hard rock hotel",
+                    "young don the sauce God",
+                    "lifeguard",
+                    "story time",
+                    "job",
+                    "work",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/IGTLRMFrCco/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/IGTLRMFrCco/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/IGTLRMFrCco/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/IGTLRMFrCco/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/IGTLRMFrCco/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "I SWEAR TO GUARD!! (ft Young Don)",
                 },
-                "publishedAt": "2020-08-18T13:33:56Z",
-                "tags": Array [
-                  "swoozie",
-                  "adande",
-                  "animation",
-                  "funny",
-                  "2d",
-                  "confrontation",
-                  "hard rock hotel",
-                  "young don the sauce God",
-                  "lifeguard",
-                  "story time",
-                  "job",
-                  "work",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/IGTLRMFrCco/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/IGTLRMFrCco/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/IGTLRMFrCco/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/IGTLRMFrCco/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/IGTLRMFrCco/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "4209",
+                  "dislikeCount": "514",
+                  "favoriteCount": "0",
+                  "likeCount": "69729",
+                  "viewCount": "736108",
                 },
-                "title": "I SWEAR TO GUARD!! (ft Young Don)",
               },
-              "statistics": Object {
-                "commentCount": "4209",
-                "dislikeCount": "514",
-                "favoriteCount": "0",
-                "likeCount": "69729",
-                "viewCount": "736108",
-              },
-            },
-            Object {
-              "etag": "5jUyIlnTFUiBz7pASg6IdchESzA",
-              "id": "KilybZma5vY",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "10",
-                "channelId": "UCjIA3wwhi0QjSOXAZwOXbPA",
-                "channelTitle": "Ozuna",
-                "defaultAudioLanguage": "es",
-                "description": "Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)
-
-#Ozuna #KarolG #CarameloRemix
-
-Escúchala en tu plataforma favorita/Listen on your favorite streaming platform: 
-https://orcd.co/ozunacarameloremix
-
-Suscríbete al canal: https://goo.gl/ngGDr2
-
-Sígueme en:
-TikTok | https://tiktok.com/@ozuna
-Instagram | https://instagram.com/ozuna
-Twitter | https://twitter.com/ozuna
-Facebook | https://facebook.com/ozunapr",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "5jUyIlnTFUiBz7pASg6IdchESzA",
+                "id": "KilybZma5vY",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "10",
+                  "channelId": "UCjIA3wwhi0QjSOXAZwOXbPA",
+                  "channelTitle": "Ozuna",
+                  "defaultAudioLanguage": "es",
                   "description": "Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)
 
 #Ozuna #KarolG #CarameloRemix
@@ -2332,129 +2335,102 @@ TikTok | https://tiktok.com/@ozuna
 Instagram | https://instagram.com/ozuna
 Twitter | https://twitter.com/ozuna
 Facebook | https://facebook.com/ozunapr",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)
+
+#Ozuna #KarolG #CarameloRemix
+
+Escúchala en tu plataforma favorita/Listen on your favorite streaming platform: 
+https://orcd.co/ozunacarameloremix
+
+Suscríbete al canal: https://goo.gl/ngGDr2
+
+Sígueme en:
+TikTok | https://tiktok.com/@ozuna
+Instagram | https://instagram.com/ozuna
+Twitter | https://twitter.com/ozuna
+Facebook | https://facebook.com/ozunapr",
+                    "title": "Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)",
+                  },
+                  "publishedAt": "2020-08-17T20:00:13Z",
+                  "tags": Array [
+                    "Reggaeton music",
+                    "musica",
+                    "reggaeton",
+                    "top reggaeton hits",
+                    "ozuna nibiru",
+                    "caramelo",
+                    "Ozuna",
+                    "Osuna",
+                    "Caramelo",
+                    "New Music",
+                    "Nuevo sencillo",
+                    "nibiru ozuna",
+                    "ozuna musica",
+                    "amor genuino ozuna",
+                    "reggaeton 2020",
+                    "musica nueva",
+                    "caramelo ozuna",
+                    "Tú eres mi bandolera y yo soy tu bandolero",
+                    "Tu eres mi bandolera",
+                    "y yo tu bandolero",
+                    "Remix",
+                    "caramelo remix",
+                    "caramelo remix karol g",
+                    "caramelo remix myke towers",
+                    "Karol G",
+                    "Myke Towers",
+                    "caramelo remix ozuna",
+                    "ozuna caramelo",
+                    "baila baila baila ozuna",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/KilybZma5vY/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/KilybZma5vY/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/KilybZma5vY/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/KilybZma5vY/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/KilybZma5vY/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)",
                 },
-                "publishedAt": "2020-08-17T20:00:13Z",
-                "tags": Array [
-                  "Reggaeton music",
-                  "musica",
-                  "reggaeton",
-                  "top reggaeton hits",
-                  "ozuna nibiru",
-                  "caramelo",
-                  "Ozuna",
-                  "Osuna",
-                  "Caramelo",
-                  "New Music",
-                  "Nuevo sencillo",
-                  "nibiru ozuna",
-                  "ozuna musica",
-                  "amor genuino ozuna",
-                  "reggaeton 2020",
-                  "musica nueva",
-                  "caramelo ozuna",
-                  "Tú eres mi bandolera y yo soy tu bandolero",
-                  "Tu eres mi bandolera",
-                  "y yo tu bandolero",
-                  "Remix",
-                  "caramelo remix",
-                  "caramelo remix karol g",
-                  "caramelo remix myke towers",
-                  "Karol G",
-                  "Myke Towers",
-                  "caramelo remix ozuna",
-                  "ozuna caramelo",
-                  "baila baila baila ozuna",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/KilybZma5vY/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/KilybZma5vY/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/KilybZma5vY/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/KilybZma5vY/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/KilybZma5vY/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "32725",
+                  "dislikeCount": "23538",
+                  "favoriteCount": "0",
+                  "likeCount": "568625",
+                  "viewCount": "11112770",
                 },
-                "title": "Ozuna x Karol G x Myke Towers - Caramelo Remix  (Video Oficial)",
               },
-              "statistics": Object {
-                "commentCount": "32725",
-                "dislikeCount": "23538",
-                "favoriteCount": "0",
-                "likeCount": "568625",
-                "viewCount": "11112770",
-              },
-            },
-            Object {
-              "etag": "yLp29WMdxOVDxjUGigoyRqB_XOk",
-              "id": "z_LdKL0drkA",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "23",
-                "channelId": "UCwtnkRZcvL4bfopzJ-Von8Q",
-                "channelTitle": "merrelltwins",
-                "defaultAudioLanguage": "en",
-                "description": "We gave each other birthday gifts for the first time! Happy birthday to us! When is your birthday?
-NEW VIDEOS EVERY TUESDAY!!!
-SUBSCRIBE TO OUR CHANNEL ▶ http://bit.ly/2dSP9Fg 
-OUR MERCH ▶ https://fanjoy.co/collections/merrell-twins
-OUR LIVE CHANNEL ▶ https://www.youtube.com/merrelltwinslive
-
-Follow Us on Twitter & Instagram: 
-INSTAGRAM:▶ http://instagram.com/MerrellTwins
-INSTAGRAM: ▶http://instagram.com/vanessamerrell
-INSTAGRAM:▶http://instagram.com/veronicamerrell
-TWITTER: ▶https://twitter.com/MerrellTwins
-TWITTER: ▶https://twitter.com/VanessaMerrell
-TWITTER: ▶https://twitter.com/veronicamerrell
-www.merrelltwins.com
-
-OUR OTHER VIDEOS
-TWIN SWAP DRIVE THRU CHALLENGE
-https://youtu.be/nhhrxATx7aA
-2 SETS OF IDENTICAL TWINS DRIVE THRU PRANK
-https://youtu.be/p15SVRulr58
-THE THIRD WHEEL
-https://youtu.be/uHYI42E8TKY
-THAT ONE FRIEND
-https://youtu.be/aeOpNraDKy8
-Merrell Twins Exposed ep1
-https://youtu.be/mWXurqWRA74
-2 Sets of Twins Drive Thru Prank
-https://youtu.be/p15SVRulr58
-Fans Write our Video
-https://youtu.be/WI0LYRZErjU
-The Break Up
-https://youtu.be/MyS8AjVj9FQ
-IF FOOD BABIES WERE REAL
-https://youtu.be/joMRNv0SlYE
-THIS COULD BE YOU
-https://youtu.be/U9v_bUMqFHg
-FIRST DATE
-https://youtu.be/IydaRQClUBY
-
-
-#birthday #gifts #twinswap",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "yLp29WMdxOVDxjUGigoyRqB_XOk",
+                "id": "z_LdKL0drkA",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "23",
+                  "channelId": "UCwtnkRZcvL4bfopzJ-Von8Q",
+                  "channelTitle": "merrelltwins",
+                  "defaultAudioLanguage": "en",
                   "description": "We gave each other birthday gifts for the first time! Happy birthday to us! When is your birthday?
 NEW VIDEOS EVERY TUESDAY!!!
 SUBSCRIBE TO OUR CHANNEL ▶ http://bit.ly/2dSP9Fg 
@@ -2496,98 +2472,121 @@ https://youtu.be/IydaRQClUBY
 
 
 #birthday #gifts #twinswap",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "We gave each other birthday gifts for the first time! Happy birthday to us! When is your birthday?
+NEW VIDEOS EVERY TUESDAY!!!
+SUBSCRIBE TO OUR CHANNEL ▶ http://bit.ly/2dSP9Fg 
+OUR MERCH ▶ https://fanjoy.co/collections/merrell-twins
+OUR LIVE CHANNEL ▶ https://www.youtube.com/merrelltwinslive
+
+Follow Us on Twitter & Instagram: 
+INSTAGRAM:▶ http://instagram.com/MerrellTwins
+INSTAGRAM: ▶http://instagram.com/vanessamerrell
+INSTAGRAM:▶http://instagram.com/veronicamerrell
+TWITTER: ▶https://twitter.com/MerrellTwins
+TWITTER: ▶https://twitter.com/VanessaMerrell
+TWITTER: ▶https://twitter.com/veronicamerrell
+www.merrelltwins.com
+
+OUR OTHER VIDEOS
+TWIN SWAP DRIVE THRU CHALLENGE
+https://youtu.be/nhhrxATx7aA
+2 SETS OF IDENTICAL TWINS DRIVE THRU PRANK
+https://youtu.be/p15SVRulr58
+THE THIRD WHEEL
+https://youtu.be/uHYI42E8TKY
+THAT ONE FRIEND
+https://youtu.be/aeOpNraDKy8
+Merrell Twins Exposed ep1
+https://youtu.be/mWXurqWRA74
+2 Sets of Twins Drive Thru Prank
+https://youtu.be/p15SVRulr58
+Fans Write our Video
+https://youtu.be/WI0LYRZErjU
+The Break Up
+https://youtu.be/MyS8AjVj9FQ
+IF FOOD BABIES WERE REAL
+https://youtu.be/joMRNv0SlYE
+THIS COULD BE YOU
+https://youtu.be/U9v_bUMqFHg
+FIRST DATE
+https://youtu.be/IydaRQClUBY
+
+
+#birthday #gifts #twinswap",
+                    "title": "Twins Swap Birthday Gift Exchange - Merrell Twins",
+                  },
+                  "publishedAt": "2020-08-18T16:00:17Z",
+                  "tags": Array [
+                    "Merrell Twins",
+                    "Twins",
+                    "Merrell",
+                    "Veronica Merrell",
+                    "Vanessa Merrell",
+                    "Twin",
+                    "Comedy",
+                    "Family Friendly",
+                    "birthday",
+                    "gift",
+                    "gift exchange",
+                    "birthday gift",
+                    "twins gift exchange",
+                    "opposite twins birthday gift exchange",
+                    "sister gift exchange",
+                    "Twins swap",
+                    "twin swap",
+                    "Veronica",
+                    "Vanessa",
+                    "twinner",
+                    "gifts",
+                    "identical twins",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/z_LdKL0drkA/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/z_LdKL0drkA/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/z_LdKL0drkA/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/z_LdKL0drkA/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/z_LdKL0drkA/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Twins Swap Birthday Gift Exchange - Merrell Twins",
                 },
-                "publishedAt": "2020-08-18T16:00:17Z",
-                "tags": Array [
-                  "Merrell Twins",
-                  "Twins",
-                  "Merrell",
-                  "Veronica Merrell",
-                  "Vanessa Merrell",
-                  "Twin",
-                  "Comedy",
-                  "Family Friendly",
-                  "birthday",
-                  "gift",
-                  "gift exchange",
-                  "birthday gift",
-                  "twins gift exchange",
-                  "opposite twins birthday gift exchange",
-                  "sister gift exchange",
-                  "Twins swap",
-                  "twin swap",
-                  "Veronica",
-                  "Vanessa",
-                  "twinner",
-                  "gifts",
-                  "identical twins",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/z_LdKL0drkA/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/z_LdKL0drkA/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/z_LdKL0drkA/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/z_LdKL0drkA/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/z_LdKL0drkA/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "4853",
+                  "dislikeCount": "284",
+                  "favoriteCount": "0",
+                  "likeCount": "41814",
+                  "viewCount": "469901",
                 },
-                "title": "Twins Swap Birthday Gift Exchange - Merrell Twins",
               },
-              "statistics": Object {
-                "commentCount": "4853",
-                "dislikeCount": "284",
-                "favoriteCount": "0",
-                "likeCount": "41814",
-                "viewCount": "469901",
-              },
-            },
-            Object {
-              "etag": "KwxOwtfTPx9b19rro6DEoDrDSzo",
-              "id": "BRhthZu0L94",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "10",
-                "channelId": "UCbg_UMjlHJg_19SZckaKajg",
-                "channelTitle": "XXL",
-                "description": "Subscribe to XXL → http://bit.ly/subscribe-xxl 
-
-NLE Choppa plays for keeps in his 2020 XXL Freshman freestyle.
-
-Have you been listening to this Freshman since Day 1? Go to https://day1club.byspotify.com/ and prove it.
-
-Visit NLE Choppa's 2020 XXL Freshman Class page → https://www.xxlmag.com/nle-choppa/
-
-Credits:
-Directed by @travissatten
-Produced by @ritemediagroup
-
-#NLEChoppa #Freestyle #XXLFreshman #XXLFreshman #HipHop #2020XXLFreshman #NLEChoppaFreestyle
-
-Go here → http://www.xxlmag.com/
-XXL on Facebook → https://www.facebook.com/xxlmag
-XXL on Twitter → https://twitter.com/XXL
-XXL on Instagram → https://instagram.com/xxl/",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "KwxOwtfTPx9b19rro6DEoDrDSzo",
+                "id": "BRhthZu0L94",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "10",
+                  "channelId": "UCbg_UMjlHJg_19SZckaKajg",
+                  "channelTitle": "XXL",
                   "description": "Subscribe to XXL → http://bit.ly/subscribe-xxl 
 
 NLE Choppa plays for keeps in his 2020 XXL Freshman freestyle.
@@ -2606,85 +2605,95 @@ Go here → http://www.xxlmag.com/
 XXL on Facebook → https://www.facebook.com/xxlmag
 XXL on Twitter → https://twitter.com/XXL
 XXL on Instagram → https://instagram.com/xxl/",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Subscribe to XXL → http://bit.ly/subscribe-xxl 
+
+NLE Choppa plays for keeps in his 2020 XXL Freshman freestyle.
+
+Have you been listening to this Freshman since Day 1? Go to https://day1club.byspotify.com/ and prove it.
+
+Visit NLE Choppa's 2020 XXL Freshman Class page → https://www.xxlmag.com/nle-choppa/
+
+Credits:
+Directed by @travissatten
+Produced by @ritemediagroup
+
+#NLEChoppa #Freestyle #XXLFreshman #XXLFreshman #HipHop #2020XXLFreshman #NLEChoppaFreestyle
+
+Go here → http://www.xxlmag.com/
+XXL on Facebook → https://www.facebook.com/xxlmag
+XXL on Twitter → https://twitter.com/XXL
+XXL on Instagram → https://instagram.com/xxl/",
+                    "title": "NLE Choppa's 2020 XXL Freshman Freestyle",
+                  },
+                  "publishedAt": "2020-08-17T16:01:14Z",
+                  "tags": Array [
+                    "nle choppa",
+                    "rapper",
+                    "rap",
+                    "hip-hop",
+                    "2020 xxl freshman",
+                    "2020 xxl freshmen",
+                    "xxl freshman",
+                    "xxl freshmen",
+                    "2020 freshman",
+                    "2020 freshmen",
+                    "xxl",
+                    "xxl magazine",
+                    "freshman",
+                    "freshmen",
+                    "nle choppa rapper",
+                    "nle choppa freestyle",
+                    "freestyle",
+                    "hip-hop freestyle",
+                    "rap freestyle",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/BRhthZu0L94/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/BRhthZu0L94/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/BRhthZu0L94/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/BRhthZu0L94/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/BRhthZu0L94/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "NLE Choppa's 2020 XXL Freshman Freestyle",
                 },
-                "publishedAt": "2020-08-17T16:01:14Z",
-                "tags": Array [
-                  "nle choppa",
-                  "rapper",
-                  "rap",
-                  "hip-hop",
-                  "2020 xxl freshman",
-                  "2020 xxl freshmen",
-                  "xxl freshman",
-                  "xxl freshmen",
-                  "2020 freshman",
-                  "2020 freshmen",
-                  "xxl",
-                  "xxl magazine",
-                  "freshman",
-                  "freshmen",
-                  "nle choppa rapper",
-                  "nle choppa freestyle",
-                  "freestyle",
-                  "hip-hop freestyle",
-                  "rap freestyle",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/BRhthZu0L94/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/BRhthZu0L94/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/BRhthZu0L94/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/BRhthZu0L94/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/BRhthZu0L94/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "9413",
+                  "dislikeCount": "5446",
+                  "favoriteCount": "0",
+                  "likeCount": "108191",
+                  "viewCount": "2011317",
                 },
-                "title": "NLE Choppa's 2020 XXL Freshman Freestyle",
               },
-              "statistics": Object {
-                "commentCount": "9413",
-                "dislikeCount": "5446",
-                "favoriteCount": "0",
-                "likeCount": "108191",
-                "viewCount": "2011317",
-              },
-            },
-            Object {
-              "etag": "gSHC0jQFYnEKW7vFCYj2vAspWIQ",
-              "id": "u-ro5IV_gsc",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "23",
-                "channelId": "UCbYzlEUtmKsvkzyVm6rPPlQ",
-                "channelTitle": "Garrett Watts",
-                "description": "What does a day in the life look like when the world is shut down? Strange. Very, very strange.
-
- Thank to Dollar Shave Club for sponsoring! Go to https://www.dollarshaveclub.com/garrettwatts to get your starter set for $5. After that the restock box ships full-sized products at regular price.
-
-I hope you love this experience and I am so grateful to do what I do. Thank you for watching the things I make and thank you for letting me do this for a living. Most importantly I hope that you all are keeping cool and as calm as possible during this strange time. 
-
-Youtooz Figure: https://youtooz.com/products/garrett-watts
-Andrew's Instagram: https://www.instagram.com/andrewsiwicki/?hl=en",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "gSHC0jQFYnEKW7vFCYj2vAspWIQ",
+                "id": "u-ro5IV_gsc",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "23",
+                  "channelId": "UCbYzlEUtmKsvkzyVm6rPPlQ",
+                  "channelTitle": "Garrett Watts",
                   "description": "What does a day in the life look like when the world is shut down? Strange. Very, very strange.
 
  Thank to Dollar Shave Club for sponsoring! Go to https://www.dollarshaveclub.com/garrettwatts to get your starter set for $5. After that the restock box ships full-sized products at regular price.
@@ -2693,92 +2702,91 @@ I hope you love this experience and I am so grateful to do what I do. Thank you 
 
 Youtooz Figure: https://youtooz.com/products/garrett-watts
 Andrew's Instagram: https://www.instagram.com/andrewsiwicki/?hl=en",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "What does a day in the life look like when the world is shut down? Strange. Very, very strange.
+
+ Thank to Dollar Shave Club for sponsoring! Go to https://www.dollarshaveclub.com/garrettwatts to get your starter set for $5. After that the restock box ships full-sized products at regular price.
+
+I hope you love this experience and I am so grateful to do what I do. Thank you for watching the things I make and thank you for letting me do this for a living. Most importantly I hope that you all are keeping cool and as calm as possible during this strange time. 
+
+Youtooz Figure: https://youtooz.com/products/garrett-watts
+Andrew's Instagram: https://www.instagram.com/andrewsiwicki/?hl=en",
+                    "title": "A Day In My Life!",
+                  },
+                  "publishedAt": "2020-08-18T02:17:22Z",
+                  "tags": Array [
+                    "creative",
+                    "ideas",
+                    "fun",
+                    "tent",
+                    "fort",
+                    "day in life",
+                    "what I do in a day",
+                    "Garrett watts",
+                    "Andrew siwicki",
+                    "bugs",
+                    "stay at home",
+                    "indoors",
+                    "day in my life",
+                    "a day in my life",
+                    "random",
+                    "meme",
+                    "memes",
+                    "internet",
+                    "chill",
+                    "lofi",
+                    "friendship",
+                    "pizza mukbang",
+                    "bros",
+                    "pals",
+                    "vibes",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "A Day In My Life!",
                 },
-                "publishedAt": "2020-08-18T02:17:22Z",
-                "tags": Array [
-                  "creative",
-                  "ideas",
-                  "fun",
-                  "tent",
-                  "fort",
-                  "day in life",
-                  "what I do in a day",
-                  "Garrett watts",
-                  "Andrew siwicki",
-                  "bugs",
-                  "stay at home",
-                  "indoors",
-                  "day in my life",
-                  "a day in my life",
-                  "random",
-                  "meme",
-                  "memes",
-                  "internet",
-                  "chill",
-                  "lofi",
-                  "friendship",
-                  "pizza mukbang",
-                  "bros",
-                  "pals",
-                  "vibes",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/u-ro5IV_gsc/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "16981",
+                  "dislikeCount": "601",
+                  "favoriteCount": "0",
+                  "likeCount": "92036",
+                  "viewCount": "591287",
                 },
-                "title": "A Day In My Life!",
               },
-              "statistics": Object {
-                "commentCount": "16981",
-                "dislikeCount": "601",
-                "favoriteCount": "0",
-                "likeCount": "92036",
-                "viewCount": "591287",
-              },
-            },
-            Object {
-              "etag": "BnV6KKu812ltELxDo_ioP0ud-rA",
-              "id": "hQq7ZSgvhtU",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "25",
-                "channelId": "UC8ZLJkQZMENy8CoS8zYczBA",
-                "channelTitle": "2020 Democratic National Convention",
-                "description": "Tune in on Monday, August 17 from 9-11 PM ET for the first night of the 2020 Democratic National Convention, where we’ll hear from the many Americans who are rising up to take on the crises facing our country.
-
-Featuring: Former First Lady Michelle Obama, Sen. Bernie Sanders, Sen. Catherine Cortez Masto, Gov. Andrew Cuomo, Gov. Gretchen Whitmer, Rep. Jim Clyburn, Convention Chairman Rep. Bennie Thompson, Rep. Gwen Moore, Former Gov. John Kasich, Sen. Doug Jones, and Sen. Amy Klobuchar.
-
-Follow the Democratic National Convention online:
-Facebook: https://www.facebook.com/DemConvention
-Twitter: https://twitter.com/DemConvention
-Instagram: https://www.instagram.com/demconvention
-Website: https://www.demconvention.com",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "BnV6KKu812ltELxDo_ioP0ud-rA",
+                "id": "hQq7ZSgvhtU",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "25",
+                  "channelId": "UC8ZLJkQZMENy8CoS8zYczBA",
+                  "channelTitle": "2020 Democratic National Convention",
                   "description": "Tune in on Monday, August 17 from 9-11 PM ET for the first night of the 2020 Democratic National Convention, where we’ll hear from the many Americans who are rising up to take on the crises facing our country.
 
 Featuring: Former First Lady Michelle Obama, Sen. Bernie Sanders, Sen. Catherine Cortez Masto, Gov. Andrew Cuomo, Gov. Gretchen Whitmer, Rep. Jim Clyburn, Convention Chairman Rep. Bennie Thompson, Rep. Gwen Moore, Former Gov. John Kasich, Sen. Doug Jones, and Sen. Amy Klobuchar.
@@ -2788,77 +2796,66 @@ Facebook: https://www.facebook.com/DemConvention
 Twitter: https://twitter.com/DemConvention
 Instagram: https://www.instagram.com/demconvention
 Website: https://www.demconvention.com",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Tune in on Monday, August 17 from 9-11 PM ET for the first night of the 2020 Democratic National Convention, where we’ll hear from the many Americans who are rising up to take on the crises facing our country.
+
+Featuring: Former First Lady Michelle Obama, Sen. Bernie Sanders, Sen. Catherine Cortez Masto, Gov. Andrew Cuomo, Gov. Gretchen Whitmer, Rep. Jim Clyburn, Convention Chairman Rep. Bennie Thompson, Rep. Gwen Moore, Former Gov. John Kasich, Sen. Doug Jones, and Sen. Amy Klobuchar.
+
+Follow the Democratic National Convention online:
+Facebook: https://www.facebook.com/DemConvention
+Twitter: https://twitter.com/DemConvention
+Instagram: https://www.instagram.com/demconvention
+Website: https://www.demconvention.com",
+                    "title": "Democratic National Convention: Day 1",
+                  },
+                  "publishedAt": "2020-08-18T03:26:19Z",
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Democratic National Convention: Day 1",
                 },
-                "publishedAt": "2020-08-18T03:26:19Z",
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/hQq7ZSgvhtU/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "3753",
+                  "dislikeCount": "8449",
+                  "favoriteCount": "0",
+                  "likeCount": "14469",
+                  "viewCount": "662594",
                 },
-                "title": "Democratic National Convention: Day 1",
               },
-              "statistics": Object {
-                "commentCount": "3753",
-                "dislikeCount": "8449",
-                "favoriteCount": "0",
-                "likeCount": "14469",
-                "viewCount": "662594",
-              },
-            },
-            Object {
-              "etag": "e1ag_97dOeyMGICIgOUWRTFsNn0",
-              "id": "-PmkvlDk-yI",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "22",
-                "channelId": "UCfp86n--4JvqKbunwSI2lYQ",
-                "channelTitle": "Cody Ko",
-                "defaultAudioLanguage": "en",
-                "description": "Click here http://harrys.com/codyko to get your Starter Set from Harry's for $3!
-
-merch: http://ko-official.com
-podcast: https://www.youtube.com/channel/UC4sf8XtH_uXnwNP699luQVQ
-2nd channel: https://www.youtube.com/channel/UCy06jHRS_82N2i5v1YL7glQ
-new song: https://song.link/us/i/1495110200
-world tour tix: http://tinymeattour.com
-
-instagram: http://instagram.com/codyko
-twitter: http://twitter.com/codyko
-
-business: mahzad.babayan@fullscreen.com
-
-edited by: https://www.youtube.com/goofyjuice
-
-5 Min Crafts: Baking
-https://youtu.be/-PmkvlDk-yI
-
-Cody Ko
-https://www.youtube.com/user/codyko69",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "e1ag_97dOeyMGICIgOUWRTFsNn0",
+                "id": "-PmkvlDk-yI",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "22",
+                  "channelId": "UCfp86n--4JvqKbunwSI2lYQ",
+                  "channelTitle": "Cody Ko",
+                  "defaultAudioLanguage": "en",
                   "description": "Click here http://harrys.com/codyko to get your Starter Set from Harry's for $3!
 
 merch: http://ko-official.com
@@ -2879,136 +2876,159 @@ https://youtu.be/-PmkvlDk-yI
 
 Cody Ko
 https://www.youtube.com/user/codyko69",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "Click here http://harrys.com/codyko to get your Starter Set from Harry's for $3!
+
+merch: http://ko-official.com
+podcast: https://www.youtube.com/channel/UC4sf8XtH_uXnwNP699luQVQ
+2nd channel: https://www.youtube.com/channel/UCy06jHRS_82N2i5v1YL7glQ
+new song: https://song.link/us/i/1495110200
+world tour tix: http://tinymeattour.com
+
+instagram: http://instagram.com/codyko
+twitter: http://twitter.com/codyko
+
+business: mahzad.babayan@fullscreen.com
+
+edited by: https://www.youtube.com/goofyjuice
+
+5 Min Crafts: Baking
+https://youtu.be/-PmkvlDk-yI
+
+Cody Ko
+https://www.youtube.com/user/codyko69",
+                    "title": "5 Min Crafts: Baking",
+                  },
+                  "publishedAt": "2020-08-17T19:54:59Z",
+                  "tags": Array [
+                    "crafts",
+                    "5 min crafts",
+                    "cinnamon",
+                    "cinnabon",
+                    "Cody ko",
+                    "cody",
+                    "ko",
+                    "instagram",
+                    "comedy",
+                    "sketch",
+                    "dms",
+                    "cringe",
+                    "vine",
+                    "advice",
+                    "vlog",
+                    "comments",
+                    "codyko",
+                    "comedian",
+                    "vines",
+                    "podcast",
+                    "funny",
+                    "tiny meat gang",
+                    "insanely chill",
+                    "6secondauditions",
+                    "the weekend edition",
+                  ],
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "5 Min Crafts: Baking",
                 },
-                "publishedAt": "2020-08-17T19:54:59Z",
-                "tags": Array [
-                  "crafts",
-                  "5 min crafts",
-                  "cinnamon",
-                  "cinnabon",
-                  "Cody ko",
-                  "cody",
-                  "ko",
-                  "instagram",
-                  "comedy",
-                  "sketch",
-                  "dms",
-                  "cringe",
-                  "vine",
-                  "advice",
-                  "vlog",
-                  "comments",
-                  "codyko",
-                  "comedian",
-                  "vines",
-                  "podcast",
-                  "funny",
-                  "tiny meat gang",
-                  "insanely chill",
-                  "6secondauditions",
-                  "the weekend edition",
-                ],
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/-PmkvlDk-yI/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "10586",
+                  "dislikeCount": "903",
+                  "favoriteCount": "0",
+                  "likeCount": "150827",
+                  "viewCount": "1468702",
                 },
-                "title": "5 Min Crafts: Baking",
               },
-              "statistics": Object {
-                "commentCount": "10586",
-                "dislikeCount": "903",
-                "favoriteCount": "0",
-                "likeCount": "150827",
-                "viewCount": "1468702",
-              },
-            },
-            Object {
-              "etag": "vI1kA13PpVr0uM15ifUZujla8pk",
-              "id": "jTMJK7wb0rM",
-              "kind": "youtube#video",
-              "snippet": Object {
-                "categoryId": "28",
-                "channelId": "UCtI0Hodo5o5dUb67FeUjDeA",
-                "channelTitle": "SpaceX",
-                "description": "SpaceX is targeting Tuesday, August 18 at 10:31 a.m. EDT for launch of its eleventh Starlink mission, which will include 58 Starlink satellites and three of Planet’s SkySats. Falcon 9 will lift off from Space Launch Complex 40 (SLC-40) at Cape Canaveral Air Force Station in Florida.  
-
-Falcon 9’s first stage previously supported the Telstar 18 VANTAGE mission in September 2018, the Iridium-8 mission in January 2019, and three separate Starlink missions in May 2019, January 2020, and June 2020. Following stage separation, SpaceX will land Falcon 9’s first stage on the “Of Course I Still Love You” droneship, which will be stationed in the Atlantic Ocean. Falcon 9’s fairing previously flew on the fourth launch of Starlink.
-
-Planet’s SkySats will deploy sequentially beginning about 12 and a half minutes after liftoff, and the Starlink satellites will deploy approximately 26 minutes after liftoff.",
-                "liveBroadcastContent": "none",
-                "localized": Object {
+              Object {
+                "etag": "vI1kA13PpVr0uM15ifUZujla8pk",
+                "id": "jTMJK7wb0rM",
+                "kind": "youtube#video",
+                "snippet": Object {
+                  "categoryId": "28",
+                  "channelId": "UCtI0Hodo5o5dUb67FeUjDeA",
+                  "channelTitle": "SpaceX",
                   "description": "SpaceX is targeting Tuesday, August 18 at 10:31 a.m. EDT for launch of its eleventh Starlink mission, which will include 58 Starlink satellites and three of Planet’s SkySats. Falcon 9 will lift off from Space Launch Complex 40 (SLC-40) at Cape Canaveral Air Force Station in Florida.  
 
 Falcon 9’s first stage previously supported the Telstar 18 VANTAGE mission in September 2018, the Iridium-8 mission in January 2019, and three separate Starlink missions in May 2019, January 2020, and June 2020. Following stage separation, SpaceX will land Falcon 9’s first stage on the “Of Course I Still Love You” droneship, which will be stationed in the Atlantic Ocean. Falcon 9’s fairing previously flew on the fourth launch of Starlink.
 
 Planet’s SkySats will deploy sequentially beginning about 12 and a half minutes after liftoff, and the Starlink satellites will deploy approximately 26 minutes after liftoff.",
+                  "liveBroadcastContent": "none",
+                  "localized": Object {
+                    "description": "SpaceX is targeting Tuesday, August 18 at 10:31 a.m. EDT for launch of its eleventh Starlink mission, which will include 58 Starlink satellites and three of Planet’s SkySats. Falcon 9 will lift off from Space Launch Complex 40 (SLC-40) at Cape Canaveral Air Force Station in Florida.  
+
+Falcon 9’s first stage previously supported the Telstar 18 VANTAGE mission in September 2018, the Iridium-8 mission in January 2019, and three separate Starlink missions in May 2019, January 2020, and June 2020. Following stage separation, SpaceX will land Falcon 9’s first stage on the “Of Course I Still Love You” droneship, which will be stationed in the Atlantic Ocean. Falcon 9’s fairing previously flew on the fourth launch of Starlink.
+
+Planet’s SkySats will deploy sequentially beginning about 12 and a half minutes after liftoff, and the Starlink satellites will deploy approximately 26 minutes after liftoff.",
+                    "title": "Starlink Mission",
+                  },
+                  "publishedAt": "2020-08-18T16:07:55Z",
+                  "thumbnails": Object {
+                    "default": Object {
+                      "height": 90,
+                      "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/default.jpg",
+                      "width": 120,
+                    },
+                    "high": Object {
+                      "height": 360,
+                      "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/hqdefault.jpg",
+                      "width": 480,
+                    },
+                    "maxres": Object {
+                      "height": 720,
+                      "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/maxresdefault.jpg",
+                      "width": 1280,
+                    },
+                    "medium": Object {
+                      "height": 180,
+                      "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/mqdefault.jpg",
+                      "width": 320,
+                    },
+                    "standard": Object {
+                      "height": 480,
+                      "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/sddefault.jpg",
+                      "width": 640,
+                    },
+                  },
                   "title": "Starlink Mission",
                 },
-                "publishedAt": "2020-08-18T16:07:55Z",
-                "thumbnails": Object {
-                  "default": Object {
-                    "height": 90,
-                    "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/default.jpg",
-                    "width": 120,
-                  },
-                  "high": Object {
-                    "height": 360,
-                    "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/hqdefault.jpg",
-                    "width": 480,
-                  },
-                  "maxres": Object {
-                    "height": 720,
-                    "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/maxresdefault.jpg",
-                    "width": 1280,
-                  },
-                  "medium": Object {
-                    "height": 180,
-                    "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/mqdefault.jpg",
-                    "width": 320,
-                  },
-                  "standard": Object {
-                    "height": 480,
-                    "url": "https://i.ytimg.com/vi/jTMJK7wb0rM/sddefault.jpg",
-                    "width": 640,
-                  },
+                "statistics": Object {
+                  "commentCount": "1918",
+                  "dislikeCount": "658",
+                  "favoriteCount": "0",
+                  "likeCount": "45271",
+                  "viewCount": "1049963",
                 },
-                "title": "Starlink Mission",
               },
-              "statistics": Object {
-                "commentCount": "1918",
-                "dislikeCount": "658",
-                "favoriteCount": "0",
-                "likeCount": "45271",
-                "viewCount": "1049963",
-              },
-            },
-          ]
-        }
-      />
+            ]
+          }
+        />
+      </div>
       <MoreButton
         onClickMore={[Function]}
       />
