@@ -19,7 +19,9 @@ describe("Test auth action", () => {
     await store.dispatch(signIn(userTokenData));
     const accessToken = localStorage.getItem("access_token");
     expect(accessToken).toBe(
-      `${userTokenData.uc.token_type} ${userTokenData.uc.access_token}`
+      `${userTokenData[process.env.REACT_APP_TOKEN_KEY].token_type} ${
+        userTokenData[process.env.REACT_APP_TOKEN_KEY].access_token
+      }`
     );
     expect(axios.get).toHaveBeenCalledWith(
       "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",

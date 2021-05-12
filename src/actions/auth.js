@@ -9,6 +9,7 @@ export const signIn = (user) => {
         throw Error("Authorization failed");
       }
       console.log(user);
+      console.log(process.env.REACT_APP_TOKEN_KEY);
       const accessToken = `${
         user[process.env.REACT_APP_TOKEN_KEY].token_type
       } ${user[process.env.REACT_APP_TOKEN_KEY].access_token}`;
