@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { defAxios as axios } from "settings";
 import { SIGN_IN, SIGN_OUT, CATCH_ERROR } from "actions/types";
 import { signIn, signOut } from "actions/auth";
-import { userTokenData, userInfoData } from "../fixtures/auth";
+import { userTokenData, userInfoData, user } from "../fixtures/auth";
 
 const mockStore = configMockStore([thunk]);
 describe("Test auth action", () => {
@@ -16,12 +16,10 @@ describe("Test auth action", () => {
     axios.get.mockResolvedValue({
       data: userInfoData,
     });
-    await store.dispatch(signIn(userTokenData));
+    await store.dispatch(signIn(user));
     const accessToken = localStorage.getItem("access_token");
     expect(accessToken).toBe(
-      `${userTokenData[process.env.REACT_APP_TOKEN_KEY].token_type} ${
-        userTokenData[process.env.REACT_APP_TOKEN_KEY].access_token
-      }`
+      `${userTokenData.token_type} ${userTokenData.access_token}`
     );
     expect(axios.get).toHaveBeenCalledWith(
       "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",

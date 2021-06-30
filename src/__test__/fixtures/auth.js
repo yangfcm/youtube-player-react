@@ -1,8 +1,12 @@
-const userTokenData = {
-  uc: {
-    token_type: "Bearer",
-    access_token: "mock_access_token",
+const user = {
+  getAuthResponse() {
+    return userTokenData;
   },
+};
+
+const userTokenData = {
+  token_type: "Bearer",
+  access_token: "mock_access_token",
 };
 
 const userInfoData = {
@@ -25,4 +29,4 @@ const authedUser = {
   avatar: userInfoData.picture,
 };
 
-export { userTokenData, userInfoData, authedUser };
+export { user, userTokenData, userInfoData, authedUser };

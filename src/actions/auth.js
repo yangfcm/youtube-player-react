@@ -3,16 +3,13 @@ import axios from "axios";
 
 export const signIn = (user) => {
   return async (dispatch) => {
-    // console.log("action", user);
     try {
       if (!user) {
         throw Error("Authorization failed");
       }
-      console.log(user);
-      console.log(process.env.REACT_APP_TOKEN_KEY);
-      const accessToken = `${
-        user[process.env.REACT_APP_TOKEN_KEY].token_type
-      } ${user[process.env.REACT_APP_TOKEN_KEY].access_token}`;
+      const accessToken = `${user.getAuthResponse().token_type} ${
+        user.getAuthResponse().access_token
+      }`;
       localStorage.setItem("access_token", accessToken);
       const response = await axios.get(
         "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
