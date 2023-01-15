@@ -1,6 +1,24 @@
+export interface Thumbnail {
+  height: number;
+  width: number;
+  url: string;
+}
+
 export interface Snippet {
+  title: string;
+  description: string;
   categoryId: string;
   channelId: string;
+  channelTitle: string;
+  publishedAt: Date;
+  tags: string[];
+  thumbnails: {
+    default?: Thumbnail;
+    high?: Thumbnail;
+    maxres?: Thumbnail;
+    medium?: Thumbnail;
+    standard?: Thumbnail;
+  };
 }
 
 export interface Statistics {
