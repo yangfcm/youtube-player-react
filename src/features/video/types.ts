@@ -24,3 +24,10 @@ export interface VideoSnippetStats extends Meta {
   snippet: Snippet;
   statistics: Statistics;
 }
+
+export interface VideoResponse {
+  etag: string;
+  kind: string;
+  pageInfo: { totalResults: number; resultsPerPage: number };
+  items: VideoSnippetStats[];
+}
