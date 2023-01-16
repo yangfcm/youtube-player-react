@@ -79,8 +79,14 @@ function App() {
       <ThemeProvider theme={mdTheme}>
         <CssBaseline />
         <Box sx={{ display: " flex" }}>
-          <MuiAppBar>
-            <Toolbar sx={{ pr: "24px" }}>
+          <MuiAppBar
+            sx={{
+              zIndex: {
+                sm: mdTheme.zIndex.drawer + 1,
+              },
+            }}
+          >
+            <Toolbar>
               <IconButton
                 edge="start"
                 color="inherit"
@@ -89,6 +95,10 @@ function App() {
                 }}
                 sx={{
                   marginRight: "36px",
+                  display: {
+                    xs: "block",
+                    sm: "none",
+                  },
                 }}
               >
                 <MenuIcon />
@@ -109,6 +119,12 @@ function App() {
             onClick={() => {
               setOpen(false);
             }}
+            sx={{
+              display: {
+                xs: "block",
+                sm: "none",
+              },
+            }}
           >
             <List>
               <ListItem disablePadding>
@@ -128,6 +144,18 @@ function App() {
                 </ListItemButton>
               </ListItem>
             </List>
+          </MuiDrawer>
+          <MuiDrawer
+            variant="permanent"
+            open
+            sx={{
+              display: {
+                xs: "none",
+                sm: "block",
+              },
+            }}
+          >
+            permanent drawer
           </MuiDrawer>
         </Box>
       </ThemeProvider>
