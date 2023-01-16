@@ -6,11 +6,18 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import HomeIcon from "@mui/icons-material/Home";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { store } from "./app/store";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 const mdTheme = createTheme();
 
@@ -103,18 +110,24 @@ function App() {
               setOpen(false);
             }}
           >
-            <Toolbar
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                px: [1],
-              }}
-            >
-              <IconButton>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Toolbar>
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <SubscriptionsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Subscriptions" />
+                </ListItemButton>
+              </ListItem>
+            </List>
           </MuiDrawer>
         </Box>
       </ThemeProvider>
