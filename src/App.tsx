@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { Provider } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import HomeIcon from "@mui/icons-material/Home";
-import MuiDrawer from "@mui/material/Drawer";
+import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { store } from "./app/store";
 import List from "@mui/material/List";
@@ -23,54 +22,6 @@ const mdTheme = createTheme();
 
 const drawerWidth: number = 240;
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(!open && {
-      overflowX: "hidden",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}));
-
 function App() {
   const [open, setOpen] = useState(false);
 
@@ -79,10 +30,10 @@ function App() {
       <ThemeProvider theme={mdTheme}>
         <CssBaseline />
         <Box sx={{ display: " flex" }}>
-          <MuiAppBar
+          <AppBar
             sx={{
               zIndex: {
-                sm: mdTheme.zIndex.drawer + 1,
+                md: mdTheme.zIndex.drawer + 1,
               },
             }}
           >
@@ -113,8 +64,8 @@ function App() {
                 Youtube
               </Typography>
             </Toolbar>
-          </MuiAppBar>
-          <MuiDrawer
+          </AppBar>
+          <Drawer
             open={open}
             onClick={() => {
               setOpen(false);
@@ -122,7 +73,11 @@ function App() {
             sx={{
               display: {
                 xs: "block",
-                sm: "none",
+                md: "none",
+              },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
               },
             }}
           >
@@ -144,19 +99,23 @@ function App() {
                 </ListItemButton>
               </ListItem>
             </List>
-          </MuiDrawer>
-          <MuiDrawer
+          </Drawer>
+          <Drawer
             variant="permanent"
             open
             sx={{
               display: {
                 xs: "none",
-                sm: "block",
+                md: "block",
+              },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
               },
             }}
           >
             permanent drawer
-          </MuiDrawer>
+          </Drawer>
         </Box>
       </ThemeProvider>
     </Provider>
