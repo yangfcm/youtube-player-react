@@ -6,21 +6,15 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import HomeIcon from "@mui/icons-material/Home";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import { store } from "./app/store";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import { SidebarMenu } from "./components/SidebarMenu";
 
 const mdTheme = createTheme();
 
-const drawerWidth: number = 240;
+const drawerWidth: number = 220;
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -45,10 +39,9 @@ function App() {
                   setOpen(true);
                 }}
                 sx={{
-                  marginRight: "36px",
                   display: {
-                    xs: "block",
-                    sm: "none",
+                    xs: "inline-flex",
+                    md: "none",
                   },
                 }}
               >
@@ -81,24 +74,7 @@ function App() {
               },
             }}
           >
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Home" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <SubscriptionsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Subscriptions" />
-                </ListItemButton>
-              </ListItem>
-            </List>
+            <SidebarMenu />
           </Drawer>
           <Drawer
             variant="permanent"
@@ -114,7 +90,8 @@ function App() {
               },
             }}
           >
-            permanent drawer
+            <Toolbar />
+            <SidebarMenu />
           </Drawer>
         </Box>
       </ThemeProvider>
