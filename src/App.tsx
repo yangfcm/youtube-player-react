@@ -23,8 +23,9 @@ function App() {
     <Provider store={store}>
       <ThemeProvider theme={mdTheme}>
         <CssBaseline />
-        <Box sx={{ display: " flex" }}>
+        <Box sx={{ display: " flex", height: "100vh" }}>
           <AppBar
+            position="fixed"
             sx={{
               zIndex: {
                 md: mdTheme.zIndex.drawer + 1,
@@ -88,11 +89,17 @@ function App() {
                 boxSizing: "border-box",
                 width: drawerWidth,
               },
+              width: drawerWidth,
             }}
           >
             <Toolbar />
             <SidebarMenu />
           </Drawer>
+          <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+            <Toolbar />
+            <div></div>
+            main content
+          </Box>
         </Box>
       </ThemeProvider>
     </Provider>
