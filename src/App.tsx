@@ -24,7 +24,6 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        {" "}
         <ThemeProvider theme={mdTheme}>
           <CssBaseline />
           <Box sx={{ display: " flex", height: "100vh" }}>
