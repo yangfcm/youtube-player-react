@@ -1,3 +1,5 @@
+import { RequireAuth } from "../components/RequireAuth";
+
 export function Subscriptions() {
-  return <>Subscriptions page</>;
+  return <RequireAuth>Subscriptions page</RequireAuth>;
 }
