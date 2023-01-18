@@ -35,16 +35,18 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
     const auth = (response as GoogleLoginResponse).getAuthResponse();
-    console.log(auth);
     const userProfile = (response as GoogleLoginResponse).getBasicProfile();
-    signin({
-      id: userProfile.getId(),
-      firstName: userProfile.getGivenName(),
-      lastName: userProfile.getFamilyName(),
-      email: userProfile.getEmail(),
-      avatar: userProfile.getImageUrl(),
-      username: userProfile.getName(),
-    });
+    signin(
+      {
+        id: userProfile.getId(),
+        firstName: userProfile.getGivenName(),
+        lastName: userProfile.getFamilyName(),
+        email: userProfile.getEmail(),
+        avatar: userProfile.getImageUrl(),
+        username: userProfile.getName(),
+      },
+      auth.access_token
+    );
   };
 
   const handleFailureSignin = () => {

@@ -13,8 +13,8 @@ export function useAuth() {
 
   const isSignedIn = useSelector(selIsSignedIn);
   const signin = useCallback(
-    (user: UserProfile) => {
-      dispatch(signinAction(user));
+    (user: UserProfile, token: string) => {
+      dispatch(signinAction({ user, token }));
     },
     [dispatch]
   );
