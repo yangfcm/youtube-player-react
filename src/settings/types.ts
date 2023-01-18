@@ -4,3 +4,8 @@ export enum AsyncStatus {
   FAIL = "fail",
   SUCCESS = "success",
 }
+
+export type GapiLoadError = {
+  details: string;
+  error: string;
+};

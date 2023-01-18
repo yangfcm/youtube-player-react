@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   GoogleLogin,
   GoogleLoginResponse,
@@ -6,21 +6,32 @@ import {
 } from "react-google-login";
 import { gapi } from "gapi-script";
 import { useAuth } from "../features/user/useAuth";
+import { GapiLoadError } from "../settings/types";
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isSignedIn, signin, signout } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const initClient = () => {
-      gapi.client.init({
-        clientId: process.env.REACT_APP_CLIENT_ID,
-        scope: "openid ",
-      });
+      gapi.client
+        .init({
+          clientId: process.env.REACT_APP_CLIENT_ID,
+          scope: "openid ",
+        })
+        .then(() => {
+          setLoading(false);
+        })
+        .catch((e: GapiLoadError) => {
+          setLoading(false);
+          setError(e.details);
+        });
     };
     gapi.load("client:auth2", initClient);
   }, []);
 
-  const handleSuccess = (
+  const handleSuccessSignin = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
     const auth = (response as GoogleLoginResponse).getAuthResponse();
@@ -35,17 +46,21 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
       username: userProfile.getName(),
     });
   };
-  const handleFailure = () => {
+
+  const handleFailureSignin = () => {
     signout();
   };
+
+  if (loading) return null;
+  if (error) return <div>{error}</div>;
 
   if (!isSignedIn) {
     return (
       <GoogleLogin
         clientId={process.env.REACT_APP_CLIENT_ID || ""}
         buttonText="Sign in with Google"
-        onSuccess={handleSuccess}
-        onFailure={handleFailure}
+        onSuccess={handleSuccessSignin}
+        onFailure={handleFailureSignin}
         cookiePolicy={"single_host_origin"}
         isSignedIn={true}
       />
