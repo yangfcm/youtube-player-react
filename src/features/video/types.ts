@@ -49,3 +49,12 @@ export interface VideoResponse {
   pageInfo: { totalResults: number; resultsPerPage: number };
   items: VideoSnippetStats[];
 }
+
+export interface VideosResponse {
+  etag: string;
+  kind: string;
+  pageInfo: { totalResults: number; resultsPerPage: number };
+  items: VideoSnippetStats[];
+  nextPageToken?: string;
+  prevPageToken?: string;
+}

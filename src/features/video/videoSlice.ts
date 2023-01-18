@@ -5,14 +5,14 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import { VideoResponse, VideoSnippetStats } from "./types";
-import { fetchVideoAPI } from "./videoAPI";
+import { VideoResponse, VideoSnippetStats, VideosResponse } from "./types";
+import { fetchVideoAPI, fetchVideosAPI } from "./videoAPI";
 
 interface VideoState {
   videos: {
     status: AsyncStatus;
-    items: VideoSnippetStats[];
     error: SerializedError | null;
+    mostPopular?: VideosResponse;
   };
   video: {
     status: AsyncStatus;
@@ -24,7 +24,6 @@ interface VideoState {
 const initialState: VideoState = {
   videos: {
     status: AsyncStatus.IDLE,
-    items: [],
     error: null,
   },
   video: {
@@ -37,7 +36,15 @@ const initialState: VideoState = {
 export const fetchVideo = createAsyncThunk(
   "video/fetchVideo",
   async (videoId: string) => {
-    const response: AxiosResponse<VideoResponse> = await fetchVideoAPI(videoId);
+    const response = await fetchVideoAPI(videoId);
+    return response;
+  }
+);
+
+export const fetchVideos = createAsyncThunk(
+  "video/fetchVideos",
+  async (filter?: Record<string, string>) => {
+    const response = await fetchVideosAPI(filter);
     return response;
   }
 );
@@ -52,7 +59,7 @@ const videoSlice = createSlice({
     };
     const fetchVideoSuccess = (
       state: VideoState,
-      { payload }: { payload: AxiosResponse<VideoResponse> }
+      { payload }: { payload: AxiosResponse<VideoResponse, any> }
     ) => {
       state.video.status = AsyncStatus.SUCCESS;
       state.video.item = payload.data.items[0] || null;
@@ -66,10 +73,37 @@ const videoSlice = createSlice({
       state.video.error = error;
     };
 
+    const fetchVideosStart = (state: VideoState) => {
+      state.videos.status = AsyncStatus.LOADING;
+    };
+    const fetchVideosSuccess = (
+      state: VideoState,
+      {
+        payload,
+        meta: { arg },
+      }: {
+        payload: AxiosResponse<VideosResponse>;
+        meta: { arg?: Record<string, string> };
+      }
+    ) => {
+      state.videos.status = AsyncStatus.SUCCESS;
+      if (arg?.chart === "mostPopular") state.videos.mostPopular = payload.data;
+    };
+    const fetchVideosFailed = (
+      state: VideoState,
+      { error }: { error: SerializedError }
+    ) => {
+      state.videos.status = AsyncStatus.FAIL;
+      state.videos.error = error;
+    };
+
     builder
       .addCase(fetchVideo.pending, fetchVideoStart)
       .addCase(fetchVideo.fulfilled, fetchVideoSuccess)
-      .addCase(fetchVideo.rejected, fetchVideoFailed);
+      .addCase(fetchVideo.rejected, fetchVideoFailed)
+      .addCase(fetchVideos.pending, fetchVideosStart)
+      .addCase(fetchVideos.fulfilled, fetchVideosSuccess)
+      .addCase(fetchVideos.rejected, fetchVideosFailed);
   },
 });
 
