@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 export interface UserProfile {
@@ -31,7 +31,7 @@ const userSlice = createSlice({
       }: PayloadAction<{ user: UserProfile; token: string }>
     ) => {
       state.profile = user;
-      state.token = token;
+      state.token = "Bearer " + token;
     },
     signout: (state) => {
       state.profile = null;
@@ -41,10 +41,13 @@ const userSlice = createSlice({
 
 export const { signin, signout } = userSlice.actions;
 
-export const selIsSignedIn = (state: RootState) =>
-  !!(state.user.profile?.id && state.user.token);
+const selUserState = (state: RootState) => state.user;
 
-export const selToken = (state: RootState) => state.user.token;
-export const selProfile = (state: RootState) => state.user.profile;
+export const selIsSignedIn = createSelector(
+  selUserState,
+  (user) => !!(user.profile?.id && user.token)
+);
+export const selToken = createSelector(selUserState, (user) => user.token);
+export const selProfile = createSelector(selUserState, (user) => user.profile);
 
 export const userReducer = userSlice.reducer;
