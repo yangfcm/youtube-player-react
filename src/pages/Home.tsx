@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { GoogleLogin } from "react-google-login";
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from "react-google-login";
 import { gapi } from "gapi-script";
 
 export function Home() {
@@ -13,8 +17,13 @@ export function Home() {
     gapi.load("client:auth2", initClient);
   }, []);
 
-  const onSuccess = (res: any) => {
-    console.log("success:", res);
+  const onSuccess = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
+    console.log(
+      "success:",
+      (response as GoogleLoginResponse).getAuthResponse()
+    );
   };
   const onFailure = (err: any) => {
     console.log("failed:", err);
