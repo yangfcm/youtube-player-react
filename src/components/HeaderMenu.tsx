@@ -1,16 +1,14 @@
 import { useState } from "react";
-import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import { GoogleLogout } from "react-google-login";
 import { RequireAuth } from "./RequireAuth";
 import { useProfile } from "../features/user/useProfile";
 import { useAuth } from "../features/user/useAuth";
-import { GoogleLogout } from "react-google-login";
 
 export function HeaderMenu() {
   const profile = useProfile();
@@ -75,7 +73,7 @@ export function HeaderMenu() {
           <GoogleLogout
             clientId={process.env.REACT_APP_CLIENT_ID || ""}
             onLogoutSuccess={handleSignOut}
-            className="auth__google-logout_button"
+            className="auth__google-logout-button"
             buttonText="Sign Out"
           />
         </MenuItem>

@@ -13,7 +13,10 @@ code {
 }
 
 .auth__google-login-button > div,
-.auth__google-logout_button > div {
+.auth__google-logout-button > div {
   margin-right: 0 !important;
   padding: 6px !important;
+}
+.auth__google-logout-button {
+  box-shadow: none !important;
 }

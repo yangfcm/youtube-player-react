@@ -6,6 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useToggleSidebar } from "../features/setting/useToggleSidebar";
 import { HeaderMenu } from "./HeaderMenu";
+import { SearchBar } from "./SearchBar";
 
 export function Header() {
   const theme = useTheme();
@@ -20,7 +21,7 @@ export function Header() {
         },
       }}
     >
-      <Toolbar>
+      <Toolbar sx={{ justifyContent: "space-between" }}>
         <IconButton
           edge="start"
           color="inherit"
@@ -41,10 +42,17 @@ export function Header() {
           variant="h6"
           color="inherit"
           noWrap
-          sx={{ flexGrow: 1 }}
+          sx={{
+            flexGrow: 1,
+            display: {
+              xs: "none",
+              sm: "block",
+            },
+          }}
         >
           Youtube
         </Typography>
+        <SearchBar />
         <HeaderMenu />
       </Toolbar>
     </AppBar>
