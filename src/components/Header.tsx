@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useToggleSidebar } from "../features/setting/useToggleSidebar";
+import { HeaderMenu } from "./HeaderMenu";
 
 export function Header() {
   const theme = useTheme();
@@ -44,6 +45,7 @@ export function Header() {
         >
           Youtube
         </Typography>
+        <HeaderMenu />
       </Toolbar>
     </AppBar>
   );

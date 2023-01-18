@@ -44,4 +44,7 @@ export const { signin, signout } = userSlice.actions;
 export const selIsSignedIn = (state: RootState) =>
   !!(state.user.profile?.id && state.user.token);
 
+export const selToken = (state: RootState) => state.user.token;
+export const selProfile = (state: RootState) => state.user.profile;
+
 export const userReducer = userSlice.reducer;
