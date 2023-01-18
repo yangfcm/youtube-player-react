@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import {
   selIsSignedIn,
+  selToken,
   signin as signinAction,
   signout as signoutAction,
   UserProfile,
@@ -12,6 +13,8 @@ export function useAuth() {
   const dispatch = useAppDispatch();
 
   const isSignedIn = useSelector(selIsSignedIn);
+  const token = useSelector(selToken);
+
   const signin = useCallback(
     (user: UserProfile, token: string) => {
       dispatch(signinAction({ user, token }));
@@ -24,6 +27,7 @@ export function useAuth() {
 
   return {
     isSignedIn,
+    token,
     signin,
     signout,
   };

@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.auth__google-login-button > div {
+  margin-right: 0 !important;
+  padding: 6px !important;
+}

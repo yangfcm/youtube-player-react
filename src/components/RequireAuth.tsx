@@ -65,6 +65,7 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
         onFailure={handleFailureSignin}
         cookiePolicy={"single_host_origin"}
         isSignedIn={true}
+        className="auth__google-login-button"
       />
     );
   }
