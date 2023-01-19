@@ -1,16 +1,17 @@
-import { useEffect } from "react";
-import { useAppDispatch } from "../app/hooks";
-import { fetchVideos } from "../features/video/videoSlice";
+import { useMostPopularVideos } from "../features/video/useMostPopularVideos";
 
 export function Home() {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(
-      fetchVideos({
-        chart: "mostPopular",
-      })
-    );
-  }, [dispatch]);
+  const { mostPopularVideos, status, error, fetchMore } =
+    useMostPopularVideos();
 
-  return <>Home page</>;
+  return (
+    <>
+      Home page
+      {mostPopularVideos &&
+        mostPopularVideos.map((video) => {
+          return <div>{video.snippet.title}</div>;
+        })}
+      <button onClick={fetchMore}>More</button>
+    </>
+  );
 }
