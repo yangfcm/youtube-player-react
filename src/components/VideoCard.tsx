@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActionArea from "@mui/material/CardActionArea";
 import Typography from "@mui/material/Typography";
 import { VideoSnippetStats } from "../features/video/types";
+import { fromNow, formatNumber } from "../app/utils";
 
 export function VideoCard({ video }: { video: VideoSnippetStats }) {
   return (
@@ -56,7 +57,8 @@ export function VideoCard({ video }: { video: VideoSnippetStats }) {
           </Box>
           <Typography variant="caption">
             <>
-              {video.statistics.viewCount} • {video.snippet.publishedAt}
+              {formatNumber(parseInt(video.statistics.viewCount)) + " views"} •{" "}
+              {fromNow(video.snippet.publishedAt)}
             </>
           </Typography>
         </CardContent>
