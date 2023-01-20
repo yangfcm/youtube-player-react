@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useMostPopularVideos } from "../features/video/useMostPopularVideos";
 import { VideoCard } from "../components/VideoCard";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
+import { MoreButton } from "../components/MoreButton";
 
 export function Home() {
   const { mostPopularVideos, status, error, fetchMore, hasMore } =
@@ -27,23 +27,12 @@ export function Home() {
           })}
       </Grid>
       {hasMore && (
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <LoadingButton
-            loading={status === AsyncStatus.LOADING}
-            variant="outlined"
-            size="small"
-            onClick={fetchMore}
-            sx={{
-              width: {
-                xs: "100%",
-                md: "50%",
-                lg: "40%",
-              },
-            }}
-          >
-            More
-          </LoadingButton>
-        </Box>
+        <MoreButton
+          loading={status === AsyncStatus.LOADING}
+          onClick={fetchMore}
+        >
+          More
+        </MoreButton>
       )}
     </Box>
   );
