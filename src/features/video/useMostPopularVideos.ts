@@ -34,5 +34,6 @@ export function useMostPopularVideos() {
     status: asyncStatus,
     error,
     fetchMore,
+    hasMore: !!nextPageToken,
   };
 }
