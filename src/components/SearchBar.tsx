@@ -11,7 +11,7 @@ export function SearchBar() {
         sx={{
           ml: 1,
           width: {
-            xs: "150px",
+            xs: "130px",
             sm: "auto",
             xl: "300px",
           },
