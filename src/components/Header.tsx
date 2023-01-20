@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import MuiLink from "@mui/material/Link";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
+import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import { useToggleSidebar } from "../features/setting/useToggleSidebar";
 import { HeaderMenu } from "./HeaderMenu";
 import { SearchBar } from "./SearchBar";
@@ -22,36 +26,54 @@ export function Header() {
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          onClick={(e) => {
-            setOpenSidebar(true);
-          }}
+        <Box
           sx={{
-            display: {
-              xs: "inline-flex",
-              md: "none",
-            },
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          sx={{
+            display: "flex",
+            alignItems: "center",
             flexGrow: 1,
-            display: {
-              xs: "none",
-              sm: "block",
-            },
           }}
         >
-          Youtube
-        </Typography>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={(e) => {
+              setOpenSidebar(true);
+            }}
+            sx={{
+              display: {
+                xs: "inline-flex",
+                md: "none",
+              },
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <MuiLink component={Link} to="/">
+            <Typography
+              component="h1"
+              variant="h6"
+              color="white"
+              noWrap
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <VideoLibraryIcon />
+              <Box
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "inline-flex",
+                  },
+                  ml: 1,
+                }}
+              >
+                LiteTube
+              </Box>
+            </Typography>
+          </MuiLink>
+        </Box>
         <SearchBar />
         <HeaderMenu />
       </Toolbar>
