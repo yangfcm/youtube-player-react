@@ -36,7 +36,10 @@ export function VideoCard({ video }: { video: VideoSnippetStats }) {
             sx={{
               display: "block",
               lineHeight: "23px",
-              height: "46px",
+              height: {
+                xs: "auto",
+                sm: "46px",
+              },
               overflow: "hidden",
               textOverflow: "ellipsis",
               mb: 1,
