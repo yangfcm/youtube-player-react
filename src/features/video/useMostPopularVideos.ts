@@ -32,7 +32,7 @@ export function useMostPopularVideos() {
   return {
     mostPopularVideos,
     status: asyncStatus,
-    error: error?.message,
+    error: error?.message || "",
     fetchMore,
     hasMore: !!nextPageToken,
   };

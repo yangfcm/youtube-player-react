@@ -3,6 +3,7 @@ import counterReducer from "../features/counter/counterSlice";
 import { videoReducer } from "../features/video/videoSlice";
 import { settingReducer } from "../features/setting/settingSlice";
 import { userReducer } from "../features/user/userSlice";
+import { searchReducer } from "../features/search/searchSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     video: videoReducer,
     setting: settingReducer,
     user: userReducer,
+    search: searchReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
