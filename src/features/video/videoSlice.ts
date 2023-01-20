@@ -87,6 +87,7 @@ const videoSlice = createSlice({
       }
     ) => {
       state.videos.status = AsyncStatus.SUCCESS;
+      state.videos.error = null;
       if (arg?.chart === "mostPopular") {
         const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
         const currentItems = state.videos.mostPopular?.items || [];
