@@ -27,12 +27,12 @@ export function useMostPopularVideos() {
     if (!mostPopularVideos || mostPopularVideos.length === 0) {
       dispatch(fetchVideos({ chart: "mostPopular" }));
     }
-  }, []);
+  }, [dispatch, mostPopularVideos]);
 
   return {
     mostPopularVideos,
     status: asyncStatus,
-    error,
+    error: error?.message,
     fetchMore,
     hasMore: !!nextPageToken,
   };
