@@ -5,6 +5,7 @@ import { VideoCard } from "../components/VideoCard";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { MoreButton } from "../components/MoreButton";
+import { ErrorMessage } from "../components/ErrorMessage";
 
 export function Home() {
   const { mostPopularVideos, status, error, fetchMore, hasMore } =
@@ -16,6 +17,7 @@ export function Home() {
 
   return (
     <Box sx={{ pb: 2 }}>
+      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Grid container spacing={2} sx={{ pb: 2 }}>
         {mostPopularVideos &&
           mostPopularVideos.map((video) => {
