@@ -12,12 +12,14 @@ export interface SearchState {
   status: AsyncStatus;
   error: SerializedError | null;
   results: SearchResultsResponse | null;
+  query: string;
 }
 
 const initialState: SearchState = {
   status: AsyncStatus.IDLE,
   error: null,
   results: null,
+  query: "",
 };
 
 export const fetchResults = createAsyncThunk(
@@ -43,12 +45,13 @@ const searchSlice = createSlice({
         meta: { arg },
       }: {
         payload: AxiosResponse<SearchResultsResponse>;
-        meta: { arg?: Record<string, string> };
+        meta: { arg: Record<string, string> };
       }
     ) => {
-      console.log(payload, arg);
+      const currentQuery = state.query;
       state.status = AsyncStatus.SUCCESS;
       state.error = null;
+      state.query = arg.q;
       const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
       const currentItems = state.results?.items || [];
       state.results = {
@@ -56,7 +59,7 @@ const searchSlice = createSlice({
         kind,
         nextPageToken,
         pageInfo,
-        items: [...currentItems, ...items],
+        items: arg.q === currentQuery ? [...currentItems, ...items] : items,
       };
     };
     const fetchResultsFailed = (

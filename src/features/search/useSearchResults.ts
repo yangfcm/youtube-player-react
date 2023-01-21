@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
@@ -14,6 +14,8 @@ export function useSearchResults(q: string) {
   const nextPageToken = useSelector(
     (state: RootState) => state.search.results?.nextPageToken
   );
+  const currentQuery = useSelector((state: RootState) => state.search.query);
+  const [queryChanged, setQueryChanged] = useState(false);
 
   const fetchMore = useCallback(() => {
     if (nextPageToken) {
@@ -22,16 +24,22 @@ export function useSearchResults(q: string) {
   }, [nextPageToken, dispatch, q]);
 
   useEffect(() => {
-    if (!searchResults?.length) {
+    if (!searchResults?.length || currentQuery !== q) {
+      // Fetch the first page.
       dispatch(fetchResults({ q, pageToken: "" }));
     }
-  }, [dispatch, q, searchResults?.length]);
+  }, [dispatch, q, searchResults?.length, currentQuery]);
+
+  useEffect(() => {
+    setQueryChanged(currentQuery !== q);
+  }, [currentQuery, q]);
 
   return {
     searchResults,
     status: asyncStatus,
     error: error?.message || "",
     hasMore: !!nextPageToken,
+    queryChanged,
     fetchMore,
   };
 }
