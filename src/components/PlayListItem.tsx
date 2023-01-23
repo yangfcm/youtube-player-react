@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import MuiLink from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -43,13 +45,26 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
       </Box>
       <Box>
         <CardContent>
-          <Typography component="div" variant="h5">
+          <MuiLink
+            component={Link}
+            to={`/playlist/${playList.id.playlistId}`}
+            underline="none"
+            color="inherit"
+            variant="h5"
+          >
             <FormatListBulletedIcon sx={{ height: "20px" }} color="secondary" />
             &nbsp;{playList.snippet.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" component="div">
+          </MuiLink>
+          <MuiLink
+            component={Link}
+            to={`/channel/${playList.snippet.channelId}`}
+            underline="none"
+            variant="body2"
+            color="text.secondary"
+            sx={{ display: "block" }}
+          >
             {playList.snippet.channelTitle}
-          </Typography>
+          </MuiLink>
           <Typography variant="caption">
             {fromNow(playList.snippet.publishedAt)}
           </Typography>
