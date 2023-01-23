@@ -6,7 +6,13 @@ export interface Snippet {
   description: string;
   publishedAt: Date;
   title: string;
-  thumbnails: Thumbnail[];
+  thumbnails: {
+    default?: Thumbnail;
+    high?: Thumbnail;
+    maxres?: Thumbnail;
+    medium?: Thumbnail;
+    standard?: Thumbnail;
+  };
 }
 
 export interface Meta {

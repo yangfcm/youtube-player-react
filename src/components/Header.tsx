@@ -6,8 +6,7 @@ import MuiLink from "@mui/material/Link";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from "@mui/icons-material/Menu";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useToggleSidebar } from "../features/setting/useToggleSidebar";
 import { HeaderMenu } from "./HeaderMenu";
 import { SearchBar } from "./SearchBar";
@@ -46,7 +45,7 @@ export function Header() {
               },
             }}
           >
-            <MenuIcon />
+            <YouTubeIcon />
           </IconButton>
           <MuiLink component={Link} to="/">
             <Typography
@@ -59,7 +58,7 @@ export function Header() {
                 alignItems: "center",
               }}
             >
-              <VideoLibraryIcon />
+              <YouTubeIcon />
               <Box
                 sx={{
                   display: {
