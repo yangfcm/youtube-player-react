@@ -29,7 +29,7 @@ export interface Statistics {
 }
 
 export interface Meta {
-  id: string | { videoId: string };
+  id: string | { videoId: string; kind: string };
   etag: string;
   kind: string;
 }

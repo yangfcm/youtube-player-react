@@ -5,6 +5,12 @@ import { useSearchResults } from "../features/search/useSearchResults";
 import { MoreButton } from "../components/MoreButton";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { AsyncStatus } from "../settings/types";
+import { VideoItem } from "../components/VideoItem";
+import { ChannelItem } from "../components/ChannelItem";
+import { PlayListItem } from "../components/PlayListItem";
+import { VideoSnippet } from "../features/video/types";
+import { ChannelSnippet } from "../features/channel/types";
+import { PlayListSnippet } from "../features/playlist/types";
 
 export function SearchResults() {
   const location = useLocation();
@@ -29,11 +35,34 @@ export function SearchResults() {
   }
 
   return (
-    <Box sx={{ pb: 2 }}>
+    <Box
+      sx={{
+        pb: 2,
+        px: {
+          xs: 0,
+          lg: 5,
+        },
+      }}
+    >
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       {searchResults &&
-        searchResults.map((result) => {
-          return <div>{result.snippet.title}</div>;
+        searchResults.map((result, index) => {
+          if (typeof result.id === "string") return null;
+          const kind = result.id.kind.split("#")[1];
+          if (kind === "video") {
+            return <VideoItem key={index} video={result as VideoSnippet} />;
+          }
+          if (kind === "channel") {
+            return (
+              <ChannelItem key={index} channel={result as ChannelSnippet} />
+            );
+          }
+          if (kind === "playlist") {
+            return (
+              <PlayListItem key={index} playList={result as PlayListSnippet} />
+            );
+          }
+          return null;
         })}
       {hasMore && (
         <MoreButton
