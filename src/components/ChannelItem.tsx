@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
 import { ChannelSnippet } from "../features/channel/types";
 
 export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
@@ -18,6 +19,7 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
           xs: "column",
           sm: "row",
         },
+        my: 1,
       }}
     >
       <Box
@@ -41,6 +43,8 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
       <Box>
         <CardContent>
           <Typography component="div" variant="h5">
+            <RecentActorsIcon sx={{ height: "20px" }} color="info" />
+            &nbsp;
             {channel.snippet.title}
           </Typography>
           <Typography
