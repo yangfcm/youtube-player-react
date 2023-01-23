@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import MuiLink from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -42,11 +44,20 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
       </Box>
       <Box>
         <CardContent>
-          <Typography component="div" variant="h5">
-            <RecentActorsIcon sx={{ height: "20px" }} color="info" />
+          <MuiLink
+            component={Link}
+            to={`/channel/${channel.id.channelId}`}
+            underline="none"
+            variant="h5"
+            color="inherit"
+          >
+            <RecentActorsIcon
+              sx={{ height: "20px", transform: "translateY(2px)" }}
+              color="info"
+            />
             &nbsp;
             {channel.snippet.title}
-          </Typography>
+          </MuiLink>
           <Typography
             variant="subtitle1"
             color="text.secondary"

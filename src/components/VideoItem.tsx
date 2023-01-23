@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import MuiLink from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -43,13 +45,26 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
       </Box>
       <Box>
         <CardContent>
-          <Typography component="div" variant="h5">
-            <OndemandVideoIcon sx={{ height: "20px" }} color="error" />
+          <MuiLink
+            component={Link}
+            to={`/video/${video.id}`}
+            underline="none"
+            variant="h5"
+            color="inherit"
+          >
+            <OndemandVideoIcon sx={{ height: "18px" }} color="error" />
             &nbsp;{video.snippet.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" component="div">
+          </MuiLink>
+          <MuiLink
+            component={Link}
+            to={`/channel/${video.snippet.channelId}`}
+            underline="none"
+            variant="body2"
+            color="text.secondary"
+            sx={{ display: "block" }}
+          >
             {video.snippet.channelTitle}
-          </Typography>
+          </MuiLink>
           <Typography variant="caption">
             {fromNow(video.snippet.publishedAt)}
           </Typography>
