@@ -28,7 +28,7 @@ export function useSearchResults(q: string) {
       // Fetch the first page.
       dispatch(fetchResults({ q, pageToken: "" }));
     }
-  }, [dispatch, q, searchResults?.length, currentQuery]);
+  }, [dispatch, q, currentQuery, searchResults?.length]);
 
   useEffect(() => {
     setQueryChanged(currentQuery !== q);
