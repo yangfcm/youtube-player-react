@@ -37,7 +37,7 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
           component="img"
           sx={{
             width: {
-              sm: 200,
+              sm: "200px",
               xs: "100%",
             },
           }}
@@ -52,7 +52,16 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
             underline="none"
             variant="h6"
             color="inherit"
-            sx={{ lineHeight: "10px" }}
+            sx={{
+              display: "block",
+              lineHeight: "23px",
+              height: {
+                xs: "auto",
+                sm: 23 * 3 + "px", // Restrict title to three lines.
+              },
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
             <OndemandVideoIcon
               sx={{ height: "18px", transform: "translateY(2px)" }}
