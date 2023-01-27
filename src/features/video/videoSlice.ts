@@ -16,7 +16,7 @@ interface VideoState {
   };
   video: {
     status: AsyncStatus;
-    item: VideoSnippetStats | null;
+    item: Record<string, VideoSnippetStats>;
     error: SerializedError | null;
   };
 }
@@ -28,7 +28,7 @@ const initialState: VideoState = {
   },
   video: {
     status: AsyncStatus.IDLE,
-    item: null,
+    item: {},
     error: null,
   },
 };
@@ -62,8 +62,14 @@ const videoSlice = createSlice({
       { payload }: { payload: AxiosResponse<VideoResponse, any> }
     ) => {
       state.video.status = AsyncStatus.SUCCESS;
-      state.video.item = payload.data.items[0] || null;
       state.video.error = null;
+      const video = payload.data.items[0];
+      if (video) {
+        state.video.item = {
+          ...state.video.item,
+          [video.id as string]: video,
+        };
+      }
     };
     const fetchVideoFailed = (
       state: VideoState,
