@@ -22,7 +22,7 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
           xs: "column",
           sm: "row",
         },
-        my: 1,
+        mb: 2,
       }}
     >
       <Box
@@ -50,9 +50,12 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
             to={`/playlist/${playList.id.playlistId}`}
             underline="none"
             color="inherit"
-            variant="h5"
+            variant="h6"
           >
-            <FormatListBulletedIcon sx={{ height: "20px" }} color="secondary" />
+            <FormatListBulletedIcon
+              sx={{ height: "20px", transform: "translateY(2px)" }}
+              color="secondary"
+            />
             &nbsp;{playList.snippet.title}
           </MuiLink>
           <MuiLink

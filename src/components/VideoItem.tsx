@@ -22,7 +22,7 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
           xs: "column",
           sm: "row",
         },
-        my: 1,
+        mb: 2,
       }}
     >
       <Box
@@ -49,10 +49,14 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
             component={Link}
             to={`/video/${(video.id as VideoId).videoId}`}
             underline="none"
-            variant="h5"
+            variant="h6"
             color="inherit"
+            sx={{ lineHeight: "10px" }}
           >
-            <OndemandVideoIcon sx={{ height: "18px" }} color="error" />
+            <OndemandVideoIcon
+              sx={{ height: "18px", transform: "translateY(2px)" }}
+              color="error"
+            />
             &nbsp;{video.snippet.title}
           </MuiLink>
           <MuiLink

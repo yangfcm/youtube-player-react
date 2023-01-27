@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
+import { VideoSnippet } from "../video/types";
 import { fetchResults } from "./searchSlice";
 
 export function useRelevantVideos(videoId: string) {
@@ -24,7 +25,7 @@ export function useRelevantVideos(videoId: string) {
   }, [videoId, dispatch, relevantVideos]);
 
   return {
-    videos: relevantVideos,
+    videos: relevantVideos as VideoSnippet[],
     status: asyncStatus,
     error: error?.message || "",
   };

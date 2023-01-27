@@ -21,7 +21,7 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
           xs: "column",
           sm: "row",
         },
-        my: 1,
+        mb: 2,
       }}
     >
       <Box
@@ -48,7 +48,7 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
             component={Link}
             to={`/channel/${channel.id.channelId}`}
             underline="none"
-            variant="h5"
+            variant="h6"
             color="inherit"
           >
             <RecentActorsIcon
