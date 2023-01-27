@@ -12,6 +12,7 @@ export interface SearchState {
   status: AsyncStatus;
   error: SerializedError | null;
   results: SearchResultsResponse | null;
+  relevantVideos: Record<string, SearchResultsResponse> | null;
   query: string;
 }
 
@@ -19,13 +20,14 @@ const initialState: SearchState = {
   status: AsyncStatus.IDLE,
   error: null,
   results: null,
+  relevantVideos: null,
   query: "",
 };
 
 export const fetchResults = createAsyncThunk(
   "search/fetchResults",
-  async ({ q, pageToken }: Record<"q" | "pageToken", string>) => {
-    const response = await fetchSearchResultsAPI(q, { pageToken });
+  async ({ q, pageToken }: Record<string, string>) => {
+    const response = await fetchSearchResultsAPI({ q, pageToken });
     return response;
   }
 );
@@ -48,19 +50,21 @@ const searchSlice = createSlice({
         meta: { arg: Record<string, string> };
       }
     ) => {
-      const currentQuery = state.query;
-      state.status = AsyncStatus.SUCCESS;
-      state.error = null;
-      state.query = arg.q;
-      const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
-      const currentItems = state.results?.items || [];
-      state.results = {
-        etag,
-        kind,
-        nextPageToken,
-        pageInfo,
-        items: arg.q === currentQuery ? [...currentItems, ...items] : items,
-      };
+      if (arg.q) {
+        const currentQuery = state.query;
+        state.status = AsyncStatus.SUCCESS;
+        state.error = null;
+        state.query = arg.q;
+        const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
+        const currentItems = state.results?.items || [];
+        state.results = {
+          etag,
+          kind,
+          nextPageToken,
+          pageInfo,
+          items: arg.q === currentQuery ? [...currentItems, ...items] : items,
+        };
+      }
     };
     const fetchResultsFailed = (
       state: SearchState,
