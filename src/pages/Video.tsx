@@ -30,7 +30,6 @@ function NoVideo() {
 export function Video() {
   const { id } = useParams();
   const { video, status, error } = useVideo(id);
-  console.log(id);
   if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
   if (!video || !id) {
     return <NoVideo />;
@@ -60,7 +59,7 @@ export function Video() {
           <Typography variant="body2">{video.snippet.description}</Typography>
         </Grid>
         <Grid item xs={12} sm={4} xl={3}>
-          <RelevantVideos />
+          <RelevantVideos videoId={id} />
         </Grid>
       </Grid>
     </Box>
