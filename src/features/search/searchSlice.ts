@@ -12,7 +12,7 @@ export interface SearchState {
   status: AsyncStatus;
   error: SerializedError | null;
   results: SearchResultsResponse | null;
-  relevantVideos: Record<string, SearchResultsResponse> | null;
+  relevantVideos: Record<string, SearchResultsResponse>;
   query: string;
 }
 
@@ -20,7 +20,7 @@ const initialState: SearchState = {
   status: AsyncStatus.IDLE,
   error: null,
   results: null,
-  relevantVideos: null,
+  relevantVideos: {},
   query: "",
 };
 
@@ -50,13 +50,13 @@ const searchSlice = createSlice({
         meta: { arg: Record<string, string> };
       }
     ) => {
+      state.status = AsyncStatus.SUCCESS;
+      state.error = null;
+      const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
+      const currentItems = state.results?.items || [];
       if (arg.q) {
         const currentQuery = state.query;
-        state.status = AsyncStatus.SUCCESS;
-        state.error = null;
         state.query = arg.q;
-        const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
-        const currentItems = state.results?.items || [];
         state.results = {
           etag,
           kind,
@@ -64,6 +64,9 @@ const searchSlice = createSlice({
           pageInfo,
           items: arg.q === currentQuery ? [...currentItems, ...items] : items,
         };
+      }
+      if (arg.relatedToVideoId) {
+        console.log("relevant videos");
       }
     };
     const fetchResultsFailed = (
