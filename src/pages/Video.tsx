@@ -38,7 +38,7 @@ export function Video() {
     <Box>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={7} xl={8}>
+        <Grid item xs={12} lg={7} xl={8}>
           <VideoPlayer videoId={id} />
           <Typography variant="h4" color="primary">
             {video.snippet.title}
@@ -58,7 +58,7 @@ export function Video() {
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.snippet.description}</Typography>
         </Grid>
-        <Grid item xs={12} md={5} xl={4}>
+        <Grid item xs={12} lg={5} xl={4}>
           <RelevantVideos videoId={id} />
         </Grid>
       </Grid>
