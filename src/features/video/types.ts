@@ -28,8 +28,10 @@ export interface Statistics {
   viewCount: string; // These properties are all number represented by string.
 }
 
+export type VideoId = { videoId: string; kind: string };
+
 export interface Meta {
-  id: string | { videoId: string; kind: string };
+  id: string | VideoId;
   etag: string;
   kind: string;
 }

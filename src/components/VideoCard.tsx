@@ -11,7 +11,7 @@ import { fromNow, formatNumber } from "../app/utils";
 export function VideoCard({ video }: { video: VideoSnippetStats }) {
   return (
     <Card>
-      <Link to={`/video/${video.id}`}>
+      <Link to={`/video/${video.id as string}`}>
         <img
           src={video.snippet.thumbnails.high?.url}
           alt={video.snippet.title}
@@ -29,7 +29,7 @@ export function VideoCard({ video }: { video: VideoSnippetStats }) {
         >
           <MuiLink
             component={Link}
-            to={`/video/${video.id}`}
+            to={`/video/${video.id as string}`}
             underline="none"
             variant="subtitle1"
             title={video.snippet.title}

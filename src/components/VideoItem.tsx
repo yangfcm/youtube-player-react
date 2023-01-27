@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { VideoSnippet } from "../features/video/types";
+import { VideoId, VideoSnippet } from "../features/video/types";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { fromNow } from "../app/utils";
 
@@ -47,7 +47,7 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
         <CardContent>
           <MuiLink
             component={Link}
-            to={`/video/${video.id}`}
+            to={`/video/${(video.id as VideoId).videoId}`}
             underline="none"
             variant="h5"
             color="inherit"
