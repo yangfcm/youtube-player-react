@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useToggleSidebar } from "../features/setting/useToggleSidebar";
 import { HeaderMenu } from "./HeaderMenu";
 import { SearchBar } from "./SearchBar";
@@ -45,7 +46,7 @@ export function Header() {
               },
             }}
           >
-            <YouTubeIcon />
+            <MenuIcon />
           </IconButton>
           <MuiLink component={Link} to="/">
             <Typography
