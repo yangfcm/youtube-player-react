@@ -26,8 +26,8 @@ const initialState: SearchState = {
 
 export const fetchResults = createAsyncThunk(
   "search/fetchResults",
-  async ({ q, pageToken }: Record<string, string>) => {
-    const response = await fetchSearchResultsAPI({ q, pageToken });
+  async (options: Record<string, string>) => {
+    const response = await fetchSearchResultsAPI(options);
     return response;
   }
 );
@@ -66,7 +66,7 @@ const searchSlice = createSlice({
         };
       }
       if (arg.relatedToVideoId) {
-        console.log("relevant videos");
+        state.relevantVideos[arg.relatedToVideoId] = payload.data;
       }
     };
     const fetchResultsFailed = (
