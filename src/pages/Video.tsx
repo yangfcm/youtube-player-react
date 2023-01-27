@@ -41,7 +41,7 @@ export function Video() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={8} xl={9}>
           <VideoPlayer videoId={id} />
-          <Typography variant="h4" color="primary" sx={{ mb: 1 }}>
+          <Typography variant="h4" color="primary">
             {video.snippet.title}
           </Typography>
           <MuiLink
@@ -49,7 +49,6 @@ export function Video() {
             to={`/channel/${video.snippet.channelId}`}
             underline="hover"
             variant="body1"
-            color="text.secondary"
           >
             {video.snippet.channelTitle}
           </MuiLink>
