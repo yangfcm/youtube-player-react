@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import { useLocation } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { useSearchResults } from "../features/search/useSearchResults";
@@ -49,20 +50,21 @@ export function SearchResults() {
         searchResults.map((result, index) => {
           if (typeof result.id === "string") return null;
           const kind = result.id.kind.split("#")[1];
-          if (kind === "video") {
-            return <VideoItem key={index} video={result as VideoSnippet} />;
-          }
-          if (kind === "channel") {
-            return (
-              <ChannelItem key={index} channel={result as ChannelSnippet} />
-            );
-          }
-          if (kind === "playlist") {
-            return (
-              <PlayListItem key={index} playList={result as PlayListSnippet} />
-            );
-          }
-          return null;
+          return (
+            <>
+              {kind === "video" ? (
+                <VideoItem key={index} video={result as VideoSnippet} />
+              ) : kind === "channel" ? (
+                <ChannelItem key={index} channel={result as ChannelSnippet} />
+              ) : kind === "playlist" ? (
+                <PlayListItem
+                  key={index}
+                  playList={result as PlayListSnippet}
+                />
+              ) : null}
+              <Divider sx={{ my: 1 }} />
+            </>
+          );
         })}
       {hasMore && (
         <MoreButton

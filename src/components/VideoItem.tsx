@@ -22,7 +22,6 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
           xs: "column",
           sm: "row",
         },
-        mb: 2,
         boxShadow: "none",
       }}
     >

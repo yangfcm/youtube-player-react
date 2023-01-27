@@ -22,7 +22,6 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
           xs: "column",
           sm: "row",
         },
-        mb: 2,
         boxShadow: "none",
       }}
     >
