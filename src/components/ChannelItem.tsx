@@ -21,7 +21,6 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
           xs: "column",
           sm: "row",
         },
-        mb: 2,
         boxShadow: "none",
       }}
     >
