@@ -11,6 +11,7 @@ export function VideoPlayer({ videoId }: { videoId: string }) {
         overflow: "hidden",
         background: "#dcddde",
         paddingBottom: "62%",
+        mb: 1,
       }}
     >
       <iframe

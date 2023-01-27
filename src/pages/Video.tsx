@@ -1,13 +1,17 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useVideo } from "../features/video/useVideo";
+import MuiLink from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
 import { RelevantVideos } from "../components/RelevantVideos";
+import { formatNumber, fromNow } from "../app/utils";
 
 function NoVideo() {
   return (
@@ -28,7 +32,7 @@ export function Video() {
   const { video, status, error } = useVideo(id);
   console.log(id);
   if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
-  if (!id || (!video && status === AsyncStatus.SUCCESS)) {
+  if (!video || !id) {
     return <NoVideo />;
   }
   return (
@@ -37,12 +41,29 @@ export function Video() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={8} xl={9}>
           <VideoPlayer videoId={id} />
+          <Typography variant="h4" color="primary" sx={{ mb: 1 }}>
+            {video.snippet.title}
+          </Typography>
+          <MuiLink
+            component={Link}
+            to={`/channel/${video.snippet.channelId}`}
+            underline="hover"
+            variant="body1"
+            color="text.secondary"
+          >
+            {video.snippet.channelTitle}
+          </MuiLink>
+          <Typography variant="body1" sx={{ my: 1 }}>
+            {formatNumber(parseInt(video.statistics.viewCount)) + " views"} •{" "}
+            {fromNow(video.snippet.publishedAt)}
+          </Typography>
+          <Divider sx={{ my: 1 }} />
+          <Typography variant="body2">{video.snippet.description}</Typography>
         </Grid>
         <Grid item xs={12} sm={4} xl={3}>
           <RelevantVideos />
         </Grid>
       </Grid>
-      Video page
     </Box>
   );
 }
