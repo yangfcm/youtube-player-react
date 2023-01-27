@@ -23,6 +23,7 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
           sm: "row",
         },
         mb: 2,
+        boxShadow: "none",
       }}
     >
       <Box

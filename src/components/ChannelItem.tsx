@@ -22,6 +22,7 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
           sm: "row",
         },
         mb: 2,
+        boxShadow: "none",
       }}
     >
       <Box
