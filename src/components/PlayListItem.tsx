@@ -23,6 +23,7 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
           sm: "row",
         },
         mb: 2,
+        boxShadow: "none",
       }}
     >
       <Box
