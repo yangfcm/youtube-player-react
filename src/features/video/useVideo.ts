@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
@@ -18,7 +18,7 @@ export function useVideo(videoId?: string) {
     if (videoId && !video) {
       dispatch(fetchVideo(videoId));
     }
-  }, [videoId, video]);
+  }, [videoId, video, dispatch]);
 
   return {
     status: asyncStatus,
