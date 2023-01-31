@@ -8,7 +8,7 @@ import { CommentReplies } from "./CommentReplies";
 export function CommentItem({ comment }: { comment: CommentSnippet }) {
   const topComment = comment.snippet.topLevelComment.snippet;
   return (
-    <Box sx={{ display: "flex", my: 2 }}>
+    <Box sx={{ display: "flex" }}>
       <Avatar
         src={topComment.authorProfileImageUrl}
         alt={topComment.authorDisplayName}
