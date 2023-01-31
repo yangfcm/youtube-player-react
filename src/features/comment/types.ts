@@ -45,7 +45,7 @@ export interface ReplySnippet {
 
 export interface CommentResponse {
   etag: string;
-  king: string;
+  kind: string;
   items: CommentSnippet[];
   nextPageToken?: string;
   pageInfo?: {

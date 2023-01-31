@@ -4,6 +4,7 @@ import { videoReducer } from "../features/video/videoSlice";
 import { settingReducer } from "../features/setting/settingSlice";
 import { userReducer } from "../features/user/userSlice";
 import { searchReducer } from "../features/search/searchSlice";
+import { commentReducer } from "../features/comment/commentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     setting: settingReducer,
     user: userReducer,
     search: searchReducer,
+    comment: commentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
