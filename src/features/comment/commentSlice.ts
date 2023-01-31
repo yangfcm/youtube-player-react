@@ -57,9 +57,7 @@ export const commentSlice = createSlice({
   extraReducers: (builder) => {
     const fetchCommentsStart = (
       state: CommentState,
-      {
-        meta: { arg },
-      }: { meta: { arg: { videoId: string; [key: string]: string } } }
+      { meta: { arg } }: { meta: { arg: { videoId: string } } }
     ) => {
       const { videoId } = arg;
       if (!videoId) return;
@@ -80,7 +78,7 @@ export const commentSlice = createSlice({
         meta: { arg },
       }: {
         payload: AxiosResponse<CommentResponse>;
-        meta: { arg: { videoId: string; [key: string]: string } };
+        meta: { arg: { videoId: string } };
       }
     ) => {
       const { videoId } = arg;
@@ -104,7 +102,7 @@ export const commentSlice = createSlice({
         meta: { arg },
       }: {
         error: SerializedError;
-        meta: { arg: { videoId: string; [key: string]: string } };
+        meta: { arg: { videoId: string } };
       }
     ) => {
       const { videoId } = arg;
@@ -113,10 +111,68 @@ export const commentSlice = createSlice({
       state.comments[videoId].error = error.message || "";
     };
 
+    const fetchRepliesStart = (
+      state: CommentState,
+      { meta: { arg } }: { meta: { arg: { commentId: string } } }
+    ) => {
+      const { commentId } = arg;
+      if (!commentId) return;
+      if (!state.replies[commentId]) {
+        state.replies[commentId] = {
+          status: AsyncStatus.LOADING,
+          error: "",
+          data: null,
+        };
+      } else {
+        state.replies[commentId].status = AsyncStatus.LOADING;
+      }
+    };
+
+    const fetchRepliesSuccess = (
+      state: CommentState,
+      {
+        payload,
+        meta: { arg },
+      }: {
+        payload: AxiosResponse<ReplyResponse>;
+        meta: { arg: { commentId: string; [key: string]: string } };
+      }
+    ) => {
+      const { commentId } = arg;
+      if (!commentId) return;
+      const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
+      const currentItems = state.replies[commentId]?.data?.items || [];
+      state.replies[commentId].status = AsyncStatus.SUCCESS;
+      state.replies[commentId].error = "";
+      state.replies[commentId].data = {
+        etag,
+        kind,
+        nextPageToken,
+        pageInfo,
+        items: [...currentItems, ...items],
+      };
+    };
+
+    const fetchRepliesFailed = (
+      state: CommentState,
+      {
+        error,
+        meta: { arg },
+      }: { error: SerializedError; meta: { arg: { commentId: string } } }
+    ) => {
+      const { commentId } = arg;
+      if (!commentId) return;
+      state.comments[commentId].status = AsyncStatus.FAIL;
+      state.comments[commentId].error = error.message || "";
+    };
+
     builder
       .addCase(fetchComments.pending, fetchCommentsStart)
       .addCase(fetchComments.fulfilled, fetchCommentsSuccess)
-      .addCase(fetchComments.rejected, fetchCommentsFailed);
+      .addCase(fetchComments.rejected, fetchCommentsFailed)
+      .addCase(fetchReplies.pending, fetchRepliesStart)
+      .addCase(fetchReplies.fulfilled, fetchRepliesSuccess)
+      .addCase(fetchReplies.rejected, fetchRepliesFailed);
   },
 });
 
