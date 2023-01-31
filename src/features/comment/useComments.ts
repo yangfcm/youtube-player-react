@@ -2,7 +2,6 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { AsyncStatus } from "../../settings/types";
 import { fetchComments } from "./commentSlice";
 
 export function useComments(videoId: string) {
@@ -29,13 +28,13 @@ export function useComments(videoId: string) {
         })
       );
     }
-  }, [dispatch, nextPageToken]);
+  }, [dispatch, nextPageToken, videoId]);
 
   useEffect(() => {
     if (videoId && (!comments || comments.length === 0)) {
       dispatch(fetchComments({ videoId }));
     }
-  }, [videoId, comments]);
+  }, [videoId, comments, dispatch]);
 
   return {
     comments,
