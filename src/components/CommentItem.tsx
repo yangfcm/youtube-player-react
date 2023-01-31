@@ -3,6 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { CommentSnippet } from "../features/comment/types";
 import { fromNow } from "../app/utils";
+import { CommentReplies } from "./CommentReplies";
 
 export function CommentItem({ comment }: { comment: CommentSnippet }) {
   const topComment = comment.snippet.topLevelComment.snippet;
@@ -23,6 +24,9 @@ export function CommentItem({ comment }: { comment: CommentSnippet }) {
           </Typography>
         </Box>
         <div dangerouslySetInnerHTML={{ __html: topComment.textDisplay }}></div>
+        {comment.snippet.totalReplyCount > 0 && (
+          <CommentReplies comment={comment} />
+        )}
       </Box>
     </Box>
   );
