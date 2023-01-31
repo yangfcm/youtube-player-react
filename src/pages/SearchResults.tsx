@@ -51,19 +51,16 @@ export function SearchResults() {
           if (typeof result.id === "string") return null;
           const kind = result.id.kind.split("#")[1];
           return (
-            <>
+            <Box key={index}>
               {kind === "video" ? (
-                <VideoItem key={index} video={result as VideoSnippet} />
+                <VideoItem video={result as VideoSnippet} />
               ) : kind === "channel" ? (
-                <ChannelItem key={index} channel={result as ChannelSnippet} />
+                <ChannelItem channel={result as ChannelSnippet} />
               ) : kind === "playlist" ? (
-                <PlayListItem
-                  key={index}
-                  playList={result as PlayListSnippet}
-                />
+                <PlayListItem playList={result as PlayListSnippet} />
               ) : null}
               <Divider sx={{ my: 1 }} />
-            </>
+            </Box>
           );
         })}
       {hasMore && (
