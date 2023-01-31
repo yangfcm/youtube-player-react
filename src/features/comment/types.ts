@@ -1,27 +1,32 @@
 export interface CommentSnippet {
-  videoId: string;
-  totalReplyCount: number;
-  isPublic: boolean;
-  canReply: boolean;
-  topLevelComment: {
-    id: string;
-    etag: string;
-    kind: string;
-    snippet: {
-      authorChannelId: {
-        value: string;
+  etag: string;
+  id: string;
+  kind: string;
+  snippet: {
+    videoId: string;
+    totalReplyCount: number;
+    isPublic: boolean;
+    canReply: boolean;
+    topLevelComment: {
+      id: string;
+      etag: string;
+      kind: string;
+      snippet: {
+        authorChannelId: {
+          value: string;
+        };
+        authorChannelUrl: string;
+        authorDisplayName: string;
+        authorProfileImageUrl: string;
+        canRate: boolean;
+        likeCount: number;
+        publishedAt: Date;
+        textDisplay: string;
+        textOriginal: string;
+        updatedAt: Date;
+        videoId: string;
+        viewerRating: string;
       };
-      authorChannelUrl: string;
-      authorDisplayName: string;
-      authorProfileImageUrl: string;
-      canRate: boolean;
-      likeCount: number;
-      publishedAt: Date;
-      textDisplay: string;
-      textOriginal: string;
-      updatedAt: Date;
-      videoId: string;
-      viewerRating: string;
     };
   };
 }
