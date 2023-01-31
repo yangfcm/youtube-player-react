@@ -17,7 +17,7 @@ export function RelevantVideos({ videoId }: { videoId: string }) {
       )}
       {videos &&
         videos.map((video, index) => (
-          <Box sx={{ mb: 1 }}>
+          <Box sx={{ mb: 1 }} key={index}>
             <VideoItem key={index} video={video} />
           </Box>
         ))}
