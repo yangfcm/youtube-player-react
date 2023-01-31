@@ -7,7 +7,7 @@ import { fromNow } from "../app/utils";
 export function CommentItem({ comment }: { comment: CommentSnippet }) {
   const topComment = comment.snippet.topLevelComment.snippet;
   return (
-    <Box sx={{ display: "flex", my: 1 }}>
+    <Box sx={{ display: "flex", my: 2 }}>
       <Avatar
         src={topComment.authorProfileImageUrl}
         alt={topComment.authorDisplayName}

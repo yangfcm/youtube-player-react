@@ -6,6 +6,7 @@ import { useComments } from "../features/comment/useComments";
 import { AsyncStatus } from "../settings/types";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { CommentItem } from "./CommentItem";
+import { MoreButton } from "./MoreButton";
 
 export function VideoComments({ videoId }: { videoId: string }) {
   const { comments, status, error, fetchMore, hasMore } = useComments(videoId);
@@ -29,6 +30,14 @@ export function VideoComments({ videoId }: { videoId: string }) {
         comments.map((comment) => (
           <CommentItem key={comment.id} comment={comment} />
         ))}
+      {hasMore && (
+        <MoreButton
+          loading={status === AsyncStatus.LOADING}
+          onClick={fetchMore}
+        >
+          More
+        </MoreButton>
+      )}
     </Box>
   );
 }
