@@ -32,20 +32,25 @@ export interface CommentSnippet {
 }
 
 export interface ReplySnippet {
-  authorChannelId: {
-    value: string;
+  etag: string;
+  id: string;
+  kind: string;
+  snippet: {
+    authorChannelId: {
+      value: string;
+    };
+    authorChannelUrl: string;
+    authorDisplayName: string;
+    authorProfileImageUrl: string;
+    canRate: boolean;
+    likeCount: number;
+    parentId: string;
+    publishedAt: Date;
+    textDisplay: string;
+    textOriginal: string;
+    updatedAt: Date;
+    viewerRating: string;
   };
-  authorChannelUrl: string;
-  authorDisplayName: string;
-  authorProfileImageUrl: string;
-  canRate: boolean;
-  likeCount: number;
-  parentId: string;
-  publishedAt: Date;
-  textDisplay: string;
-  textOriginal: string;
-  updatedAt: Date;
-  viewerRating: string;
 }
 
 export interface CommentResponse {
