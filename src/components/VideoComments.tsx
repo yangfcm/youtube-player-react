@@ -28,7 +28,9 @@ export function VideoComments({ videoId }: { videoId: string }) {
       )}
       {comments &&
         comments.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
+          <Box sx={{ my: 3 }}>
+            <CommentItem key={comment.id} comment={comment} />
+          </Box>
         ))}
       {hasMore && (
         <MoreButton
