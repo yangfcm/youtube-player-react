@@ -31,6 +31,7 @@ function NoVideo() {
 export function Video() {
   const { id } = useParams();
   const { video, status, error } = useVideo(id);
+  if (status === AsyncStatus.IDLE) return null;
   if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
   if (!video || !id) {
     return <NoVideo />;
