@@ -14,7 +14,7 @@ interface CommentState {
     {
       status: AsyncStatus;
       error: string;
-      data: CommentResponse;
+      data: CommentResponse | null;
     }
   >;
   replies: Record<
@@ -22,7 +22,7 @@ interface CommentState {
     {
       status: AsyncStatus;
       error: string;
-      data: ReplyResponse;
+      data: ReplyResponse | null;
     }
   >;
 }
@@ -61,7 +61,15 @@ export const commentSlice = createSlice({
         meta: { arg },
       }: { meta: { arg: { videoId: string; [key: string]: string } } }
     ) => {
-      if (arg.videoId) {
+      const { videoId } = arg;
+      if (!videoId) return;
+      if (!state.comments[arg.videoId]) {
+        state.comments[arg.videoId] = {
+          status: AsyncStatus.LOADING,
+          error: "",
+          data: null,
+        };
+      } else {
         state.comments[arg.videoId].status = AsyncStatus.LOADING;
       }
     };

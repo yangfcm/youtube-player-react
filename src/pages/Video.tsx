@@ -10,6 +10,7 @@ import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
+import { VideoComments } from "../components/VideoComments";
 import { RelevantVideos } from "../components/RelevantVideos";
 import { formatNumber, fromNow } from "../app/utils";
 
@@ -57,6 +58,7 @@ export function Video() {
           </Typography>
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.snippet.description}</Typography>
+          <VideoComments videoId={id} />
         </Grid>
         <Grid item xs={12} lg={5} xl={4}>
           <RelevantVideos videoId={id} />
