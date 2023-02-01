@@ -6,6 +6,11 @@ const axiosInstance = axios.create({
   params: {
     key: process.env.REACT_APP_API_KEY,
   },
+  headers: localStorage.getItem("token")
+    ? {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      }
+    : {},
 });
 
 axiosInstance.interceptors.response.use(
