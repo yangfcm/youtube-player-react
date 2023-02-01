@@ -1,5 +1,15 @@
-import { createSlice, PayloadAction, createSelector } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  createSelector,
+  createAsyncThunk,
+  SerializedError,
+} from "@reduxjs/toolkit";
+import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
+import { AsyncStatus } from "../../settings/types";
+import { SubscriptionsResponse } from "./types";
+import { fetchSubscriptionsAPI } from "./userAPI";
 
 export interface UserProfile {
   id: string;
@@ -13,12 +23,29 @@ export interface UserProfile {
 interface UserState {
   profile: UserProfile | null;
   token: string;
+  subscriptions: {
+    status: AsyncStatus;
+    error: string;
+    data?: SubscriptionsResponse;
+  };
 }
 
 const initialState: UserState = {
   profile: null,
   token: "",
+  subscriptions: {
+    status: AsyncStatus.IDLE,
+    error: "",
+  },
 };
+
+export const fetchSubscriptions = createAsyncThunk(
+  "user/fetchSubscriptions",
+  async () => {
+    const response = await fetchSubscriptionsAPI();
+    return response;
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -36,6 +63,31 @@ const userSlice = createSlice({
     signout: (state) => {
       state.profile = null;
     },
+  },
+  extraReducers: (builder) => {
+    const fetchSubscriptionsStart = (state: UserState) => {
+      state.subscriptions.status = AsyncStatus.LOADING;
+    };
+    const fetchSubscriptionsSuccess = (
+      state: UserState,
+      { payload }: { payload: AxiosResponse<SubscriptionsResponse> }
+    ) => {
+      state.subscriptions.status = AsyncStatus.SUCCESS;
+      state.subscriptions.error = "";
+      state.subscriptions.data = payload.data;
+    };
+    const fetchSubscriptionsFailed = (
+      state: UserState,
+      { error }: { error: SerializedError }
+    ) => {
+      state.subscriptions.status = AsyncStatus.FAIL;
+      state.subscriptions.error = error.message || "";
+    };
+
+    builder
+      .addCase(fetchSubscriptions.pending, fetchSubscriptionsStart)
+      .addCase(fetchSubscriptions.fulfilled, fetchSubscriptionsSuccess)
+      .addCase(fetchSubscriptions.rejected, fetchSubscriptionsFailed);
   },
 });
 
