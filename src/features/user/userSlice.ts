@@ -41,8 +41,8 @@ const initialState: UserState = {
 
 export const fetchSubscriptions = createAsyncThunk(
   "user/fetchSubscriptions",
-  async () => {
-    const response = await fetchSubscriptionsAPI();
+  async (options?: Record<string, string>) => {
+    const response = await fetchSubscriptionsAPI(options);
     return response;
   }
 );
@@ -65,16 +65,32 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    const fetchSubscriptionsStart = (state: UserState) => {
+    const fetchSubscriptionsStart = (
+      state: UserState,
+      { meta: { arg } }: { meta: { arg?: Record<string, string> } }
+    ) => {
       state.subscriptions.status = AsyncStatus.LOADING;
+      if (!arg?.pageToken) state.subscriptions.data = undefined;
     };
     const fetchSubscriptionsSuccess = (
       state: UserState,
-      { payload }: { payload: AxiosResponse<SubscriptionsResponse> }
+      {
+        payload,
+        meta: { arg },
+      }: {
+        payload: AxiosResponse<SubscriptionsResponse>;
+        meta: { arg?: Record<string, string> };
+      }
     ) => {
+      const currentItems = state.subscriptions.data?.items || [];
       state.subscriptions.status = AsyncStatus.SUCCESS;
       state.subscriptions.error = "";
-      state.subscriptions.data = payload.data;
+      state.subscriptions.data = {
+        ...payload.data,
+        items: arg?.pageToken
+          ? [...currentItems, ...payload.data.items]
+          : payload.data.items,
+      };
     };
     const fetchSubscriptionsFailed = (
       state: UserState,
