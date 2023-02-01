@@ -8,8 +8,9 @@ import {
 import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
+import { PlayListsResponse } from "../playlist/types";
 import { SubscriptionsResponse } from "./types";
-import { fetchSubscriptionsAPI } from "./userAPI";
+import { fetchPlayListsAPI, fetchSubscriptionsAPI } from "./userAPI";
 
 export interface UserProfile {
   id: string;
@@ -28,6 +29,11 @@ interface UserState {
     error: string;
     data?: SubscriptionsResponse;
   };
+  playlists: {
+    status: AsyncStatus;
+    error: string;
+    data?: PlayListsResponse;
+  };
 }
 
 const initialState: UserState = {
@@ -37,12 +43,24 @@ const initialState: UserState = {
     status: AsyncStatus.IDLE,
     error: "",
   },
+  playlists: {
+    status: AsyncStatus.IDLE,
+    error: "",
+  },
 };
 
 export const fetchSubscriptions = createAsyncThunk(
   "user/fetchSubscriptions",
   async (options?: Record<string, string>) => {
     const response = await fetchSubscriptionsAPI(options);
+    return response;
+  }
+);
+
+export const fetchPlayLists = createAsyncThunk(
+  "user/fetchPlayLists",
+  async (options?: Record<string, string>) => {
+    const response = await fetchPlayListsAPI(options);
     return response;
   }
 );
@@ -64,6 +82,10 @@ const userSlice = createSlice({
       state.profile = null;
       state.token = "";
       state.subscriptions = {
+        status: AsyncStatus.IDLE,
+        error: "",
+      };
+      state.playlists = {
         status: AsyncStatus.IDLE,
         error: "",
       };
@@ -105,10 +127,48 @@ const userSlice = createSlice({
       state.subscriptions.error = error.message || "";
     };
 
+    const fetchPlayListsStart = (
+      state: UserState,
+      { meta: { arg } }: { meta: { arg?: Record<string, string> } }
+    ) => {
+      state.playlists.status = AsyncStatus.LOADING;
+      if (!arg?.pageToken) state.playlists.data = undefined;
+    };
+    const fetchPlayListsSuccess = (
+      state: UserState,
+      {
+        payload,
+        meta: { arg },
+      }: {
+        payload: AxiosResponse<PlayListsResponse>;
+        meta: { arg?: Record<string, string> };
+      }
+    ) => {
+      const currentItems = state.playlists.data?.items || [];
+      state.playlists.status = AsyncStatus.SUCCESS;
+      state.playlists.error = "";
+      state.playlists.data = {
+        ...payload.data,
+        items: arg?.pageToken
+          ? [...currentItems, ...payload.data.items]
+          : payload.data.items,
+      };
+    };
+    const fetchPlayListsFailed = (
+      state: UserState,
+      { error }: { error: SerializedError }
+    ) => {
+      state.playlists.status = AsyncStatus.FAIL;
+      state.playlists.error = error.message || "";
+    };
+
     builder
       .addCase(fetchSubscriptions.pending, fetchSubscriptionsStart)
       .addCase(fetchSubscriptions.fulfilled, fetchSubscriptionsSuccess)
-      .addCase(fetchSubscriptions.rejected, fetchSubscriptionsFailed);
+      .addCase(fetchSubscriptions.rejected, fetchSubscriptionsFailed)
+      .addCase(fetchPlayLists.pending, fetchPlayListsStart)
+      .addCase(fetchPlayLists.fulfilled, fetchPlayListsSuccess)
+      .addCase(fetchPlayLists.rejected, fetchPlayListsFailed);
   },
 });
 

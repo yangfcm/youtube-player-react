@@ -15,15 +15,38 @@ export interface Snippet {
   };
 }
 
+interface PlayListId {
+  kind: string;
+  playlistId: string;
+}
+
 export interface Meta {
-  id: {
-    kind: string;
-    playlistId: string;
-  };
+  id: string | PlayListId;
   etag: string;
   kind: string;
 }
 
 export interface PlayListSnippet extends Meta {
   snippet: Snippet;
+}
+
+export interface PlayListDetails extends Meta {
+  snippet: Snippet;
+  contentDetails: {
+    itemCount: number;
+  };
+  status: {
+    privacyStatus: string;
+  };
+}
+
+export interface PlayListsResponse {
+  etag: string;
+  kind: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+  items: PlayListDetails[];
+  nextPageToken?: string;
 }
