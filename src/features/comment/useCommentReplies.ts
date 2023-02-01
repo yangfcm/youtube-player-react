@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { fetchReplies } from "./commentSlice";
 
-export function useCommentReplies(commentId: string) {
+export function useCommentReplies(commentId: string, showReply: boolean) {
   const dispatch = useAppDispatch();
   const replies = useSelector(
     (state: RootState) => state.comment.replies[commentId]?.data?.items
@@ -30,11 +30,11 @@ export function useCommentReplies(commentId: string) {
     }
   }, [dispatch, nextPageToken, commentId]);
 
-  const fetchCommentReplies = useCallback(() => {
-    if (commentId) {
+  useEffect(() => {
+    if (commentId && !replies?.length && showReply) {
       dispatch(fetchReplies({ commentId }));
     }
-  }, [dispatch, commentId]);
+  }, [dispatch, commentId, showReply, replies]);
 
   return {
     replies: replies,
@@ -42,6 +42,5 @@ export function useCommentReplies(commentId: string) {
     error,
     hasMore: !!nextPageToken,
     fetchMore,
-    fetchCommentReplies,
   };
 }
