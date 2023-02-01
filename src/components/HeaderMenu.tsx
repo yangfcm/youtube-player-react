@@ -5,24 +5,17 @@ import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import { GoogleLogout } from "react-google-login";
 import { RequireAuth } from "./RequireAuth";
 import { useProfile } from "../features/user/useProfile";
-import { useAuth } from "../features/user/useAuth";
+import { GoogleLogout } from "./GoogleLogout";
 
 export function HeaderMenu() {
   const profile = useProfile();
-  const { signout } = useAuth();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
   const handleOpen = (event: React.MouseEvent<HTMLElement>) =>
     setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
-
-  const handleSignOut = () => {
-    localStorage.removeItem("token");
-    signout();
-  };
 
   return (
     <RequireAuth>
@@ -71,12 +64,7 @@ export function HeaderMenu() {
         </MenuItem>
         <Divider />
         <MenuItem>
-          <GoogleLogout
-            clientId={process.env.REACT_APP_CLIENT_ID || ""}
-            onLogoutSuccess={handleSignOut}
-            className="auth__google-logout-button"
-            buttonText="Sign Out"
-          />
+          <GoogleLogout />
         </MenuItem>
       </Menu>
     </RequireAuth>
