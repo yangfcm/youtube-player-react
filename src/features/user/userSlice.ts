@@ -62,6 +62,11 @@ const userSlice = createSlice({
     },
     signout: (state) => {
       state.profile = null;
+      state.token = "";
+      state.subscriptions = {
+        status: AsyncStatus.IDLE,
+        error: "",
+      };
     },
   },
   extraReducers: (builder) => {
