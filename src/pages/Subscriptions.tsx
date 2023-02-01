@@ -31,33 +31,36 @@ export function Subscriptions() {
     fetchMore,
   } = useSubscriptions();
 
-  if (status === AsyncStatus.IDLE) return null;
-  if (status === AsyncStatus.LOADING && subscriptions.length === 0)
-    return <LoadingSpinner />;
-  if (subscriptions.length === 0) return <NoSubscriptions />;
-
   return (
     <RequireAuth>
-      <Box>
-        <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-        <Grid container spacing={2}>
-          {subscriptions.map((subscription) => {
-            return (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={subscription.id}>
-                {subscription.snippet.title}
-              </Grid>
-            );
-          })}
-        </Grid>
-        {hasMore && (
-          <MoreButton
-            loading={status === AsyncStatus.LOADING}
-            onClick={fetchMore}
-          >
-            More
-          </MoreButton>
-        )}
-      </Box>
+      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
+      {status === AsyncStatus.IDLE ? (
+        <></>
+      ) : status === AsyncStatus.LOADING && subscriptions.length === 0 ? (
+        <LoadingSpinner />
+      ) : subscriptions.length === 0 ? (
+        <NoSubscriptions />
+      ) : (
+        <Box>
+          <Grid container spacing={2}>
+            {subscriptions.map((subscription) => {
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={subscription.id}>
+                  {subscription.snippet.title}
+                </Grid>
+              );
+            })}
+          </Grid>
+          {hasMore && (
+            <MoreButton
+              loading={status === AsyncStatus.LOADING}
+              onClick={fetchMore}
+            >
+              More
+            </MoreButton>
+          )}
+        </Box>
+      )}
     </RequireAuth>
   );
 }
