@@ -47,7 +47,7 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
       },
       auth.access_token
     );
-    localStorage.setItem("token", auth.access_token);
+    localStorage.setItem("token", "Bearer " + auth.access_token);
   };
 
   const handleFailureSignin = () => {
