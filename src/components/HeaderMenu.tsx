@@ -20,6 +20,7 @@ export function HeaderMenu() {
   const handleClose = () => setAnchorEl(null);
 
   const handleSignOut = () => {
+    localStorage.removeItem("token");
     signout();
   };
 

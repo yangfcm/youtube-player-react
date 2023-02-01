@@ -20,7 +20,7 @@ export function useSubscriptions() {
 
   useEffect(() => {
     if (userId) dispatch(fetchSubscriptions());
-  }, [userId]);
+  }, [userId, dispatch]);
 
   return {
     subscriptions: data?.items,

@@ -14,5 +14,8 @@ export async function fetchSubscriptionsAPI(
       maxResults: MAX_RESULTS_24 * 2,
       ...options,
     },
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
   });
 }
