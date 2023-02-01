@@ -47,7 +47,11 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
         <CardContent>
           <MuiLink
             component={Link}
-            to={`/playlist/${playList.id.playlistId}`}
+            to={`/playlist/${
+              typeof playList.id === "string"
+                ? playList.id
+                : playList.id.playlistId
+            }`}
             underline="none"
             color="inherit"
             variant="h6"
