@@ -34,6 +34,7 @@ export function Subscriptions() {
   if (status === AsyncStatus.IDLE) return null;
   if (status === AsyncStatus.LOADING && subscriptions.length === 0)
     return <LoadingSpinner />;
+  if (subscriptions.length === 0) return <NoSubscriptions />;
 
   return (
     <RequireAuth>
