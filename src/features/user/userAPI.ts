@@ -11,6 +11,7 @@ export async function fetchSubscriptionsAPI(): Promise<
       part: PART_SNIPPET,
       mine: "true",
       order: "alphabetical",
+      maxResults: MAX_RESULTS_24 * 2,
     },
   });
 }
