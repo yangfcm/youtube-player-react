@@ -31,10 +31,12 @@ export function PlayLists() {
             return (
               <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                 <PlayListCard
-                  id={playList.id as string}
-                  title={playList.snippet.title}
-                  imageUrl={playList.snippet.thumbnails.high?.url || ""}
-                  videoCount={playList.contentDetails.itemCount}
+                  playlist={{
+                    id: playList.id as string,
+                    title: playList.snippet.title,
+                    imageUrl: playList.snippet.thumbnails.high?.url,
+                    videoCount: playList.contentDetails.itemCount,
+                  }}
                 />
               </Grid>
             );

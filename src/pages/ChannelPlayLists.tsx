@@ -33,10 +33,12 @@ export function ChannelPlayLists() {
           return (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <PlayListCard
-                id={playlist.id as string}
-                title={playlist.snippet.title}
-                imageUrl={playlist.snippet.thumbnails.high?.url || ""}
-                videoCount={playlist.contentDetails.itemCount}
+                playlist={{
+                  id: playlist.id as string,
+                  title: playlist.snippet.title,
+                  imageUrl: playlist.snippet.thumbnails.high?.url,
+                  videoCount: playlist.contentDetails.itemCount,
+                }}
               />
             </Grid>
           );
