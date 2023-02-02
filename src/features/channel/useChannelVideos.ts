@@ -12,7 +12,7 @@ export function useChannelVideos(channelId: string) {
   const error = useSelector((state: RootState) => state.channel.videos.error);
 
   const channelVideos = useSelector(
-    (state: RootState) => state.channel.videos.data[channelId]?.items || []
+    (state: RootState) => state.channel.videos.data[channelId]?.items
   );
   const nextPageToken = useSelector(
     (state: RootState) => state.channel.videos.data[channelId]?.nextPageToken
@@ -30,10 +30,10 @@ export function useChannelVideos(channelId: string) {
   }, [dispatch, nextPageToken, channelId]);
 
   useEffect(() => {
-    if (channelId && channelVideos.length === 0) {
+    if (channelId && !channelVideos) {
       dispatch(fetchChannelVideos({ channelId }));
     }
-  }, [channelId, channelVideos.length, dispatch]);
+  }, [channelId, channelVideos, dispatch]);
 
   return {
     channelVideos,

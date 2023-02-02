@@ -31,7 +31,7 @@ export function useComments(videoId: string) {
   }, [dispatch, nextPageToken, videoId]);
 
   useEffect(() => {
-    if (videoId && (!comments || comments.length === 0)) {
+    if (videoId && !comments) {
       dispatch(fetchComments({ videoId }));
     }
   }, [videoId, comments, dispatch]);

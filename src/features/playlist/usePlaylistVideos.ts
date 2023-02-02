@@ -7,7 +7,7 @@ import { fetchPlaylistVideos } from "./playlistSlice";
 export function usePlaylistVideos(playlistId: string) {
   const dispatch = useAppDispatch();
   const playlistVideos = useSelector(
-    (state: RootState) => state.playlist.playlists[playlistId]?.items || []
+    (state: RootState) => state.playlist.playlists[playlistId]?.items
   );
   const asyncStatus = useSelector((state: RootState) => state.playlist.status);
   const error = useSelector((state: RootState) => state.playlist.error);
@@ -27,10 +27,10 @@ export function usePlaylistVideos(playlistId: string) {
   }, [dispatch, nextPageToken, playlistId]);
 
   useEffect(() => {
-    if (playlistId && playlistVideos.length === 0) {
+    if (playlistId && !playlistVideos) {
       dispatch(fetchPlaylistVideos({ playlistId }));
     }
-  }, [playlistId, dispatch, playlistVideos.length]);
+  }, [playlistId, dispatch, playlistVideos]);
 
   return {
     playlistVideos,
