@@ -6,15 +6,35 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { VideoSnippetStats } from "../features/video/types";
 import { fromNow, formatNumber } from "../app/utils";
+import placeholder from "../images/placeholder-item.jpg";
 
-export function VideoCard({ video }: { video: VideoSnippetStats }) {
+type VideoTypeProps = {
+  id: string;
+  title: string;
+  channelId: string;
+  channelTitle: string;
+  imageUrl?: string;
+  viewCount?: string;
+  publishedAt?: Date;
+};
+
+export function VideoCard({ video }: { video: VideoTypeProps }) {
+  const {
+    id,
+    title,
+    channelId,
+    channelTitle,
+    viewCount,
+    publishedAt,
+    imageUrl,
+  } = video;
   return (
     <Card>
-      <Link to={`/video/${video.id as string}`}>
+      <Link to={`/video/${id}`}>
         <img
-          src={video.snippet.thumbnails.high?.url}
-          alt={video.snippet.title}
-          title={video.snippet.title}
+          src={imageUrl || placeholder}
+          alt={title}
+          title={title}
           loading="lazy"
           style={{ width: "100%", height: "auto" }}
         />
@@ -27,10 +47,10 @@ export function VideoCard({ video }: { video: VideoSnippetStats }) {
       >
         <MuiLink
           component={Link}
-          to={`/video/${video.id as string}`}
+          to={`/video/${id}`}
           underline="none"
           variant="subtitle1"
-          title={video.snippet.title}
+          title={title}
           sx={{
             display: "block",
             lineHeight: "23px",
@@ -43,23 +63,24 @@ export function VideoCard({ video }: { video: VideoSnippetStats }) {
             mb: 1,
           }}
         >
-          {video.snippet.title}
+          {title}
         </MuiLink>
         <Box sx={{ mb: "5px" }}>
           <MuiLink
             component={Link}
-            to={`/channel/${video.snippet.channelId}`}
+            to={`/channel/${channelId}`}
             underline="hover"
             variant="body2"
             color="inherit"
           >
-            {video.snippet.channelTitle}
+            {channelTitle}
           </MuiLink>
         </Box>
         <Typography variant="caption">
           <>
-            {formatNumber(parseInt(video.statistics.viewCount)) + " views"} •{" "}
-            {fromNow(video.snippet.publishedAt)}
+            {viewCount && formatNumber(parseInt(viewCount)) + " views"}{" "}
+            {viewCount && publishedAt && "• "}
+            {publishedAt && fromNow(publishedAt)}
           </>
         </Typography>
       </CardContent>
