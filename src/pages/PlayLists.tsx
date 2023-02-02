@@ -33,33 +33,31 @@ export function PlayLists() {
       <Typography variant="h5" sx={{ mb: 2 }}>
         Play List
       </Typography>
-      {status === AsyncStatus.IDLE ? (
-        <></>
-      ) : status === AsyncStatus.LOADING && playLists.length === 0 ? (
+      {status === AsyncStatus.LOADING && playLists.length === 0 && (
         <LoadingSpinner />
-      ) : status === AsyncStatus.SUCCESS && playLists.length === 0 ? (
-        <NoPlayLists />
-      ) : (
-        <Box>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
-            {playLists.map((playList, index) => {
-              return (
-                <Grid item xs={12} sm={3} lg={2} key={index}>
-                  {playList.snippet.title}
-                </Grid>
-              );
-            })}
-          </Grid>
-          {hasMore && (
-            <MoreButton
-              loading={status === AsyncStatus.LOADING}
-              onClick={fetchMore}
-            >
-              More
-            </MoreButton>
-          )}
-        </Box>
       )}
+      {status === AsyncStatus.SUCCESS && playLists.length === 0 && (
+        <NoPlayLists />
+      )}
+      <Box>
+        <Grid container spacing={2} sx={{ pb: 2 }}>
+          {playLists.map((playList, index) => {
+            return (
+              <Grid item xs={12} sm={3} lg={2} key={index}>
+                {playList.snippet.title}
+              </Grid>
+            );
+          })}
+        </Grid>
+        {hasMore && (
+          <MoreButton
+            loading={status === AsyncStatus.LOADING}
+            onClick={fetchMore}
+          >
+            More playlists
+          </MoreButton>
+        )}
+      </Box>
     </RequireAuth>
   );
 }

@@ -39,39 +39,35 @@ export function Subscriptions() {
       <Typography variant="h5" sx={{ mb: 2 }}>
         Subscriptions
       </Typography>
-      {status === AsyncStatus.IDLE ? (
-        <></>
-      ) : status === AsyncStatus.LOADING && subscriptions.length === 0 ? (
+      {status === AsyncStatus.LOADING && subscriptions.length === 0 && (
         <LoadingSpinner />
-      ) : status === AsyncStatus.SUCCESS && subscriptions.length === 0 ? (
-        <NoSubscriptions />
-      ) : (
-        <Box>
-          <Grid container spacing={2} sx={{ pb: 2 }}>
-            {subscriptions.map((subscription) => {
-              return (
-                <Grid item xs={6} sm={3} lg={2} key={subscription.id}>
-                  <ChannelCard
-                    id={subscription.id}
-                    title={subscription.snippet.title}
-                    imageUrl={
-                      subscription.snippet.thumbnails.default?.url || ""
-                    }
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-          {hasMore && (
-            <MoreButton
-              loading={status === AsyncStatus.LOADING}
-              onClick={fetchMore}
-            >
-              More
-            </MoreButton>
-          )}
-        </Box>
       )}
+      {status === AsyncStatus.SUCCESS && subscriptions.length === 0 && (
+        <NoSubscriptions />
+      )}
+      <Box>
+        <Grid container spacing={2} sx={{ pb: 2 }}>
+          {subscriptions.map((subscription) => {
+            return (
+              <Grid item xs={6} sm={3} lg={2} key={subscription.id}>
+                <ChannelCard
+                  id={subscription.id}
+                  title={subscription.snippet.title}
+                  imageUrl={subscription.snippet.thumbnails.default?.url || ""}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+        {hasMore && (
+          <MoreButton
+            loading={status === AsyncStatus.LOADING}
+            onClick={fetchMore}
+          >
+            More subscriptions
+          </MoreButton>
+        )}
+      </Box>
     </RequireAuth>
   );
 }
