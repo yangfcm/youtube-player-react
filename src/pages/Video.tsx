@@ -3,7 +3,6 @@ import { useVideo } from "../features/video/useVideo";
 import MuiLink from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { LoadingSpinner } from "../components/LoadingSpinner";
@@ -14,31 +13,18 @@ import { VideoComments } from "../components/VideoComments";
 import { RelevantVideos } from "../components/RelevantVideos";
 import { PlayListVideos } from "../components/PlayListVideos";
 import { formatNumber, fromNow, getSearchString } from "../app/utils";
-
-function NoVideo() {
-  return (
-    <Box sx={{ display: "d-flex", justifyContent: "center" }}>
-      <Alert
-        variant="filled"
-        severity="error"
-        sx={{ justifyContent: "center" }}
-      >
-        The video isn't available
-      </Alert>
-    </Box>
-  );
-}
+import { NoContent } from "../components/NoContent";
 
 export function Video() {
-  const { id } = useParams();
+  const { id = "" } = useParams();
   const location = useLocation();
   const playlistId = getSearchString(location.search, "playlistId");
 
   const { video, status, error } = useVideo(id);
   if (status === AsyncStatus.IDLE) return null;
   if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
-  if (!video || !id) {
-    return <NoVideo />;
+  if (!video) {
+    return <NoContent>The video isn't available.</NoContent>;
   }
   return (
     <Box>
