@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
@@ -18,7 +18,7 @@ export function useChannelProfile(channelId: string) {
     if (channelId && !channelProfile) {
       dispatch(fetchChannelProfile({ channelId }));
     }
-  }, [channelId, dispatch]);
+  }, [channelId, dispatch, channelProfile]);
 
   return {
     status: asyncStatus,
