@@ -9,7 +9,7 @@ import { AsyncStatus } from "../settings/types";
 import { VideoItem } from "../components/VideoItem";
 import { ChannelItem } from "../components/ChannelItem";
 import { PlayListItem } from "../components/PlayListItem";
-import { VideoSnippet } from "../features/video/types";
+import { VideoId } from "../features/video/types";
 import { ChannelSnippet } from "../features/channel/types";
 import { PlayListSnippet } from "../features/playlist/types";
 
@@ -53,7 +53,16 @@ export function SearchResults() {
           return (
             <Box key={index}>
               {kind === "video" ? (
-                <VideoItem video={result as VideoSnippet} />
+                <VideoItem
+                  video={{
+                    id: (result.id as VideoId).videoId,
+                    title: result.snippet.title,
+                    channelId: result.snippet.channelId,
+                    channelTitle: result.snippet.channelTitle,
+                    publishedAt: result.snippet.publishedAt,
+                    imageUrl: result.snippet.thumbnails?.high?.url || "",
+                  }}
+                />
               ) : kind === "channel" ? (
                 <ChannelItem channel={result as ChannelSnippet} />
               ) : kind === "playlist" ? (
