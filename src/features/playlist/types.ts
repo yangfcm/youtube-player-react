@@ -15,7 +15,7 @@ export interface Snippet {
   };
 }
 
-interface PlayListId {
+export interface PlayListId {
   kind: string;
   playlistId: string;
 }

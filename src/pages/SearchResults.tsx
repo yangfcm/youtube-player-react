@@ -11,7 +11,7 @@ import { ChannelItem } from "../components/ChannelItem";
 import { PlayListItem } from "../components/PlayListItem";
 import { VideoId } from "../features/video/types";
 import { ChannelSnippet } from "../features/channel/types";
-import { PlayListSnippet } from "../features/playlist/types";
+import { PlayListSnippet, PlayListId } from "../features/playlist/types";
 
 export function SearchResults() {
   const location = useLocation();
@@ -60,13 +60,30 @@ export function SearchResults() {
                     channelId: result.snippet.channelId,
                     channelTitle: result.snippet.channelTitle,
                     publishedAt: result.snippet.publishedAt,
-                    imageUrl: result.snippet.thumbnails?.high?.url || "",
+                    imageUrl: result.snippet.thumbnails?.high?.url,
                   }}
                 />
               ) : kind === "channel" ? (
-                <ChannelItem channel={result as ChannelSnippet} />
+                <ChannelItem
+                  channel={{
+                    id: (result as ChannelSnippet).id.channelId,
+                    title: result.snippet.title,
+                    imageUrl: result.snippet.thumbnails?.high?.url,
+                    description: result.snippet.description,
+                  }}
+                />
               ) : kind === "playlist" ? (
-                <PlayListItem playList={result as PlayListSnippet} />
+                <PlayListItem
+                  playlist={{
+                    id: ((result as PlayListSnippet).id as PlayListId)
+                      .playlistId,
+                    title: result.snippet.title,
+                    imageUrl: result.snippet.thumbnails?.high?.url,
+                    channelId: result.snippet.channelId,
+                    channelTitle: result.snippet.channelTitle,
+                    publishedAt: result.snippet.publishedAt,
+                  }}
+                />
               ) : null}
               <Divider sx={{ my: 1 }} />
             </Box>
