@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useVideo } from "../features/video/useVideo";
 import MuiLink from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -12,7 +12,8 @@ import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
 import { VideoComments } from "../components/VideoComments";
 import { RelevantVideos } from "../components/RelevantVideos";
-import { formatNumber, fromNow } from "../app/utils";
+import { PlayListVideos } from "../components/PlayListVideos";
+import { formatNumber, fromNow, getSearchString } from "../app/utils";
 
 function NoVideo() {
   return (
@@ -30,6 +31,9 @@ function NoVideo() {
 
 export function Video() {
   const { id } = useParams();
+  const location = useLocation();
+  const playlistId = getSearchString(location.search, "playlistId");
+
   const { video, status, error } = useVideo(id);
   if (status === AsyncStatus.IDLE) return null;
   if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
@@ -62,7 +66,11 @@ export function Video() {
           <VideoComments videoId={id} />
         </Grid>
         <Grid item xs={12} lg={5} xl={4}>
-          <RelevantVideos videoId={id} />
+          {playlistId ? (
+            <PlayListVideos playlistId={playlistId} />
+          ) : (
+            <RelevantVideos videoId={id} />
+          )}
         </Grid>
       </Grid>
     </Box>

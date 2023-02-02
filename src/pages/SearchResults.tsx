@@ -12,19 +12,11 @@ import { PlayListItem } from "../components/PlayListItem";
 import { VideoId } from "../features/video/types";
 import { ChannelSnippet } from "../features/channel/types";
 import { PlayListSnippet, PlayListId } from "../features/playlist/types";
+import { getSearchString } from "../app/utils";
 
 export function SearchResults() {
   const location = useLocation();
-  const query = location.search.substring(1);
-  const vars = query.split("&");
-  let q = "";
-  for (let i = 0; i < vars.length; i++) {
-    const pair = vars[i].split("=");
-    if (pair[0] === "q") {
-      q = decodeURIComponent(pair[1]);
-      break;
-    }
-  }
+  const q = getSearchString(location.search, "q");
   const { searchResults, status, error, fetchMore, hasMore, queryChanged } =
     useSearchResults(q);
 

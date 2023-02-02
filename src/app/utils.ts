@@ -60,3 +60,17 @@ export const formatNumber = (number: number) => {
   }
   return arr.join(",");
 };
+
+export const getSearchString = (search: string, key: string) => {
+  const query = search.substring(1); // Remove the first '?' letter
+  const vars = query.split("&");
+  let value = "";
+  for (let i = 0; i < vars.length; i++) {
+    const pair = vars[i].split("=");
+    if (pair[0] === key) {
+      value = decodeURIComponent(pair[1]);
+      break;
+    }
+  }
+  return value;
+};
