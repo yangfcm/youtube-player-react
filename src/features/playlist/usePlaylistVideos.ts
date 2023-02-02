@@ -28,7 +28,6 @@ export function usePlaylistVideos(playlistId: string) {
 
   useEffect(() => {
     if (playlistId && playlistVideos.length === 0) {
-      console.log("fetch !");
       dispatch(fetchPlaylistVideos({ playlistId }));
     }
   }, [playlistId, dispatch, playlistVideos.length]);
