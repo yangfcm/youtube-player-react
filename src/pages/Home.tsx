@@ -23,7 +23,17 @@ export function Home() {
           mostPopularVideos.map((video) => {
             return (
               <Grid item xs={12} sm={6} md={4} lg={3} key={video.id as string}>
-                <VideoCard video={video} />
+                <VideoCard
+                  video={{
+                    id: video.id as string,
+                    title: video.snippet.title,
+                    imageUrl: video.snippet.thumbnails.high?.url,
+                    channelId: video.snippet.channelId,
+                    channelTitle: video.snippet.channelTitle,
+                    viewCount: video.statistics.viewCount,
+                    publishedAt: video.snippet.publishedAt,
+                  }}
+                />
               </Grid>
             );
           })}
