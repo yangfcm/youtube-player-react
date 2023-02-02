@@ -2,11 +2,12 @@ import { AxiosResponse } from "axios";
 import { appAxios } from "../../settings/api";
 import {
   MAX_RESULTS_24,
+  PART_SNIPPET,
   PART_SNIPPET_CONTENT_STATUS,
   PART_SNIPPET_STATS,
 } from "../../settings/constant";
 import { PlayListsResponse } from "../playlist/types";
-import { VideosResponse } from "../video/types";
+import { VideosSnippetResponse } from "../video/types";
 import { ChannelDetailsResponse } from "./types";
 
 export async function fetchChannelProfileAPI(
@@ -23,11 +24,11 @@ export async function fetchChannelProfileAPI(
 export async function fetchChannelVideosAPI(
   channelId: string,
   options: Record<string, string> = {}
-): Promise<AxiosResponse<VideosResponse>> {
+): Promise<AxiosResponse<VideosSnippetResponse>> {
   return await appAxios.get("/search", {
     params: {
       channelId,
-      part: PART_SNIPPET_STATS,
+      part: PART_SNIPPET,
       order: "date",
       type: "video",
       maxResults: MAX_RESULTS_24,

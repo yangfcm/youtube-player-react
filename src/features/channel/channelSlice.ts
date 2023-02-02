@@ -6,7 +6,7 @@ import {
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
-import { VideosResponse } from "../video/types";
+import { VideosSnippetResponse } from "../video/types";
 import {
   fetchChannelPlaylistsAPI,
   fetchChannelProfileAPI,
@@ -23,7 +23,7 @@ export interface ChannelState {
   videos: {
     status: AsyncStatus;
     error: string;
-    data: Record<string, VideosResponse>;
+    data: Record<string, VideosSnippetResponse>;
   };
   playlists: {
     status: AsyncStatus;
@@ -116,7 +116,7 @@ export const channelSlice = createSlice({
         payload,
         meta: { arg },
       }: {
-        payload: AxiosResponse<VideosResponse>;
+        payload: AxiosResponse<VideosSnippetResponse>;
         meta: { arg: { channelId: string } };
       }
     ) => {

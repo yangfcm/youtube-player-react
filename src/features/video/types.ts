@@ -60,3 +60,12 @@ export interface VideosResponse {
   nextPageToken?: string;
   prevPageToken?: string;
 }
+
+export interface VideosSnippetResponse {
+  etag: string;
+  kind: string;
+  pageInfo: { totalResults: number; resultsPerPage: number };
+  items: VideoSnippet[];
+  nextPageToken?: string;
+  prevPageToken?: string;
+}
