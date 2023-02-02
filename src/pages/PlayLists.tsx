@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import { usePlayLists } from "../features/user/usePlayLists";
 import { RequireAuth } from "../components/RequireAuth";
@@ -9,20 +8,7 @@ import { ErrorMessage } from "../components/ErrorMessage";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { MoreButton } from "../components/MoreButton";
 import { AsyncStatus } from "../settings/types";
-
-function NoPlayLists() {
-  return (
-    <Box sx={{ display: "d-flex", justifyContent: "center" }}>
-      <Alert
-        variant="filled"
-        severity="error"
-        sx={{ justifyContent: "center" }}
-      >
-        You haven't created any play lists.
-      </Alert>
-    </Box>
-  );
-}
+import { NoContent } from "../components/NoContent";
 
 export function PlayLists() {
   const { playLists = [], status, error, hasMore, fetchMore } = usePlayLists();
@@ -37,7 +23,7 @@ export function PlayLists() {
         <LoadingSpinner />
       )}
       {status === AsyncStatus.SUCCESS && playLists.length === 0 && (
-        <NoPlayLists />
+        <NoContent>You haven't created any playlists.</NoContent>
       )}
       <Box sx={{ pb: 2 }}>
         <Grid container spacing={2} sx={{ pb: 2 }}>

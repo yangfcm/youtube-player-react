@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import { RequireAuth } from "../components/RequireAuth";
 import { useSubscriptions } from "../features/user/useSubscriptions";
@@ -9,20 +8,7 @@ import { LoadingSpinner } from "../components/LoadingSpinner";
 import { MoreButton } from "../components/MoreButton";
 import { AsyncStatus } from "../settings/types";
 import { ChannelCard } from "../components/ChannelCard";
-
-function NoSubscriptions() {
-  return (
-    <Box sx={{ display: "d-flex", justifyContent: "center" }}>
-      <Alert
-        variant="filled"
-        severity="error"
-        sx={{ justifyContent: "center" }}
-      >
-        You haven't subscribed any channel.
-      </Alert>
-    </Box>
-  );
-}
+import { NoContent } from "../components/NoContent";
 
 export function Subscriptions() {
   const {
@@ -43,7 +29,7 @@ export function Subscriptions() {
         <LoadingSpinner />
       )}
       {status === AsyncStatus.SUCCESS && subscriptions.length === 0 && (
-        <NoSubscriptions />
+        <NoContent> You haven't subscribed any channel.</NoContent>
       )}
       <Box sx={{ pb: 2 }}>
         <Grid container spacing={2} sx={{ pb: 2 }}>

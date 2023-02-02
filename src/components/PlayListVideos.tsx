@@ -1,10 +1,11 @@
 import Box from "@mui/material/Box";
-import { ErrorMessage } from "../components/ErrorMessage";
-import { LoadingSpinner } from "../components/LoadingSpinner";
-import { MoreButton } from "../components/MoreButton";
+import { ErrorMessage } from "./ErrorMessage";
+import { LoadingSpinner } from "./LoadingSpinner";
+import { MoreButton } from "./MoreButton";
 import { AsyncStatus } from "../settings/types";
 import { usePlaylistVideos } from "../features/playlist/usePlaylistVideos";
-import { VideoItem } from "../components/VideoItem";
+import { VideoItem } from "./VideoItem";
+import { NoContent } from "./NoContent";
 
 export function PlayListVideos({ playlistId }: { playlistId: string }) {
   const { playlistVideos, status, error, hasMore, fetchMore } =
@@ -16,6 +17,12 @@ export function PlayListVideos({ playlistId }: { playlistId: string }) {
       {status === AsyncStatus.LOADING && playlistVideos.length === 0 && (
         <LoadingSpinner />
       )}
+      {(status === AsyncStatus.SUCCESS || status === AsyncStatus.FAIL) &&
+        playlistVideos.length === 0 && (
+          <NoContent>
+            No videos in the playlist or playlist is unavailable.
+          </NoContent>
+        )}
       {playlistVideos.map((video) => (
         <Box key={video.contentDetails.videoId} sx={{ mb: 1 }}>
           <VideoItem
