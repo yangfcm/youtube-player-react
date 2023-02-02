@@ -2,15 +2,18 @@ import { Link } from "react-router-dom";
 import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Chip from "@mui/material/Chip";
 
 export function PlayListCard({
   id,
   title,
   imageUrl,
+  videoCount,
 }: {
   id: string;
   title: string;
   imageUrl: string;
+  videoCount: number;
 }) {
   return (
     <Card>
@@ -35,11 +38,11 @@ export function PlayListCard({
             textOverflow: "ellipsis",
             mb: 1,
             alignItems: "center",
-            justifyContent: "center",
           }}
         >
           {title}
         </MuiLink>
+        <Chip label={`${videoCount} videos`} size="small" />
       </CardContent>
     </Card>
   );

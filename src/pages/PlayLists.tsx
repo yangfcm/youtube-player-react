@@ -48,6 +48,7 @@ export function PlayLists() {
                   id={playList.id as string}
                   title={playList.snippet.title}
                   imageUrl={playList.snippet.thumbnails.high?.url || ""}
+                  videoCount={playList.contentDetails.itemCount}
                 />
               </Grid>
             );
