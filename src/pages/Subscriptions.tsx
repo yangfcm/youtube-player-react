@@ -37,7 +37,7 @@ export function Subscriptions() {
             return (
               <Grid item xs={6} sm={3} lg={2} key={subscription.id}>
                 <ChannelCard
-                  id={subscription.id}
+                  id={subscription.snippet.resourceId.channelId}
                   title={subscription.snippet.title}
                   imageUrl={subscription.snippet.thumbnails.default?.url || ""}
                 />
