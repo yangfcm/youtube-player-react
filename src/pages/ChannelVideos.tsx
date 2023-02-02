@@ -1,6 +1,6 @@
+import { useParams } from "react-router";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { useParams } from "react-router";
 import { useChannelVideos } from "../features/channel/useChannelVideos";
 import { VideoCard } from "../components/VideoCard";
 import { LoadingSpinner } from "../components/LoadingSpinner";
@@ -24,7 +24,7 @@ export function ChannelVideos() {
   if (status === AsyncStatus.LOADING && channelVideos.length === 0)
     return <LoadingSpinner />;
   if (status === AsyncStatus.SUCCESS && channelVideos.length === 0)
-    return <NoContent>There is no vide in the channel.</NoContent>;
+    return <NoContent>There is no video in the channel.</NoContent>;
 
   return (
     <Box sx={{ py: 2 }}>
