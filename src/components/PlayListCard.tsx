@@ -31,13 +31,12 @@ export function PlayListCard({
           to={`/playlist/${id}`}
           underline="none"
           sx={{
-            display: "flex",
+            display: "block",
             lineHeight: "20px",
-            maxHeight: "40px",
+            height: "40px",
             overflow: "hidden",
             textOverflow: "ellipsis",
             mb: 1,
-            alignItems: "center",
           }}
         >
           {title}

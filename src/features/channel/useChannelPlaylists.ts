@@ -14,7 +14,7 @@ export function useChannelPlaylists(channelId: string) {
   );
 
   const channelPlaylists = useSelector(
-    (state: RootState) => state.channel.playlists.data[channelId]?.items || []
+    (state: RootState) => state.channel.playlists.data[channelId]?.items
   );
   const nextPageToken = useSelector(
     (state: RootState) => state.channel.playlists.data[channelId]?.nextPageToken
@@ -32,10 +32,10 @@ export function useChannelPlaylists(channelId: string) {
   }, [dispatch, nextPageToken, channelId]);
 
   useEffect(() => {
-    if (channelId && channelPlaylists.length === 0) {
+    if (channelId && !channelPlaylists) {
       dispatch(fetchChannelPlaylists({ channelId }));
     }
-  }, [channelId, channelPlaylists.length, dispatch]);
+  }, [channelId, channelPlaylists, dispatch]);
 
   return {
     channelPlaylists,
