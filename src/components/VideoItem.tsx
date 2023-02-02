@@ -5,11 +5,20 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { VideoId, VideoSnippet } from "../features/video/types";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { fromNow } from "../app/utils";
 
-export function VideoItem({ video }: { video: VideoSnippet }) {
+type VideoPropsType = {
+  id: string;
+  title: string;
+  channelId?: string;
+  channelTitle?: string;
+  publishedAt?: Date;
+  imageUrl: string;
+};
+
+export function VideoItem({ video }: { video: VideoPropsType }) {
+  const { id, title, channelId, channelTitle, publishedAt, imageUrl } = video;
   return (
     <Card
       sx={{
@@ -40,14 +49,14 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
               xs: "100%",
             },
           }}
-          image={video.snippet.thumbnails.high?.url}
+          image={imageUrl}
         />
       </Box>
       <Box>
         <CardContent>
           <MuiLink
             component={Link}
-            to={`/video/${(video.id as VideoId).videoId}`}
+            to={`/video/${id}`}
             underline="none"
             variant="h6"
             color="inherit"
@@ -66,21 +75,31 @@ export function VideoItem({ video }: { video: VideoSnippet }) {
               sx={{ height: "18px", transform: "translateY(2px)" }}
               color="error"
             />
-            &nbsp;{video.snippet.title}
+            &nbsp;{title}
           </MuiLink>
-          <MuiLink
-            component={Link}
-            to={`/channel/${video.snippet.channelId}`}
-            underline="none"
-            variant="body2"
-            color="text.secondary"
-            sx={{ display: "block" }}
-          >
-            {video.snippet.channelTitle}
-          </MuiLink>
-          <Typography variant="caption">
-            {fromNow(video.snippet.publishedAt)}
-          </Typography>
+          {channelTitle && (
+            <>
+              {channelId ? (
+                <MuiLink
+                  component={Link}
+                  to={`/channel/${channelId}`}
+                  underline="none"
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ display: "block" }}
+                >
+                  {channelTitle}
+                </MuiLink>
+              ) : (
+                <Typography variant="body2" color="text-secondary">
+                  {channelTitle}
+                </Typography>
+              )}
+            </>
+          )}
+          {publishedAt && (
+            <Typography variant="caption">{fromNow(publishedAt)}</Typography>
+          )}
         </CardContent>
       </Box>
     </Card>
