@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { fromNow } from "../app/utils";
+import placeholder from "../images/placeholder-item.jpg";
 
 type VideoPropsType = {
   id: string;
@@ -14,7 +15,7 @@ type VideoPropsType = {
   channelId?: string;
   channelTitle?: string;
   publishedAt?: Date;
-  imageUrl: string;
+  imageUrl?: string;
 };
 
 export function VideoItem({ video }: { video: VideoPropsType }) {
@@ -49,7 +50,7 @@ export function VideoItem({ video }: { video: VideoPropsType }) {
               xs: "100%",
             },
           }}
-          image={imageUrl}
+          image={imageUrl || placeholder}
         />
       </Box>
       <Box>
