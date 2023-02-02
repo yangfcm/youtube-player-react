@@ -12,7 +12,7 @@ export function usePlaylistVideos(playlistId: string) {
   const asyncStatus = useSelector((state: RootState) => state.playlist.status);
   const error = useSelector((state: RootState) => state.playlist.error);
   const nextPageToken = useSelector(
-    (state: RootState) => state.playlist.playlists[playlistId].nextPageToken
+    (state: RootState) => state.playlist.playlists[playlistId]?.nextPageToken
   );
 
   const fetchMore = useCallback(() => {
@@ -28,9 +28,10 @@ export function usePlaylistVideos(playlistId: string) {
 
   useEffect(() => {
     if (playlistId && playlistVideos.length === 0) {
+      console.log("fetch !");
       dispatch(fetchPlaylistVideos({ playlistId }));
     }
-  }, [playlistId, dispatch, playlistVideos]);
+  }, [playlistId, dispatch, playlistVideos.length]);
 
   return {
     playlistVideos,

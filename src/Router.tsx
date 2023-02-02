@@ -4,13 +4,15 @@ import { Subscriptions } from "./pages/Subscriptions";
 import { SearchResults } from "./pages/SearchResults";
 import { Video } from "./pages/Video";
 import { PlayLists } from "./pages/PlayLists";
+import { PlayListVideos } from "./pages/PlayListVideos";
 
 export function Router() {
   return (
     <Routes>
       <Route path="/subscriptions" element={<Subscriptions />} />
       <Route path="/search" element={<SearchResults />} />
-      <Route path="/playlist" element={<PlayLists />} />
+      <Route path="/playlist/:id" element={<PlayListVideos />} />
+      <Route path="/playlists" element={<PlayLists />} />
       <Route path="/video/:id" element={<Video />} />
       <Route path="/" element={<Home />} />
     </Routes>

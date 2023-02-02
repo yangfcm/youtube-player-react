@@ -32,7 +32,7 @@ export function SidebarMenu() {
           </ListItemButton>
         </ListItem>
       </MuiLink>
-      <MuiLink component={Link} to="/playlist" underline="none">
+      <MuiLink component={Link} to="/playlists" underline="none">
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
