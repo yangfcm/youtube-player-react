@@ -8,8 +8,13 @@ import { VideoItem } from "./VideoItem";
 import { NoContent } from "./NoContent";
 
 export function PlayListVideos({ playlistId }: { playlistId: string }) {
-  const { playlistVideos, status, error, hasMore, fetchMore } =
-    usePlaylistVideos(playlistId);
+  const {
+    playlistVideos = [],
+    status,
+    error,
+    hasMore,
+    fetchMore,
+  } = usePlaylistVideos(playlistId);
 
   return (
     <Box sx={{ pb: 2 }}>
