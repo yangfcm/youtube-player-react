@@ -45,7 +45,7 @@ export function Subscriptions() {
       {status === AsyncStatus.SUCCESS && subscriptions.length === 0 && (
         <NoSubscriptions />
       )}
-      <Box>
+      <Box sx={{ pb: 2 }}>
         <Grid container spacing={2} sx={{ pb: 2 }}>
           {subscriptions.map((subscription) => {
             return (

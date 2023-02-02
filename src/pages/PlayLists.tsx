@@ -39,12 +39,16 @@ export function PlayLists() {
       {status === AsyncStatus.SUCCESS && playLists.length === 0 && (
         <NoPlayLists />
       )}
-      <Box>
+      <Box sx={{ pb: 2 }}>
         <Grid container spacing={2} sx={{ pb: 2 }}>
           {playLists.map((playList, index) => {
             return (
-              <Grid item xs={12} sm={3} lg={2} key={index}>
-                {playList.snippet.title}
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <PlayListCard
+                  id={playList.id as string}
+                  title={playList.snippet.title}
+                  imageUrl={playList.snippet.thumbnails.high?.url || ""}
+                />
               </Grid>
             );
           })}

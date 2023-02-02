@@ -30,7 +30,7 @@ export function PlayListCard({
           sx={{
             display: "flex",
             lineHeight: "20px",
-            height: "60px",
+            maxHeight: "40px",
             overflow: "hidden",
             textOverflow: "ellipsis",
             mb: 1,
