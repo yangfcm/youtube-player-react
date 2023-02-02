@@ -9,7 +9,7 @@ import RecentActorsIcon from "@mui/icons-material/RecentActors";
 import placeholder from "../images/placeholder-channel.jpg";
 
 type ChannelPropsType = {
-  id: string;
+  id?: string;
   title: string;
   imageUrl?: string;
   description?: string;
@@ -52,22 +52,28 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
       </Box>
       <Box>
         <CardContent>
-          <MuiLink
-            component={Link}
-            to={`/channel/${id}`}
-            underline="none"
-            variant="h6"
-            color="inherit"
-          >
-            <RecentActorsIcon
-              sx={{ height: "20px", transform: "translateY(2px)" }}
-              color="info"
-            />
-            &nbsp;
-            {title}
-          </MuiLink>
+          {id ? (
+            <MuiLink
+              component={Link}
+              to={`/channel/${id}`}
+              underline="none"
+              variant="h6"
+              color="inherit"
+            >
+              <RecentActorsIcon
+                sx={{ height: "20px", transform: "translateY(2px)" }}
+                color="info"
+              />
+              &nbsp;
+              {title}
+            </MuiLink>
+          ) : (
+            <Typography variant="h6" color="inherit">
+              {title}
+            </Typography>
+          )}
           <Typography
-            variant="subtitle1"
+            variant="subtitle2"
             color="text.secondary"
             component="div"
           >

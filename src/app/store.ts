@@ -6,6 +6,7 @@ import { userReducer } from "../features/user/userSlice";
 import { searchReducer } from "../features/search/searchSlice";
 import { commentReducer } from "../features/comment/commentSlice";
 import { playlistReducer } from "../features/playlist/playlistSlice";
+import { channelReducer } from "../features/channel/channelSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     search: searchReducer,
     comment: commentReducer,
     playlist: playlistReducer,
+    channel: channelReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
