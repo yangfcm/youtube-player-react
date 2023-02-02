@@ -50,3 +50,46 @@ export interface PlayListsResponse {
   items: PlayListDetails[];
   nextPageToken?: string;
 }
+
+interface PlayListItemDetails extends Meta {
+  snippet: {
+    channelId: string;
+    channelTitle: string;
+    description: string;
+    playlistId: string;
+    position: number;
+    publishedAt: Date;
+    resourceId: {
+      kind: string;
+      videoId: string;
+    };
+    thumbnails: {
+      default?: Thumbnail;
+      high?: Thumbnail;
+      maxres?: Thumbnail;
+      medium?: Thumbnail;
+      standard?: Thumbnail;
+    };
+    title: string;
+    videoOwnerChannelId: string;
+    videoOwnerChannelTitle: string;
+  };
+  contentDetails: {
+    videoId: string;
+    videoPublishedAt: Date;
+  };
+  status: {
+    privacyStatus: string;
+  };
+}
+
+export interface PlayListItemsResponse {
+  etag: string;
+  kind: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+  nextPageToken?: string;
+  items: PlayListItemDetails[];
+}
