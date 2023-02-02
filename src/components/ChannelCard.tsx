@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 
 export function ChannelCard({
   id,
@@ -22,7 +22,7 @@ export function ChannelCard({
           style={{ width: "100%", height: "auto" }}
         />
       </Link>
-      <CardContent>
+      <Box sx={{ py: 1 }}>
         <MuiLink
           component={Link}
           to={`/channel/${id}`}
@@ -40,7 +40,7 @@ export function ChannelCard({
         >
           {title}
         </MuiLink>
-      </CardContent>
+      </Box>
     </Card>
   );
 }
