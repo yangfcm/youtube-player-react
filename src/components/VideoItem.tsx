@@ -16,10 +16,19 @@ type VideoPropsType = {
   channelTitle?: string;
   publishedAt?: Date;
   imageUrl?: string;
+  playlistId?: string;
 };
 
 export function VideoItem({ video }: { video: VideoPropsType }) {
-  const { id, title, channelId, channelTitle, publishedAt, imageUrl } = video;
+  const {
+    id,
+    title,
+    channelId,
+    channelTitle,
+    publishedAt,
+    imageUrl,
+    playlistId,
+  } = video;
   return (
     <Card
       sx={{
@@ -57,7 +66,9 @@ export function VideoItem({ video }: { video: VideoPropsType }) {
         <CardContent>
           <MuiLink
             component={Link}
-            to={`/video/${id}`}
+            to={
+              `/video/${id}` + (playlistId ? `?playlistId=${playlistId}` : "")
+            }
             underline="none"
             variant="h6"
             color="inherit"
