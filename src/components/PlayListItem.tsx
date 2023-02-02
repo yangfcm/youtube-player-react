@@ -7,9 +7,20 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { fromNow } from "../app/utils";
-import { PlayListSnippet } from "../features/playlist/types";
+import placeholder from "../images/placeholder-item.jpg";
 
-export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
+type PlaylistPropsType = {
+  id: string;
+  title: string;
+  imageUrl?: string;
+  channelId?: string;
+  channelTitle?: string;
+  publishedAt?: Date;
+};
+
+export function PlayListItem({ playlist }: { playlist: PlaylistPropsType }) {
+  const { id, title, imageUrl, channelId, channelTitle, publishedAt } =
+    playlist;
   return (
     <Card
       sx={{
@@ -40,18 +51,14 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
               xs: "100%",
             },
           }}
-          image={playList.snippet.thumbnails.high?.url}
+          image={imageUrl || placeholder}
         />
       </Box>
       <Box>
         <CardContent>
           <MuiLink
             component={Link}
-            to={`/playlist/${
-              typeof playList.id === "string"
-                ? playList.id
-                : playList.id.playlistId
-            }`}
+            to={`/playlist/${id}`}
             underline="none"
             color="inherit"
             variant="h6"
@@ -60,21 +67,31 @@ export function PlayListItem({ playList }: { playList: PlayListSnippet }) {
               sx={{ height: "20px", transform: "translateY(2px)" }}
               color="secondary"
             />
-            &nbsp;{playList.snippet.title}
+            &nbsp;{title}
           </MuiLink>
-          <MuiLink
-            component={Link}
-            to={`/channel/${playList.snippet.channelId}`}
-            underline="none"
-            variant="body2"
-            color="text.secondary"
-            sx={{ display: "block" }}
-          >
-            {playList.snippet.channelTitle}
-          </MuiLink>
-          <Typography variant="caption">
-            {fromNow(playList.snippet.publishedAt)}
-          </Typography>
+          {channelTitle && (
+            <>
+              {channelId ? (
+                <MuiLink
+                  component={Link}
+                  to={`/channel/${channelId}`}
+                  underline="none"
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ display: "block" }}
+                >
+                  {channelTitle}
+                </MuiLink>
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  {channelTitle}
+                </Typography>
+              )}
+            </>
+          )}
+          {publishedAt && (
+            <Typography variant="caption">{fromNow(publishedAt)}</Typography>
+          )}
         </CardContent>
       </Box>
     </Card>

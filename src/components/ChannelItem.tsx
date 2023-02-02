@@ -6,9 +6,17 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import RecentActorsIcon from "@mui/icons-material/RecentActors";
-import { ChannelSnippet } from "../features/channel/types";
+import placeholder from "../images/placeholder-item.jpg";
 
-export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
+type ChannelPropsType = {
+  id: string;
+  title: string;
+  imageUrl?: string;
+  description?: string;
+};
+
+export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
+  const { id, title, imageUrl, description } = channel;
   return (
     <Card
       sx={{
@@ -39,14 +47,14 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
               xs: "100%",
             },
           }}
-          image={channel.snippet.thumbnails.high?.url}
+          image={imageUrl || placeholder}
         />
       </Box>
       <Box>
         <CardContent>
           <MuiLink
             component={Link}
-            to={`/channel/${channel.id.channelId}`}
+            to={`/channel/${id}`}
             underline="none"
             variant="h6"
             color="inherit"
@@ -56,14 +64,14 @@ export function ChannelItem({ channel }: { channel: ChannelSnippet }) {
               color="info"
             />
             &nbsp;
-            {channel.snippet.title}
+            {title}
           </MuiLink>
           <Typography
             variant="subtitle1"
             color="text.secondary"
             component="div"
           >
-            {channel.snippet.description}
+            {description}
           </Typography>
         </CardContent>
       </Box>

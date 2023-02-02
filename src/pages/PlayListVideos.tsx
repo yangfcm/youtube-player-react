@@ -1,5 +1,4 @@
-import { useParams, Link } from "react-router-dom";
-import Grid from "@mui/material/Grid";
+import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { ErrorMessage } from "../components/ErrorMessage";
