@@ -60,17 +60,23 @@ export const fetchChannelProfile = createAsyncThunk(
 
 export const fetchChannelVideos = createAsyncThunk(
   "channel/fetchChannelVideos",
-  async (args: { channelId: string; [key: string]: string }) => {
-    const { channelId, ...options } = args;
-    const response = await fetchChannelVideosAPI(channelId, options);
+  async (args: { channelId: string; pageToken?: string }) => {
+    const { channelId, pageToken } = args;
+    const response = await fetchChannelVideosAPI(
+      channelId,
+      pageToken ? { pageToken } : {}
+    );
     return response;
   }
 );
 export const fetchChannelPlaylists = createAsyncThunk(
   "channel/fetchChannelPlaylists",
-  async (args: { channelId: string; [key: string]: string }) => {
-    const { channelId, ...options } = args;
-    const response = await fetchChannelPlaylistsAPI(channelId, options);
+  async (args: { channelId: string; pageToken?: string }) => {
+    const { channelId, pageToken } = args;
+    const response = await fetchChannelPlaylistsAPI(
+      channelId,
+      pageToken ? { pageToken } : {}
+    );
     return response;
   }
 );
