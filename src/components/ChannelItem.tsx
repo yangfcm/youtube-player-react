@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import RecentActorsIcon from "@mui/icons-material/RecentActors";
-import placeholder from "../images/placeholder-item.jpg";
+import placeholder from "../images/placeholder-channel.jpg";
 
 type ChannelPropsType = {
   id: string;
