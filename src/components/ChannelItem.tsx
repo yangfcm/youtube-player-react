@@ -68,7 +68,7 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
               {title}
             </MuiLink>
           ) : (
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h5" color="inherit">
               {title}
             </Typography>
           )}
