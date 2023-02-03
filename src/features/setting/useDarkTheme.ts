@@ -10,6 +10,7 @@ export function useDarkTheme() {
   const setDarkTheme = useCallback(
     (dark: boolean) => {
       dispatch(setDarkThemeSetting(dark));
+      localStorage.setItem("dark", dark ? "1" : "0");
     },
     [dispatch]
   );
