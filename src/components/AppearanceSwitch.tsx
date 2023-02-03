@@ -1,13 +1,13 @@
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { styled } from "@mui/material/styles";
-import Switch, { SwitchProps } from "@mui/material/Switch";
-import React from "react";
+import Switch from "@mui/material/Switch";
+import { useDarkTheme } from "../features/setting/useDarkTheme";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
-  padding: 7, 
+  padding: 7,
   "& .MuiSwitch-switchBase": {
     margin: 1,
     padding: 0,
@@ -52,6 +52,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export function AppearanceSwitch() {
+  const { setDarkTheme } = useDarkTheme();
   return (
     <FormGroup>
       <FormControlLabel
@@ -59,7 +60,7 @@ export function AppearanceSwitch() {
         label="Appearance"
         onClick={(e) => e.stopPropagation()}
         onChange={(e: React.BaseSyntheticEvent) => {
-          console.log(e.target.checked);
+          setDarkTheme(e.target.checked);
         }}
         sx={{ ml: -2 }}
       />
