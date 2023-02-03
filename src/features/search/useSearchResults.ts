@@ -37,7 +37,7 @@ export function useSearchResults(q: string) {
   return {
     searchResults,
     status: asyncStatus,
-    error: error?.message || "",
+    error,
     hasMore: !!nextPageToken,
     queryChanged,
     fetchMore,

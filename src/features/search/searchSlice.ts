@@ -7,10 +7,11 @@ import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { fetchSearchResultsAPI } from "./searchAPI";
 import { SearchResultsResponse } from "./types";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 export interface SearchState {
   status: AsyncStatus;
-  error: SerializedError | null;
+  error?: string;
   results: SearchResultsResponse | null;
   relevantVideos: Record<string, SearchResultsResponse>;
   query: string;
@@ -18,7 +19,7 @@ export interface SearchState {
 
 const initialState: SearchState = {
   status: AsyncStatus.IDLE,
-  error: null,
+  error: "",
   results: null,
   relevantVideos: {},
   query: "",
@@ -51,18 +52,17 @@ const searchSlice = createSlice({
       }
     ) => {
       state.status = AsyncStatus.SUCCESS;
-      state.error = null;
-      const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
+      state.error = "";
       const currentItems = state.results?.items || [];
       if (arg.q) {
         const currentQuery = state.query;
         state.query = arg.q;
         state.results = {
-          etag,
-          kind,
-          nextPageToken,
-          pageInfo,
-          items: arg.q === currentQuery ? [...currentItems, ...items] : items,
+          ...payload.data,
+          items:
+            arg.q === currentQuery
+              ? [...currentItems, ...payload.data.items]
+              : payload.data.items,
         };
       }
       if (arg.relatedToVideoId) {
@@ -74,7 +74,7 @@ const searchSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.status = AsyncStatus.FAIL;
-      state.error = error;
+      state.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder
