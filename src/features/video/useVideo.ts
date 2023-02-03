@@ -22,7 +22,7 @@ export function useVideo(videoId?: string) {
 
   return {
     status: asyncStatus,
-    error: error?.message || "",
+    error,
     video,
   };
 }

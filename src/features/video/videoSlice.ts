@@ -7,29 +7,30 @@ import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { VideoResponse, VideoSnippetStats, VideosResponse } from "./types";
 import { fetchVideoAPI, fetchVideosAPI } from "./videoAPI";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 interface VideoState {
   videos: {
     status: AsyncStatus;
-    error: SerializedError | null;
+    error: string;
     mostPopular?: VideosResponse;
   };
   video: {
     status: AsyncStatus;
     item: Record<string, VideoSnippetStats>;
-    error: SerializedError | null;
+    error: string;
   };
 }
 
 const initialState: VideoState = {
   videos: {
     status: AsyncStatus.IDLE,
-    error: null,
+    error: "",
   },
   video: {
     status: AsyncStatus.IDLE,
     item: {},
-    error: null,
+    error: "",
   },
 };
 
@@ -62,7 +63,7 @@ const videoSlice = createSlice({
       { payload }: { payload: AxiosResponse<VideoResponse, any> }
     ) => {
       state.video.status = AsyncStatus.SUCCESS;
-      state.video.error = null;
+      state.video.error = "";
       const video = payload.data.items[0];
       if (video) {
         state.video.item = {
@@ -76,7 +77,7 @@ const videoSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.video.status = AsyncStatus.FAIL;
-      state.video.error = error;
+      state.video.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     const fetchVideosStart = (state: VideoState) => {
@@ -93,7 +94,7 @@ const videoSlice = createSlice({
       }
     ) => {
       state.videos.status = AsyncStatus.SUCCESS;
-      state.videos.error = null;
+      state.videos.error = "";
       if (arg?.chart === "mostPopular") {
         // Received most popular videos.
         const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
@@ -112,7 +113,7 @@ const videoSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.videos.status = AsyncStatus.FAIL;
-      state.videos.error = error;
+      state.videos.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder
