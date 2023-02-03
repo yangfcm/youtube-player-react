@@ -52,7 +52,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export function AppearanceSwitch() {
-  const { setDarkTheme } = useDarkTheme();
+  const { darkTheme, setDarkTheme } = useDarkTheme();
   return (
     <FormGroup>
       <FormControlLabel
@@ -62,6 +62,7 @@ export function AppearanceSwitch() {
         onChange={(e: React.BaseSyntheticEvent) => {
           setDarkTheme(e.target.checked);
         }}
+        checked={darkTheme}
         sx={{ ml: -2 }}
       />
     </FormGroup>
