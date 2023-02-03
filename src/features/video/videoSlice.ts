@@ -60,7 +60,7 @@ const videoSlice = createSlice({
     };
     const fetchVideoSuccess = (
       state: VideoState,
-      { payload }: { payload: AxiosResponse<VideoResponse, any> }
+      { payload }: { payload: AxiosResponse<VideoResponse> }
     ) => {
       state.video.status = AsyncStatus.SUCCESS;
       state.video.error = "";
@@ -97,14 +97,10 @@ const videoSlice = createSlice({
       state.videos.error = "";
       if (arg?.chart === "mostPopular") {
         // Received most popular videos.
-        const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
         const currentItems = state.videos.mostPopular?.items || [];
         state.videos.mostPopular = {
-          etag,
-          kind,
-          nextPageToken,
-          pageInfo,
-          items: [...currentItems, ...items],
+          ...payload.data,
+          items: [...currentItems, ...payload.data.items],
         };
       }
     };
