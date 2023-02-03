@@ -48,7 +48,7 @@ export function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <MuiLink component={Link} to="/">
+          <MuiLink component={Link} to="/" underline="none">
             <Typography
               component="h1"
               variant="h6"
