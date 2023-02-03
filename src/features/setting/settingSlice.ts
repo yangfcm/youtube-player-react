@@ -3,10 +3,12 @@ import { RootState } from "../../app/store";
 
 export interface SettingState {
   openSidebar: boolean;
+  darkTheme: boolean;
 }
 
 const initialState: SettingState = {
   openSidebar: false,
+  darkTheme: false,
 };
 
 export const settingSlice = createSlice({
@@ -16,10 +18,13 @@ export const settingSlice = createSlice({
     setOpenSidebar: (state, action: PayloadAction<boolean>) => {
       state.openSidebar = action.payload;
     },
+    setDarkTheme: (state, action: PayloadAction<boolean>) => {
+      state.darkTheme = action.payload;
+    },
   },
 });
 
-export const { setOpenSidebar } = settingSlice.actions;
+export const { setOpenSidebar, setDarkTheme } = settingSlice.actions;
 
 export const selOpenSidebar = (state: RootState) => state.setting.openSidebar;
 
