@@ -8,6 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { RequireAuth } from "./RequireAuth";
 import { useProfile } from "../features/user/useProfile";
 import { GoogleLogout } from "./GoogleLogout";
+import { AppearanceSwitch } from "./AppearanceSwitch";
 
 export function HeaderMenu() {
   const profile = useProfile();
@@ -63,6 +64,9 @@ export function HeaderMenu() {
           {profile?.username}
         </MenuItem>
         <Divider />
+        <MenuItem>
+          <AppearanceSwitch />
+        </MenuItem>
         <MenuItem>
           <GoogleLogout />
         </MenuItem>
