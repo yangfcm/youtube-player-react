@@ -7,13 +7,16 @@ import { AsyncStatus } from "../settings/types";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { CommentItem } from "./CommentItem";
 import { MoreButton } from "./MoreButton";
+import { NoContent } from "./NoContent";
 
 export function VideoComments({ videoId }: { videoId: string }) {
-  const { comments, status, error, fetchMore, hasMore } = useComments(videoId);
-
-  if (!comments?.length && status === AsyncStatus.LOADING) {
-    return <LoadingSpinner />;
-  }
+  const {
+    comments = [],
+    status,
+    error,
+    fetchMore,
+    hasMore,
+  } = useComments(videoId);
 
   return (
     <Box sx={{ my: 2 }}>
@@ -21,17 +24,22 @@ export function VideoComments({ videoId }: { videoId: string }) {
         <MessageIcon />
         &nbsp;Comments
       </Typography>
+      {status === AsyncStatus.LOADING && comments.length === 0 && (
+        <LoadingSpinner />
+      )}
       {status === AsyncStatus.FAIL && (
         <Alert severity="error" sx={{ justifyContent: "center" }}>
           {error}
         </Alert>
       )}
-      {comments &&
-        comments.map((comment) => (
-          <Box sx={{ my: 3 }} key={comment.id}>
-            <CommentItem comment={comment} />
-          </Box>
-        ))}
+      {status === AsyncStatus.SUCCESS && comments.length === 0 && (
+        <NoContent>Nobody has left comment.</NoContent>
+      )}
+      {comments.map((comment) => (
+        <Box sx={{ my: 3 }} key={comment.id}>
+          <CommentItem comment={comment} />
+        </Box>
+      ))}
       {hasMore && (
         <MoreButton
           loading={status === AsyncStatus.LOADING}
