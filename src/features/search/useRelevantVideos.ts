@@ -27,6 +27,6 @@ export function useRelevantVideos(videoId: string) {
   return {
     videos: relevantVideos as VideoSnippet[],
     status: asyncStatus,
-    error: error?.message || "",
+    error: error,
   };
 }
