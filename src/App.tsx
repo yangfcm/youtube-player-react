@@ -9,7 +9,11 @@ import { Router } from "./Router";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+  palette: {
+    // mode: 'dark',
+  },
+});
 
 function App() {
   return (
