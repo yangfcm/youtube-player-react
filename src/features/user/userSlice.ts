@@ -11,6 +11,7 @@ import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
 import { SubscriptionsResponse } from "./types";
 import { fetchPlayListsAPI, fetchSubscriptionsAPI } from "./userAPI";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 export interface UserProfile {
   id: string;
@@ -103,10 +104,8 @@ const userSlice = createSlice({
       state: UserState,
       {
         payload,
-        meta: { arg },
       }: {
         payload: AxiosResponse<SubscriptionsResponse>;
-        meta: { arg?: Record<string, string> };
       }
     ) => {
       const currentItems = state.subscriptions.data?.items || [];
@@ -114,9 +113,7 @@ const userSlice = createSlice({
       state.subscriptions.error = "";
       state.subscriptions.data = {
         ...payload.data,
-        items: arg?.pageToken
-          ? [...currentItems, ...payload.data.items]
-          : payload.data.items,
+        items: [...currentItems, ...payload.data.items],
       };
     };
     const fetchSubscriptionsFailed = (
@@ -124,7 +121,7 @@ const userSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.subscriptions.status = AsyncStatus.FAIL;
-      state.subscriptions.error = error.message || "";
+      state.subscriptions.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     const fetchPlayListsStart = (
@@ -138,10 +135,8 @@ const userSlice = createSlice({
       state: UserState,
       {
         payload,
-        meta: { arg },
       }: {
         payload: AxiosResponse<PlayListsResponse>;
-        meta: { arg?: Record<string, string> };
       }
     ) => {
       const currentItems = state.playlists.data?.items || [];
@@ -149,9 +144,7 @@ const userSlice = createSlice({
       state.playlists.error = "";
       state.playlists.data = {
         ...payload.data,
-        items: arg?.pageToken
-          ? [...currentItems, ...payload.data.items]
-          : payload.data.items,
+        items: [...currentItems, ...payload.data.items],
       };
     };
     const fetchPlayListsFailed = (
@@ -159,7 +152,7 @@ const userSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.playlists.status = AsyncStatus.FAIL;
-      state.playlists.error = error.message || "";
+      state.playlists.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder
