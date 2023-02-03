@@ -7,6 +7,7 @@ import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { fetchCommentsAPI, fetchRepliesAPI } from "./commentAPI";
 import { CommentResponse, ReplyResponse } from "./types";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 interface CommentState {
   comments: Record<
@@ -108,7 +109,7 @@ export const commentSlice = createSlice({
       const { videoId } = arg;
       if (!videoId) return;
       state.comments[videoId].status = AsyncStatus.FAIL;
-      state.comments[videoId].error = error.message || "";
+      state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     const fetchRepliesStart = (
@@ -163,7 +164,7 @@ export const commentSlice = createSlice({
       const { commentId } = arg;
       if (!commentId) return;
       state.comments[commentId].status = AsyncStatus.FAIL;
-      state.comments[commentId].error = error.message || "";
+      state.comments[commentId].error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder
