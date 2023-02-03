@@ -13,6 +13,7 @@ import {
   fetchChannelVideosAPI,
 } from "./channelAPI";
 import { ChannelDetails, ChannelDetailsResponse } from "./types";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 export interface ChannelState {
   profile: {
@@ -110,7 +111,7 @@ export const channelSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.profile.status = AsyncStatus.FAIL;
-      state.profile.error = error.message || "";
+      state.profile.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     const fetchChannelVideosStart = (state: ChannelState) => {
@@ -140,7 +141,7 @@ export const channelSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.videos.status = AsyncStatus.FAIL;
-      state.videos.error = error.message || "";
+      state.videos.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     const fetchChannelPlaylistsStart = (state: ChannelState) => {
@@ -170,7 +171,7 @@ export const channelSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.playlists.status = AsyncStatus.FAIL;
-      state.playlists.error = error.message || "";
+      state.playlists.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder
