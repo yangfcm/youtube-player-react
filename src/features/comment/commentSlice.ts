@@ -35,18 +35,24 @@ const initialState: CommentState = {
 
 export const fetchComments = createAsyncThunk(
   "comment/fetchComments",
-  async (args: { videoId: string; [key: string]: string }) => {
-    const { videoId, ...options } = args;
-    const response = await fetchCommentsAPI(videoId, options);
+  async (args: { videoId: string; pageToken?: string }) => {
+    const { videoId, pageToken } = args;
+    const response = await fetchCommentsAPI(
+      videoId,
+      pageToken ? { pageToken } : {}
+    );
     return response;
   }
 );
 
 export const fetchReplies = createAsyncThunk(
   "comment/fetchReplies",
-  async (args: { commentId: string; [key: string]: string }) => {
-    const { commentId, ...options } = args;
-    const response = await fetchRepliesAPI(commentId, options);
+  async (args: { commentId: string; pageToken?: string }) => {
+    const { commentId, pageToken } = args;
+    const response = await fetchRepliesAPI(
+      commentId,
+      pageToken ? { pageToken } : {}
+    );
     return response;
   }
 );
@@ -84,16 +90,12 @@ export const commentSlice = createSlice({
     ) => {
       const { videoId } = arg;
       if (!videoId) return;
-      const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
       const currentItems = state.comments[videoId]?.data?.items || [];
       state.comments[videoId].status = AsyncStatus.SUCCESS;
       state.comments[videoId].error = "";
       state.comments[videoId].data = {
-        etag,
-        kind,
-        nextPageToken,
-        pageInfo,
-        items: [...currentItems, ...items],
+        ...payload.data,
+        items: [...currentItems, ...payload.data.items],
       };
     };
     const fetchCommentsFailed = (
@@ -136,21 +138,17 @@ export const commentSlice = createSlice({
         meta: { arg },
       }: {
         payload: AxiosResponse<ReplyResponse>;
-        meta: { arg: { commentId: string; [key: string]: string } };
+        meta: { arg: { commentId: string } };
       }
     ) => {
       const { commentId } = arg;
       if (!commentId) return;
-      const { etag, items, kind, nextPageToken, pageInfo } = payload.data;
       const currentItems = state.replies[commentId]?.data?.items || [];
       state.replies[commentId].status = AsyncStatus.SUCCESS;
       state.replies[commentId].error = "";
       state.replies[commentId].data = {
-        etag,
-        kind,
-        nextPageToken,
-        pageInfo,
-        items: [...currentItems, ...items],
+        ...payload.data,
+        items: [...currentItems, ...payload.data.items],
       };
     };
 
