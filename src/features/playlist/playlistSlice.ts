@@ -7,6 +7,7 @@ import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { fetchPlaylistVideosAPI } from "./playlistAPI";
 import { PlayListItemsResponse } from "./types";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 interface PlaylistState {
   playlists: Record<string, PlayListItemsResponse>;
@@ -22,9 +23,12 @@ const initialState: PlaylistState = {
 
 export const fetchPlaylistVideos = createAsyncThunk(
   "playlist/fetchVideos",
-  async (args: { playlistId: string; [key: string]: string }) => {
-    const { playlistId, ...options } = args;
-    const response = await fetchPlaylistVideosAPI(playlistId, options);
+  async (args: { playlistId: string; pageToken?: string }) => {
+    const { playlistId, pageToken } = args;
+    const response = await fetchPlaylistVideosAPI(
+      playlistId,
+      pageToken ? { pageToken } : {}
+    );
     return response;
   }
 );
@@ -44,10 +48,11 @@ const playlistSlice = createSlice({
         meta: { arg },
       }: {
         payload: AxiosResponse<PlayListItemsResponse>;
-        meta: { arg: { playlistId: string; [key: string]: string } };
+        meta: { arg: { playlistId: string } };
       }
     ) => {
       const { playlistId } = arg;
+      if (!playlistId) return;
       const currentItems = state.playlists[playlistId]?.items || [];
       state.status = AsyncStatus.SUCCESS;
       state.error = "";
@@ -61,7 +66,7 @@ const playlistSlice = createSlice({
       { error }: { error: SerializedError }
     ) => {
       state.status = AsyncStatus.FAIL;
-      state.error = error.message || "";
+      state.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder
