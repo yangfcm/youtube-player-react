@@ -7,6 +7,7 @@ import {
 import { gapi } from "gapi-script";
 import { useAuth } from "../features/user/useAuth";
 import { GapiLoadError } from "../settings/types";
+import { ErrorMessage } from "./ErrorMessage";
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isSignedIn, signin, signout } = useAuth();
@@ -56,7 +57,7 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
   };
 
   if (loading) return null;
-  if (error) return <div>{error}</div>;
+  if (error) return <ErrorMessage open={!!error}>{error}</ErrorMessage>;
 
   if (!isSignedIn) {
     return (
