@@ -4,7 +4,6 @@ import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { VideoSnippetStats } from "../features/video/types";
 import { fromNow, formatNumber } from "../app/utils";
 import placeholder from "../images/placeholder-item.jpg";
 
