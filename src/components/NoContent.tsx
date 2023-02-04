@@ -5,7 +5,6 @@ export function NoContent({ children }: { children: React.ReactNode }) {
   return (
     <Box
       sx={{
-        background: "#eee",
         display: "flex",
         AlignItems: "center",
         justifyContent: "center",
