@@ -35,7 +35,7 @@ export function GoogleLogin() {
   return (
     <ReactGoogleLogin
       clientId={process.env.REACT_APP_CLIENT_ID || ""}
-      buttonText="Sign in with Google"
+      buttonText="Log in"
       onSuccess={handleSuccessSignin}
       onFailure={handleFailureSignin}
       cookiePolicy={"single_host_origin"}

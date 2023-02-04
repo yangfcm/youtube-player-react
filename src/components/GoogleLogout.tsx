@@ -14,7 +14,7 @@ export function GoogleLogout() {
       clientId={process.env.REACT_APP_CLIENT_ID || ""}
       onLogoutSuccess={handleSignOut}
       className="auth__google-logout-button"
-      buttonText="Sign Out"
+      buttonText="Log out"
     />
   );
 }

@@ -19,4 +19,7 @@ code {
 }
 .auth__google-logout-button {
   box-shadow: none !important;
+  display: flex !important;
+  width: 100%;
+  justify-content: center !important;
 }
