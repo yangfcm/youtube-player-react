@@ -22,7 +22,8 @@ export function GoogleLogin() {
         avatar: userProfile.getImageUrl(),
         username: userProfile.getName(),
       },
-      auth.access_token
+      auth.access_token,
+      auth.expires_at
     );
     localStorage.setItem("token", "Bearer " + auth.access_token);
   };

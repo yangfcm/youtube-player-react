@@ -25,6 +25,7 @@ export interface UserProfile {
 interface UserState {
   profile: UserProfile | null;
   token: string;
+  expiresAt: number;
   subscriptions: {
     status: AsyncStatus;
     error: string;
@@ -40,6 +41,7 @@ interface UserState {
 const initialState: UserState = {
   profile: null,
   token: "",
+  expiresAt: 0,
   subscriptions: {
     status: AsyncStatus.IDLE,
     error: "",
@@ -73,15 +75,17 @@ const userSlice = createSlice({
     signin: (
       state,
       {
-        payload: { user, token },
-      }: PayloadAction<{ user: UserProfile; token: string }>
+        payload: { user, token, expiresAt },
+      }: PayloadAction<{ user: UserProfile; token: string; expiresAt: number }>
     ) => {
       state.profile = user;
       state.token = "Bearer " + token;
+      state.expiresAt = expiresAt;
     },
     signout: (state) => {
       state.profile = null;
       state.token = "";
+      state.expiresAt = 0;
       state.subscriptions = {
         status: AsyncStatus.IDLE,
         error: "",
