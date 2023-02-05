@@ -173,10 +173,10 @@ export const { signin, signout } = userSlice.actions;
 
 const selUserState = (state: RootState) => state.user;
 
-export const selIsSignedIn = createSelector(
-  selUserState,
-  (user) => !!(user.profile?.id && user.token)
-);
+export const selIsSignedIn = createSelector(selUserState, (user) => {
+  const isExpired = Date.now() > user.expiresAt;
+  return !!(user.profile?.id && user.token && !isExpired);
+});
 export const selToken = createSelector(selUserState, (user) => user.token);
 export const selProfile = createSelector(selUserState, (user) => user.profile);
 
