@@ -111,7 +111,11 @@ export const commentSlice = createSlice({
       const { videoId } = arg;
       if (!videoId) return;
       state.comments[videoId].status = AsyncStatus.FAIL;
-      state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
+      if (error.message && error.message.includes("disabled comments")) {
+        state.comments[videoId].error = "Comments are turned off.";
+      } else {
+        state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
+      }
     };
 
     const fetchRepliesStart = (
