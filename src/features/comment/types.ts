@@ -74,3 +74,5 @@ export interface ReplyResponse {
     totalResults?: number;
   };
 }
+
+export type CommentOrder = "relevance" | "time";

@@ -2,12 +2,14 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import MessageIcon from "@mui/icons-material/Message";
+import Stack from "@mui/material/Stack";
 import { useComments } from "../features/comment/useComments";
 import { AsyncStatus } from "../settings/types";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { CommentItem } from "./CommentItem";
 import { MoreButton } from "./MoreButton";
 import { NoContent } from "./NoContent";
+import { SortComments } from "./SortComments";
 
 export function VideoComments({ videoId }: { videoId: string }) {
   const {
@@ -20,10 +22,13 @@ export function VideoComments({ videoId }: { videoId: string }) {
 
   return (
     <Box sx={{ my: 2 }}>
-      <Typography variant="h5" sx={{ display: "flex", alignItems: "center" }}>
-        <MessageIcon />
-        &nbsp;Comments
-      </Typography>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="h5" sx={{ display: "flex", alignItems: "center" }}>
+          <MessageIcon />
+          &nbsp;Comments
+        </Typography>
+        <SortComments disabled={comments.length === 0} />
+      </Stack>
       {status === AsyncStatus.LOADING && comments.length === 0 && (
         <LoadingSpinner />
       )}
