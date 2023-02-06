@@ -2,11 +2,12 @@ import {
   createAsyncThunk,
   createSlice,
   SerializedError,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { fetchCommentsAPI, fetchRepliesAPI } from "./commentAPI";
-import { CommentResponse, ReplyResponse } from "./types";
+import { CommentResponse, ReplyResponse, CommentOrder } from "./types";
 import {
   DEFAULT_ERROR_MESSAGE,
   COMMENTS_TURNED_OFF_MESSAGE,
@@ -19,6 +20,7 @@ interface CommentState {
       status: AsyncStatus;
       error: string;
       data: CommentResponse | null;
+      order: CommentOrder;
     }
   >;
   replies: Record<
@@ -63,7 +65,20 @@ export const fetchReplies = createAsyncThunk(
 export const commentSlice = createSlice({
   name: "comment",
   initialState,
-  reducers: {},
+  reducers: {
+    setCommentOrder: (
+      state,
+      action: PayloadAction<{
+        videoId: string;
+        order: CommentOrder;
+      }>
+    ) => {
+      const { videoId, order } = action.payload;
+      if (state.comments[videoId]) {
+        state.comments[videoId].order = order;
+      }
+    },
+  },
   extraReducers: (builder) => {
     const fetchCommentsStart = (
       state: CommentState,
@@ -76,6 +91,7 @@ export const commentSlice = createSlice({
           status: AsyncStatus.LOADING,
           error: "",
           data: null,
+          order: "relevance",
         };
       } else {
         state.comments[arg.videoId].status = AsyncStatus.LOADING;
@@ -116,6 +132,7 @@ export const commentSlice = createSlice({
       state.comments[videoId].status = AsyncStatus.FAIL;
       if (error.message && error.message.includes("disabled comments")) {
         state.comments[videoId].error = COMMENTS_TURNED_OFF_MESSAGE;
+        state.comments[videoId].data = null;
       } else {
         state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
       }
@@ -181,5 +198,7 @@ export const commentSlice = createSlice({
       .addCase(fetchReplies.rejected, fetchRepliesFailed);
   },
 });
+
+export const { setCommentOrder } = commentSlice.actions;
 
 export const commentReducer = commentSlice.reducer;
