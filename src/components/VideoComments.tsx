@@ -18,8 +18,8 @@ export function VideoComments({ videoId }: { videoId: string }) {
     error,
     fetchMore,
     hasMore,
-    commentOrder = "relevance",
-    setCommentOrder,
+    order = "relevance",
+    setOrder,
   } = useComments(videoId);
 
   return (
@@ -31,8 +31,8 @@ export function VideoComments({ videoId }: { videoId: string }) {
         </Typography>
         <SortComments
           disabled={comments.length === 0}
-          order={commentOrder}
-          onChangeOrder={setCommentOrder}
+          order={order}
+          onChangeOrder={setOrder}
         />
       </Stack>
       {status === AsyncStatus.LOADING && comments.length === 0 && (

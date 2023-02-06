@@ -2,16 +2,16 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import {
-  fetchComments,
-  setCommentOrder as setCommentOrderAction,
-} from "./commentSlice";
+import { fetchComments, setCommentOrder } from "./commentSlice";
 import { CommentOrder } from "./types";
 
 export function useComments(videoId: string) {
   const dispatch = useAppDispatch();
+  const order =
+    useSelector((state: RootState) => state.comment.comments[videoId]?.order) ||
+    "relevance";
   const comments = useSelector(
-    (state: RootState) => state.comment.comments[videoId]?.data?.items
+    (state: RootState) => state.comment.comments[videoId]?.data[order]?.items
   );
   const asyncStatus = useSelector(
     (state: RootState) => state.comment.comments[videoId]?.status
@@ -20,10 +20,8 @@ export function useComments(videoId: string) {
     (state: RootState) => state.comment.comments[videoId]?.error
   );
   const nextPageToken = useSelector(
-    (state: RootState) => state.comment.comments[videoId]?.data?.nextPageToken
-  );
-  const commentOrder = useSelector(
-    (state: RootState) => state.comment.comments[videoId]?.order
+    (state: RootState) =>
+      state.comment.comments[videoId]?.data[order]?.nextPageToken
   );
 
   const fetchMore = useCallback(() => {
@@ -32,15 +30,16 @@ export function useComments(videoId: string) {
         fetchComments({
           videoId,
           pageToken: nextPageToken,
+          order,
         })
       );
     }
-  }, [dispatch, nextPageToken, videoId]);
+  }, [dispatch, nextPageToken, videoId, order]);
 
-  const setCommentOrder = useCallback(
+  const setOrder = useCallback(
     (order: CommentOrder) => {
       dispatch(
-        setCommentOrderAction({
+        setCommentOrder({
           videoId,
           order,
         })
@@ -51,9 +50,9 @@ export function useComments(videoId: string) {
 
   useEffect(() => {
     if (videoId && !comments) {
-      dispatch(fetchComments({ videoId }));
+      dispatch(fetchComments({ videoId, order }));
     }
-  }, [videoId, comments, dispatch]);
+  }, [videoId, comments, dispatch, order]);
 
   return {
     comments,
@@ -61,7 +60,7 @@ export function useComments(videoId: string) {
     error,
     hasMore: !!nextPageToken,
     fetchMore,
-    commentOrder,
-    setCommentOrder,
+    order,
+    setOrder,
   };
 }

@@ -19,7 +19,11 @@ interface CommentState {
     {
       status: AsyncStatus;
       error: string;
-      data: CommentResponse | null;
+      // data: CommentResponse | null;
+      data: {
+        relevance?: CommentResponse;
+        time?: CommentResponse;
+      };
       order: CommentOrder;
     }
   >;
@@ -40,11 +44,15 @@ const initialState: CommentState = {
 
 export const fetchComments = createAsyncThunk(
   "comment/fetchComments",
-  async (args: { videoId: string; pageToken?: string }) => {
-    const { videoId, pageToken } = args;
+  async (args: {
+    videoId: string;
+    pageToken?: string;
+    order?: CommentOrder;
+  }) => {
+    const { videoId, pageToken, order = "relevance" } = args;
     const response = await fetchCommentsAPI(
       videoId,
-      pageToken ? { pageToken } : {}
+      pageToken ? { pageToken, order } : { order }
     );
     return response;
   }
@@ -82,16 +90,20 @@ export const commentSlice = createSlice({
   extraReducers: (builder) => {
     const fetchCommentsStart = (
       state: CommentState,
-      { meta: { arg } }: { meta: { arg: { videoId: string } } }
+      {
+        meta: { arg },
+      }: { meta: { arg: { videoId: string; order?: CommentOrder } } }
     ) => {
-      const { videoId } = arg;
+      const { videoId, order = "relevance" } = arg;
       if (!videoId) return;
-      if (!state.comments[arg.videoId]) {
+      if (!state.comments[arg.videoId]?.data) {
         state.comments[arg.videoId] = {
           status: AsyncStatus.LOADING,
           error: "",
-          data: null,
-          order: "relevance",
+          data: {
+            [order]: undefined,
+          },
+          order,
         };
       } else {
         state.comments[arg.videoId].status = AsyncStatus.LOADING;
@@ -104,15 +116,15 @@ export const commentSlice = createSlice({
         meta: { arg },
       }: {
         payload: AxiosResponse<CommentResponse>;
-        meta: { arg: { videoId: string } };
+        meta: { arg: { videoId: string; order?: CommentOrder } };
       }
     ) => {
-      const { videoId } = arg;
+      const { videoId, order = "relevance" } = arg;
       if (!videoId) return;
-      const currentItems = state.comments[videoId]?.data?.items || [];
+      const currentItems = state.comments[videoId]?.data[order]?.items || [];
       state.comments[videoId].status = AsyncStatus.SUCCESS;
       state.comments[videoId].error = "";
-      state.comments[videoId].data = {
+      state.comments[videoId].data[order] = {
         ...payload.data,
         items: [...currentItems, ...payload.data.items],
       };
@@ -124,15 +136,15 @@ export const commentSlice = createSlice({
         meta: { arg },
       }: {
         error: SerializedError;
-        meta: { arg: { videoId: string } };
+        meta: { arg: { videoId: string; order?: CommentOrder } };
       }
     ) => {
-      const { videoId } = arg;
+      const { videoId, order = "relevance" } = arg;
       if (!videoId) return;
       state.comments[videoId].status = AsyncStatus.FAIL;
       if (error.message && error.message.includes("disabled comments")) {
         state.comments[videoId].error = COMMENTS_TURNED_OFF_MESSAGE;
-        state.comments[videoId].data = null;
+        state.comments[videoId].data[order] = undefined;
       } else {
         state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
       }
