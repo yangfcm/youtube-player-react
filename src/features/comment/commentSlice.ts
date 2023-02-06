@@ -7,7 +7,10 @@ import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { fetchCommentsAPI, fetchRepliesAPI } from "./commentAPI";
 import { CommentResponse, ReplyResponse } from "./types";
-import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
+import {
+  DEFAULT_ERROR_MESSAGE,
+  COMMENTS_TURNED_OFF_MESSAGE,
+} from "../../settings/constant";
 
 interface CommentState {
   comments: Record<
@@ -112,7 +115,7 @@ export const commentSlice = createSlice({
       if (!videoId) return;
       state.comments[videoId].status = AsyncStatus.FAIL;
       if (error.message && error.message.includes("disabled comments")) {
-        state.comments[videoId].error = "Comments are turned off.";
+        state.comments[videoId].error = COMMENTS_TURNED_OFF_MESSAGE;
       } else {
         state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
       }
