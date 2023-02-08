@@ -1,10 +1,15 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, memo } from "react";
+import { useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import { getVideoById } from "../features/video/selectors";
+import { RootState } from "../app/store";
 
-export function AddComment({ videoId }: { videoId: string }) {
+function AddCommentComp({ videoId }: { videoId: string }) {
+  const video = useSelector((state: RootState) => getVideoById(state, videoId));
+  const channelId = video.snippet.channelId;
   const [comment, setComment] = useState("");
 
   const handleAddComment = (e: FormEvent<HTMLFormElement>) => {
@@ -35,3 +40,5 @@ export function AddComment({ videoId }: { videoId: string }) {
     </Stack>
   );
 }
+
+export const AddComment = memo(AddCommentComp);
