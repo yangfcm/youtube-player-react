@@ -79,7 +79,6 @@ export type CommentOrder = "relevance" | "time";
 
 export type VideoCommentRequestBody = {
   snippet: {
-    channelId: string;
     videoId: string;
     topLevelComment: {
       snippet: {

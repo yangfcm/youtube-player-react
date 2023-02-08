@@ -38,17 +38,14 @@ export async function fetchRepliesAPI(
 }
 
 export async function postVideoCommentAPI({
-  channelId,
   videoId,
   comment,
 }: {
-  channelId: string;
   videoId: string;
   comment: string;
 }): Promise<AxiosResponse<CommentSnippet>> {
   const requestBody: VideoCommentRequestBody = {
     snippet: {
-      channelId,
       videoId,
       topLevelComment: {
         snippet: {

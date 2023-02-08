@@ -81,7 +81,7 @@ export const fetchReplies = createAsyncThunk(
 
 export const postVideoComment = createAsyncThunk(
   "comment/postVideoComment",
-  async (args: { channelId: string; videoId: string; comment: string }) => {
+  async (args: { videoId: string; comment: string }) => {
     const response = await postVideoCommentAPI(args);
     return response;
   }
