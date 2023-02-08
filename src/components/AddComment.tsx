@@ -14,7 +14,6 @@ function AddCommentComp({ videoId }: { videoId: string }) {
   const handleAddComment = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!comment.trim()) return;
-    console.log(comment);
     postVideoComment(comment);
   };
 
