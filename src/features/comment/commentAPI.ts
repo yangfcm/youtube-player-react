@@ -5,6 +5,7 @@ import {
   CommentResponse,
   ReplyResponse,
   VideoCommentRequestBody,
+  CommentSnippet,
 } from "./types";
 
 export async function fetchCommentsAPI(
@@ -44,7 +45,7 @@ export async function postVideoCommentAPI({
   channelId: string;
   videoId: string;
   comment: string;
-}): Promise<AxiosResponse<any>> {
+}): Promise<AxiosResponse<CommentSnippet>> {
   const requestBody: VideoCommentRequestBody = {
     snippet: {
       channelId,

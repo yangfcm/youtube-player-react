@@ -1,21 +1,19 @@
 import { useState, FormEvent, memo } from "react";
-import { useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { getVideoById } from "../features/video/selectors";
-import { RootState } from "../app/store";
+import { usePostComment } from "../features/comment/usePostComment";
 
 function AddCommentComp({ videoId }: { videoId: string }) {
-  const video = useSelector((state: RootState) => getVideoById(state, videoId));
-  const channelId = video.snippet.channelId;
   const [comment, setComment] = useState("");
+  const { postVideoComment } = usePostComment(videoId);
 
   const handleAddComment = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!comment.trim()) return;
     console.log(comment);
+    postVideoComment(comment);
   };
 
   return (

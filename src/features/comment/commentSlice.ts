@@ -6,8 +6,17 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import { fetchCommentsAPI, fetchRepliesAPI } from "./commentAPI";
-import { CommentResponse, ReplyResponse, CommentOrder } from "./types";
+import {
+  fetchCommentsAPI,
+  fetchRepliesAPI,
+  postVideoCommentAPI,
+} from "./commentAPI";
+import {
+  CommentResponse,
+  ReplyResponse,
+  CommentOrder,
+  CommentSnippet,
+} from "./types";
 import {
   DEFAULT_ERROR_MESSAGE,
   COMMENTS_TURNED_OFF_MESSAGE,
@@ -66,6 +75,14 @@ export const fetchReplies = createAsyncThunk(
       commentId,
       pageToken ? { pageToken } : {}
     );
+    return response;
+  }
+);
+
+export const postVideoComment = createAsyncThunk(
+  "comment/postVideoComment",
+  async (args: { channelId: string; videoId: string; comment: string }) => {
+    const response = await postVideoCommentAPI(args);
     return response;
   }
 );
@@ -201,13 +218,64 @@ export const commentSlice = createSlice({
       state.comments[commentId].error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
+    const postVideoCommentStart = (
+      state: CommentState,
+      {
+        meta: { arg },
+      }: {
+        meta: { arg: { videoId: string } };
+      }
+    ) => {
+      const { videoId } = arg;
+      state.comments[videoId].status = AsyncStatus.LOADING;
+    };
+
+    const postVideoCommentSuccess = (
+      state: CommentState,
+      {
+        payload,
+        meta: { arg },
+      }: {
+        payload: AxiosResponse<CommentSnippet>;
+        meta: { arg: { videoId: string } };
+      }
+    ) => {
+      const { videoId } = arg;
+      const addedComment = payload.data;
+      const order = state.comments[videoId].order || "relevance";
+      const currentItems = state.comments[videoId].data[order]?.items || [];
+      state.comments[videoId].status = AsyncStatus.SUCCESS;
+      state.comments[videoId].error = "";
+      if (state.comments[videoId].data[order]) {
+        state.comments[videoId].data[order]!.items = [
+          addedComment,
+          ...currentItems,
+        ];
+      }
+    };
+
+    const postVideoCommentFailed = (
+      state: CommentState,
+      {
+        error,
+        meta: { arg },
+      }: { error: SerializedError; meta: { arg: { videoId: string } } }
+    ) => {
+      const { videoId } = arg;
+      state.comments[videoId].status = AsyncStatus.FAIL;
+      state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
+    };
+
     builder
       .addCase(fetchComments.pending, fetchCommentsStart)
       .addCase(fetchComments.fulfilled, fetchCommentsSuccess)
       .addCase(fetchComments.rejected, fetchCommentsFailed)
       .addCase(fetchReplies.pending, fetchRepliesStart)
       .addCase(fetchReplies.fulfilled, fetchRepliesSuccess)
-      .addCase(fetchReplies.rejected, fetchRepliesFailed);
+      .addCase(fetchReplies.rejected, fetchRepliesFailed)
+      .addCase(postVideoComment.pending, postVideoCommentStart)
+      .addCase(postVideoComment.fulfilled, postVideoCommentSuccess)
+      .addCase(postVideoComment.rejected, postVideoCommentFailed);
   },
 });
 
