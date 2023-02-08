@@ -4,11 +4,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
-export function AddComment() {
+export function AddComment({ videoId }: { videoId: string }) {
   const [comment, setComment] = useState("");
 
   const handleAddComment = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!comment.trim()) return;
     console.log(comment);
   };
 
