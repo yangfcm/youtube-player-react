@@ -1,4 +1,4 @@
-import { useState, FormEvent, memo } from "react";
+import { useState, useEffect, FormEvent, memo } from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -17,6 +17,12 @@ function AddCommentComp({ videoId }: { videoId: string }) {
     postVideoComment(comment);
   };
 
+  useEffect(() => {
+    if (status === AsyncStatus.FAIL || status === AsyncStatus.SUCCESS) {
+      setComment(""); // Reset form when comment is submitted, either successfully or not.
+    }
+  }, [status]);
+
   return (
     <>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
@@ -34,6 +40,7 @@ function AddCommentComp({ videoId }: { videoId: string }) {
           label="Leave your comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          disabled={status === AsyncStatus.LOADING}
         />
         <Button
           type="submit"
