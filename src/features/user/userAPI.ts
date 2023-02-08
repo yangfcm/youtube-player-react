@@ -40,3 +40,48 @@ export async function fetchPlayListsAPI(
     },
   });
 }
+
+export async function subscribeAPI(
+  channelId: string
+): Promise<AxiosResponse<any>> {
+  return await appAxios.post(
+    "/subscriptions",
+    {
+      snippet: {
+        resourceId: {
+          kind: "youtube#channel",
+          channelId,
+        },
+      },
+    },
+    {
+      headers: { Authorization: localStorage.getItem("token") },
+      params: {
+        part: PART_SNIPPET,
+      },
+    }
+  );
+}
+
+export async function unsubscribeAPI(channelId: string): Promise<string> {
+  const subscriptionRes = await appAxios.get("/subscriptions", {
+    params: {
+      part: PART_SNIPPET,
+      forChannelId: channelId,
+      mine: true,
+    },
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+  const subscriptionId = subscriptionRes.data.items[0].id; // Get subscription id.
+  await appAxios.delete("/subscriptions", {
+    params: {
+      id: subscriptionId,
+    },
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+  return channelId;
+}
