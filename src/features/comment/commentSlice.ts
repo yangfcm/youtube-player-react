@@ -44,11 +44,15 @@ interface CommentState {
       data: ReplyResponse | null;
     }
   >;
+  postStatus: AsyncStatus;
+  postError: string;
 }
 
 const initialState: CommentState = {
   comments: {},
   replies: {},
+  postStatus: AsyncStatus.IDLE,
+  postError: "",
 };
 
 export const fetchComments = createAsyncThunk(
@@ -218,16 +222,8 @@ export const commentSlice = createSlice({
       state.comments[commentId].error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
-    const postVideoCommentStart = (
-      state: CommentState,
-      {
-        meta: { arg },
-      }: {
-        meta: { arg: { videoId: string } };
-      }
-    ) => {
-      const { videoId } = arg;
-      state.comments[videoId].status = AsyncStatus.LOADING;
+    const postVideoCommentStart = (state: CommentState) => {
+      state.postStatus = AsyncStatus.LOADING;
     };
 
     const postVideoCommentSuccess = (
@@ -244,8 +240,8 @@ export const commentSlice = createSlice({
       const addedComment = payload.data;
       const order = state.comments[videoId].order || "relevance";
       const currentItems = state.comments[videoId].data[order]?.items || [];
-      state.comments[videoId].status = AsyncStatus.SUCCESS;
-      state.comments[videoId].error = "";
+      state.postStatus = AsyncStatus.SUCCESS;
+      state.postError = "";
       if (state.comments[videoId].data[order]) {
         state.comments[videoId].data[order]!.items = [
           addedComment,
@@ -256,14 +252,10 @@ export const commentSlice = createSlice({
 
     const postVideoCommentFailed = (
       state: CommentState,
-      {
-        error,
-        meta: { arg },
-      }: { error: SerializedError; meta: { arg: { videoId: string } } }
+      { error }: { error: SerializedError }
     ) => {
-      const { videoId } = arg;
-      state.comments[videoId].status = AsyncStatus.FAIL;
-      state.comments[videoId].error = error.message || DEFAULT_ERROR_MESSAGE;
+      state.postStatus = AsyncStatus.FAIL;
+      state.postError = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder

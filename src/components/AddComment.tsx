@@ -18,8 +18,8 @@ function AddCommentComp({ videoId }: { videoId: string }) {
   };
 
   useEffect(() => {
-    if (status === AsyncStatus.FAIL || status === AsyncStatus.SUCCESS) {
-      setComment(""); // Reset form when comment is submitted, either successfully or not.
+    if (status === AsyncStatus.SUCCESS) {
+      setComment(""); // Reset form when comment is submitted successfully.
     }
   }, [status]);
 

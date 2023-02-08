@@ -8,11 +8,9 @@ export function usePostComment(videoId: string) {
   const dispatch = useAppDispatch();
 
   const asyncStatus = useSelector(
-    (state: RootState) => state.comment.comments[videoId]?.status
+    (state: RootState) => state.comment.postStatus
   );
-  const error = useSelector(
-    (state: RootState) => state.comment.comments[videoId]?.error
-  );
+  const error = useSelector((state: RootState) => state.comment.postError);
 
   const postVideoComment = useCallback(
     (comment: string) => {
