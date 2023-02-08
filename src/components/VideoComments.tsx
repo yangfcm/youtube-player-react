@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import MessageIcon from "@mui/icons-material/Message";
 import Stack from "@mui/material/Stack";
@@ -10,6 +9,7 @@ import { CommentItem } from "./CommentItem";
 import { MoreButton } from "./MoreButton";
 import { NoContent } from "./NoContent";
 import { SortComments } from "./SortComments";
+import { ErrorMessage } from "./ErrorMessage";
 import { AddComment } from "./AddComment";
 
 export function VideoComments({ videoId }: { videoId: string }) {
@@ -40,11 +40,7 @@ export function VideoComments({ videoId }: { videoId: string }) {
       {status === AsyncStatus.LOADING && comments.length === 0 && (
         <LoadingSpinner />
       )}
-      {status === AsyncStatus.FAIL && (
-        <Alert severity="error" sx={{ justifyContent: "center" }}>
-          {error}
-        </Alert>
-      )}
+      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       {status === AsyncStatus.SUCCESS && comments.length === 0 && (
         <NoContent>Nobody has left comment.</NoContent>
       )}
