@@ -44,7 +44,7 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
           sx={{
             width: {
               sm: 160,
-              xs: "100%",
+              xs: "50%",
             },
           }}
           image={imageUrl || placeholder}
