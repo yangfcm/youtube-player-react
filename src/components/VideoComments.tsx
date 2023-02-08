@@ -10,6 +10,7 @@ import { CommentItem } from "./CommentItem";
 import { MoreButton } from "./MoreButton";
 import { NoContent } from "./NoContent";
 import { SortComments } from "./SortComments";
+import { AddComment } from './AddComment';
 
 export function VideoComments({ videoId }: { videoId: string }) {
   const {
@@ -35,6 +36,7 @@ export function VideoComments({ videoId }: { videoId: string }) {
           onChangeOrder={setOrder}
         />
       </Stack>
+      <AddComment />
       {status === AsyncStatus.LOADING && comments.length === 0 && (
         <LoadingSpinner />
       )}
