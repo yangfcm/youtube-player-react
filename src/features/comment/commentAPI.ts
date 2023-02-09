@@ -1,7 +1,12 @@
 import { AxiosResponse } from "axios";
 import { appAxios } from "../../settings/api";
 import { MAX_RESULTS_15, PART_SNIPPET } from "../../settings/constant";
-import { CommentResponse, ReplyResponse } from "./types";
+import {
+  CommentResponse,
+  ReplyResponse,
+  VideoCommentRequestBody,
+  CommentSnippet,
+} from "./types";
 
 export async function fetchCommentsAPI(
   videoId: string,
@@ -28,6 +33,33 @@ export async function fetchRepliesAPI(
       part: PART_SNIPPET,
       maxResults: MAX_RESULTS_15,
       ...options,
+    },
+  });
+}
+
+export async function postVideoCommentAPI({
+  videoId,
+  comment,
+}: {
+  videoId: string;
+  comment: string;
+}): Promise<AxiosResponse<CommentSnippet>> {
+  const requestBody: VideoCommentRequestBody = {
+    snippet: {
+      videoId,
+      topLevelComment: {
+        snippet: {
+          textOriginal: comment,
+        },
+      },
+    },
+  };
+  return await appAxios.post("/commentThreads", requestBody, {
+    params: {
+      part: PART_SNIPPET,
+    },
+    headers: {
+      Authorization: localStorage.getItem("token"),
     },
   });
 }

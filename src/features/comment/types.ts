@@ -74,3 +74,16 @@ export interface ReplyResponse {
     totalResults?: number;
   };
 }
+
+export type CommentOrder = "relevance" | "time";
+
+export type VideoCommentRequestBody = {
+  snippet: {
+    videoId: string;
+    topLevelComment: {
+      snippet: {
+        textOriginal: string;
+      };
+    };
+  };
+};

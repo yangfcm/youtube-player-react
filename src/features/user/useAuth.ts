@@ -16,8 +16,8 @@ export function useAuth() {
   const token = useSelector(selToken);
 
   const signin = useCallback(
-    (user: UserProfile, token: string) => {
-      dispatch(signinAction({ user, token }));
+    (user: UserProfile, token: string, expiresAt: number) => {
+      dispatch(signinAction({ user, token, expiresAt }));
     },
     [dispatch]
   );

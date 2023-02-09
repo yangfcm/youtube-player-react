@@ -6,7 +6,7 @@ import {
   PART_SNIPPET_CONTENT_STATUS,
 } from "../../settings/constant";
 import { PlayListsResponse } from "../playlist/types";
-import { SubscriptionsResponse } from "./types";
+import { SubscriptionSnippet, SubscriptionsResponse } from "./types";
 
 export async function fetchSubscriptionsAPI(
   options?: Record<string, string>
@@ -39,4 +39,55 @@ export async function fetchPlayListsAPI(
       Authorization: localStorage.getItem("token"),
     },
   });
+}
+
+export async function subscribeChannelAPI(
+  channelId: string
+): Promise<AxiosResponse<SubscriptionSnippet>> {
+  return await appAxios.post(
+    "/subscriptions",
+    {
+      snippet: {
+        resourceId: {
+          kind: "youtube#channel",
+          channelId,
+        },
+      },
+    },
+    {
+      headers: { Authorization: localStorage.getItem("token") },
+      params: {
+        part: PART_SNIPPET,
+      },
+    }
+  );
+}
+
+export async function fetchSubscriptionIdAPI(
+  channelId: string
+): Promise<AxiosResponse<SubscriptionsResponse>> {
+  return await appAxios.get("/subscriptions", {
+    params: {
+      part: PART_SNIPPET,
+      forChannelId: channelId,
+      mine: true,
+    },
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+}
+
+export async function unsubscribeChannelAPI(
+  subscriptionId: string
+): Promise<string> {
+  await appAxios.delete("/subscriptions", {
+    params: {
+      id: subscriptionId,
+    },
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+  return subscriptionId;
 }

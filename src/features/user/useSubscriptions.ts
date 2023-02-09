@@ -19,8 +19,8 @@ export function useSubscriptions() {
   }, [nextPageToken, dispatch]);
 
   useEffect(() => {
-    if (userId) dispatch(fetchSubscriptions());
-  }, [userId, dispatch]);
+    if (userId && !data) dispatch(fetchSubscriptions());
+  }, [userId, dispatch, data]);
 
   return {
     subscriptions: data?.items,

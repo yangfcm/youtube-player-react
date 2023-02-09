@@ -9,9 +9,13 @@ import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
-import { SubscriptionsResponse } from "./types";
-import { fetchPlayListsAPI, fetchSubscriptionsAPI } from "./userAPI";
-import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
+import { SubscriptionSnippet, SubscriptionsResponse } from "./types";
+import {
+  fetchPlayListsAPI,
+  fetchSubscriptionIdAPI,
+  fetchSubscriptionsAPI,
+} from "./userAPI";
+import { DEFAULT_ERROR_MESSAGE, UNSUBSCRIBED } from "../../settings/constant";
 
 export interface UserProfile {
   id: string;
@@ -25,10 +29,12 @@ export interface UserProfile {
 interface UserState {
   profile: UserProfile | null;
   token: string;
+  expiresAt: number;
   subscriptions: {
     status: AsyncStatus;
     error: string;
     data?: SubscriptionsResponse;
+    subscriptionIds: Record<string, string>;
   };
   playlists: {
     status: AsyncStatus;
@@ -40,9 +46,11 @@ interface UserState {
 const initialState: UserState = {
   profile: null,
   token: "",
+  expiresAt: 0,
   subscriptions: {
     status: AsyncStatus.IDLE,
     error: "",
+    subscriptionIds: {},
   },
   playlists: {
     status: AsyncStatus.IDLE,
@@ -66,6 +74,14 @@ export const fetchPlayLists = createAsyncThunk(
   }
 );
 
+export const fetchSubscriptionId = createAsyncThunk(
+  "user/fetchSubscriptionId",
+  async (channelId: string) => {
+    const response = await fetchSubscriptionIdAPI(channelId);
+    return response;
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -73,23 +89,57 @@ const userSlice = createSlice({
     signin: (
       state,
       {
-        payload: { user, token },
-      }: PayloadAction<{ user: UserProfile; token: string }>
+        payload: { user, token, expiresAt },
+      }: PayloadAction<{ user: UserProfile; token: string; expiresAt: number }>
     ) => {
       state.profile = user;
       state.token = "Bearer " + token;
+      state.expiresAt = expiresAt;
     },
     signout: (state) => {
       state.profile = null;
       state.token = "";
+      state.expiresAt = 0;
       state.subscriptions = {
         status: AsyncStatus.IDLE,
         error: "",
+        subscriptionIds: {},
       };
       state.playlists = {
         status: AsyncStatus.IDLE,
         error: "",
       };
+    },
+    receiveSubscriptionId: (
+      state,
+      {
+        payload: { channelId, subscriptionId },
+      }: PayloadAction<{ channelId: string; subscriptionId: string }>
+    ) => {
+      state.subscriptions.subscriptionIds[channelId] = subscriptionId;
+    },
+    subscribed: (
+      state,
+      {
+        payload: { channelId, subscription },
+      }: PayloadAction<{ channelId: string; subscription: SubscriptionSnippet }>
+    ) => {
+      state.subscriptions.subscriptionIds[channelId] = subscription.id;
+      if (state.subscriptions.data) {
+        // Add the newly subscribed channel to the top of the existing subscriptions.
+        state.subscriptions.data.items.unshift(subscription);
+      }
+    },
+    unsubscribed: (
+      state,
+      { payload: { channelId } }: PayloadAction<{ channelId: string }>
+    ) => {
+      state.subscriptions.subscriptionIds[channelId] = UNSUBSCRIBED;
+      if (state.subscriptions.data) {
+        state.subscriptions.data.items = state.subscriptions.data.items.filter(
+          (item) => item.snippet.resourceId.channelId !== channelId
+        );
+      }
     },
   },
   extraReducers: (builder) => {
@@ -115,6 +165,12 @@ const userSlice = createSlice({
         ...payload.data,
         items: [...currentItems, ...payload.data.items],
       };
+      payload.data.items.forEach(
+        (item) =>
+          (state.subscriptions.subscriptionIds[
+            item.snippet.resourceId.channelId
+          ] = item.id)
+      ); // Populate subscriptionIds map.
     };
     const fetchSubscriptionsFailed = (
       state: UserState,
@@ -165,14 +221,20 @@ const userSlice = createSlice({
   },
 });
 
-export const { signin, signout } = userSlice.actions;
+export const {
+  signin,
+  signout,
+  receiveSubscriptionId,
+  subscribed,
+  unsubscribed,
+} = userSlice.actions;
 
 const selUserState = (state: RootState) => state.user;
 
-export const selIsSignedIn = createSelector(
-  selUserState,
-  (user) => !!(user.profile?.id && user.token)
-);
+export const selIsSignedIn = createSelector(selUserState, (user) => {
+  const isExpired = Date.now() > user.expiresAt;
+  return !!(user.profile?.id && user.token && !isExpired);
+});
 export const selToken = createSelector(selUserState, (user) => user.token);
 export const selProfile = createSelector(selUserState, (user) => user.profile);
 
