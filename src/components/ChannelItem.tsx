@@ -24,7 +24,7 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
       sx={{
         display: "flex",
         height: {
-          sm: 160,
+          sm: 165,
           xs: "auto",
         },
         flexDirection: {
