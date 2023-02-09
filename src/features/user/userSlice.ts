@@ -125,14 +125,21 @@ const userSlice = createSlice({
       }: PayloadAction<{ channelId: string; subscription: SubscriptionSnippet }>
     ) => {
       state.subscriptions.subscriptionIds[channelId] = subscription.id;
-      // @TODO: Update subscriptions.data
+      if (state.subscriptions.data) {
+        // Add the newly subscribed channel to the top of the existing subscriptions.
+        state.subscriptions.data.items.unshift(subscription);
+      }
     },
     unsubscribed: (
       state,
       { payload: { channelId } }: PayloadAction<{ channelId: string }>
     ) => {
       state.subscriptions.subscriptionIds[channelId] = UNSUBSCRIBED;
-      // @TODO: Update subscriptions.data
+      if (state.subscriptions.data) {
+        state.subscriptions.data.items = state.subscriptions.data.items.filter(
+          (item) => item.snippet.resourceId.channelId !== channelId
+        );
+      }
     },
   },
   extraReducers: (builder) => {
