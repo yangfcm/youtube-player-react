@@ -9,13 +9,13 @@ import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
-import { SubscriptionsResponse } from "./types";
+import { SubscriptionSnippet, SubscriptionsResponse } from "./types";
 import {
   fetchPlayListsAPI,
   fetchSubscriptionIdAPI,
   fetchSubscriptionsAPI,
 } from "./userAPI";
-import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
+import { DEFAULT_ERROR_MESSAGE, UNSUBSCRIBED } from "../../settings/constant";
 
 export interface UserProfile {
   id: string;
@@ -118,6 +118,22 @@ const userSlice = createSlice({
     ) => {
       state.subscriptions.subscriptionIds[channelId] = subscriptionId;
     },
+    subscribed: (
+      state,
+      {
+        payload: { channelId, subscription },
+      }: PayloadAction<{ channelId: string; subscription: SubscriptionSnippet }>
+    ) => {
+      state.subscriptions.subscriptionIds[channelId] = subscription.id;
+      // @TODO: Update subscriptions.data
+    },
+    unsubscribed: (
+      state,
+      { payload: { channelId } }: PayloadAction<{ channelId: string }>
+    ) => {
+      state.subscriptions.subscriptionIds[channelId] = UNSUBSCRIBED;
+      // @TODO: Update subscriptions.data
+    },
   },
   extraReducers: (builder) => {
     const fetchSubscriptionsStart = (
@@ -198,7 +214,13 @@ const userSlice = createSlice({
   },
 });
 
-export const { signin, signout, receiveSubscriptionId } = userSlice.actions;
+export const {
+  signin,
+  signout,
+  receiveSubscriptionId,
+  subscribed,
+  unsubscribed,
+} = userSlice.actions;
 
 const selUserState = (state: RootState) => state.user;
 

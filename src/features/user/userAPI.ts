@@ -6,7 +6,7 @@ import {
   PART_SNIPPET_CONTENT_STATUS,
 } from "../../settings/constant";
 import { PlayListsResponse } from "../playlist/types";
-import { SubscriptionsResponse } from "./types";
+import { SubscriptionSnippet, SubscriptionsResponse } from "./types";
 
 export async function fetchSubscriptionsAPI(
   options?: Record<string, string>
@@ -41,9 +41,9 @@ export async function fetchPlayListsAPI(
   });
 }
 
-export async function subscribeAPI(
+export async function subscribeChannelAPI(
   channelId: string
-): Promise<AxiosResponse<any>> {
+): Promise<AxiosResponse<SubscriptionSnippet>> {
   return await appAxios.post(
     "/subscriptions",
     {
@@ -78,7 +78,9 @@ export async function fetchSubscriptionIdAPI(
   });
 }
 
-export async function unsubscribeAPI(subscriptionId: string): Promise<string> {
+export async function unsubscribeChannelAPI(
+  subscriptionId: string
+): Promise<string> {
   await appAxios.delete("/subscriptions", {
     params: {
       id: subscriptionId,

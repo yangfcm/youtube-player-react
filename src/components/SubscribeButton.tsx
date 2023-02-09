@@ -6,7 +6,8 @@ import { UNSUBSCRIBED } from "../settings/constant";
 import { useState } from "react";
 
 function SubscribeButtonComp({ channelId }: { channelId: string }) {
-  const { status, subscriptionId } = useSubscribe(channelId);
+  const { status, subscriptionId, subscribeChannel, unsubscribeChannel } =
+    useSubscribe(channelId);
   const subscribed = subscriptionId !== UNSUBSCRIBED;
   const [subscribedText, setSubscribedText] = useState("Subscribed");
 
@@ -23,6 +24,13 @@ function SubscribeButtonComp({ channelId }: { channelId: string }) {
       }}
       onMouseLeave={() => {
         if (subscribed) setSubscribedText("Subscribed");
+      }}
+      onClick={() => {
+        if (subscribed) {
+          unsubscribeChannel(subscriptionId);
+        } else {
+          subscribeChannel();
+        }
       }}
     >
       {subscribed ? subscribedText : "Subscribe"}
