@@ -142,6 +142,12 @@ const userSlice = createSlice({
         ...payload.data,
         items: [...currentItems, ...payload.data.items],
       };
+      payload.data.items.forEach(
+        (item) =>
+          (state.subscriptions.subscriptionIds[
+            item.snippet.resourceId.channelId
+          ] = item.id)
+      ); // Populate subscriptionIds map.
     };
     const fetchSubscriptionsFailed = (
       state: UserState,

@@ -6,7 +6,6 @@ import { UNSUBSCRIBED } from "../settings/constant";
 
 function SubscribeButtonComp({ channelId }: { channelId: string }) {
   const { status, subscriptionId } = useSubscribe(channelId);
-  console.log(subscriptionId);
 
   if (!subscriptionId) return null;
 
