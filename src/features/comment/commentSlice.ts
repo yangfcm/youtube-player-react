@@ -16,37 +16,12 @@ import {
   ReplyResponse,
   CommentOrder,
   CommentSnippet,
+  CommentState,
 } from "./types";
 import {
   DEFAULT_ERROR_MESSAGE,
   COMMENTS_TURNED_OFF_MESSAGE,
 } from "../../settings/constant";
-
-interface CommentState {
-  comments: Record<
-    string,
-    {
-      status: AsyncStatus;
-      error: string;
-      // data: CommentResponse | null;
-      data: {
-        relevance?: CommentResponse;
-        time?: CommentResponse;
-      };
-      order: CommentOrder;
-    }
-  >;
-  replies: Record<
-    string,
-    {
-      status: AsyncStatus;
-      error: string;
-      data: ReplyResponse | null;
-    }
-  >;
-  postStatus: AsyncStatus;
-  postError: string;
-}
 
 const initialState: CommentState = {
   comments: {},

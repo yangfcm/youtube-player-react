@@ -1,3 +1,4 @@
+import { AsyncStatus } from "../../settings/types";
 import { ChannelSnippet } from "../channel/types";
 import { PlayListSnippet } from "../playlist/types";
 import { VideoSnippet } from "../video/types";
@@ -11,4 +12,12 @@ export interface SearchResultsResponse {
   items: ResultItemSnippet[];
   nextPageToken?: string;
   prevPageToken?: string;
+}
+
+export interface SearchState {
+  status: AsyncStatus;
+  error?: string;
+  results: SearchResultsResponse | null;
+  relevantVideos: Record<string, SearchResultsResponse>;
+  query: string;
 }

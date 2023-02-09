@@ -9,39 +9,18 @@ import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
-import { SubscriptionSnippet, SubscriptionsResponse } from "./types";
+import {
+  SubscriptionSnippet,
+  SubscriptionsResponse,
+  UserState,
+  UserProfile,
+} from "./types";
 import {
   fetchPlayListsAPI,
   fetchSubscriptionIdAPI,
   fetchSubscriptionsAPI,
 } from "./userAPI";
 import { DEFAULT_ERROR_MESSAGE, UNSUBSCRIBED } from "../../settings/constant";
-
-export interface UserProfile {
-  id: string;
-  email: string;
-  username: string;
-  lastName: string;
-  firstName: string;
-  avatar: string;
-}
-
-interface UserState {
-  profile: UserProfile | null;
-  token: string;
-  expiresAt: number;
-  subscriptions: {
-    status: AsyncStatus;
-    error: string;
-    data?: SubscriptionsResponse;
-    subscriptionIds: Record<string, string>;
-  };
-  playlists: {
-    status: AsyncStatus;
-    error: string;
-    data?: PlayListsResponse;
-  };
-}
 
 const initialState: UserState = {
   profile: null,

@@ -1,3 +1,5 @@
+import { AsyncStatus } from "../../settings/types";
+import { PlayListsResponse } from "../playlist/types";
 import { Thumbnail } from "../video/types";
 
 export interface SubscriptionSnippet {
@@ -30,4 +32,30 @@ export interface SubscriptionsResponse {
   };
   items: SubscriptionSnippet[];
   nextPageToken?: string;
+}
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  username: string;
+  lastName: string;
+  firstName: string;
+  avatar: string;
+}
+
+export interface UserState {
+  profile: UserProfile | null;
+  token: string;
+  expiresAt: number;
+  subscriptions: {
+    status: AsyncStatus;
+    error: string;
+    data?: SubscriptionsResponse;
+    subscriptionIds: Record<string, string>;
+  };
+  playlists: {
+    status: AsyncStatus;
+    error: string;
+    data?: PlayListsResponse;
+  };
 }

@@ -1,3 +1,4 @@
+import { AsyncStatus } from "../../settings/types";
 import { Thumbnail } from "../video/types";
 
 export interface Snippet {
@@ -92,4 +93,10 @@ export interface PlayListItemsResponse {
   };
   nextPageToken?: string;
   items: PlayListItemDetails[];
+}
+
+export interface PlaylistState {
+  playlists: Record<string, PlayListItemsResponse>;
+  status: AsyncStatus;
+  error: string;
 }
