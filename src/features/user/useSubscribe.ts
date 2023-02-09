@@ -20,8 +20,7 @@ export function useSubscribe(channelId: string) {
       setStatus(AsyncStatus.LOADING);
       setError("");
       const response = await fetchSubscriptionIdAPI(channelId);
-      const subscriptionId =
-        response.data.items[0]?.snippet.resourceId.channelId || UNSUBSCRIBED;
+      const subscriptionId = response.data.items[0]?.id || UNSUBSCRIBED;
       dispatch(
         receiveSubscriptionId({
           channelId,

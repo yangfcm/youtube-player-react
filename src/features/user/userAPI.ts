@@ -78,18 +78,7 @@ export async function fetchSubscriptionIdAPI(
   });
 }
 
-export async function unsubscribeAPI(channelId: string): Promise<string> {
-  const subscriptionRes = await appAxios.get("/subscriptions", {
-    params: {
-      part: PART_SNIPPET,
-      forChannelId: channelId,
-      mine: true,
-    },
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-  });
-  const subscriptionId = subscriptionRes.data.items[0].id; // Get subscription id.
+export async function unsubscribeAPI(subscriptionId: string): Promise<string> {
   await appAxios.delete("/subscriptions", {
     params: {
       id: subscriptionId,
@@ -98,5 +87,5 @@ export async function unsubscribeAPI(channelId: string): Promise<string> {
       Authorization: localStorage.getItem("token"),
     },
   });
-  return channelId;
+  return subscriptionId;
 }
