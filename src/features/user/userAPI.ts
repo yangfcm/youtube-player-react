@@ -65,7 +65,7 @@ export async function subscribeAPI(
 
 export async function fetchSubscriptionIdAPI(
   channelId: string
-): Promise<AxiosResponse<any>> {
+): Promise<AxiosResponse<SubscriptionsResponse>> {
   return await appAxios.get("/subscriptions", {
     params: {
       part: PART_SNIPPET,
