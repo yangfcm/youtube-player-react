@@ -26,14 +26,16 @@ export function Channel() {
   return (
     <Box sx={{ pb: 2 }}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-      <ChannelItem
-        channel={{
-          id,
-          title: channelProfile.snippet.title,
-          imageUrl: channelProfile.snippet.thumbnails.medium?.url,
-          description: channelProfile.snippet.description,
-        }}
-      />
+      {channelProfile && (
+        <ChannelItem
+          channel={{
+            id,
+            title: channelProfile.snippet.title,
+            imageUrl: channelProfile.snippet.thumbnails.medium?.url,
+            description: channelProfile.snippet.description,
+          }}
+        />
+      )}
       <Tabs
         value={value}
         onChange={(event: React.SyntheticEvent, newValue: string) =>
