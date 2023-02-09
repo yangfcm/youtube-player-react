@@ -6,16 +6,8 @@ import {
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { fetchSearchResultsAPI } from "./searchAPI";
-import { SearchResultsResponse } from "./types";
+import { SearchResultsResponse, SearchState } from "./types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
-
-export interface SearchState {
-  status: AsyncStatus;
-  error?: string;
-  results: SearchResultsResponse | null;
-  relevantVideos: Record<string, SearchResultsResponse>;
-  query: string;
-}
 
 const initialState: SearchState = {
   status: AsyncStatus.IDLE,

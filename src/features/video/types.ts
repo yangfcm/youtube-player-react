@@ -1,3 +1,5 @@
+import { AsyncStatus } from "../../settings/types";
+
 export interface Thumbnail {
   height?: number;
   width?: number;
@@ -68,4 +70,17 @@ export interface VideosSnippetResponse {
   items: VideoSnippet[];
   nextPageToken?: string;
   prevPageToken?: string;
+}
+
+export interface VideoState {
+  videos: {
+    status: AsyncStatus;
+    error: string;
+    mostPopular?: VideosResponse;
+  };
+  video: {
+    status: AsyncStatus;
+    item: Record<string, VideoSnippetStats>;
+    error: string;
+  };
 }

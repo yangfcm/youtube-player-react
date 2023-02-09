@@ -1,3 +1,5 @@
+import { AsyncStatus } from "../../settings/types";
+
 export interface CommentSnippet {
   etag: string;
   id: string;
@@ -87,3 +89,29 @@ export type VideoCommentRequestBody = {
     };
   };
 };
+
+export interface CommentState {
+  comments: Record<
+    string,
+    {
+      status: AsyncStatus;
+      error: string;
+      // data: CommentResponse | null;
+      data: {
+        relevance?: CommentResponse;
+        time?: CommentResponse;
+      };
+      order: CommentOrder;
+    }
+  >;
+  replies: Record<
+    string,
+    {
+      status: AsyncStatus;
+      error: string;
+      data: ReplyResponse | null;
+    }
+  >;
+  postStatus: AsyncStatus;
+  postError: string;
+}

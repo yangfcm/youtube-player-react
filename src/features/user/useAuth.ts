@@ -6,8 +6,8 @@ import {
   selToken,
   signin as signinAction,
   signout as signoutAction,
-  UserProfile,
 } from "./userSlice";
+import { UserProfile } from "./types";
 
 export function useAuth() {
   const dispatch = useAppDispatch();

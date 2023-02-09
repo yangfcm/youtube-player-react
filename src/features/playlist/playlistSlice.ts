@@ -6,14 +6,8 @@ import {
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { fetchPlaylistVideosAPI } from "./playlistAPI";
-import { PlayListItemsResponse } from "./types";
+import { PlayListItemsResponse, PlaylistState } from "./types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
-
-interface PlaylistState {
-  playlists: Record<string, PlayListItemsResponse>;
-  status: AsyncStatus;
-  error: string;
-}
 
 const initialState: PlaylistState = {
   playlists: {},

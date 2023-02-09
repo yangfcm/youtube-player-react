@@ -5,22 +5,9 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import { VideoResponse, VideoSnippetStats, VideosResponse } from "./types";
+import { VideoResponse, VideosResponse, VideoState } from "./types";
 import { fetchVideoAPI, fetchVideosAPI } from "./videoAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
-
-interface VideoState {
-  videos: {
-    status: AsyncStatus;
-    error: string;
-    mostPopular?: VideosResponse;
-  };
-  video: {
-    status: AsyncStatus;
-    item: Record<string, VideoSnippetStats>;
-    error: string;
-  };
-}
 
 const initialState: VideoState = {
   videos: {

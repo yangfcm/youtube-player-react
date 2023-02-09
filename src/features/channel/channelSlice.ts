@@ -12,26 +12,8 @@ import {
   fetchChannelProfileAPI,
   fetchChannelVideosAPI,
 } from "./channelAPI";
-import { ChannelDetails, ChannelDetailsResponse } from "./types";
+import { ChannelState, ChannelDetailsResponse } from "./types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
-
-export interface ChannelState {
-  profile: {
-    status: AsyncStatus;
-    error: string;
-    data: Record<string, ChannelDetails>;
-  };
-  videos: {
-    status: AsyncStatus;
-    error: string;
-    data: Record<string, VideosSnippetResponse>;
-  };
-  playlists: {
-    status: AsyncStatus;
-    error: string;
-    data: Record<string, PlayListsResponse>;
-  };
-}
 
 const initialState: ChannelState = {
   profile: {

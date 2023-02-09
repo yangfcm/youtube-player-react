@@ -1,4 +1,7 @@
 import { Thumbnail } from "../video/types";
+import { AsyncStatus } from "../../settings/types";
+import { VideosSnippetResponse } from "../video/types";
+import { PlayListsResponse } from "../playlist/types";
 
 export interface Snippet {
   channelId: string;
@@ -57,4 +60,22 @@ export interface ChannelDetailsResponse {
     resultsPerPage: number;
   };
   items: ChannelDetails[];
+}
+
+export interface ChannelState {
+  profile: {
+    status: AsyncStatus;
+    error: string;
+    data: Record<string, ChannelDetails>;
+  };
+  videos: {
+    status: AsyncStatus;
+    error: string;
+    data: Record<string, VideosSnippetResponse>;
+  };
+  playlists: {
+    status: AsyncStatus;
+    error: string;
+    data: Record<string, PlayListsResponse>;
+  };
 }
