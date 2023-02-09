@@ -28,6 +28,7 @@ export function Channel() {
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <ChannelItem
         channel={{
+          id,
           title: channelProfile.snippet.title,
           imageUrl: channelProfile.snippet.thumbnails.medium?.url,
           description: channelProfile.snippet.description,

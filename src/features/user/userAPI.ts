@@ -63,6 +63,21 @@ export async function subscribeAPI(
   );
 }
 
+export async function fetchSubscriptionIdAPI(
+  channelId: string
+): Promise<AxiosResponse<any>> {
+  return await appAxios.get("/subscriptions", {
+    params: {
+      part: PART_SNIPPET,
+      forChannelId: channelId,
+      mine: true,
+    },
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+}
+
 export async function unsubscribeAPI(channelId: string): Promise<string> {
   const subscriptionRes = await appAxios.get("/subscriptions", {
     params: {

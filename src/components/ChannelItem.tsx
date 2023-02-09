@@ -11,7 +11,7 @@ import placeholder from "../images/placeholder-channel.jpg";
 import { SubscribeButton } from "./SubscribeButton";
 
 type ChannelPropsType = {
-  id?: string;
+  id: string;
   title: string;
   imageUrl?: string;
   description?: string;
@@ -80,7 +80,7 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
                 {title}
               </Typography>
             )}
-            <SubscribeButton />
+            {id && <SubscribeButton channelId={id} />}
           </Stack>
           <Typography
             variant="subtitle2"

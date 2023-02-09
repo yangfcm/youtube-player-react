@@ -10,7 +10,11 @@ import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
 import { SubscriptionsResponse } from "./types";
-import { fetchPlayListsAPI, fetchSubscriptionsAPI } from "./userAPI";
+import {
+  fetchPlayListsAPI,
+  fetchSubscriptionIdAPI,
+  fetchSubscriptionsAPI,
+} from "./userAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 export interface UserProfile {
@@ -30,6 +34,7 @@ interface UserState {
     status: AsyncStatus;
     error: string;
     data?: SubscriptionsResponse;
+    subscriptionIds: Record<string, string>;
   };
   playlists: {
     status: AsyncStatus;
@@ -45,6 +50,7 @@ const initialState: UserState = {
   subscriptions: {
     status: AsyncStatus.IDLE,
     error: "",
+    subscriptionIds: {},
   },
   playlists: {
     status: AsyncStatus.IDLE,
@@ -64,6 +70,14 @@ export const fetchPlayLists = createAsyncThunk(
   "user/fetchPlayLists",
   async (options?: Record<string, string>) => {
     const response = await fetchPlayListsAPI(options);
+    return response;
+  }
+);
+
+export const fetchSubscriptionId = createAsyncThunk(
+  "user/fetchSubscriptionId",
+  async (channelId: string) => {
+    const response = await fetchSubscriptionIdAPI(channelId);
     return response;
   }
 );
@@ -89,11 +103,20 @@ const userSlice = createSlice({
       state.subscriptions = {
         status: AsyncStatus.IDLE,
         error: "",
+        subscriptionIds: {},
       };
       state.playlists = {
         status: AsyncStatus.IDLE,
         error: "",
       };
+    },
+    receiveSubscriptionId: (
+      state,
+      {
+        payload: { channelId, subscriptionId },
+      }: PayloadAction<{ channelId: string; subscriptionId: string }>
+    ) => {
+      state.subscriptions.subscriptionIds[channelId] = subscriptionId;
     },
   },
   extraReducers: (builder) => {
@@ -169,7 +192,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { signin, signout } = userSlice.actions;
+export const { signin, signout, receiveSubscriptionId } = userSlice.actions;
 
 const selUserState = (state: RootState) => state.user;
 
