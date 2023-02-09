@@ -1,9 +1,12 @@
 import Button from "@mui/material/Button";
+import { RequireAuth } from "./RequireAuth";
 
 export function SubscribeButton() {
   return (
-    <Button variant="outlined" size="small">
-      Subscribed
-    </Button>
+    <RequireAuth showLoginButton={false}>
+      <Button variant="outlined" size="small">
+        Subscribed
+      </Button>
+    </RequireAuth>
   );
 }
