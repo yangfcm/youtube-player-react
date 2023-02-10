@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL } from "./constant";
+import { API_BASE_URL, LOCATION_API_URL } from "./constant";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -20,3 +20,7 @@ axiosInstance.interceptors.response.use(
 );
 
 export const appAxios = axiosInstance;
+
+export const locationAxios = axios.create({
+  baseURL: LOCATION_API_URL,
+});

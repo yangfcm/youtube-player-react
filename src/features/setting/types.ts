@@ -22,14 +22,9 @@ export interface CategoriesResponse {
   kind: string;
 }
 
-export interface RegionSnippet {
-  etag: string;
-  id: string;
-  kind: string;
-}
-
-export interface RegionsResponse {
-  etag: string;
-  items: RegionSnippet[];
-  kind: string;
+export interface LocationResponse {
+  ipAddress: string;
+  countryCode: string;
+  countryName: string;
+  city: string;
 }
