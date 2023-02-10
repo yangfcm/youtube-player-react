@@ -8,3 +8,4 @@ export const DEFAULT_ERROR_MESSAGE = "Something bad happens";
 export const SIDEBAR_WIDTH = 220;
 export const COMMENTS_TURNED_OFF_MESSAGE = "Comments are turned off.";
 export const UNSUBSCRIBED = "0"; // Use string '0' to indicate the channel is not subscribed.
+export const DEFAULT_COUNTRY_CODE = "US";
