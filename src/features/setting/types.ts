@@ -1,7 +1,7 @@
 export interface SettingState {
   openSidebar: boolean;
   darkTheme: boolean;
-  region?: string;
+  location?: string;
   categories?: CategoriesResponse;
 }
 

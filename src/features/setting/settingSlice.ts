@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
+import {
+  DEFAULT_COUNTRY_CODE,
+  ALLOWED_COUNTRY_CODES,
+} from "../../settings/constant";
 import { fetchLocationAPI, fetchVideoCategoriesAPI } from "./settingAPI";
 import { CategoriesResponse, LocationResponse, SettingState } from "./types";
 
@@ -40,9 +44,14 @@ export const settingSlice = createSlice({
       state: SettingState,
       { payload }: { payload: AxiosResponse<LocationResponse> }
     ) => {
-      state.region = payload.data.countryCode;
+      const { countryCode } = payload.data;
+      state.location = ALLOWED_COUNTRY_CODES.includes(countryCode)
+        ? payload.data.countryCode
+        : DEFAULT_COUNTRY_CODE;
     };
-    const fetchLocationFail = () => {};
+    const fetchLocationFail = (state: SettingState) => {
+      state.location = DEFAULT_COUNTRY_CODE;
+    };
     const fetchCategoriesStart = () => {};
     const fetchCategoriesSuccess = (
       state: SettingState,
