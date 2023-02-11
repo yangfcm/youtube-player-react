@@ -6,6 +6,7 @@ import { fetchVideos } from "./videoSlice";
 
 export function useMostPopularVideos() {
   const dispatch = useAppDispatch();
+  const region = useSelector((state: RootState) => state.setting.location);
   const mostPopularVideos = useSelector(
     (state: RootState) => state.video.videos.mostPopular?.items
   );
@@ -24,10 +25,10 @@ export function useMostPopularVideos() {
   }, [nextPageToken, dispatch]);
 
   useEffect(() => {
-    if (!mostPopularVideos || mostPopularVideos.length === 0) {
-      dispatch(fetchVideos({ chart: "mostPopular" }));
+    if (region && (!mostPopularVideos || mostPopularVideos.length === 0)) {
+      dispatch(fetchVideos({ chart: "mostPopular", regionCode: region }));
     }
-  }, [dispatch, mostPopularVideos]);
+  }, [dispatch, mostPopularVideos, region]);
 
   return {
     mostPopularVideos,
