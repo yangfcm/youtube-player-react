@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { fetchLocation } from "./settingSlice";
 import { RootState } from "../../app/store";
 
-export function useLocation() {
+export function useRegion() {
   const dispatch = useAppDispatch();
   const location = useSelector((state: RootState) => state.setting.location);
 
