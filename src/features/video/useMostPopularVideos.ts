@@ -19,14 +19,25 @@ export function useMostPopularVideos() {
   );
 
   const fetchMore = useCallback(() => {
-    if (nextPageToken) {
-      dispatch(fetchVideos({ chart: "mostPopular", pageToken: nextPageToken }));
+    if (nextPageToken && region) {
+      dispatch(
+        fetchVideos({
+          chart: "mostPopular",
+          pageToken: nextPageToken,
+          regionCode: region,
+        })
+      );
     }
-  }, [nextPageToken, dispatch]);
+  }, [nextPageToken, dispatch, region]);
 
   useEffect(() => {
     if (region && (!mostPopularVideos || mostPopularVideos.length === 0)) {
-      dispatch(fetchVideos({ chart: "mostPopular", regionCode: region }));
+      dispatch(
+        fetchVideos({
+          chart: "mostPopular",
+          regionCode: region,
+        })
+      );
     }
   }, [dispatch, mostPopularVideos, region]);
 
