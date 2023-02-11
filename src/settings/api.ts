@@ -23,4 +23,5 @@ export const appAxios = axiosInstance;
 
 export const locationAxios = axios.create({
   baseURL: LOCATION_API_URL,
+  timeout: 3000,
 });
