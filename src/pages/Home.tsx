@@ -10,7 +10,6 @@ import { ErrorMessage } from "../components/ErrorMessage";
 export function Home() {
   const { mostPopularVideos, status, error, fetchMore, hasMore } =
     useMostPopularVideos();
-
   if (!mostPopularVideos?.length && status === AsyncStatus.LOADING) {
     return <LoadingSpinner />;
   }
