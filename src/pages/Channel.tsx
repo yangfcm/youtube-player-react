@@ -9,6 +9,7 @@ import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { NoContent } from "../components/NoContent";
 import { ChannelItem } from "../components/ChannelItem";
+import { ChannelBanner, bannerHeight } from "../components/ChannelBanner";
 
 export function Channel() {
   const { pathname } = useLocation();
@@ -23,34 +24,46 @@ export function Channel() {
   if (status === AsyncStatus.SUCCESS && !channelProfile)
     return <NoContent>Channel is unavailable</NoContent>;
 
+  const bannerImageUrl =
+    channelProfile?.brandingSettings?.image?.bannerExternalUrl;
+
   return (
     <Box sx={{ pb: 2 }}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-      {channelProfile && (
-        <ChannelItem
-          channel={{
-            id,
-            title: channelProfile.snippet.title,
-            imageUrl: channelProfile.snippet.thumbnails.medium?.url,
-            description: channelProfile.snippet.description,
-          }}
-        />
-      )}
-      <Tabs
-        value={value}
-        onChange={(event: React.SyntheticEvent, newValue: string) =>
-          setValue(newValue)
-        }
+      {bannerImageUrl && <ChannelBanner imageUrl={bannerImageUrl} />}
+      <Box
+        sx={{
+          transform: bannerImageUrl ? `translateY(${bannerHeight})` : "",
+        }}
       >
-        <Tab component={Link} to="./videos" label="Videos" value="videos" />
-        <Tab
-          component={Link}
-          to="./playlists"
-          label="Playlists"
-          value="playlists"
-        />
-      </Tabs>
-      <Outlet />
+        {channelProfile && (
+          <>
+            <ChannelItem
+              channel={{
+                id,
+                title: channelProfile.snippet.title,
+                imageUrl: channelProfile.snippet.thumbnails.medium?.url,
+                description: channelProfile.snippet.description,
+              }}
+            />
+          </>
+        )}
+        <Tabs
+          value={value}
+          onChange={(event: React.SyntheticEvent, newValue: string) =>
+            setValue(newValue)
+          }
+        >
+          <Tab component={Link} to="./videos" label="Videos" value="videos" />
+          <Tab
+            component={Link}
+            to="./playlists"
+            label="Playlists"
+            value="playlists"
+          />
+        </Tabs>
+        <Outlet />
+      </Box>
     </Box>
   );
 }
