@@ -4,7 +4,7 @@ import {
   MAX_RESULTS_24,
   PART_SNIPPET,
   PART_SNIPPET_CONTENT_STATUS,
-  PART_SNIPPET_STATS,
+  PART_SNIPPET_STATS_BRANDING,
 } from "../../settings/constant";
 import { PlayListsResponse } from "../playlist/types";
 import { VideosSnippetResponse } from "../video/types";
@@ -16,7 +16,7 @@ export async function fetchChannelProfileAPI(
   return await appAxios.get("/channels", {
     params: {
       id: channelId,
-      part: PART_SNIPPET_STATS,
+      part: PART_SNIPPET_STATS_BRANDING,
     },
   });
 }
