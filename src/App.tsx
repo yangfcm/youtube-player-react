@@ -8,7 +8,7 @@ import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 import { AppThemeProvider } from "./components/AppThemeProvider";
 import { GoogleAuthProvider } from "./components/GoogleAuthProvider";
-import { SettingProvider } from "./components/SettingProvider";
+import { RegionProvider } from "./components/RegionProvider";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <AppThemeProvider>
           <GoogleAuthProvider>
-            <SettingProvider>
+            <RegionProvider>
               <Box sx={{ display: " flex", height: "100vh" }}>
                 <Header />
                 <Sidebar />
@@ -25,7 +25,7 @@ function App() {
                   <Router />
                 </Box>
               </Box>
-            </SettingProvider>
+            </RegionProvider>
           </GoogleAuthProvider>
         </AppThemeProvider>
       </BrowserRouter>
