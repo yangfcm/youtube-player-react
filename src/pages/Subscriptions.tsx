@@ -39,7 +39,7 @@ export function Subscriptions() {
                 <ChannelCard
                   id={subscription.snippet.resourceId.channelId}
                   title={subscription.snippet.title}
-                  imageUrl={subscription.snippet.thumbnails.default?.url || ""}
+                  imageUrl={subscription.snippet.thumbnails.high?.url || ""}
                 />
               </Grid>
             );

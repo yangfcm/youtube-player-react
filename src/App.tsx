@@ -17,12 +17,19 @@ function App() {
         <AppThemeProvider>
           <GoogleAuthProvider>
             <RegionProvider>
-              <Box sx={{ display: " flex", height: "100vh" }}>
-                <Header />
+              <Header />
+              <Box
+                id="app__main-container"
+                sx={{ display: " flex", height: "100vh" }}
+              >
                 <Sidebar />
-                <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+                <Box id="app__main" component="main" sx={{ flexGrow: 1 }}>
                   <Toolbar />
-                  <Router />
+                  <Box id="app__position-anchor" sx={{ position: "relative" }}>
+                    <Box id="app__router-container" sx={{ p: 2 }}>
+                      <Router />
+                    </Box>
+                  </Box>
                 </Box>
               </Box>
             </RegionProvider>
