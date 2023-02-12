@@ -50,6 +50,11 @@ export interface ChannelDetails {
     videoCount: string;
     viewCount: string;
   };
+  brandingSettings?: {
+    image?: {
+      bannerExternalUrl?: string;
+    };
+  };
 }
 
 export interface ChannelDetailsResponse {
