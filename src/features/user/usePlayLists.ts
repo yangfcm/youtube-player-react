@@ -19,8 +19,8 @@ export function usePlayLists() {
   }, [nextPageToken, dispatch]);
 
   useEffect(() => {
-    if (userId) dispatch(fetchPlayLists());
-  }, [userId, dispatch]);
+    if (userId && !data) dispatch(fetchPlayLists());
+  }, [userId, dispatch, data]);
 
   return {
     playLists: data?.items,
