@@ -14,7 +14,7 @@ export async function fetchPlaylistVideosAPI(
     params: {
       playlistId,
       part: PART_SNIPPET_CONTENT_STATUS,
-      maxResults: MAX_RESULTS_15,
+      maxResults: MAX_RESULTS_15 * 3,
       ...options,
     },
   });
