@@ -9,7 +9,7 @@ export async function fetchVideosAPI(
   return await appAxios.get("/videos", {
     params: {
       part: PART_SNIPPET_STATS,
-      maxResults: MAX_RESULTS_24,
+      maxResults: MAX_RESULTS_24 / 2,
       ...options,
     },
   });
