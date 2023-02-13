@@ -33,7 +33,10 @@ export function Channel() {
       {bannerImageUrl && <ChannelBanner imageUrl={bannerImageUrl} />}
       <Box
         sx={{
-          transform: bannerImageUrl ? `translateY(${bannerHeight})` : "",
+          transform: {
+            sm: bannerImageUrl ? `translateY(${bannerHeight})` : "",
+            xs: "",
+          },
         }}
       >
         {channelProfile && (
