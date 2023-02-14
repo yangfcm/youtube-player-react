@@ -71,7 +71,7 @@ export function LazyImage(props: LazyImageProps) {
   return (
     <div ref={ref}>
       {inView ? (
-        <img src={props.src} alt={alt} title={title} style={style} />
+        <img src={src} alt={alt} title={title} style={style} />
       ) : (
         <img src={placeholder} alt="loading" />
         // <LoadingPlaceholder />
