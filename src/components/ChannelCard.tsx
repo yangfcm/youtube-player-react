@@ -19,6 +19,7 @@ export function ChannelCard({
           src={imageUrl}
           alt={title}
           title={title}
+          loading="lazy"
           style={{ width: "100%", height: "auto" }}
         />
       </Link>
