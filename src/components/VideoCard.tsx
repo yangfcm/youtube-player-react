@@ -32,7 +32,11 @@ export function VideoCard({ video }: { video: VideoTypeProps }) {
     <Card>
       <Link to={`/video/${id}`}>
         {imageUrl ? (
-          <LazyImage src={imageUrl} style={{ width: "100%", height: "auto" }} />
+          <LazyImage
+            src={imageUrl}
+            style={{ width: "100%", height: "auto" }}
+            ratio="3:2"
+          />
         ) : (
           <img
             src={placeholder}

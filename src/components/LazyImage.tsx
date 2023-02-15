@@ -5,7 +5,6 @@ import {
   useCallback,
   MutableRefObject,
 } from "react";
-import placeholder from "../images/placeholder-image.png";
 
 const listenerCallbacks = new WeakMap();
 
@@ -56,9 +55,10 @@ type LazyImageProps = {
   alt?: string;
   title?: string;
   style?: React.CSSProperties;
+  ratio?: "3:2" | "1:1"; // The ratio for placeholder image
 };
 export function LazyImage(props: LazyImageProps) {
-  const { src, alt = "Image", title = "", style = {} } = props;
+  const { src, alt = "Image", title = "", style = {}, ratio = "1:1" } = props;
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -73,7 +73,17 @@ export function LazyImage(props: LazyImageProps) {
       {inView ? (
         <img src={src} alt={alt} title={title} style={style} />
       ) : (
-        <img src={placeholder} alt="loading" />
+        <img
+          src={
+            ratio === "1:1"
+              ? "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
+              : ratio === "3:2"
+              ? "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAAEElEQVR42mM8U88ABIwQCgAXtgKZPVsbEAAAAABJRU5ErkJggg=="
+              : ""
+          }
+          alt="loading"
+          style={{ width: "100%", height: "auto" }}
+        />
         // <LoadingPlaceholder />
       )}
     </div>
