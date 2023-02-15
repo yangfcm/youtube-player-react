@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
+import { LazyImage } from "./LazyImage";
 
 export function ChannelCard({
   id,
@@ -15,7 +16,7 @@ export function ChannelCard({
   return (
     <Card>
       <Link to={`/channel/${id}`}>
-        <img
+        <LazyImage
           src={imageUrl}
           alt={title}
           title={title}

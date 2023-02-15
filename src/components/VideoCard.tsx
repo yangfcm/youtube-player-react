@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { fromNow, formatNumber } from "../app/utils";
 import placeholder from "../images/placeholder-item.jpg";
+import { LazyImage } from "./LazyImage";
 
 type VideoTypeProps = {
   id: string;
@@ -30,13 +31,19 @@ export function VideoCard({ video }: { video: VideoTypeProps }) {
   return (
     <Card>
       <Link to={`/video/${id}`}>
-        <img
-          src={imageUrl || placeholder}
-          alt={title}
-          title={title}
-          loading="lazy"
-          style={{ width: "100%", height: "auto" }}
-        />
+        {imageUrl ? (
+          <LazyImage
+            src={imageUrl}
+            style={{ width: "100%", height: "auto" }}
+            ratio="3:2"
+          />
+        ) : (
+          <img
+            src={placeholder}
+            alt="placeholder"
+            style={{ width: "100%", height: "auto" }}
+          />
+        )}
       </Link>
       <CardContent
         sx={{
