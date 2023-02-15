@@ -50,6 +50,11 @@ const useIntersection = (
   }, [ref, callback]);
 };
 
+const PLACEHOLDER_IMAGE_SQUARE =
+  "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII=";
+const PLACEHOLDER_IMAGE_RECTANGLE =
+  "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAAEElEQVR42mM8U88ABIwQCgAXtgKZPVsbEAAAAABJRU5ErkJggg==";
+
 type LazyImageProps = {
   src: string;
   alt?: string;
@@ -76,9 +81,9 @@ export function LazyImage(props: LazyImageProps) {
         <img
           src={
             ratio === "1:1"
-              ? "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
+              ? PLACEHOLDER_IMAGE_SQUARE
               : ratio === "3:2"
-              ? "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAAEElEQVR42mM8U88ABIwQCgAXtgKZPVsbEAAAAABJRU5ErkJggg=="
+              ? PLACEHOLDER_IMAGE_RECTANGLE
               : ""
           }
           alt="loading"
