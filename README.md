@@ -33,3 +33,17 @@ A lightweight, ad-free Youtube video watching app built with React and Google Yo
       	To get your channel id, you need to first signup as a youtube user and navigate to your channel. You can get your channel id in URL: `https://www.youtube.com/channel/your_channel_id?view_as=subscriber`
 
 - Run `npm start` to run it on local machine.
+
+## Docker
+
+- Build and start app in dev.
+
+```
+docker build -f Dockerfile.dev .
+```
+
+```
+docker run -p 3000:3000 <image id from last command>
+```
+
+The issue with this approach is the change to source code cannot be reflected on UI instantly.
