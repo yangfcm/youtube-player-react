@@ -36,6 +36,8 @@ A lightweight, ad-free Youtube video watching app built with React and Google Yo
 
 ## Docker
 
+- Requirements: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
 - Build and start app in dev.
 
 ```
@@ -47,3 +49,9 @@ docker run -p 3000:3000 <image id from last command>
 ```
 
 The issue with this approach is the change to source code cannot be reflected on UI instantly.
+
+- Build, start and watch source file.
+
+```
+docker-compose up
+```
