@@ -125,6 +125,7 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
     buttonText,
     children,
     onSuccess,
+    onFailure,
   } = props;
 
   const [hovered, setHovered] = useState(false);
@@ -197,7 +198,7 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
       };
       onSuccess(res);
     } catch (err) {
-      console.log(err);
+      onFailure && onFailure();
     }
   };
 
@@ -208,7 +209,7 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
       googleAuth.disconnect();
       onSuccess();
     } catch (err) {
-      console.log(err);
+      onFailure && onFailure();
     }
   };
 
