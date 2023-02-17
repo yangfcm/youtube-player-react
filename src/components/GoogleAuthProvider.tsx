@@ -23,6 +23,7 @@ export function GoogleAuthProvider({
         })
         .then(() => {
           setLoading(false);
+          setGoogleAuthEnabled(true);
         })
         .catch((e: GapiLoadError) => {
           setLoading(false);
@@ -30,7 +31,7 @@ export function GoogleAuthProvider({
           setGoogleAuthEnabled(false);
           return;
         });
-      const googleAuth = await gapi?.auth2.getAuthInstance();
+      const googleAuth = await gapi.auth2.getAuthInstance();
       const isSignedIn = googleAuth.isSignedIn.get();
       if (isSignedIn) {
         const currentUser = googleAuth.currentUser.get();
