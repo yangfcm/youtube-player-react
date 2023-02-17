@@ -1,4 +1,4 @@
-import { GoogleLogout as ReactGoogleLogout } from "react-google-login";
+import { GoogleLoginBase } from "./GoogleLoginBase";
 import { useAuth } from "../features/user/useAuth";
 
 export function GoogleLogout() {
@@ -10,10 +10,9 @@ export function GoogleLogout() {
   };
 
   return (
-    <ReactGoogleLogout
-      clientId={process.env.REACT_APP_CLIENT_ID || ""}
-      onLogoutSuccess={handleSignOut}
-      className="auth__google-logout-button"
+    <GoogleLoginBase
+      isLoggedIn={true}
+      onSuccess={handleSignOut}
       buttonText="Log out"
     />
   );

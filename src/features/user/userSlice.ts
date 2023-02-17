@@ -35,6 +35,7 @@ const initialState: UserState = {
     status: AsyncStatus.IDLE,
     error: "",
   },
+  isGoogleAuthEnabled: false,
 };
 
 export const fetchSubscriptions = createAsyncThunk(
@@ -88,6 +89,9 @@ const userSlice = createSlice({
         status: AsyncStatus.IDLE,
         error: "",
       };
+    },
+    setGoogleAuthEnabled: (state, { payload }: PayloadAction<boolean>) => {
+      state.isGoogleAuthEnabled = payload;
     },
     receiveSubscriptionId: (
       state,
@@ -203,6 +207,7 @@ const userSlice = createSlice({
 export const {
   signin,
   signout,
+  setGoogleAuthEnabled,
   receiveSubscriptionId,
   subscribed,
   unsubscribed,

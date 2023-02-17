@@ -3,6 +3,7 @@ import { gapi } from "gapi-script";
 import { GapiLoadError } from "../settings/types";
 import { ErrorMessage } from "./ErrorMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
+import { useAuth } from "../features/user/useAuth";
 
 export function GoogleAuthProvider({
   children,
@@ -11,9 +12,10 @@ export function GoogleAuthProvider({
 }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { signin, signout, setGoogleAuthEnabled } = useAuth();
 
   useEffect(() => {
-    const initClient = () => {
+    const initClient = async () => {
       gapi.client
         .init({
           clientId: process.env.REACT_APP_CLIENT_ID,
@@ -21,14 +23,40 @@ export function GoogleAuthProvider({
         })
         .then(() => {
           setLoading(false);
+          setGoogleAuthEnabled(true);
         })
         .catch((e: GapiLoadError) => {
           setLoading(false);
           setError(e.details);
+          setGoogleAuthEnabled(false);
+          return;
         });
+      const googleAuth = await gapi.auth2.getAuthInstance();
+      const isSignedIn = googleAuth.isSignedIn.get();
+      if (isSignedIn) {
+        const currentUser = googleAuth.currentUser.get();
+        const authResponse = currentUser.getAuthResponse();
+        const userProfile = currentUser.getBasicProfile();
+        signin(
+          {
+            id: userProfile.getId(),
+            firstName: userProfile.getGivenName(),
+            lastName: userProfile.getFamilyName(),
+            email: userProfile.getEmail(),
+            avatar: userProfile.getImageUrl(),
+            username: userProfile.getName(),
+          },
+          authResponse.access_token,
+          authResponse.expires_at
+        );
+      } else {
+        signout();
+      }
+      setLoading(false);
+      setError("");
     };
     gapi.load("client:auth2", initClient);
-  }, []);
+  }, [signin, signout, setGoogleAuthEnabled]);
 
   if (loading) return <LoadingSpinner />;
 

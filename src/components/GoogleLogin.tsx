@@ -1,16 +1,10 @@
-import {
-  GoogleLogin as ReactGoogleLogin,
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from "react-google-login";
+import { GoogleLoginBase, GoogleLoginResponse } from "./GoogleLoginBase";
 import { useAuth } from "../features/user/useAuth";
 
 export function GoogleLogin() {
-  const { signin, signout } = useAuth();
+  const { signin, signout, isGoogleAuthEnabled } = useAuth();
 
-  const handleSuccessSignin = (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => {
+  const handleSuccessSignin = (response?: GoogleLoginResponse) => {
     const auth = (response as GoogleLoginResponse).getAuthResponse();
     const userProfile = (response as GoogleLoginResponse).getBasicProfile();
     signin(
@@ -34,14 +28,12 @@ export function GoogleLogin() {
   };
 
   return (
-    <ReactGoogleLogin
-      clientId={process.env.REACT_APP_CLIENT_ID || ""}
+    <GoogleLoginBase
+      disabled={!isGoogleAuthEnabled}
+      isLoggedIn={false}
       buttonText="Log in"
       onSuccess={handleSuccessSignin}
       onFailure={handleFailureSignin}
-      cookiePolicy={"single_host_origin"}
-      isSignedIn={true}
-      className="auth__google-login-button"
     />
   );
 }
