@@ -8,6 +8,7 @@ import { PlayListVideos } from "./pages/PlayListVideos";
 import { Channel } from "./pages/Channel";
 import { ChannelVideos } from "./pages/ChannelVideos";
 import { ChannelPlayLists } from "./pages/ChannelPlayLists";
+import { NotFound } from "./pages/NotFound";
 
 export function Router() {
   return (
@@ -23,6 +24,7 @@ export function Router() {
         <Route path="playlists" element={<ChannelPlayLists />} />
       </Route>
       <Route path="/" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
