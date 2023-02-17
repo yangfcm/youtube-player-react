@@ -6,7 +6,7 @@ function GoogleIcon({ active = true }: { active?: boolean }) {
     <div
       style={{
         background: active ? "#eee" : "#fff",
-        padding: "6px",
+        marginLeft: "10px",
         borderRadius: 2,
         display: "flex",
         alignItems: "center",
@@ -69,7 +69,6 @@ type GoogleLoginPropsType = {
   active?: boolean;
   children?: React.ReactNode;
   buttonText?: string;
-  theme?: "dark" | "light";
   disabled?: boolean;
   disabledStyle?: Record<string, any>;
   isSignedIn?: boolean;
@@ -77,7 +76,6 @@ type GoogleLoginPropsType = {
 export function GoogleLoginBase(props: GoogleLoginPropsType) {
   const {
     isLoggedIn,
-    theme = "light",
     disabled = false,
     disabledStyle = { opacity: 0.6 },
     buttonText,
@@ -90,10 +88,10 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
   const [active, setActive] = useState(false);
 
   const initialStyle = {
-    backgroundColor: theme === "dark" ? "rgb(66, 133, 244)" : "#fff",
-    display: "inline-flex",
+    backgroundColor: "#fff",
+    display: "flex",
     alignItems: "center",
-    color: theme === "dark" ? "#fff" : "rgba(0, 0, 0, .54)",
+    color: "rgba(0, 0, 0, .54)",
     boxShadow: "0 2px 2px 0 rgba(0, 0, 0, .24), 0 0 1px 0 rgba(0, 0, 0, .24)",
     padding: 0,
     borderRadius: 2,
@@ -110,8 +108,8 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
 
   const activeStyle = {
     cursor: "pointer",
-    backgroundColor: theme === "dark" ? "#3367D6" : "#eee",
-    color: theme === "dark" ? "#fff" : "rgba(0, 0, 0, .54)",
+    backgroundColor: "#eee",
+    color: "rgba(0, 0, 0, .54)",
     opacity: 1,
   };
 
@@ -121,10 +119,6 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
     }
 
     if (active) {
-      if (theme === "dark") {
-        return Object.assign({}, initialStyle, activeStyle);
-      }
-
       return Object.assign({}, initialStyle, activeStyle);
     }
 
@@ -173,6 +167,7 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
       }}
       onMouseDown={() => setActive(true)}
       onMouseUp={() => setActive(false)}
+      onClick={handleClickButton}
     >
       <GoogleIcon active={active} />
       <span
@@ -180,7 +175,6 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
           padding: 10,
           fontWeight: 500,
         }}
-        onClick={handleClickButton}
       >
         {children || buttonText}
       </span>
