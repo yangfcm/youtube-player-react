@@ -2,7 +2,7 @@ import { GoogleLoginBase, GoogleLoginResponse } from "./GoogleLoginBase";
 import { useAuth } from "../features/user/useAuth";
 
 export function GoogleLogin() {
-  const { signin, signout } = useAuth();
+  const { signin, signout, isGoogleAuthEnabled } = useAuth();
 
   const handleSuccessSignin = (response?: GoogleLoginResponse) => {
     const auth = (response as GoogleLoginResponse).getAuthResponse();
@@ -29,6 +29,7 @@ export function GoogleLogin() {
 
   return (
     <GoogleLoginBase
+      disabled={!isGoogleAuthEnabled}
       isLoggedIn={false}
       buttonText="Log in"
       onSuccess={handleSuccessSignin}

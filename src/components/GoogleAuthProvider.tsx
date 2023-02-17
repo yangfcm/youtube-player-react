@@ -12,7 +12,7 @@ export function GoogleAuthProvider({
 }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { signin, signout } = useAuth();
+  const { signin, signout, setGoogleAuthEnabled } = useAuth();
 
   useEffect(() => {
     const initClient = async () => {
@@ -27,7 +27,7 @@ export function GoogleAuthProvider({
         .catch((e: GapiLoadError) => {
           setLoading(false);
           setError(e.details);
-          signout();
+          setGoogleAuthEnabled(false);
           return;
         });
       const googleAuth = await gapi?.auth2.getAuthInstance();
@@ -55,7 +55,7 @@ export function GoogleAuthProvider({
       setError("");
     };
     gapi.load("client:auth2", initClient);
-  }, [signin, signout]);
+  }, [signin, signout, setGoogleAuthEnabled]);
 
   if (loading) return <LoadingSpinner />;
 

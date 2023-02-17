@@ -58,4 +58,5 @@ export interface UserState {
     error: string;
     data?: PlayListsResponse;
   };
+  isGoogleAuthEnabled: boolean;
 }
