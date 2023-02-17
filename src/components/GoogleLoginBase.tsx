@@ -89,7 +89,7 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
 
   const initialStyle = {
     backgroundColor: "#fff",
-    display: "flex",
+    display: "inline-flex",
     alignItems: "center",
     color: "rgba(0, 0, 0, .54)",
     boxShadow: "0 2px 2px 0 rgba(0, 0, 0, .24), 0 0 1px 0 rgba(0, 0, 0, .24)",
