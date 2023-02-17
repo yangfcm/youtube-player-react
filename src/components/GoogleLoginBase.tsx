@@ -70,14 +70,11 @@ type GoogleLoginPropsType = {
   children?: React.ReactNode;
   buttonText?: string;
   disabled?: boolean;
-  disabledStyle?: Record<string, any>;
-  isSignedIn?: boolean;
 };
 export function GoogleLoginBase(props: GoogleLoginPropsType) {
   const {
     isLoggedIn,
     disabled = false,
-    disabledStyle = { opacity: 0.6 },
     buttonText,
     children,
     onSuccess,
@@ -100,6 +97,8 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
     fontWeight: "500",
     fontFamily: "Roboto, sans-serif",
   };
+
+  const disabledStyle = { opacity: 0.6 };
 
   const hoveredStyle = {
     cursor: "pointer",
@@ -153,6 +152,7 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
 
   const handleClickButton = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (disabled) return;
     if (isLoggedIn) logout();
     else login();
   };
