@@ -56,52 +56,10 @@ interface BasicProfile {
   getImageUrl(): string;
 }
 
-interface SignInOptions {
-  readonly scope?: string;
-  readonly app_package_name?: string;
-  readonly fetch_basic_profile?: boolean;
-  readonly prompt?: string;
-}
-
-interface GrantOfflineAccessOptions {
-  readonly scope?: string;
-  readonly redirect_uri?: string;
-}
-
-export interface GoogleLoginResponseOffline {
-  readonly code: string;
-}
-
 // Based on https://developers.google.com/identity/sign-in/web/reference
 export interface GoogleLoginResponse {
   getBasicProfile(): BasicProfile;
   getAuthResponse(includeAuthorizationData?: boolean): AuthResponse;
-  reloadAuthResponse(): Promise<AuthResponse>;
-  getGrantedScopes(): string;
-  getHostedDomain(): string;
-  getId(): string;
-  isSignedIn(): boolean;
-  hasGrantedScopes(scopes: string): boolean;
-  disconnect(): void;
-  grantOfflineAccess(
-    options: GrantOfflineAccessOptions
-  ): Promise<GoogleLoginResponseOffline>;
-  signIn(options: SignInOptions): Promise<any>;
-  grant(options: SignInOptions): Promise<any>;
-  // google-login.js sez: offer renamed response keys to names that match use
-  googleId: string;
-  tokenObj: AuthResponse;
-  tokenId: string;
-  accessToken: string;
-  readonly code?: string; //does not exist but here to satisfy typescript compatibility
-  profileObj: {
-    googleId: string;
-    imageUrl: string;
-    email: string;
-    name: string;
-    givenName: string;
-    familyName: string;
-  };
 }
 
 type GoogleLoginPropsType = {
@@ -182,20 +140,6 @@ export function GoogleLoginBase(props: GoogleLoginPropsType) {
     if (!googleAuth) return;
     try {
       const res = await googleAuth.signIn({ prompt: "" });
-      const basicProfile = res.getBasicProfile();
-      const authResponse = res.getAuthResponse(true);
-      res.googleId = basicProfile.getId();
-      res.tokenObj = authResponse;
-      res.tokenId = authResponse.id_token;
-      res.accessToken = authResponse.access_token;
-      res.profileObj = {
-        googleId: basicProfile.getId(),
-        imageUrl: basicProfile.getImageUrl(),
-        email: basicProfile.getEmail(),
-        name: basicProfile.getName(),
-        givenName: basicProfile.getGivenName(),
-        familyName: basicProfile.getFamilyName(),
-      };
       onSuccess(res);
     } catch (err) {
       onFailure && onFailure();
