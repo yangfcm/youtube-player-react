@@ -2,8 +2,6 @@ import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import {
-  selIsSignedIn,
-  selToken,
   signin as signinAction,
   signout as signoutAction,
   setGoogleAuthEnabled as setGoogleAuthEnabledAction,
@@ -14,8 +12,12 @@ import { RootState } from "../../app/store";
 export function useAuth() {
   const dispatch = useAppDispatch();
 
-  const isSignedIn = useSelector(selIsSignedIn);
-  const token = useSelector(selToken);
+  const isSignedIn = useSelector(({ user }: RootState) => {
+    const isExpired = Date.now() > user.expiresAt;
+    return !!(user.profile?.id && user.token && !isExpired);
+  });
+
+  const token = useSelector((state: RootState) => state.user.token);
   const isGoogleAuthEnabled = useSelector(
     (state: RootState) => state.user.isGoogleAuthEnabled
   );
