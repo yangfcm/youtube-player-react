@@ -31,11 +31,13 @@ export function useAuth() {
 
   const signin = useCallback(
     (user: UserProfile, token: string, expiresAt: number) => {
+      localStorage.setItem("token", "Bearer " + token);
       dispatch(signinAction({ user, token, expiresAt }));
     },
     [dispatch]
   );
   const signout = useCallback(() => {
+    localStorage.removeItem("token");
     dispatch(signoutAction());
   }, [dispatch]);
 

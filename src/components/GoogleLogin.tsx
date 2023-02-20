@@ -19,12 +19,10 @@ export function GoogleLogin() {
       auth.access_token,
       auth.expires_at
     );
-    localStorage.setItem("token", "Bearer " + auth.access_token);
   };
 
   const handleFailureSignin = () => {
     signout();
-    localStorage.removeItem("token");
   };
 
   return (
