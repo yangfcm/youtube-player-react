@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Subscriptions } from "./pages/Subscriptions";
 import { SearchResults } from "./pages/SearchResults";
@@ -9,8 +10,15 @@ import { Channel } from "./pages/Channel";
 import { ChannelVideos } from "./pages/ChannelVideos";
 import { ChannelPlayLists } from "./pages/ChannelPlayLists";
 import { NotFound } from "./pages/NotFound";
+import { useAuth } from "./features/user/useAuth";
 
 export function Router() {
+  const location = useLocation();
+  const { isSignedIn, signout } = useAuth();
+  useEffect(() => {
+    if(!isSignedIn) signout();
+  }, [location]);
+
   return (
     <Routes>
       <Route path="/subscriptions" element={<Subscriptions />} />
