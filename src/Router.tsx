@@ -15,9 +15,10 @@ import { useAuth } from "./features/user/useAuth";
 export function Router() {
   const location = useLocation();
   const { isSignedIn, signout } = useAuth();
+  console.log(isSignedIn);
   useEffect(() => {
     if(!isSignedIn) signout();
-  }, [location]);
+  }, [location, signout, isSignedIn]);
 
   return (
     <Routes>
