@@ -10,12 +10,16 @@ export function GoogleAuthProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { signin, signout, setGoogleAuthEnabled } = useAuth();
 
   useEffect(() => {
     const initClient = async () => {
+      if(!gapi?.client?.init) {
+        return;
+      }
+      setLoading(true);
       gapi.client
         .init({
           clientId: process.env.REACT_APP_CLIENT_ID,
