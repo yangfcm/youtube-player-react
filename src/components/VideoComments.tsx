@@ -34,7 +34,7 @@ export function VideoComments({ videoId }: { videoId: string }) {
   }
 
   return (
-    <Box sx={{ my: 2 }}>
+    <Box>
       <Stack direction="row" spacing={2}>
         <Typography variant="h5" sx={{ display: "flex", alignItems: "center" }}>
           <MessageIcon />

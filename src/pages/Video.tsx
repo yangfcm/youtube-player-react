@@ -10,7 +10,6 @@ import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
 import { VideoComments } from "../components/VideoComments";
-import { RelevantVideos } from "../components/RelevantVideos";
 import { PlayListVideos } from "../components/PlayListVideos";
 import { formatNumber, fromNow, getSearchString } from "../app/utils";
 import { NoContent } from "../components/NoContent";
@@ -30,7 +29,7 @@ export function Video() {
     <Box>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Grid container spacing={2}>
-        <Grid item xs={12} lg={7} xl={8}>
+        <Grid item xs={12}>
           <VideoPlayer videoId={id} />
           <Typography variant="h4" color="primary">
             {video.snippet.title}
@@ -49,15 +48,20 @@ export function Video() {
           </Typography>
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.snippet.description}</Typography>
-          <VideoComments videoId={id} />
         </Grid>
-        <Grid item xs={12} lg={5} xl={4}>
-          {playlistId ? (
+      </Grid>
+      <Grid container spacing={2} my={2}>
+        {playlistId ? <>
+          <Grid item xs={12} lg={7} xl={8}>
+            <VideoComments videoId={id} />
+          </Grid>
+          <Grid item xs={12} lg={5} xl={4}>
             <PlayListVideos playlistId={playlistId} />
-          ) : (
-            <RelevantVideos videoId={id} />
-          )}
-        </Grid>
+          </Grid>
+        </> :
+        <Grid item xs={12}>
+          <VideoComments videoId={id} />
+        </Grid>}
       </Grid>
     </Box>
   );
