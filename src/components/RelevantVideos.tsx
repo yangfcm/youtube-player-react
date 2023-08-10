@@ -6,6 +6,7 @@ import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { VideoId } from "../features/video/types";
 
+/** Relevant videos API is deprecated by Google so this component is also deprecated. */
 export function RelevantVideos({ videoId }: { videoId: string }) {
   const { videos, status, error } = useRelevantVideos(videoId);
   if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
