@@ -46,7 +46,7 @@ export function Video() {
             {formatNumber(parseInt(video.statistics.viewCount)) + " views"} •{" "}
             {fromNow(video.snippet.publishedAt)}
           </Typography>
-          <MuiLink href={`https://www.youtubepi.com/watch?v=${id}`} target="_blank" component="button" variant="button" >Download Video</MuiLink>
+          <MuiLink href={`https://www.youtubepi.com/watch?v=${id}`} target="_blank" variant="button" >Download Video</MuiLink>
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.snippet.description}</Typography>
         </Grid>
