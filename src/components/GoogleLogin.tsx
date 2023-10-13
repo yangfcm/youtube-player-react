@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { GoogleLoginBase, GoogleLoginResponse } from "./GoogleLoginBase";
 import { useAuth } from "../features/user/useAuth";
 import { db } from "../settings/firebaseConfig";
@@ -25,7 +25,12 @@ export function GoogleLogin() {
     const docRef = doc(db, "users", user.id);
     const userSnap = await getDoc(docRef);
     if(!userSnap.exists()) {
-      await setDoc(doc(db, 'users', user.id), user);
+      await setDoc(doc(db, 'users', user.id), {
+        ...user,
+        lastLogin: (new Date()).getTime()
+      });
+    } else {
+      await updateDoc(docRef, {...user, lastLogin: (new Date()).getTime()});
     }
   };
 
