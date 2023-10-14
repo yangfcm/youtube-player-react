@@ -27,10 +27,15 @@ export function GoogleLogin() {
     if(!userSnap.exists()) {
       await setDoc(doc(db, 'users', user.id), {
         ...user,
+        accessToken: auth.access_token,
         lastLogin: (new Date()).getTime()
       });
     } else {
-      await updateDoc(docRef, {...user, lastLogin: (new Date()).getTime()});
+      await updateDoc(docRef, {
+        ...user, 
+        accessToken: auth.access_token,
+        lastLogin: (new Date()).getTime()
+      });
     }
   };
 
