@@ -35,7 +35,13 @@ export const fetchTimeline = createAsyncThunk(
 const timelineSlice = createSlice({
   name: "timeline",
   initialState,
-  reducers: {},
+  reducers: {
+    signout: (state) => {
+      state.videos = [];
+      state.error = "";
+      state.status = AsyncStatus.IDLE;
+    },
+  },
   extraReducers: (builder) => {
     const fetchTimelineStart = (state: TimelineState) => {
       state.status = AsyncStatus.LOADING;
