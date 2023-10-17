@@ -6,15 +6,15 @@ import { fetchTimeline } from "./timelineSlice";
 
 export function useTimeline(userId: string) {
   const dispatch = useAppDispatch();
-  const timelineState = useSelector((state: RootState) => {
+  const { videos, status, error } = useSelector((state: RootState) => {
     return state.timeline;
   });
 
   useEffect(() => {
-    if (userId) {
+    if (userId && videos.length === 0) {
       dispatch(fetchTimeline(userId));
     }
-  }, [userId, dispatch]);
+  }, [userId, videos.length, dispatch]);
 
-  return timelineState;
+  return { videos, status, error };
 }

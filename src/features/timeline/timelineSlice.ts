@@ -18,7 +18,7 @@ const initialState: TimelineState = {
 export const fetchTimeline = createAsyncThunk(
   "timeline/fetchTimeline",
   async (userId: string) => {
-    const timelineCollectionRef = collection(db, "users", userId, "items");
+    const timelineCollectionRef = collection(db, "timeline", userId, "items");
     const timelineQuery = query(
       timelineCollectionRef,
       orderBy("publishTimestamp", "desc")
