@@ -8,6 +8,7 @@ export interface TimelineVideo {
   description: string;
   publishTimestamp: number;
   liveBroadcastContent: string;
+  imageUrl: string;
 }
 
 export interface TimelineState {
