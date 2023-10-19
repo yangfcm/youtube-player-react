@@ -8,6 +8,7 @@ import MuiLink from "@mui/material/Link";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import HomeIcon from "@mui/icons-material/Home";
+import ExploreIcon from '@mui/icons-material/Explore';
 
 export function SidebarMenu() {
   return (
@@ -39,6 +40,16 @@ export function SidebarMenu() {
               <ViewListIcon />
             </ListItemIcon>
             <ListItemText primary="Play List" />
+          </ListItemButton>
+        </ListItem>
+      </MuiLink>
+      <MuiLink component={Link} to="/explore" underline="none">
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <ExploreIcon />
+            </ListItemIcon>
+            <ListItemText primary="Explore" />
           </ListItemButton>
         </ListItem>
       </MuiLink>
