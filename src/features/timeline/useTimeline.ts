@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useAppDispatch } from "../../app/hooks";
@@ -12,6 +12,10 @@ export function useTimeline(userId: string) {
   const { videos, status, error, meta } = useSelector((state: RootState) => {
     return state.timeline;
   });
+
+  const hasMore = useMemo(() => {
+    return (meta?.totalCount || 0) > videos.length;
+  }, [videos, meta?.totalCount]);
 
   useEffect(() => {
     if (!userId) return;
@@ -30,5 +34,5 @@ export function useTimeline(userId: string) {
     return () => unsubscribe();
   }, [userId, dispatch, meta?.totalCount]);
 
-  return { videos, status, error };
+  return { videos, status, error, hasMore };
 }

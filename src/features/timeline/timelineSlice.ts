@@ -24,15 +24,26 @@ const initialState: TimelineState = {
   error: "",
 };
 
+type FetchTimelineFilter = {
+  userId: string;
+  maxResults?: number;
+  after?: string;
+  way?: "REPLACE" | "APPEND" | "TOP";
+};
 export const fetchTimeline = createAsyncThunk(
   "timeline/fetchTimeline",
-  async (filter: Record<string, string>) => {
-    const { userId, maxResults = MAX_RESULTS_24 } = filter;
+  async (filter: FetchTimelineFilter) => {
+    const {
+      userId,
+      maxResults = MAX_RESULTS_24,
+      after = "",
+      way = "REPLACE",
+    } = filter;
     const timelineCollectionRef = collection(db, "timeline", userId, "items");
     const timelineQuery = query(
       timelineCollectionRef,
       orderBy("publishTimestamp", "desc"),
-      // startAfter("655Qi5gcvZg"),
+      startAfter(after),
       limit(Number(maxResults))
     );
     const querySnapshot = await getDocs(timelineQuery);
@@ -79,8 +90,9 @@ const timelineSlice = createSlice({
       {
         payload,
         meta: { arg },
-      }: { payload: TimelineVideo[]; meta: { arg?: Record<string, string> } }
+      }: { payload: TimelineVideo[]; meta: { arg?: FetchTimelineFilter } }
     ) => {
+      console.log(arg);
       state.status = AsyncStatus.SUCCESS;
       state.error = "";
       state.videos = payload;

@@ -5,6 +5,7 @@ import { VideoCard } from "../components/VideoCard";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
+import { MoreButton } from "../components/MoreButton";
 import { RequireAuth } from "../components/RequireAuth";
 import { useProfile } from "../features/user/useProfile";
 
@@ -13,7 +14,7 @@ export function Home() {
   //   useMostPopularVideos();
   const user = useProfile();
   const userId = user?.id || '';
-  const { videos, status, error } = useTimeline(userId);
+  const { videos, status, error, hasMore } = useTimeline(userId);
   if (!videos.length && status === AsyncStatus.LOADING) {
     return <LoadingSpinner />;
   }
@@ -41,6 +42,12 @@ export function Home() {
               );
             })}
         </Grid>
+        {hasMore && (
+          <MoreButton
+            loading={status===AsyncStatus.LOADING}
+            onClick={() => console.log('fetch more')}
+          >More</MoreButton>
+        )}
       </Box>
     </RequireAuth>
   );
