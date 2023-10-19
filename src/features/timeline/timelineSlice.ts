@@ -7,7 +7,14 @@ import {
 import { AsyncStatus } from "../../settings/types";
 import { TimelineMetaData, TimelineState, TimelineVideo } from "./types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  limit,
+  startAfter,
+} from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
 
 const initialState: TimelineState = {
@@ -19,11 +26,14 @@ const initialState: TimelineState = {
 
 export const fetchTimeline = createAsyncThunk(
   "timeline/fetchTimeline",
-  async (userId: string) => {
+  async (filter: Record<string, string>) => {
+    const { userId } = filter;
     const timelineCollectionRef = collection(db, "timeline", userId, "items");
     const timelineQuery = query(
       timelineCollectionRef,
       orderBy("publishTimestamp", "desc")
+      // startAfter("655Qi5gcvZg"),
+      // limit(3)
     );
     const querySnapshot = await getDocs(timelineQuery);
     const timelineVideos: TimelineVideo[] = [];
@@ -66,7 +76,10 @@ const timelineSlice = createSlice({
     };
     const fetchTimelineSuccess = (
       state: TimelineState,
-      { payload }: { payload: TimelineVideo[] }
+      {
+        payload,
+        meta: { arg },
+      }: { payload: TimelineVideo[]; meta: { arg?: Record<string, string> } }
     ) => {
       state.status = AsyncStatus.SUCCESS;
       state.error = "";

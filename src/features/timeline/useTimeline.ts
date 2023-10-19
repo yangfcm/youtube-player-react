@@ -25,7 +25,7 @@ export function useTimeline(userId: string) {
       }
       console.log("fetch timeline!");
       dispatch(setTimelineMetaData(newMeta));
-      dispatch(fetchTimeline(userId));
+      dispatch(fetchTimeline({ userId }));
     });
     return () => unsubscribe();
   }, [userId, dispatch, meta?.totalCount]);
