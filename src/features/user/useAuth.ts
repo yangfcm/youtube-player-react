@@ -6,6 +6,7 @@ import {
   signout as signoutAction,
   setGoogleAuthEnabled as setGoogleAuthEnabledAction,
 } from "./userSlice";
+import { resetTimeline } from "../timeline/timelineSlice";
 import { UserProfile } from "./types";
 import { RootState } from "../../app/store";
 
@@ -38,6 +39,7 @@ export function useAuth() {
   );
   const signout = useCallback(() => {
     localStorage.removeItem("token");
+    dispatch(resetTimeline());
     dispatch(signoutAction());
   }, [dispatch]);
 

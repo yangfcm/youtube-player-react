@@ -9,6 +9,8 @@ import { TimelineMetaData, TimelineState, TimelineVideo } from "./types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
+import { AppDispatch } from "../../app/store";
+import { signout } from "../user/userSlice";
 
 const initialState: TimelineState = {
   videos: [],
@@ -38,12 +40,6 @@ const timelineSlice = createSlice({
   name: "timeline",
   initialState,
   reducers: {
-    signout: (state) => {
-      state.videos = [];
-      state.error = "";
-      state.status = AsyncStatus.IDLE;
-      state.meta = null;
-    },
     setTimeline: (state, action: PayloadAction<TimelineVideo[]>) => {
       state.videos = action.payload;
       state.error = "";
@@ -51,6 +47,12 @@ const timelineSlice = createSlice({
     },
     setTimelineMetaData: (state, action: PayloadAction<TimelineMetaData>) => {
       state.meta = action.payload;
+    },
+    resetTimeline: (state) => {
+      state.videos = [];
+      state.error = "";
+      state.status = AsyncStatus.IDLE;
+      state.meta = null;
     },
   },
   extraReducers: (builder) => {
@@ -80,6 +82,6 @@ const timelineSlice = createSlice({
   },
 });
 
-export const { setTimelineMetaData } = timelineSlice.actions;
+export const { setTimelineMetaData, resetTimeline } = timelineSlice.actions;
 
 export const timelineReducer = timelineSlice.reducer;
