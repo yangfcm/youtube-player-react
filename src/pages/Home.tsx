@@ -14,7 +14,7 @@ export function Home() {
   //   useMostPopularVideos();
   const user = useProfile();
   const userId = user?.id || '';
-  const { videos, status, error, hasMore } = useTimeline(userId);
+  const { videos, status, error, hasMore, fetchMore } = useTimeline(userId);
   if (!videos.length && status === AsyncStatus.LOADING) {
     return <LoadingSpinner />;
   }
@@ -45,7 +45,7 @@ export function Home() {
         {hasMore && (
           <MoreButton
             loading={status===AsyncStatus.LOADING}
-            onClick={() => console.log('fetch more')}
+            onClick={fetchMore}
           >More</MoreButton>
         )}
       </Box>

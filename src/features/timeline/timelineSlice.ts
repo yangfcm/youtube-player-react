@@ -14,6 +14,8 @@ import {
   query,
   limit,
   startAfter,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
 
@@ -33,17 +35,18 @@ type FetchTimelineFilter = {
 export const fetchTimeline = createAsyncThunk(
   "timeline/fetchTimeline",
   async (filter: FetchTimelineFilter) => {
-    const {
-      userId,
-      maxResults = MAX_RESULTS_24,
-      after = "",
-      way = "REPLACE",
-    } = filter;
+    const { userId, maxResults = MAX_RESULTS_24, after } = filter;
+    console.log(after);
     const timelineCollectionRef = collection(db, "timeline", userId, "items");
+
+    let startAfterDoc;
+    if (after) {
+      startAfterDoc = await getDoc(doc(timelineCollectionRef, after));
+    }
     const timelineQuery = query(
       timelineCollectionRef,
       orderBy("publishTimestamp", "desc"),
-      startAfter(after),
+      startAfter(startAfterDoc || ""),
       limit(Number(maxResults))
     );
     const querySnapshot = await getDocs(timelineQuery);
@@ -90,12 +93,27 @@ const timelineSlice = createSlice({
       {
         payload,
         meta: { arg },
-      }: { payload: TimelineVideo[]; meta: { arg?: FetchTimelineFilter } }
+      }: { payload: TimelineVideo[]; meta: { arg: FetchTimelineFilter } }
     ) => {
-      console.log(arg);
+      const { way = "REPLACE" } = arg;
       state.status = AsyncStatus.SUCCESS;
       state.error = "";
-      state.videos = payload;
+
+      const currentItems = state.videos;
+
+      switch (way) {
+        case "REPLACE":
+          state.videos = payload;
+          break;
+        case "APPEND":
+          state.videos = [...currentItems, ...payload];
+          break;
+        case "TOP":
+          state.videos = [...payload, ...currentItems];
+          break;
+        default:
+          return;
+      }
     };
 
     builder

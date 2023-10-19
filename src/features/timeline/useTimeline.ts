@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useAppDispatch } from "../../app/hooks";
@@ -17,6 +17,18 @@ export function useTimeline(userId: string) {
     return (meta?.totalCount || 0) > videos.length;
   }, [videos, meta?.totalCount]);
 
+  const fetchMore = useCallback(() => {
+    const lastItem = videos[videos.length - 1];
+    console.log(lastItem);
+    dispatch(
+      fetchTimeline({
+        userId,
+        after: lastItem.id,
+        way: "APPEND",
+      })
+    );
+  }, [userId, videos, dispatch]);
+
   useEffect(() => {
     if (!userId) return;
     const unsubscribe = onSnapshot(doc(db, "timeline", userId), (doc) => {
@@ -34,5 +46,5 @@ export function useTimeline(userId: string) {
     return () => unsubscribe();
   }, [userId, dispatch, meta?.totalCount]);
 
-  return { videos, status, error, hasMore };
+  return { videos, status, error, hasMore, fetchMore };
 }
