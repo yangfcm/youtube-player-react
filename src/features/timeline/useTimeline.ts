@@ -37,11 +37,11 @@ export function useTimeline(userId: string) {
       if (meta?.totalCount === newMeta.totalCount) return; // If the
       if (meta?.totalCount && newMeta.totalCount > meta.totalCount) {
         const diff = newMeta.totalCount - meta.totalCount;
-        console.log("fetch", diff);
+        dispatch(fetchTimeline({ userId, maxResults: diff, way: "TOP" }));
+      } else {
+        dispatch(fetchTimeline({ userId }));
       }
-      console.log("fetch timeline!");
       dispatch(setTimelineMetaData(newMeta));
-      dispatch(fetchTimeline({ userId }));
     });
     return () => unsubscribe();
   }, [userId, dispatch, meta?.totalCount]);
