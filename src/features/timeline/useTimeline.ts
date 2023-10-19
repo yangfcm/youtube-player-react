@@ -34,7 +34,7 @@ export function useTimeline(userId: string) {
     const unsubscribe = onSnapshot(doc(db, "timeline", userId), (doc) => {
       const newMeta = doc.data() as TimelineMetaData;
       // console.log("fetch timeline!", doc.data());
-      if (meta?.totalCount === newMeta.totalCount) return; // If the
+      if (!newMeta || meta?.totalCount === newMeta.totalCount) return;
       if (meta?.totalCount && newMeta.totalCount > meta.totalCount) {
         const diff = newMeta.totalCount - meta.totalCount;
         dispatch(fetchTimeline({ userId, maxResults: diff, way: "TOP" }));
