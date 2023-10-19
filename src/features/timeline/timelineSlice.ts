@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { AsyncStatus } from "../../settings/types";
 import { TimelineMetaData, TimelineState, TimelineVideo } from "./types";
-import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
+import { DEFAULT_ERROR_MESSAGE, MAX_RESULTS_24 } from "../../settings/constant";
 import {
   collection,
   getDocs,
@@ -27,13 +27,13 @@ const initialState: TimelineState = {
 export const fetchTimeline = createAsyncThunk(
   "timeline/fetchTimeline",
   async (filter: Record<string, string>) => {
-    const { userId } = filter;
+    const { userId, maxResults = MAX_RESULTS_24 } = filter;
     const timelineCollectionRef = collection(db, "timeline", userId, "items");
     const timelineQuery = query(
       timelineCollectionRef,
-      orderBy("publishTimestamp", "desc")
+      orderBy("publishTimestamp", "desc"),
       // startAfter("655Qi5gcvZg"),
-      // limit(3)
+      limit(Number(maxResults))
     );
     const querySnapshot = await getDocs(timelineQuery);
     const timelineVideos: TimelineVideo[] = [];
