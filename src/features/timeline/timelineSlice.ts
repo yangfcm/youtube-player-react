@@ -9,8 +9,6 @@ import { TimelineMetaData, TimelineState, TimelineVideo } from "./types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
-import { AppDispatch } from "../../app/store";
-import { signout } from "../user/userSlice";
 
 const initialState: TimelineState = {
   videos: [],
