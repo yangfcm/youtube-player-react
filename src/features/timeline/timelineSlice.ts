@@ -5,13 +5,14 @@ import {
   SerializedError,
 } from "@reduxjs/toolkit";
 import { AsyncStatus } from "../../settings/types";
-import { TimelineState, TimelineVideo } from "./types";
+import { TimelineMetaData, TimelineState, TimelineVideo } from "./types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
 
 const initialState: TimelineState = {
   videos: [],
+  meta: null,
   status: AsyncStatus.IDLE,
   error: "",
 };
@@ -41,11 +42,15 @@ const timelineSlice = createSlice({
       state.videos = [];
       state.error = "";
       state.status = AsyncStatus.IDLE;
+      state.meta = null;
     },
     setTimeline: (state, action: PayloadAction<TimelineVideo[]>) => {
       state.videos = action.payload;
       state.error = "";
       state.status = AsyncStatus.SUCCESS;
+    },
+    setTimelineMetaData: (state, action: PayloadAction<TimelineMetaData>) => {
+      state.meta = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -74,5 +79,7 @@ const timelineSlice = createSlice({
       .addCase(fetchTimeline.rejected, fetchTimelineFailed);
   },
 });
+
+export const { setTimelineMetaData } = timelineSlice.actions;
 
 export const timelineReducer = timelineSlice.reducer;

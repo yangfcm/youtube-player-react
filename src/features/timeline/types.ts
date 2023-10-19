@@ -13,6 +13,12 @@ export interface TimelineVideo {
 
 export interface TimelineState {
   videos: TimelineVideo[];
+  meta: TimelineMetaData | null;
   status: AsyncStatus;
   error: string;
+}
+
+export interface TimelineMetaData {
+  totalCount: number;
+  updatedAt: number;
 }
