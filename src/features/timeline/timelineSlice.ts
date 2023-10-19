@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createSlice,
+  PayloadAction,
   SerializedError,
 } from "@reduxjs/toolkit";
 import { AsyncStatus } from "../../settings/types";
@@ -40,6 +41,11 @@ const timelineSlice = createSlice({
       state.videos = [];
       state.error = "";
       state.status = AsyncStatus.IDLE;
+    },
+    setTimeline: (state, action: PayloadAction<TimelineVideo[]>) => {
+      state.videos = action.payload;
+      state.error = "";
+      state.status = AsyncStatus.SUCCESS;
     },
   },
   extraReducers: (builder) => {

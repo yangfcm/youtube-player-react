@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { fetchTimeline } from "./timelineSlice";
+import { db } from "../../settings/firebaseConfig";
 
 export function useTimeline(userId: string) {
   const dispatch = useAppDispatch();
@@ -11,10 +13,13 @@ export function useTimeline(userId: string) {
   });
 
   useEffect(() => {
-    if (userId && videos.length === 0) {
+    if (!userId) return;
+    const unsubscribe = onSnapshot(doc(db, "timeline", userId), (doc) => {
+      // console.log("fetch timeline!", doc.data());
       dispatch(fetchTimeline(userId));
-    }
-  }, [userId, videos.length, dispatch]);
+    });
+    return () => unsubscribe();
+  }, [userId, dispatch]);
 
   return { videos, status, error };
 }
