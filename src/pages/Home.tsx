@@ -7,6 +7,7 @@ import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { MoreButton } from "../components/MoreButton";
 import { RequireAuth } from "../components/RequireAuth";
+import { NoContent } from "../components/NoContent";
 import { useProfile } from "../features/user/useProfile";
 
 export function Home() {
@@ -23,6 +24,9 @@ export function Home() {
     <RequireAuth>      
       <Box sx={{ pb: 2 }}>
         <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
+        {status === AsyncStatus.SUCCESS && videos.length === 0 && (
+          <NoContent> Your feed is empty.</NoContent>
+        )}
         <Grid container spacing={2} sx={{ pb: 2 }}>
           {
             videos.map((video) => {
