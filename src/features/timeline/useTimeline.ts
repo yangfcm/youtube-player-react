@@ -19,7 +19,6 @@ export function useTimeline(userId: string) {
 
   const fetchMore = useCallback(() => {
     const lastItem = videos[videos.length - 1];
-    console.log(lastItem);
     dispatch(
       fetchTimeline({
         userId,

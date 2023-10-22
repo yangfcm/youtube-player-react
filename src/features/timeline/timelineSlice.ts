@@ -36,7 +36,6 @@ export const fetchTimeline = createAsyncThunk(
   "timeline/fetchTimeline",
   async (filter: FetchTimelineFilter) => {
     const { userId, maxResults = MAX_RESULTS_24, after } = filter;
-    console.log(after);
     const timelineCollectionRef = collection(db, "timeline", userId, "items");
 
     let startAfterDoc;
