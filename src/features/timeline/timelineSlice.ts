@@ -12,6 +12,7 @@ import {
   getDocs,
   orderBy,
   query,
+  where,
   limit,
   startAfter,
   getDoc,
@@ -44,6 +45,7 @@ export const fetchTimeline = createAsyncThunk(
     }
     const timelineQuery = query(
       timelineCollectionRef,
+      where("isActive", "==", true),
       orderBy("publishTimestamp", "desc"),
       startAfter(startAfterDoc || ""),
       limit(Number(maxResults))
