@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { GoogleLoginBase, GoogleLoginResponse } from "./GoogleLoginBase";
 import { useAuth } from "../features/user/useAuth";
 import { db } from "../settings/firebaseConfig";
@@ -22,21 +22,11 @@ export function GoogleLogin() {
       auth.access_token,
       auth.expires_at
     );
-    const docRef = doc(db, "users", user.id);
-    const userSnap = await getDoc(docRef);
-    if(!userSnap.exists()) {
-      await setDoc(doc(db, 'users', user.id), {
-        ...user,
-        accessToken: auth.access_token,
-        lastLogin: (new Date()).getTime()
-      });
-    } else {
-      await updateDoc(docRef, {
-        ...user, 
-        accessToken: auth.access_token,
-        lastLogin: (new Date()).getTime()
-      });
-    }
+    await setDoc(doc(db, 'users', user.id), {
+      ...user,
+      accessToken: auth.access_token,
+      lastLogin: (new Date()).getTime()
+    }, { merge: true });
   };
 
   const handleFailureSignin = () => {
