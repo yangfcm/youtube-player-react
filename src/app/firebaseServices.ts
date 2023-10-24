@@ -1,7 +1,7 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../settings/firebaseConfig";
 
-export const updaterUserSubscriptions = async (
+export const updateUserSubscriptions = async (
   userId: string,
   channelId: string,
   action: "subscribe" | "unsubscribe"

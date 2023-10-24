@@ -5,6 +5,8 @@ import { AsyncStatus } from "../settings/types";
 import { UNSUBSCRIBED } from "../settings/constant";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
+import { updateUserSubscriptions } from "../app/firebaseServices";
+import { useProfile } from "../features/user/useProfile";
 
 function SubscribeButtonComp({ channelId }: { channelId: string }) {
   const {
@@ -16,6 +18,7 @@ function SubscribeButtonComp({ channelId }: { channelId: string }) {
   } = useSubscribe(channelId);
   const subscribed = subscriptionId !== UNSUBSCRIBED;
   const [subscribedText, setSubscribedText] = useState("Subscribed");
+  const user = useProfile();
 
   if (!subscriptionId) return null;
 
@@ -36,9 +39,13 @@ function SubscribeButtonComp({ channelId }: { channelId: string }) {
         }}
         onClick={() => {
           if (subscribed) {
-            unsubscribeChannel(subscriptionId);
+            unsubscribeChannel(subscriptionId).then(() => {
+              updateUserSubscriptions(user?.id || '', channelId, 'unsubscribe');
+            });
           } else {
-            subscribeChannel();
+            subscribeChannel().then(() => {
+              updateUserSubscriptions(user?.id || '', channelId, 'subscribe');
+            });
           }
         }}
       >
