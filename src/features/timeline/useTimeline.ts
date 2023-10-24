@@ -34,12 +34,13 @@ export function useTimeline(userId: string) {
       const newMeta = doc.data() as TimelineMetaData;
       // console.log("fetch timeline!", doc.data());
       if (!newMeta || meta?.totalCount === newMeta.totalCount) return;
-      if (meta?.totalCount && newMeta.totalCount > meta.totalCount) {
-        const diff = newMeta.totalCount - meta.totalCount;
-        dispatch(fetchTimeline({ userId, maxResults: diff, way: "TOP" }));
-      } else {
-        dispatch(fetchTimeline({ userId }));
-      }
+      // if (meta?.totalCount && newMeta.totalCount > meta.totalCount) {
+      //   const diff = newMeta.totalCount - meta.totalCount;
+      //   dispatch(fetchTimeline({ userId, maxResults: diff, way: "TOP" }));
+      // } else {
+      //   dispatch(fetchTimeline({ userId }));
+      // }
+      dispatch(fetchTimeline({ userId }));
       dispatch(setTimelineMetaData(newMeta));
     });
     return () => unsubscribe();
