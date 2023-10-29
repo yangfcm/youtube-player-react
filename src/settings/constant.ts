@@ -22,5 +22,5 @@ export const ALLOWED_COUNTRY_CODES = [
   "IN",
   "US",
 ];
-export const AUDIO_URL =
-  "https://australia-southeast1-player-3fb79.cloudfunctions.net/widgets/audio";
+export const SERVER_URL =
+  "https://australia-southeast1-player-3fb79.cloudfunctions.net/widgets";
