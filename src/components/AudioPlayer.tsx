@@ -1,9 +1,9 @@
-import { AUDIO_URL } from "../settings/constant"
+import { SERVER_URL } from "../settings/constant"
 
 export function AudioPlayer({ videoId }: { videoId: string }) {
   return (
     <audio controls>
-      <source src={`${AUDIO_URL}/${videoId}`} type="audio/mpeg" />
+      <source src={`${SERVER_URL}/audio/${videoId}`} type="audio/mpeg" />
     </audio>
   )
 }
