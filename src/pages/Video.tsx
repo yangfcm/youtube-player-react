@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, useLocation, Link } from "react-router-dom";
 import { useVideo } from "../features/video/useVideo";
 import MuiLink from "@mui/material/Link";
@@ -13,11 +14,27 @@ import { VideoComments } from "../components/VideoComments";
 import { PlayListVideos } from "../components/PlayListVideos";
 import { formatNumber, fromNow, getSearchString } from "../app/utils";
 import { NoContent } from "../components/NoContent";
+import { downloadVideo } from "../app/firebaseServices";
 
 export function Video() {
+  const [downloadUrl, setDownloadUrl] = useState('');
   const { id = "" } = useParams();
   const location = useLocation();
   const playlistId = getSearchString(location.search, "playlistId");
+
+  const handleDownloadClick = async () => {
+    console.log('handle download!');
+    const url = await downloadVideo(id);
+    setDownloadUrl(url);
+    // console.log('get url', url);
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = 'video.mp4'; // You can specify the desired file name
+    // a.style.display = 'none';
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
+  }
 
   const { video, status, error } = useVideo(id);
   if (status === AsyncStatus.IDLE) return null;
@@ -46,7 +63,8 @@ export function Video() {
             {formatNumber(parseInt(video.statistics.viewCount)) + " views"} •{" "}
             {fromNow(video.snippet.publishedAt)}
           </Typography>
-          <MuiLink href={`https://www.youtubepi.com/watch?v=${id}`} target="_blank" variant="button" >Download Video</MuiLink>
+          <button onClick={handleDownloadClick}>Fetch</button>
+          {downloadUrl && <a href={downloadUrl} download>Download</a>}
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.snippet.description}</Typography>
         </Grid>
@@ -60,9 +78,9 @@ export function Video() {
             <PlayListVideos playlistId={playlistId} />
           </Grid>
         </> :
-        <Grid item xs={12}>
-          <VideoComments videoId={id} />
-        </Grid>}
+          <Grid item xs={12}>
+            <VideoComments videoId={id} />
+          </Grid>}
       </Grid>
     </Box>
   );
