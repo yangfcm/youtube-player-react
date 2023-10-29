@@ -1,5 +1,7 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../settings/firebaseConfig";
+import { SERVER_URL } from "../settings/constant";
+import axios from "axios";
 
 export const updateUserSubscriptions = async (
   userId: string,
@@ -23,3 +25,8 @@ export const updateUserSubscriptions = async (
     subscriptions: updatedSubscriptions,
   });
 };
+
+export const downloadVideo = async(videoId: string) => {
+  const response = await axios.get(`${SERVER_URL}/download/${videoId}`);
+  return response.data;
+}
