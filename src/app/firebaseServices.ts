@@ -26,7 +26,12 @@ export const updateUserSubscriptions = async (
   });
 };
 
-export const downloadVideo = async(videoId: string) => {
+export const downloadVideo = async (videoId: string) => {
   const response = await axios.get(`${SERVER_URL}/download/${videoId}`);
   return response.data;
-}
+};
+
+export const fetchVideoInfo = async (videoId: string) => {
+  const response = await axios.get(`${SERVER_URL}/videoinfo/${videoId}`);
+  return response.data;
+};
