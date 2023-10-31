@@ -49,24 +49,24 @@ export function Video() {
         <Grid item xs={12}>
           <VideoPlayer videoId={id} />
           <Typography variant="h4" color="primary">
-            {video.snippet.title}
+            {video.title}
           </Typography>
           <MuiLink
             component={Link}
-            to={`/channel/${video.snippet.channelId}`}
+            to={`/channel/${video.channelId}`}
             underline="hover"
             variant="body1"
           >
-            {video.snippet.channelTitle}
+            {video.channelTitle}
           </MuiLink>
           <Typography variant="body1" sx={{ my: 1 }}>
-            {formatNumber(parseInt(video.statistics.viewCount)) + " views"} •{" "}
-            {fromNow(video.snippet.publishedAt)}
+            {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
+            {fromNow(video.publishedAt)}
           </Typography>
           <button onClick={handleDownloadClick}>Fetch</button>
           {downloadUrl && <a href={downloadUrl} download>Download</a>}
           <Divider sx={{ my: 1 }} />
-          <Typography variant="body2">{video.snippet.description}</Typography>
+          <Typography variant="body2">{video.description}</Typography>
         </Grid>
       </Grid>
       <Grid container spacing={2} my={2}>

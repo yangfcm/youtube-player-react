@@ -72,6 +72,44 @@ export interface VideosSnippetResponse {
   prevPageToken?: string;
 }
 
+export interface VideoInfoResponse {
+  videoId: string;
+  title: string;
+  description: string | null;
+  publishedAt: string;
+  thumbnails: Thumbnail[];
+  tags: string[];
+  lengthSeconds: number;
+  isFamilySafe: boolean;
+  isLiveContent: boolean;
+  viewCount: string;
+  channelId: string;
+  channelTitle: string;
+  channelThumbnail: string;
+  channelSubscribeCount?: number;
+  relatedVideos: {
+    videoId?: string;
+    title?: string;
+    publishedAt?: string;
+    lengthSeconds?: number;
+    viewCount?: string;
+    shortViewCountText?: string;
+    thumbnail: string;
+    channelId: string;
+    channelTitle: string;
+    channelThumbnail?: string;
+  }[];
+  videoFormats: {
+    quality: string;
+    qualityLabel: string;
+    fileSize: string;
+  }[];
+  audioFormats: {
+    audioBitrate: string;
+    fileSize: string;
+  }[];
+}
+
 export interface VideoState {
   videos: {
     status: AsyncStatus;
@@ -80,7 +118,7 @@ export interface VideoState {
   };
   video: {
     status: AsyncStatus;
-    item: Record<string, VideoSnippetStats>;
+    item: Record<string, VideoInfoResponse>;
     error: string;
   };
 }
