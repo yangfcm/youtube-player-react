@@ -15,6 +15,7 @@ import { PlayListVideos } from "../components/PlayListVideos";
 import { formatNumber, fromNow, getSearchString } from "../app/utils";
 import { NoContent } from "../components/NoContent";
 import { downloadVideo } from "../app/firebaseServices";
+import { RelatedVideos } from '../components/RelatedVideos';
 
 export function Video() {
   const [downloadUrl, setDownloadUrl] = useState('');
@@ -67,20 +68,11 @@ export function Video() {
           {downloadUrl && <a href={downloadUrl} download>Download</a>}
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.description}</Typography>
+          <Box sx={{my: 2}}>
+            {playlistId ? <PlayListVideos playlistId={playlistId} /> : <RelatedVideos videos={video.relatedVideos} />}
+          </Box>
+          <VideoComments videoId={id} />
         </Grid>
-      </Grid>
-      <Grid container spacing={2} my={2}>
-        {playlistId ? <>
-          <Grid item xs={12} lg={7} xl={8}>
-            <VideoComments videoId={id} />
-          </Grid>
-          <Grid item xs={12} lg={5} xl={4}>
-            <PlayListVideos playlistId={playlistId} />
-          </Grid>
-        </> :
-          <Grid item xs={12}>
-            <VideoComments videoId={id} />
-          </Grid>}
       </Grid>
     </Box>
   );

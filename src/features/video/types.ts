@@ -72,6 +72,19 @@ export interface VideosSnippetResponse {
   prevPageToken?: string;
 }
 
+export interface RelatedVideo {
+  videoId: string;
+  title: string;
+  publishedAt: string;
+  lengthSeconds?: number;
+  viewCount?: string;
+  shortViewCountText?: string;
+  thumbnail: string;
+  channelId: string;
+  channelTitle: string;
+  channelThumbnail?: string;
+}
+
 export interface VideoInfoResponse {
   videoId: string;
   title: string;
@@ -87,18 +100,7 @@ export interface VideoInfoResponse {
   channelTitle: string;
   channelThumbnail: string;
   channelSubscribeCount?: number;
-  relatedVideos: {
-    videoId?: string;
-    title?: string;
-    publishedAt?: string;
-    lengthSeconds?: number;
-    viewCount?: string;
-    shortViewCountText?: string;
-    thumbnail: string;
-    channelId: string;
-    channelTitle: string;
-    channelThumbnail?: string;
-  }[];
+  relatedVideos: RelatedVideo[];
   videoFormats: {
     quality: string;
     qualityLabel: string;

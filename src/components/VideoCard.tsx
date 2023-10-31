@@ -15,7 +15,7 @@ type VideoTypeProps = {
   channelTitle: string;
   imageUrl?: string;
   viewCount?: string;
-  publishedAt?: Date;
+  publishedAt?: Date | string;
 };
 
 export function VideoCard({ video }: { video: VideoTypeProps }) {
@@ -86,7 +86,7 @@ export function VideoCard({ video }: { video: VideoTypeProps }) {
           <>
             {viewCount && formatNumber(parseInt(viewCount)) + " views"}{" "}
             {viewCount && publishedAt && "• "}
-            {publishedAt && fromNow(publishedAt)}
+            {publishedAt && ( publishedAt instanceof Date ? fromNow(publishedAt) : publishedAt )}
           </>
         </Typography>
       </CardContent>
