@@ -7,7 +7,7 @@ export function RelatedVideos({ videos: videosProp }: { videos: RelatedVideo[] }
   const videos = videosProp.length > 12 ? videosProp.slice(0, 12) : videosProp;
   return (
     <>
-      <Typography variant="h5">Related Videos</Typography>
+      <Typography variant="h5" sx={{mb: 2}}>Related Videos</Typography>
       <Grid container spacing={2}>
         {videos.map((video) => {
           return (            

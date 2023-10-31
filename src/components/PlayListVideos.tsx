@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { ErrorMessage } from "./ErrorMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
@@ -30,9 +29,9 @@ export function PlayListVideos({ playlistId }: { playlistId: string }) {
             No videos in the playlist or playlist is unavailable.
           </NoContent>
         )}
-      <Typography variant="h5">
+      {/* <Typography variant="h5">
         More videos in the playlist
-      </Typography>
+      </Typography> */}
       <Grid container spacing={2}>
         {playlistVideos.map((video) => (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={video.contentDetails.videoId}>
