@@ -3,7 +3,8 @@ import Typography from '@mui/material/Typography';
 import { VideoCard } from './VideoCard';
 import { RelatedVideo } from '../features/video/types';
 
-export function RelatedVideos({ videos }: { videos: RelatedVideo[] }) {
+export function RelatedVideos({ videos: videosProp }: { videos: RelatedVideo[] }) {
+  const videos = videosProp.length > 12 ? videosProp.slice(0, 12) : videosProp;
   return (
     <>
       <Typography variant="h5">Related Videos</Typography>
