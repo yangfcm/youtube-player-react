@@ -26,8 +26,20 @@ export const updateUserSubscriptions = async (
   });
 };
 
-export const downloadVideo = async (videoId: string) => {
-  const response = await axios.get(`${SERVER_URL}/download/${videoId}`);
+export const downloadVideo = async ({
+  videoId,
+  userId,
+  title,
+}: {
+  videoId: string;
+  userId: string;
+  title: string;
+}) => {
+  const response = await axios.post(`${SERVER_URL}/download/`, {
+    videoId,
+    userId,
+    title,
+  });
   return response.data;
 };
 
