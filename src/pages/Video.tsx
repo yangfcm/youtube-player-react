@@ -63,7 +63,7 @@ export function Video() {
             {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
             {fromNow(video.publishedAt)}
           </Typography>
-          <RequireAuth>
+          <RequireAuth showLoginButton={false}>
             <>
               <button onClick={handleDownloadClick}>Fetch</button>
               {downloadUrl && <a href={downloadUrl} download>Download</a>}
