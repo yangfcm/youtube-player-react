@@ -45,8 +45,8 @@ export function Video() {
           >
             {video.channelTitle}
           </MuiLink>
-          <Stack direction="row" justifyContent="space-between">
-            <Box sx={{flexGrow: 1}}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between">
+            <Box sx={{ flexGrow: 1 }}>
               <Typography variant="body1" sx={{ my: 1 }}>
                 {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
                 {fromNow(video.publishedAt)}
@@ -56,7 +56,7 @@ export function Video() {
           </Stack>
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.description}</Typography>
-          <Box sx={{my: 2}}>
+          <Box sx={{ my: 2 }}>
             {playlistId ? <PlayListVideos playlistId={playlistId} /> : <RelatedVideos videos={video.relatedVideos} />}
           </Box>
           <VideoComments videoId={id} />

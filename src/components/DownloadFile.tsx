@@ -42,7 +42,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
 
   return (
     <RequireAuth showLoginButton={false}>
-      <Stack direction="row" alignItems="center" spacing={2}>
+      <Stack direction="row" alignItems="center" spacing={1}>
         {downloadVideoUrl ?
           <Button
             href={downloadVideoUrl}

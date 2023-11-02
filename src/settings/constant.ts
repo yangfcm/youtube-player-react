@@ -22,5 +22,5 @@ export const ALLOWED_COUNTRY_CODES = [
   "IN",
   "US",
 ];
-export const SERVER_URL =
+export const FIREBASE_SERVER_URL =
   "https://australia-southeast1-player-3fb79.cloudfunctions.net/widgets";
