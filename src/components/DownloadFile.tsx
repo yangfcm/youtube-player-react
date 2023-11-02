@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -10,41 +10,29 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { downloadVideo } from "../app/firebaseServices";
 import { RequireAuth } from '../components/RequireAuth';
+import { ErrorMessage } from './ErrorMessage';
 import { useProfile } from '../features/user/useProfile';
 import { VideoInfoResponse } from '../features/video/types';
 import { DownloadFileType } from '../features/video/types';
+import { useDownloadVideo } from '../features/video/useDownloadVideo';
+import { AsyncStatus } from '../settings/types';
 
 export function DownloadFile({ video }: { video: VideoInfoResponse }) {
-  const [isDownloading, setIsDownloading] = useState(false);
-  const [downloadVideoUrl, setDownloadVideoUrl] = useState('');
-  const [downloadAudioUrl, setDownloadAudioUrl] = useState('');
   const [fileType, setFileType] = useState<DownloadFileType>('video');
-  // const fileTypeName = fileType === 'video' ? 'Video' : fileType === 'audioonly' ? 'Audio' : '';
 
   const user = useProfile();
-
-  const handleDownloadClick = useCallback(async () => {
-    if (!video || !user) return;
-    setIsDownloading(true);
-    const url = await downloadVideo({
-      videoId: video.videoId,
-      title: video.title,
-      userId: user.id,
-      filter: fileType
-    });
-    if (fileType === 'video') {
-      setDownloadVideoUrl(url);
-    }
-    if (fileType === 'audioonly') {
-      setDownloadAudioUrl(url);
-    }
-    setIsDownloading(false);
-  }, [video, user, fileType]);
+  const { url, isUrlExpired, status, error, downloadVideo } = useDownloadVideo({
+    videoId: video.videoId,
+    title: video.title,
+    userId: user?.id || '',
+    filter: fileType,
+  });
+  const isDownloading = status === AsyncStatus.LOADING;
 
   return (
     <RequireAuth showLoginButton={false}>
+      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
         <FormControl>
           <FormLabel>Download as</FormLabel>
@@ -55,8 +43,8 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
         </FormControl>
         {fileType === 'video' &&
           <>
-            {downloadVideoUrl ? <Button
-              href={downloadVideoUrl}
+            {url && !isUrlExpired ? <Button
+              href={url}
               download
               startIcon={<DownloadIcon />}
               variant="contained"
@@ -68,7 +56,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
             </Button> :
               <LoadingButton
                 loading={isDownloading}
-                onClick={handleDownloadClick}
+                onClick={downloadVideo}
                 variant="outlined"
                 size="large"
                 color="secondary"
@@ -81,8 +69,8 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
         }
         {fileType === 'audioonly' &&
           <>
-            {downloadAudioUrl ? <Button
-              href={downloadAudioUrl}
+            {url && !isUrlExpired ? <Button
+              href={url}
               download
               startIcon={<DownloadIcon />}
               variant="contained"
@@ -94,7 +82,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
             </Button> :
               <LoadingButton
                 loading={isDownloading}
-                onClick={handleDownloadClick}
+                onClick={downloadVideo}
                 variant="outlined"
                 size="large"
                 color="secondary"

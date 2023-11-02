@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import { VideosResponse, VideoState, VideoInfoResponse, DownloadResponse, DownloadParameter, DownloadState } from "./types";
+import { VideosResponse, VideoState, VideoInfoResponse, DownloadResponse, DownloadParameter } from "./types";
 import { fetchVideosAPI, fetchVideoInfoAPI, downloadVideoAPI } from "./videoAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
