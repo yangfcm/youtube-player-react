@@ -5,8 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import { VideosResponse, VideoState, VideoInfoResponse } from "./types";
-import { fetchVideosAPI, fetchVideoInfoAPI } from "./videoAPI";
+import { VideosResponse, VideoState, VideoInfoResponse, DownloadResponse } from "./types";
+import { fetchVideosAPI, fetchVideoInfoAPI, downloadVideoAPI, DownloadParameter } from "./videoAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: VideoState = {
@@ -36,6 +36,14 @@ export const fetchVideos = createAsyncThunk(
     return response;
   }
 );
+
+export const downloadVideo = createAsyncThunk(
+  'video/downloadVideo',
+  async(para: DownloadParameter) => {
+    const response = await downloadVideoAPI(para);
+    return response;
+  }
+)
 
 const videoSlice = createSlice({
   name: "video",
@@ -99,13 +107,46 @@ const videoSlice = createSlice({
       state.videos.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
+    const downloadVideoStart = (state: VideoState, {meta: { arg }}: {
+      meta: { arg: DownloadParameter }
+    }) => {
+      const videoItem = state.video.item[arg.videoId];
+      if(!videoItem) return;
+      videoItem.fetching = true;
+      if(videoItem.downloadError) videoItem.downloadError = '';
+    };
+    const downloadVideoFailed = (
+      state: VideoState, 
+      { error, meta: {arg} }: { error: SerializedError, meta: { arg: DownloadParameter}}
+    ) => {
+      const videoItem = state.video.item[arg.videoId];
+      if(!videoItem) return;
+      videoItem.fetching = false;
+      videoItem.downloadError = error.message || DEFAULT_ERROR_MESSAGE;
+    };
+    const downloadVideoSuccess = (
+      state: VideoState, 
+      { payload, meta: { arg }}: { payload: AxiosResponse<DownloadResponse>, meta: { arg: DownloadParameter }}
+    ) => {
+      const videoItem = state.video.item[arg.videoId];
+      if(!videoItem) return;
+      videoItem.fetching = false;
+      if(videoItem.downloadError) videoItem.downloadError = '';
+      videoItem.downloadUrl = payload.data.url;
+      videoItem.urlExpiredAt = payload.data.expiredAt;
+    };
+
     builder
       .addCase(fetchVideo.pending, fetchVideoStart)
       .addCase(fetchVideo.fulfilled, fetchVideoSuccess)
       .addCase(fetchVideo.rejected, fetchVideoFailed)
       .addCase(fetchVideos.pending, fetchVideosStart)
       .addCase(fetchVideos.fulfilled, fetchVideosSuccess)
-      .addCase(fetchVideos.rejected, fetchVideosFailed);
+      .addCase(fetchVideos.rejected, fetchVideosFailed)
+      .addCase(downloadVideo.pending, downloadVideoStart)
+      .addCase(downloadVideo.fulfilled, downloadVideoSuccess)
+      .addCase(downloadVideo.rejected, downloadVideoFailed)
+      ;
   },
 });
 

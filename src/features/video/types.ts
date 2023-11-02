@@ -112,6 +112,13 @@ export interface VideoInfoResponse {
   }[];
 }
 
+export interface VideoDownloadState {
+  downloadUrl?: string;
+  urlExpiredAt?: number;
+  fetching?: boolean;
+  downloadError?: string;
+}
+
 export interface VideoState {
   videos: {
     status: AsyncStatus;
@@ -120,9 +127,14 @@ export interface VideoState {
   };
   video: {
     status: AsyncStatus;
-    item: Record<string, VideoInfoResponse>;
+    item: Record<string, VideoInfoResponse & VideoDownloadState>;
     error: string;
   };
 }
 
 export type DownloadFileType = 'video' | 'audioonly';
+
+export interface DownloadResponse {
+  url: string;
+  expiredAt: number;
+}
