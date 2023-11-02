@@ -112,20 +112,11 @@ const videoSlice = createSlice({
     }) => {
       const videoItem = state.video.item[arg.videoId];
       if(!videoItem) return;
-      const downloadState: DownloadState = {
+      const key =  arg.filter === 'audioonly' ? 'downloadAudioonly' : 'downloadVideo';
+      videoItem[key] = {
         status: AsyncStatus.LOADING,
         error: '',
-      };
-      switch(arg.filter) {
-        case 'video':
-          videoItem.downloadVideo = downloadState;
-          break;
-        case 'audioonly':
-          videoItem.downloadAudioonly = downloadState;
-          break;
-        default:
-          return;
-      }
+      };;
     };
     const downloadVideoFailed = (
       state: VideoState, 
@@ -133,20 +124,11 @@ const videoSlice = createSlice({
     ) => {
       const videoItem = state.video.item[arg.videoId];
       if(!videoItem) return;
-      const downloadState: DownloadState = {
+      const key =  arg.filter === 'audioonly' ? 'downloadAudioonly' : 'downloadVideo';
+      videoItem[key] = {
         status: AsyncStatus.FAIL,
         error: error.message || DEFAULT_ERROR_MESSAGE
-      };
-      switch(arg.filter) {
-        case 'video':
-          videoItem.downloadVideo = downloadState;
-          break;
-        case 'audioonly':
-          videoItem.downloadAudioonly = downloadState;
-          break;
-        default:
-          return;
-      }
+      };;
     };
     const downloadVideoSuccess = (
       state: VideoState, 
@@ -154,22 +136,13 @@ const videoSlice = createSlice({
     ) => {
       const videoItem = state.video.item[arg.videoId];
       if(!videoItem) return;
-      const downloadState: DownloadState = {
+      const key =  arg.filter === 'audioonly' ? 'downloadAudioonly' : 'downloadVideo';
+      videoItem[key] = {
         status: AsyncStatus.SUCCESS,
         error: '',
         url: payload.data.url,
         expiredAt: payload.data.expiredAt,
-      };
-      switch(arg.filter) {
-        case 'video':
-          videoItem.downloadVideo = downloadState;
-          break;
-        case 'audioonly':
-          videoItem.downloadAudioonly = downloadState;
-          break;
-        default:
-          return;
-      }
+      };;
     };
 
     builder
