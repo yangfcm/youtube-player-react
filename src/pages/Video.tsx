@@ -28,7 +28,7 @@ export function Video() {
   const { video, status, error } = useVideo(id);
   const user = useProfile();
 
-  const handleDownloadClick = useCallback(async (filter: 'video' | 'audio') => {
+  const handleDownloadClick = useCallback(async (filter: 'video' | 'audioonly') => {
     if(!video || !user) return;
     const url = await downloadVideo({
       videoId: video.videoId,
@@ -71,7 +71,7 @@ export function Video() {
             <RequireAuth showLoginButton={false}>
               <Stack direction="row" alignItems="center" spacing={2}>
                 <button onClick={() => handleDownloadClick('video')}>Fetch Video</button>
-                <button onClick={() => handleDownloadClick('audio')}>Fetch Audio</button>
+                <button onClick={() => handleDownloadClick('audioonly')}>Fetch Audio</button>
                 {downloadUrl && <a href={downloadUrl} download>Download</a>}
               </Stack>
             </RequireAuth>

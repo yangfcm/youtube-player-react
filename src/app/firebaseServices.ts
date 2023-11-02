@@ -35,7 +35,7 @@ export const downloadVideo = async ({
   videoId: string;
   userId: string;
   title: string;
-  filter?: "video" | "audio";
+  filter?: "video" | "audioonly";
 }) => {
   const response = await axios.post(`${SERVER_URL}/download/`, {
     videoId,
