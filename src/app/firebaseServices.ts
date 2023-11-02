@@ -44,8 +44,3 @@ export const downloadVideo = async ({
   });
   return response.data;
 };
-
-export const fetchVideoInfo = async (videoId: string) => {
-  const response = await firebaseAxios.get(`/videoinfo/${videoId}`);
-  return response.data;
-};

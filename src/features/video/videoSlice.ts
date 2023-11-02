@@ -6,8 +6,7 @@ import {
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import { VideosResponse, VideoState, VideoInfoResponse } from "./types";
-import { fetchVideosAPI } from "./videoAPI";
-import { fetchVideoInfo } from "../../app/firebaseServices";
+import { fetchVideosAPI, fetchVideoInfoAPI } from "./videoAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: VideoState = {
@@ -25,7 +24,7 @@ const initialState: VideoState = {
 export const fetchVideo = createAsyncThunk(
   "video/fetchVideo",
   async (videoId: string) => {
-    const response = await fetchVideoInfo(videoId);
+    const response = await fetchVideoInfoAPI(videoId);
     return response;
   }
 );
@@ -48,11 +47,11 @@ const videoSlice = createSlice({
     };
     const fetchVideoSuccess = (
       state: VideoState,
-      { payload }: { payload: VideoInfoResponse }
+      { payload }: { payload: AxiosResponse<VideoInfoResponse> }
     ) => {
       state.video.status = AsyncStatus.SUCCESS;
       state.video.error = "";
-      const video = payload;
+      const video = payload.data;
       if (video) {
         state.video.item = {
           ...state.video.item,

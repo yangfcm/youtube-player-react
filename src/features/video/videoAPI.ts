@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
-import { appAxios } from "../../settings/api";
+import { appAxios, firebaseAxios } from "../../settings/api";
 import { MAX_RESULTS_24, PART_SNIPPET_STATS } from "../../settings/constant";
-import { VideoResponse, VideosResponse } from "./types";
+import { VideoInfoResponse, VideoResponse, VideosResponse } from "./types";
 
 export async function fetchVideosAPI(
   options: Record<string, string> = {}
@@ -25,3 +25,8 @@ export async function fetchVideoAPI(
     },
   });
 }
+
+export async function fetchVideoInfoAPI(videoId: string): Promise<AxiosResponse<VideoInfoResponse>> {
+  return await firebaseAxios.get(`/videoinfo/${videoId}`);
+};
+
