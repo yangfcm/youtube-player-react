@@ -21,7 +21,8 @@ import { RequireAuth } from '../components/RequireAuth';
 import { useProfile } from '../features/user/useProfile';
 
 export function Video() {
-  const [downloadUrl, setDownloadUrl] = useState('');
+  const [downloadVideoUrl, setDownloadVideoUrl] = useState('');
+  const [downloadAudioUrl, setDownloadAudioUrl] = useState('');
   const { id = "" } = useParams();
   const location = useLocation();
   const playlistId = getSearchString(location.search, "playlistId");
@@ -36,7 +37,12 @@ export function Video() {
       userId: user.id,
       filter,
     });
-    setDownloadUrl(url);
+    if(filter === 'video') {
+      setDownloadVideoUrl(url);
+    }
+    if(filter === 'audioonly') {
+      setDownloadAudioUrl(url);
+    }
   }, [video, user]);
 
   if (status === AsyncStatus.IDLE) return null;
@@ -70,9 +76,12 @@ export function Video() {
             </Box>
             <RequireAuth showLoginButton={false}>
               <Stack direction="row" alignItems="center" spacing={2}>
-                <button onClick={() => handleDownloadClick('video')}>Fetch Video</button>
-                <button onClick={() => handleDownloadClick('audioonly')}>Fetch Audio</button>
-                {downloadUrl && <a href={downloadUrl} download>Download</a>}
+                {downloadVideoUrl ? 
+                  <a href={downloadVideoUrl} download>Download</a> : 
+                  <button onClick={() => handleDownloadClick('video')}>Fetch Video</button>}
+                {downloadAudioUrl ? 
+                  <a href={downloadAudioUrl} download>Download</a> : 
+                  <button onClick={() => handleDownloadClick('audioonly')}>Fetch Audio</button>}
               </Stack>
             </RequireAuth>
           </Stack>
