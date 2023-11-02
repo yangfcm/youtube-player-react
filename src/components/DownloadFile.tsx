@@ -49,8 +49,8 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
         <FormControl>
           <FormLabel>Download as</FormLabel>
           <RadioGroup row defaultValue="video" onChange={e => setFileType(e.target.value as DownloadFileType)}>
-            <FormControlLabel value="video" control={<Radio />} label="Video" />
-            <FormControlLabel value="audioonly" control={<Radio />} label="Audio" />
+            <FormControlLabel value="video" control={<Radio />} label="Video" disabled={isDownloading} />
+            <FormControlLabel value="audioonly" control={<Radio />} label="Audio" disabled={isDownloading} />
           </RadioGroup>
         </FormControl>
         {fileType === 'video' &&
@@ -62,7 +62,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
               variant="contained"
               size="large"
               color="secondary"
-              sx={{ width: '165px' }}
+              sx={{ width: '140px' }}
             >
               Download
             </Button> :
@@ -73,7 +73,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
                 size="large"
                 color="secondary"
                 startIcon={<VideoFileIcon />}
-                sx={{ width: '165px' }}
+                sx={{ width: '140px' }}
               >
                 Fetch
               </LoadingButton>}
@@ -88,7 +88,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
               variant="contained"
               size="large"
               color="secondary"
-              sx={{ width: '165px' }}
+              sx={{ width: '140px' }}
             >
               Download
             </Button> :
@@ -99,7 +99,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
                 size="large"
                 color="secondary"
                 startIcon={<AudioFileIcon />}
-                sx={{ width: '165px' }}
+                sx={{ width: '140px' }}
               >
                 Fetch
               </LoadingButton>}
