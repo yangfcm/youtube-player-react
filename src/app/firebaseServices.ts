@@ -1,6 +1,5 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../settings/firebaseConfig";
-import { firebaseAxios } from "../settings/api";
 
 export const updateUserSubscriptions = async (
   userId: string,
@@ -23,24 +22,4 @@ export const updateUserSubscriptions = async (
   await updateDoc(userRef, {
     subscriptions: updatedSubscriptions,
   });
-};
-
-export const downloadVideo = async ({
-  videoId,
-  userId,
-  title,
-  filter = "video",
-}: {
-  videoId: string;
-  userId: string;
-  title: string;
-  filter?: "video" | "audioonly";
-}) => {
-  const response = await firebaseAxios.post(`/download/`, {
-    videoId,
-    userId,
-    title,
-    filter,
-  });
-  return response.data;
 };
