@@ -5,8 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import { VideosResponse, VideoState, VideoInfoResponse, DownloadResponse } from "./types";
-import { fetchVideosAPI, fetchVideoInfoAPI, downloadVideoAPI, DownloadParameter } from "./videoAPI";
+import { VideosResponse, VideoState, VideoInfoResponse, DownloadResponse, DownloadParameter, DownloadState } from "./types";
+import { fetchVideosAPI, fetchVideoInfoAPI, downloadVideoAPI } from "./videoAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: VideoState = {
@@ -112,8 +112,20 @@ const videoSlice = createSlice({
     }) => {
       const videoItem = state.video.item[arg.videoId];
       if(!videoItem) return;
-      videoItem.fetching = true;
-      if(videoItem.downloadError) videoItem.downloadError = '';
+      const downloadState: DownloadState = {
+        status: AsyncStatus.LOADING,
+        error: '',
+      };
+      switch(arg.filter) {
+        case 'video':
+          videoItem.downloadVideo = downloadState;
+          break;
+        case 'audioonly':
+          videoItem.downloadAudioonly = downloadState;
+          break;
+        default:
+          return;
+      }
     };
     const downloadVideoFailed = (
       state: VideoState, 
@@ -121,8 +133,20 @@ const videoSlice = createSlice({
     ) => {
       const videoItem = state.video.item[arg.videoId];
       if(!videoItem) return;
-      videoItem.fetching = false;
-      videoItem.downloadError = error.message || DEFAULT_ERROR_MESSAGE;
+      const downloadState: DownloadState = {
+        status: AsyncStatus.FAIL,
+        error: error.message || DEFAULT_ERROR_MESSAGE
+      };
+      switch(arg.filter) {
+        case 'video':
+          videoItem.downloadVideo = downloadState;
+          break;
+        case 'audioonly':
+          videoItem.downloadAudioonly = downloadState;
+          break;
+        default:
+          return;
+      }
     };
     const downloadVideoSuccess = (
       state: VideoState, 
@@ -130,10 +154,22 @@ const videoSlice = createSlice({
     ) => {
       const videoItem = state.video.item[arg.videoId];
       if(!videoItem) return;
-      videoItem.fetching = false;
-      if(videoItem.downloadError) videoItem.downloadError = '';
-      videoItem.downloadUrl = payload.data.url;
-      videoItem.urlExpiredAt = payload.data.expiredAt;
+      const downloadState: DownloadState = {
+        status: AsyncStatus.SUCCESS,
+        error: '',
+        url: payload.data.url,
+        expiredAt: payload.data.expiredAt,
+      };
+      switch(arg.filter) {
+        case 'video':
+          videoItem.downloadVideo = downloadState;
+          break;
+        case 'audioonly':
+          videoItem.downloadAudioonly = downloadState;
+          break;
+        default:
+          return;
+      }
     };
 
     builder
