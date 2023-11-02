@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Stack from '@mui/material/Stack';
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
@@ -27,12 +28,13 @@ export function Video() {
   const { video, status, error } = useVideo(id);
   const user = useProfile();
 
-  const handleDownloadClick = useCallback(async () => {
+  const handleDownloadClick = useCallback(async (filter: 'video' | 'audio') => {
     if(!video || !user) return;
     const url = await downloadVideo({
       videoId: video.videoId,
       title: video.title,
       userId: user.id,
+      filter,
     });
     setDownloadUrl(url);
   }, [video, user]);
@@ -59,16 +61,21 @@ export function Video() {
           >
             {video.channelTitle}
           </MuiLink>
-          <Typography variant="body1" sx={{ my: 1 }}>
-            {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
-            {fromNow(video.publishedAt)}
-          </Typography>
-          <RequireAuth showLoginButton={false}>
-            <>
-              <button onClick={handleDownloadClick}>Fetch</button>
-              {downloadUrl && <a href={downloadUrl} download>Download</a>}
-            </>
-          </RequireAuth>
+          <Stack direction="row" justifyContent="space-between">
+            <Box sx={{flexGrow: 1}}>
+              <Typography variant="body1" sx={{ my: 1 }}>
+                {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
+                {fromNow(video.publishedAt)}
+              </Typography>
+            </Box>
+            <RequireAuth showLoginButton={false}>
+              <Stack direction="row" alignItems="center" spacing={2}>
+                <button onClick={() => handleDownloadClick('video')}>Fetch Video</button>
+                <button onClick={() => handleDownloadClick('audio')}>Fetch Audio</button>
+                {downloadUrl && <a href={downloadUrl} download>Download</a>}
+              </Stack>
+            </RequireAuth>
+          </Stack>
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.description}</Typography>
           <Box sx={{my: 2}}>

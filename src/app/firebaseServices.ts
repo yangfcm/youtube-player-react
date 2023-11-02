@@ -30,15 +30,18 @@ export const downloadVideo = async ({
   videoId,
   userId,
   title,
+  filter = "video",
 }: {
   videoId: string;
   userId: string;
   title: string;
+  filter?: "video" | "audio";
 }) => {
   const response = await axios.post(`${SERVER_URL}/download/`, {
     videoId,
     userId,
     title,
+    filter,
   });
   return response.data;
 };
