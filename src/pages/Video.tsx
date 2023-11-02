@@ -34,19 +34,19 @@ export function Video() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <VideoPlayer videoId={id} />
-          <Typography variant="h4" color="primary">
+          <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
             {video.title}
           </Typography>
-          <MuiLink
-            component={Link}
-            to={`/channel/${video.channelId}`}
-            underline="hover"
-            variant="body1"
-          >
-            {video.channelTitle}
-          </MuiLink>
           <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between">
             <Box sx={{ flexGrow: 1 }}>
+              <MuiLink
+                component={Link}
+                to={`/channel/${video.channelId}`}
+                underline="hover"
+                variant="body1"
+              >
+                {video.channelTitle}
+              </MuiLink>
               <Typography variant="body1" sx={{ my: 1 }}>
                 {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
                 {fromNow(video.publishedAt)}

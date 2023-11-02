@@ -124,3 +124,5 @@ export interface VideoState {
     error: string;
   };
 }
+
+export type DownloadFileType = 'video' | 'audioonly';
