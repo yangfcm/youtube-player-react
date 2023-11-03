@@ -5,9 +5,22 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import { VideosResponse, VideoState, VideoInfoResponse, DownloadResponse, DownloadParameter } from "./types";
-import { fetchVideosAPI, fetchVideoInfoAPI, downloadVideoAPI } from "./videoAPI";
-import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
+import {
+  VideosResponse,
+  VideoState,
+  VideoInfoResponse,
+  DownloadResponse,
+  DownloadParameter,
+} from "./types";
+import {
+  fetchVideosAPI,
+  fetchVideoInfoAPI,
+  downloadVideoAPI,
+} from "./videoAPI";
+import {
+  DEFAULT_ERROR_MESSAGE,
+  DOWNLOAD_CANCELD_ERROR,
+} from "../../settings/constant";
 
 const initialState: VideoState = {
   videos: {
@@ -38,12 +51,12 @@ export const fetchVideos = createAsyncThunk(
 );
 
 export const downloadVideo = createAsyncThunk(
-  'video/downloadVideo',
-  async(para: DownloadParameter) => {
+  "video/downloadVideo",
+  async (para: DownloadParameter) => {
     const response = await downloadVideoAPI(para);
     return response;
   }
-)
+);
 
 const videoSlice = createSlice({
   name: "video",
@@ -107,42 +120,66 @@ const videoSlice = createSlice({
       state.videos.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
-    const downloadVideoStart = (state: VideoState, {meta: { arg }}: {
-      meta: { arg: DownloadParameter }
-    }) => {
+    const downloadVideoStart = (
+      state: VideoState,
+      {
+        meta: { arg },
+      }: {
+        meta: { arg: DownloadParameter };
+      }
+    ) => {
       const videoItem = state.video.item[arg.videoId];
-      if(!videoItem) return;
-      const key =  arg.filter === 'audioonly' ? 'downloadAudioonly' : 'downloadVideo';
+      if (!videoItem) return;
+      const key =
+        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
       videoItem[key] = {
         status: AsyncStatus.LOADING,
-        error: '',
-      };;
+        error: "",
+      };
     };
     const downloadVideoFailed = (
-      state: VideoState, 
-      { error, meta: {arg} }: { error: SerializedError, meta: { arg: DownloadParameter}}
+      state: VideoState,
+      {
+        error,
+        meta: { arg },
+      }: { error: SerializedError; meta: { arg: DownloadParameter } }
     ) => {
       const videoItem = state.video.item[arg.videoId];
-      if(!videoItem) return;
-      const key =  arg.filter === 'audioonly' ? 'downloadAudioonly' : 'downloadVideo';
+      if (!videoItem) return;
+      const key =
+        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
+      if (error.message === DOWNLOAD_CANCELD_ERROR) {
+        videoItem[key] = {
+          status: AsyncStatus.IDLE,
+          error: "",
+        };
+        return;
+      }
       videoItem[key] = {
         status: AsyncStatus.FAIL,
-        error: error.message || DEFAULT_ERROR_MESSAGE
-      };;
+        error: error.message || DEFAULT_ERROR_MESSAGE,
+      };
     };
     const downloadVideoSuccess = (
-      state: VideoState, 
-      { payload, meta: { arg }}: { payload: AxiosResponse<DownloadResponse>, meta: { arg: DownloadParameter }}
+      state: VideoState,
+      {
+        payload,
+        meta: { arg },
+      }: {
+        payload: AxiosResponse<DownloadResponse>;
+        meta: { arg: DownloadParameter };
+      }
     ) => {
       const videoItem = state.video.item[arg.videoId];
-      if(!videoItem) return;
-      const key =  arg.filter === 'audioonly' ? 'downloadAudioonly' : 'downloadVideo';
+      if (!videoItem) return;
+      const key =
+        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
       videoItem[key] = {
         status: AsyncStatus.SUCCESS,
-        error: '',
+        error: "",
         url: payload.data.url,
         expiredAt: payload.data.expiredAt,
-      };;
+      };
     };
 
     builder
@@ -154,8 +191,7 @@ const videoSlice = createSlice({
       .addCase(fetchVideos.rejected, fetchVideosFailed)
       .addCase(downloadVideo.pending, downloadVideoStart)
       .addCase(downloadVideo.fulfilled, downloadVideoSuccess)
-      .addCase(downloadVideo.rejected, downloadVideoFailed)
-      ;
+      .addCase(downloadVideo.rejected, downloadVideoFailed);
   },
 });
 

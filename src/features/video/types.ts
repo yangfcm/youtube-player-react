@@ -1,3 +1,4 @@
+import { CancelToken } from "axios";
 import { AsyncStatus } from "../../settings/types";
 
 export interface Thumbnail {
@@ -112,12 +113,12 @@ export interface VideoInfoResponse {
   }[];
 }
 
-export interface DownloadState { 
-    url?: string;
-    expiredAt?: number;
-    status?: AsyncStatus;
-    error?: string;
-};
+export interface DownloadState {
+  url?: string;
+  expiredAt?: number;
+  status?: AsyncStatus;
+  error?: string;
+}
 
 export interface VideoState {
   videos: {
@@ -127,21 +128,25 @@ export interface VideoState {
   };
   video: {
     status: AsyncStatus;
-    item: Record<string, VideoInfoResponse & {
-      downloadVideo?: DownloadState;
-      downloadAudioonly?: DownloadState;
-    }>;
+    item: Record<
+      string,
+      VideoInfoResponse & {
+        downloadVideo?: DownloadState;
+        downloadAudioonly?: DownloadState;
+      }
+    >;
     error: string;
   };
 }
 
-export type DownloadFileType = 'video' | 'audioonly';
+export type DownloadFileType = "video" | "audioonly";
 
 export type DownloadParameter = {
   videoId: string;
   userId: string;
   title: string;
   filter: DownloadFileType;
+  cancelToken?: CancelToken;
 };
 
 export interface DownloadResponse {

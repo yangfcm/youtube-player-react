@@ -1,7 +1,13 @@
 import { AxiosResponse } from "axios";
 import { appAxios, firebaseAxios } from "../../settings/api";
 import { MAX_RESULTS_24, PART_SNIPPET_STATS } from "../../settings/constant";
-import { VideoInfoResponse, VideoResponse, VideosResponse, DownloadParameter, DownloadResponse } from "./types";
+import {
+  VideoInfoResponse,
+  VideoResponse,
+  VideosResponse,
+  DownloadParameter,
+  DownloadResponse,
+} from "./types";
 
 export async function fetchVideosAPI(
   options: Record<string, string> = {}
@@ -26,21 +32,28 @@ export async function fetchVideoAPI(
   });
 }
 
-export async function fetchVideoInfoAPI(videoId: string): Promise<AxiosResponse<VideoInfoResponse>> {
+export async function fetchVideoInfoAPI(
+  videoId: string
+): Promise<AxiosResponse<VideoInfoResponse>> {
   return await firebaseAxios.get(`/videoinfo/${videoId}`);
-};
+}
 
 export async function downloadVideoAPI({
   videoId,
   userId,
   title,
   filter = "video",
+  cancelToken,
 }: DownloadParameter): Promise<AxiosResponse<DownloadResponse>> {
-  const response = await firebaseAxios.post(`/download/`, {
-    videoId,
-    userId,
-    title,
-    filter,
-  });
+  const response = await firebaseAxios.post(
+    `/download/`,
+    {
+      videoId,
+      userId,
+      title,
+      filter,
+    },
+    { cancelToken }
+  );
   return response;
 }
