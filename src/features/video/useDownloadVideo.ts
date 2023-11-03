@@ -21,7 +21,7 @@ export function useDownloadVideo({
     return () => {
       cancelTokenSource.cancel(DOWNLOAD_CANCELD_ERROR);
     };
-  }, [cancelTokenSource]);
+  }, []);
 
   const downloadState = useSelector(
     (state: RootState) => getVideoDownloadState(state, { videoId, filter }),
