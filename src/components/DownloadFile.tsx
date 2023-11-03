@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -22,13 +22,19 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
   const [fileType, setFileType] = useState<DownloadFileType>('video');
 
   const user = useProfile();
-  const { url, isUrlExpired, status, error, downloadVideo } = useDownloadVideo({
+  const { url, isUrlExpired, status, error, downloadVideo, expiredAt } = useDownloadVideo({
     videoId: video.videoId,
     title: video.title,
     userId: user?.id || '',
     filter: fileType,
   });
   const isDownloading = status === AsyncStatus.LOADING;
+  const checkDownloadable = useCallback((e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    // Not downloading if link is expired.
+    if (Date.now() > (expiredAt || 0) || !url) {
+      e.preventDefault();
+    }
+  }, [expiredAt, url]);
 
   return (
     <RequireAuth showLoginButton={false}>
@@ -51,6 +57,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
               size="large"
               color="secondary"
               sx={{ width: '140px' }}
+              onClick={checkDownloadable}
             >
               Download
             </Button> :
@@ -77,6 +84,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
               size="large"
               color="secondary"
               sx={{ width: '140px' }}
+              onClick={checkDownloadable}
             >
               Download
             </Button> :
