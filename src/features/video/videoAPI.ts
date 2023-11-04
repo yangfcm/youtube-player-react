@@ -7,6 +7,7 @@ import {
   VideosResponse,
   DownloadParameter,
   DownloadResponse,
+  ProgressResponse,
 } from "./types";
 
 export async function fetchVideosAPI(
@@ -45,7 +46,7 @@ export async function downloadVideoAPI({
   filter = "video",
   cancelToken,
 }: DownloadParameter): Promise<AxiosResponse<DownloadResponse>> {
-  const response = await firebaseAxios.post(
+  return await firebaseAxios.post(
     `/download/`,
     {
       videoId,
@@ -55,5 +56,18 @@ export async function downloadVideoAPI({
     },
     { cancelToken }
   );
-  return response;
+}
+
+export async function getDownloadProgressAPI({
+  videoId,
+  userId,
+  filter,
+}: Pick<DownloadParameter, "videoId" | "userId" | "filter">): Promise<
+  AxiosResponse<ProgressResponse>
+> {
+  return await firebaseAxios.post("/progress", {
+    videoId,
+    userId,
+    filter,
+  });
 }

@@ -13,7 +13,9 @@ export const usePoll = (
 ) => {
   const { interval } = config;
   useEffect(() => {
-    const pollInterval = setInterval(callback, interval);
+    const pollInterval = setInterval(async () => {
+      await callback();
+    }, interval);
     return () => clearInterval(pollInterval);
   }, [callback, interval, deps]);
 };

@@ -153,3 +153,8 @@ export interface DownloadResponse {
   url: string;
   expiredAt: number;
 }
+
+export interface ProgressResponse {
+  bytesRead: number;
+  totalBytes: number;
+}

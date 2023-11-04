@@ -16,9 +16,11 @@ export function useVideo(videoId?: string) {
 
   useEffect(() => {
     if (videoId && !video) {
+      console.log("fetch video!");
       dispatch(fetchVideo(videoId));
     }
-  }, [videoId, video, dispatch]);
+    // eslint-disable-next-line
+  }, [videoId]);
 
   return {
     status: asyncStatus,
