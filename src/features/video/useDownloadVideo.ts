@@ -34,6 +34,14 @@ export function useDownloadVideo({
   }, []);
 
   useEffect(() => {
+    // When filter/fileType is changed, set progress as 0.
+    if (progress !== 0) {
+      setProgress(0);
+    }
+    // eslint-disable-next-line
+  }, [filter]);
+
+  useEffect(() => {
     const unsubscribe = onSnapshot(
       doc(db, "downloadProgress", `${videoId}_${userId}_${filter}`),
       (doc) => {
@@ -54,7 +62,7 @@ export function useDownloadVideo({
     );
     return () => unsubscribe();
     // eslint-disable-next-line
-  }, [status, videoId]);
+  }, [status, videoId, filter]);
 
   const downloadVideo = useCallback(() => {
     dispatch(
