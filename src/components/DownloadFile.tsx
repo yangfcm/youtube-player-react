@@ -29,7 +29,6 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
     userId: user?.id || '',
     filter: fileType,
   });
-  console.log(downloadProgress);
   const isDownloading = status === AsyncStatus.LOADING;
   const checkDownloadable = useCallback((e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     // Not downloading if link is expired.
