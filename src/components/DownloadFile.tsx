@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -18,6 +19,7 @@ import { VideoInfoResponse } from '../features/video/types';
 import { DownloadFileType } from '../features/video/types';
 import { useDownloadVideo } from '../features/video/useDownloadVideo';
 import { AsyncStatus } from '../settings/types';
+import { DownloadLink } from './DownloadLink';
 
 export function DownloadFile({ video }: { video: VideoInfoResponse }) {
   const [fileType, setFileType] = useState<DownloadFileType>('video');
@@ -40,71 +42,74 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
   return (
     <RequireAuth showLoginButton={false}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-        <FormControl>
-          <FormLabel>Download as</FormLabel>
-          <RadioGroup row defaultValue="video" onChange={e => setFileType(e.target.value as DownloadFileType)}>
-            <FormControlLabel value="video" control={<Radio />} label="Video" disabled={isDownloading} />
-            <FormControlLabel value="audioonly" control={<Radio />} label="Audio" disabled={isDownloading} />
-          </RadioGroup>
-        </FormControl>
-        {fileType === 'video' &&
-          <>
-            {url && !isUrlExpired ? <Button
-              href={url}
-              download
-              startIcon={<DownloadIcon />}
-              variant="contained"
-              size="large"
-              color="secondary"
-              sx={{ width: '140px' }}
-              onClick={checkDownloadable}
-            >
-              Download
-            </Button> :
-              <LoadingButton
-                loading={isDownloading}
-                onClick={downloadVideo}
-                variant="outlined"
+      <Box>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+          <FormControl>
+            <FormLabel>Download as</FormLabel>
+            <RadioGroup row defaultValue="video" onChange={e => setFileType(e.target.value as DownloadFileType)}>
+              <FormControlLabel value="video" control={<Radio />} label="Video" disabled={isDownloading} />
+              <FormControlLabel value="audioonly" control={<Radio />} label="Audio" disabled={isDownloading} />
+            </RadioGroup>
+          </FormControl>
+          {fileType === 'video' &&
+            <>
+              {url && !isUrlExpired ? <Button
+                href={url}
+                download
+                startIcon={<DownloadIcon />}
+                variant="contained"
                 size="large"
                 color="secondary"
-                startIcon={<VideoFileIcon />}
                 sx={{ width: '140px' }}
-                loadingIndicator={<CircularPercentProgress value={downloadProgress} color="inherit" />}
+                onClick={checkDownloadable}
               >
-                Fetch
-              </LoadingButton>}
-          </>
-        }
-        {fileType === 'audioonly' &&
-          <>
-            {url && !isUrlExpired ? <Button
-              href={url}
-              download
-              startIcon={<DownloadIcon />}
-              variant="contained"
-              size="large"
-              color="secondary"
-              sx={{ width: '140px' }}
-              onClick={checkDownloadable}
-            >
-              Download
-            </Button> :
-              <LoadingButton
-                loading={isDownloading}
-                onClick={downloadVideo}
-                variant="outlined"
+                Download
+              </Button> :
+                <LoadingButton
+                  loading={isDownloading}
+                  onClick={downloadVideo}
+                  variant="outlined"
+                  size="large"
+                  color="secondary"
+                  startIcon={<VideoFileIcon />}
+                  sx={{ width: '140px' }}
+                  loadingIndicator={<CircularPercentProgress value={downloadProgress} color="inherit" />}
+                >
+                  Fetch
+                </LoadingButton>}
+            </>
+          }
+          {fileType === 'audioonly' &&
+            <>
+              {url && !isUrlExpired ? <Button
+                href={url}
+                download
+                startIcon={<DownloadIcon />}
+                variant="contained"
                 size="large"
                 color="secondary"
-                startIcon={<AudioFileIcon />}
                 sx={{ width: '140px' }}
-                loadingIndicator={<CircularPercentProgress value={downloadProgress} color="inherit" />}
+                onClick={checkDownloadable}
               >
-                Fetch
-              </LoadingButton>}
-          </>
-        }
-      </Stack>
+                Download
+              </Button> :
+                <LoadingButton
+                  loading={isDownloading}
+                  onClick={downloadVideo}
+                  variant="outlined"
+                  size="large"
+                  color="secondary"
+                  startIcon={<AudioFileIcon />}
+                  sx={{ width: '140px' }}
+                  loadingIndicator={<CircularPercentProgress value={downloadProgress} color="inherit" />}
+                >
+                  Fetch
+                </LoadingButton>}
+            </>
+          }
+        </Stack> 
+        <DownloadLink videoId={video.videoId} />
+      </Box>
     </RequireAuth>
   );
 }
