@@ -34,20 +34,24 @@ export function useDownloadVideo({
   }, []);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(doc(db, "video", videoId), (doc) => {
-      const data = doc.data() as { progress: number };
-      if (status === AsyncStatus.IDLE || status === AsyncStatus.FAIL) {
-        setProgress(0);
-      }
-      if (status === AsyncStatus.LOADING) {
-        if (data?.progress > progress) {
+    const unsubscribe = onSnapshot(
+      doc(db, "downloadProgress", `${videoId}_${userId}_${filter}`),
+      (doc) => {
+        const data = doc.data() as { progress: number };
+        if (
+          (status === AsyncStatus.IDLE || status === AsyncStatus.FAIL) &&
+          progress !== 0
+        ) {
+          setProgress(0);
+        }
+        if (status === AsyncStatus.LOADING && data?.progress > progress) {
           setProgress(data.progress);
         }
+        if (status === AsyncStatus.SUCCESS && progress !== 100) {
+          setProgress(100);
+        }
       }
-      if (status === AsyncStatus.SUCCESS) {
-        setProgress(100);
-      }
-    });
+    );
     return () => unsubscribe();
     // eslint-disable-next-line
   }, [status, videoId]);

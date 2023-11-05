@@ -11,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { RequireAuth } from '../components/RequireAuth';
+import { CircularPercentProgress } from './CircularPercentProgress';
 import { ErrorMessage } from './ErrorMessage';
 import { useProfile } from '../features/user/useProfile';
 import { VideoInfoResponse } from '../features/video/types';
@@ -70,6 +71,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
                 color="secondary"
                 startIcon={<VideoFileIcon />}
                 sx={{ width: '140px' }}
+                loadingIndicator={<CircularPercentProgress value={downloadProgress} color="inherit" />}
               >
                 Fetch
               </LoadingButton>}
@@ -97,6 +99,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
                 color="secondary"
                 startIcon={<AudioFileIcon />}
                 sx={{ width: '140px' }}
+                loadingIndicator={<CircularPercentProgress value={downloadProgress} color="inherit" />}
               >
                 Fetch
               </LoadingButton>}
