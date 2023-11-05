@@ -16,6 +16,7 @@ import { formatNumber, fromNow, getSearchString } from "../app/utils";
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from '../components/RelatedVideos';
 import { DownloadFile } from '../components/DownloadFile';
+import { DownloadLink } from '../components/DownloadLink';
 
 export function Video() {
   const { id = "" } = useParams();
@@ -54,6 +55,7 @@ export function Video() {
             </Box>
             <DownloadFile video={video} />
           </Stack>
+          <DownloadLink videoId={id} />
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.description}</Typography>
           <Box sx={{ my: 2 }}>
