@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL, LOCATION_API_URL } from "./constant";
+import { API_BASE_URL, LOCATION_API_URL, FIREBASE_SERVER_URL } from "./constant";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -25,3 +25,7 @@ export const locationAxios = axios.create({
   baseURL: LOCATION_API_URL,
   timeout: 3000,
 });
+
+export const firebaseAxios = axios.create({
+  baseURL: FIREBASE_SERVER_URL
+})

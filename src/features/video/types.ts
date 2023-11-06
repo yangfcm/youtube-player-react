@@ -1,3 +1,4 @@
+import { CancelToken } from "axios";
 import { AsyncStatus } from "../../settings/types";
 
 export interface Thumbnail {
@@ -20,6 +21,10 @@ export interface Snippet {
     maxres?: Thumbnail;
     medium?: Thumbnail;
     standard?: Thumbnail;
+  };
+  resourceId?: {
+    kind: string;
+    videoId: string;
   };
 }
 
@@ -72,6 +77,53 @@ export interface VideosSnippetResponse {
   prevPageToken?: string;
 }
 
+export interface RelatedVideo {
+  videoId: string;
+  title: string;
+  publishedAt: string;
+  lengthSeconds?: number;
+  viewCount?: string;
+  shortViewCountText?: string;
+  thumbnail: string;
+  channelId: string;
+  channelTitle: string;
+  channelThumbnail?: string;
+}
+
+export interface VideoInfoResponse {
+  videoId: string;
+  title: string;
+  description: string | null;
+  publishedAt: string;
+  thumbnails: Thumbnail[];
+  tags: string[];
+  lengthSeconds: number;
+  isFamilySafe: boolean;
+  isLiveContent: boolean;
+  viewCount: string;
+  channelId: string;
+  channelTitle: string;
+  channelThumbnail: string;
+  channelSubscribeCount?: number;
+  relatedVideos: RelatedVideo[];
+  videoFormats: {
+    quality: string;
+    qualityLabel: string;
+    fileSize: string;
+  }[];
+  audioFormats: {
+    audioBitrate: string;
+    fileSize: string;
+  }[];
+}
+
+export interface DownloadState {
+  url?: string;
+  expiredAt?: number;
+  status?: AsyncStatus;
+  error?: string;
+}
+
 export interface VideoState {
   videos: {
     status: AsyncStatus;
@@ -80,7 +132,33 @@ export interface VideoState {
   };
   video: {
     status: AsyncStatus;
-    item: Record<string, VideoSnippetStats>;
+    item: Record<
+      string,
+      VideoInfoResponse & {
+        downloadVideo?: DownloadState;
+        downloadAudioonly?: DownloadState;
+      }
+    >;
     error: string;
   };
+}
+
+export type DownloadFileType = "video" | "audioonly";
+
+export type DownloadParameter = {
+  videoId: string;
+  userId: string;
+  title: string;
+  filter: DownloadFileType;
+  cancelToken?: CancelToken;
+};
+
+export interface DownloadResponse {
+  url: string;
+  expiredAt: number;
+}
+
+export interface ProgressResponse {
+  bytesRead: number;
+  totalBytes: number;
 }

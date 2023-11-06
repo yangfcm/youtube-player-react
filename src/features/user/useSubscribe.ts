@@ -61,8 +61,7 @@ export function useSubscribe(channelId: string) {
       try {
         setStatus(AsyncStatus.LOADING);
         setError("");
-        const response = await unsubscribeChannelAPI(subscriptionId);
-        console.log(response);
+        await unsubscribeChannelAPI(subscriptionId);
         dispatch(
           unsubscribed({
             channelId,

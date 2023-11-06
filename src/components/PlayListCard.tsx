@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
 import CardContent from "@mui/material/CardContent";
 import placeholder from "../images/placeholder-item.jpg";
+import { LazyImage } from "./LazyImage";
 
 type PlaylistPropsType = {
   id: string;
@@ -17,11 +18,10 @@ export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
   return (
     <Card>
       <Link to={`/playlist/${id}`}>
-        <img
+        <LazyImage
           src={imageUrl || placeholder}
-          alt={title}
-          title={title}
           style={{ width: "100%", height: "auto" }}
+          ratio="3:2"
         />
       </Link>
       <CardContent>

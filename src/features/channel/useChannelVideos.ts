@@ -11,8 +11,16 @@ export function useChannelVideos(channelId: string) {
   );
   const error = useSelector((state: RootState) => state.channel.videos.error);
 
-  const channelVideos = useSelector(
-    (state: RootState) => state.channel.videos.data[channelId]?.items
+  const channelVideos = useSelector((state: RootState) =>
+    state.channel.videos.data[channelId]?.items.map((item) => ({
+      ...item,
+      id: item.snippet.resourceId || {},
+    }))
+  );
+  const uploadPlaylistId = useSelector(
+    (state: RootState) =>
+      state.channel.profile.data[channelId]?.contentDetails.relatedPlaylists
+        .uploads
   );
   const nextPageToken = useSelector(
     (state: RootState) => state.channel.videos.data[channelId]?.nextPageToken
@@ -24,16 +32,17 @@ export function useChannelVideos(channelId: string) {
         fetchChannelVideos({
           channelId,
           pageToken: nextPageToken,
+          uploadPlaylistId,
         })
       );
     }
-  }, [dispatch, nextPageToken, channelId]);
+  }, [dispatch, nextPageToken, channelId, uploadPlaylistId]);
 
   useEffect(() => {
-    if (channelId && !channelVideos) {
-      dispatch(fetchChannelVideos({ channelId }));
+    if (channelId && !channelVideos && uploadPlaylistId) {
+      dispatch(fetchChannelVideos({ channelId, uploadPlaylistId }));
     }
-  }, [channelId, channelVideos, dispatch]);
+  }, [channelId, channelVideos, dispatch, uploadPlaylistId]);
 
   return {
     channelVideos,

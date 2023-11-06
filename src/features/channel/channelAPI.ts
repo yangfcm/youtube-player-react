@@ -4,7 +4,7 @@ import {
   MAX_RESULTS_24,
   PART_SNIPPET,
   PART_SNIPPET_CONTENT_STATUS,
-  PART_SNIPPET_STATS_BRANDING,
+  PART_SNIPPET_CONTENT_STATS_BRANDING,
 } from "../../settings/constant";
 import { PlayListsResponse } from "../playlist/types";
 import { VideosSnippetResponse } from "../video/types";
@@ -16,21 +16,20 @@ export async function fetchChannelProfileAPI(
   return await appAxios.get("/channels", {
     params: {
       id: channelId,
-      part: PART_SNIPPET_STATS_BRANDING,
+      part: PART_SNIPPET_CONTENT_STATS_BRANDING,
     },
   });
 }
 
 export async function fetchChannelVideosAPI(
   channelId: string,
+  uploadPlaylistId: string,
   options: Record<string, string> = {}
 ): Promise<AxiosResponse<VideosSnippetResponse>> {
-  return await appAxios.get("/search", {
+  return await appAxios.get("/playlistItems", {
     params: {
-      channelId,
+      playlistId: uploadPlaylistId,
       part: PART_SNIPPET,
-      order: "date",
-      type: "video",
       maxResults: MAX_RESULTS_24,
       ...options,
     },

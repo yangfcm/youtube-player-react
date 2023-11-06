@@ -18,7 +18,8 @@ export function useVideo(videoId?: string) {
     if (videoId && !video) {
       dispatch(fetchVideo(videoId));
     }
-  }, [videoId, video, dispatch]);
+    // eslint-disable-next-line
+  }, [videoId]);
 
   return {
     status: asyncStatus,
