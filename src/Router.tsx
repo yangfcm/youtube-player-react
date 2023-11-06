@@ -9,6 +9,7 @@ import { PlayListVideos } from "./pages/PlayListVideos";
 import { Channel } from "./pages/Channel";
 import { ChannelVideos } from "./pages/ChannelVideos";
 import { ChannelPlayLists } from "./pages/ChannelPlayLists";
+import { ChannelProfile } from "./pages/ChannelProfile";
 import { PopularVideos } from "./pages/PopularVideos";
 import { NotFound } from "./pages/NotFound";
 import { useAuth } from "./features/user/useAuth";
@@ -32,6 +33,7 @@ export function Router() {
         <Route index element={<Navigate replace to="videos" />} />
         <Route path="videos" element={<ChannelVideos />} />
         <Route path="playlists" element={<ChannelPlayLists />} />
+        <Route path="about" element={<ChannelProfile />} />
       </Route>
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />

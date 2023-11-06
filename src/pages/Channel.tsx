@@ -64,6 +64,12 @@ export function Channel() {
             label="Playlists"
             value="playlists"
           />
+          <Tab
+            component={Link}
+            to="./about"
+            label="About"
+            value="abouc"
+          />
         </Tabs>
         <Outlet />
       </Box>
