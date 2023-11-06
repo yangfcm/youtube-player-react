@@ -11,8 +11,11 @@ export function useChannelVideos(channelId: string) {
   );
   const error = useSelector((state: RootState) => state.channel.videos.error);
 
-  const channelVideos = useSelector(
-    (state: RootState) => state.channel.videos.data[channelId]?.items
+  const channelVideos = useSelector((state: RootState) =>
+    state.channel.videos.data[channelId]?.items.map((item) => ({
+      ...item,
+      id: item.snippet.resourceId || {},
+    }))
   );
   const uploadPlaylistId = useSelector(
     (state: RootState) =>

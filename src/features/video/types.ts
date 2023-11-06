@@ -22,6 +22,10 @@ export interface Snippet {
     medium?: Thumbnail;
     standard?: Thumbnail;
   };
+  resourceId?: {
+    kind: string;
+    videoId: string;
+  };
 }
 
 export interface Statistics {
