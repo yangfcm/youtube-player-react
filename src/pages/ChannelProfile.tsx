@@ -8,7 +8,7 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useChannelProfile } from "../features/channel/useChannelProfile";
-import { formatNumber } from "../app/utils";
+import { formatNumber, formatDate } from "../app/utils";
 
 function ProfileTitle({ children }: { children: React.ReactNode }){
   return (
@@ -34,7 +34,7 @@ export function ChannelProfile() {
   return (
     <Box sx={{px: 2, pt: 1, pb: 4}}>
       <ProfileTitle>
-        <AccessTimeIcon />&nbsp;Joined on {channelProfile.snippet.publishedAt.toString()}
+        <AccessTimeIcon />&nbsp;Joined on {formatDate(channelProfile.snippet.publishedAt)}
       </ProfileTitle>
       <ProfileTitle>
         <VideoLibraryIcon />&nbsp;{formatNumber(parseInt(channelProfile.statistics.videoCount))} videos

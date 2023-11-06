@@ -68,7 +68,7 @@ export function Channel() {
             component={Link}
             to="./about"
             label="About"
-            value="abouc"
+            value="about"
           />
         </Tabs>
         <Outlet />
