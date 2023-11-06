@@ -55,6 +55,11 @@ export interface ChannelDetails {
       bannerExternalUrl?: string;
     };
   };
+  contentDetails: {
+    relatedPlaylists: {
+      uploads: string;
+    };
+  };
 }
 
 export interface ChannelDetailsResponse {
