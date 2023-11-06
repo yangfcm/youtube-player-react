@@ -46,7 +46,7 @@ export function Channel() {
                 id,
                 title: channelProfile.snippet.title,
                 imageUrl: channelProfile.snippet.thumbnails.medium?.url,
-                description: channelProfile.snippet.description,
+                // description: channelProfile.snippet.description,
               }}
             />
           </>
