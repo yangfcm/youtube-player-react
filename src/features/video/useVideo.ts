@@ -16,7 +16,6 @@ export function useVideo(videoId?: string) {
 
   useEffect(() => {
     if (videoId && !video) {
-      console.log("fetch video!");
       dispatch(fetchVideo(videoId));
     }
     // eslint-disable-next-line
