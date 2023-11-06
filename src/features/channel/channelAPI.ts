@@ -23,14 +23,13 @@ export async function fetchChannelProfileAPI(
 
 export async function fetchChannelVideosAPI(
   channelId: string,
+  uploadPlaylistId: string,
   options: Record<string, string> = {}
 ): Promise<AxiosResponse<VideosSnippetResponse>> {
-  return await appAxios.get("/search", {
+  return await appAxios.get("/playlistItems", {
     params: {
-      channelId,
+      playlistId: uploadPlaylistId,
       part: PART_SNIPPET,
-      order: "date",
-      type: "video",
       maxResults: MAX_RESULTS_24,
       ...options,
     },

@@ -43,10 +43,15 @@ export const fetchChannelProfile = createAsyncThunk(
 
 export const fetchChannelVideos = createAsyncThunk(
   "channel/fetchChannelVideos",
-  async (args: { channelId: string; pageToken?: string }) => {
-    const { channelId, pageToken } = args;
+  async (args: {
+    channelId: string;
+    uploadPlaylistId: string;
+    pageToken?: string;
+  }) => {
+    const { channelId, pageToken, uploadPlaylistId } = args;
     const response = await fetchChannelVideosAPI(
       channelId,
+      uploadPlaylistId,
       pageToken ? { pageToken } : {}
     );
     return response;
@@ -106,7 +111,7 @@ export const channelSlice = createSlice({
         meta: { arg },
       }: {
         payload: AxiosResponse<VideosSnippetResponse>;
-        meta: { arg: { channelId: string } };
+        meta: { arg: { channelId: string; uploadPlaylistId: string } };
       }
     ) => {
       const { channelId } = arg;
