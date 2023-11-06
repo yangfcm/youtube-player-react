@@ -5,6 +5,8 @@ const MONTH = DAY * 30;
 const YEAR = DAY * 365;
 
 export function fromNow(time: Date | number | string): string {
+  if (typeof time === "string" && isNaN(new Date(time).getTime())) return time; // If argument time is not a representation of date time, return it as it is.
+
   let then = 0;
   if (typeof time === "number") {
     then = time;
