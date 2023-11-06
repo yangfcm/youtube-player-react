@@ -86,7 +86,7 @@ export function VideoCard({ video }: { video: VideoTypeProps }) {
           <>
             {viewCount && formatNumber(parseInt(viewCount)) + " views"}{" "}
             {viewCount && publishedAt && "• "}
-            {publishedAt && ( publishedAt instanceof Date ? fromNow(publishedAt) : publishedAt )}
+            {publishedAt && fromNow(publishedAt)}
           </>
         </Typography>
       </CardContent>
