@@ -23,7 +23,7 @@ export function GoogleAuthProvider({
       gapi.client
         .init({
           clientId: process.env.REACT_APP_CLIENT_ID,
-          scope: "openid ",
+          scope: "openid email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl",
         })
         .then(() => {
           setLoading(false);
