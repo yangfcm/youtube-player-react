@@ -46,7 +46,7 @@ export function Channel() {
                 id,
                 title: channelProfile.snippet.title,
                 imageUrl: channelProfile.snippet.thumbnails.medium?.url,
-                description: channelProfile.snippet.description,
+                // description: channelProfile.snippet.description,
               }}
             />
           </>
@@ -63,6 +63,12 @@ export function Channel() {
             to="./playlists"
             label="Playlists"
             value="playlists"
+          />
+          <Tab
+            component={Link}
+            to="./about"
+            label="About"
+            value="about"
           />
         </Tabs>
         <Outlet />

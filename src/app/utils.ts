@@ -5,6 +5,8 @@ const MONTH = DAY * 30;
 const YEAR = DAY * 365;
 
 export function fromNow(time: Date | number | string): string {
+  if (typeof time === "string" && isNaN(new Date(time).getTime())) return time; // If argument time is not a representation of date time, return it as it is.
+
   let then = 0;
   if (typeof time === "number") {
     then = time;
@@ -73,4 +75,13 @@ export const getSearchString = (search: string, key: string) => {
     }
   }
   return value;
+};
+
+export const formatDate = (date: string | Date) => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-based
+  const day = String(d.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 };

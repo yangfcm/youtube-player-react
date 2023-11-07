@@ -1,10 +1,11 @@
 import Box from "@mui/material/Box";
+import Grid from '@mui/material/Grid';
 import { ErrorMessage } from "./ErrorMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { MoreButton } from "./MoreButton";
 import { AsyncStatus } from "../settings/types";
 import { usePlaylistVideos } from "../features/playlist/usePlaylistVideos";
-import { VideoItem } from "./VideoItem";
+import { VideoCard } from "./VideoCard";
 import { NoContent } from "./NoContent";
 
 export function PlayListVideos({ playlistId }: { playlistId: string }) {
@@ -28,21 +29,25 @@ export function PlayListVideos({ playlistId }: { playlistId: string }) {
             No videos in the playlist or playlist is unavailable.
           </NoContent>
         )}
-      {playlistVideos.map((video) => (
-        <Box key={video.contentDetails.videoId} sx={{ mb: 1 }}>
-          <VideoItem
-            video={{
-              id: video.contentDetails.videoId,
-              title: video.snippet.title,
-              imageUrl: video.snippet.thumbnails?.high?.url || "",
-              publishedAt: video.contentDetails.videoPublishedAt,
-              channelTitle: video.snippet.videoOwnerChannelTitle,
-              channelId: video.snippet.videoOwnerChannelId,
-              playlistId,
-            }}
-          />
-        </Box>
-      ))}
+      {/* <Typography variant="h5">
+        More videos in the playlist
+      </Typography> */}
+      <Grid container spacing={2}>
+        {playlistVideos.map((video) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={video.contentDetails.videoId}>
+            <VideoCard
+              video={{
+                id: video.contentDetails.videoId,
+                title: video.snippet.title,
+                imageUrl: video.snippet.thumbnails?.high?.url || "",
+                publishedAt: video.contentDetails.videoPublishedAt,
+                channelTitle: video.snippet.videoOwnerChannelTitle,
+                channelId: video.snippet.videoOwnerChannelId,
+              }}
+            />
+          </Grid>
+        ))}
+      </Grid>
       {hasMore && (
         <MoreButton
           loading={status === AsyncStatus.LOADING}

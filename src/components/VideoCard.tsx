@@ -15,7 +15,7 @@ type VideoTypeProps = {
   channelTitle: string;
   imageUrl?: string;
   viewCount?: string;
-  publishedAt?: Date;
+  publishedAt?: Date | string;
 };
 
 export function VideoCard({ video }: { video: VideoTypeProps }) {
