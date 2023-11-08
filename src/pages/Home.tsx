@@ -15,8 +15,8 @@ export function Home() {
   //   useMostPopularVideos();
   const user = useProfile();
   const userId = user?.id || '';
-  const { videos, status, error, hasMore, fetchMore } = useTimeline(userId);
-  if (!videos.length && status === AsyncStatus.LOADING) {
+  const { videos, status, error, hasMore, fetchMore, meta } = useTimeline(userId);
+  if (!videos.length && (status === AsyncStatus.LOADING || meta?.loading ) ) {
     return <LoadingSpinner />;
   }
 

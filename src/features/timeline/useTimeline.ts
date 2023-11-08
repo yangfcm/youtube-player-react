@@ -31,20 +31,17 @@ export function useTimeline(userId: string) {
   useEffect(() => {
     if (!userId) return;
     const unsubscribe = onSnapshot(doc(db, "timeline", userId), (doc) => {
-      const newMeta = doc.data() as TimelineMetaData;
-      // console.log("fetch timeline!", doc.data());
-      if (!newMeta || meta?.totalCount === newMeta.totalCount) return;
-      // if (meta?.totalCount && newMeta.totalCount > meta.totalCount) {
-      //   const diff = newMeta.totalCount - meta.totalCount;
-      //   dispatch(fetchTimeline({ userId, maxResults: diff, way: "TOP" }));
-      // } else {
-      //   dispatch(fetchTimeline({ userId }));
-      // }
-      dispatch(fetchTimeline({ userId }));
-      dispatch(setTimelineMetaData(newMeta));
+      const meta = doc.data() as TimelineMetaData;
+      dispatch(setTimelineMetaData(meta));
     });
     return () => unsubscribe();
+    // eslint-disable-next-line
+  }, [userId]);
+
+  useEffect(() => {
+    if (!userId || !meta?.totalCount) return;
+    dispatch(fetchTimeline({ userId }));
   }, [userId, dispatch, meta?.totalCount]);
 
-  return { videos, status, error, hasMore, fetchMore };
+  return { videos, status, error, hasMore, fetchMore, meta };
 }

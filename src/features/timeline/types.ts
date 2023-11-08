@@ -21,4 +21,5 @@ export interface TimelineState {
 export interface TimelineMetaData {
   totalCount: number;
   updatedAt: number;
+  loading: boolean;
 }
