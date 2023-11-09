@@ -70,7 +70,6 @@ export function GoogleAuthProvider({
   }, [signin, signout, setGoogleAuthEnabled, gapi]);
 
   if (loading) {
-    console.log('google loading!');
     return <LoadingSpinner />;
   }
 
