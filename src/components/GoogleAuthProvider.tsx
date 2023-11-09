@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { gapi } from "gapi-script";
+import { loadGapiInsideDOM  } from "gapi-script";
 import { GapiLoadError } from "../settings/types";
 import { ErrorMessage } from "./ErrorMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
@@ -13,8 +13,14 @@ export function GoogleAuthProvider({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { signin, signout, setGoogleAuthEnabled } = useAuth();
+  const [gapi, setGapi] = useState<any>();
 
   useEffect(() => {
+    const initGapi = async() => {
+      setLoading(true);
+      const gapi = await loadGapiInsideDOM();
+      setGapi(gapi);
+    }
     const initClient = async () => {
       gapi?.client
         .init({
@@ -55,11 +61,16 @@ export function GoogleAuthProvider({
       setLoading(false);
       setError("");
     };
-    setLoading(true);
-    gapi?.load("client:auth2", initClient);
-  }, [signin, signout, setGoogleAuthEnabled]);
+
+    initGapi();
+    if(gapi) {
+      setLoading(true);
+      gapi?.load("client:auth2", initClient);
+    }
+  }, [signin, signout, setGoogleAuthEnabled, gapi]);
 
   if (loading) {
+    console.log('google loading!');
     return <LoadingSpinner />;
   }
 
