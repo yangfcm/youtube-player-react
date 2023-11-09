@@ -16,11 +16,7 @@ export function GoogleAuthProvider({
 
   useEffect(() => {
     const initClient = async () => {
-      if(!gapi?.client?.init) {
-        return;
-      }
-      setLoading(true);
-      gapi.client
+      gapi?.client
         .init({
           clientId: process.env.REACT_APP_CLIENT_ID,
           scope: "openid email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl",
@@ -35,8 +31,8 @@ export function GoogleAuthProvider({
           setGoogleAuthEnabled(false);
           return;
         });
-      const googleAuth = await gapi.auth2.getAuthInstance();
-      const isSignedIn = googleAuth.isSignedIn.get();
+      const googleAuth = await gapi?.auth2.getAuthInstance();
+      const isSignedIn = googleAuth?.isSignedIn.get();
       if (isSignedIn) {
         const currentUser = googleAuth.currentUser.get();
         const authResponse = currentUser.getAuthResponse();
@@ -59,10 +55,13 @@ export function GoogleAuthProvider({
       setLoading(false);
       setError("");
     };
-    gapi.load("client:auth2", initClient);
+    setLoading(true);
+    gapi?.load("client:auth2", initClient);
   }, [signin, signout, setGoogleAuthEnabled]);
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
