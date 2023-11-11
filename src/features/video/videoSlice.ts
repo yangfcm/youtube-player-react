@@ -2,6 +2,7 @@ import {
   createAsyncThunk,
   createSlice,
   SerializedError,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
@@ -11,6 +12,8 @@ import {
   VideoInfoResponse,
   DownloadResponse,
   DownloadParameter,
+  DownloadState,
+  DownloadFileType,
 } from "./types";
 import {
   fetchVideosAPI,
@@ -61,7 +64,26 @@ export const downloadVideo = createAsyncThunk(
 const videoSlice = createSlice({
   name: "video",
   initialState,
-  reducers: {},
+  reducers: {
+    setDownloadState: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        videoId: string;
+        filter: DownloadFileType;
+        downloadState: Partial<DownloadState>;
+      }>
+    ) => {
+      const { videoId, downloadState, filter } = payload;
+      const videoItem = state.video.item[videoId];
+      if (!videoItem) return;
+      const key =
+        filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
+      const currentState = videoItem[key] || {};
+      videoItem[key] = { ...currentState, ...downloadState };
+    },
+  },
   extraReducers: (builder) => {
     const fetchVideoStart = (state: VideoState) => {
       state.video.status = AsyncStatus.LOADING;
@@ -194,5 +216,7 @@ const videoSlice = createSlice({
       .addCase(downloadVideo.rejected, downloadVideoFailed);
   },
 });
+
+export const { setDownloadState } = videoSlice.actions;
 
 export const videoReducer = videoSlice.reducer;
