@@ -10,7 +10,6 @@ import {
   VideosResponse,
   VideoState,
   VideoInfoResponse,
-  DownloadResponse,
   DownloadParameter,
   DownloadState,
   DownloadFileType,
@@ -20,10 +19,7 @@ import {
   fetchVideoInfoAPI,
   downloadVideoAPI,
 } from "./videoAPI";
-import {
-  DEFAULT_ERROR_MESSAGE,
-  DOWNLOAD_CANCELD_ERROR,
-} from "../../settings/constant";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: VideoState = {
   videos: {
@@ -142,78 +138,13 @@ const videoSlice = createSlice({
       state.videos.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
-    const downloadVideoStart = (
-      state: VideoState,
-      {
-        meta: { arg },
-      }: {
-        meta: { arg: DownloadParameter };
-      }
-    ) => {
-      const videoItem = state.video.item[arg.videoId];
-      if (!videoItem) return;
-      const key =
-        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
-      videoItem[key] = {
-        status: AsyncStatus.LOADING,
-        error: "",
-      };
-    };
-    const downloadVideoFailed = (
-      state: VideoState,
-      {
-        error,
-        meta: { arg },
-      }: { error: SerializedError; meta: { arg: DownloadParameter } }
-    ) => {
-      const videoItem = state.video.item[arg.videoId];
-      if (!videoItem) return;
-      const key =
-        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
-      if (error.message === DOWNLOAD_CANCELD_ERROR) {
-        videoItem[key] = {
-          status: AsyncStatus.IDLE,
-          error: "",
-        };
-        return;
-      }
-      videoItem[key] = {
-        status: AsyncStatus.FAIL,
-        error: error.message || DEFAULT_ERROR_MESSAGE,
-      };
-    };
-    const downloadVideoSuccess = (
-      state: VideoState,
-      {
-        payload,
-        meta: { arg },
-      }: {
-        payload: AxiosResponse<DownloadResponse>;
-        meta: { arg: DownloadParameter };
-      }
-    ) => {
-      const videoItem = state.video.item[arg.videoId];
-      if (!videoItem) return;
-      const key =
-        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
-      videoItem[key] = {
-        status: AsyncStatus.SUCCESS,
-        error: "",
-        url: payload.data.url,
-        expiredAt: payload.data.expiredAt,
-      };
-    };
-
     builder
       .addCase(fetchVideo.pending, fetchVideoStart)
       .addCase(fetchVideo.fulfilled, fetchVideoSuccess)
       .addCase(fetchVideo.rejected, fetchVideoFailed)
       .addCase(fetchVideos.pending, fetchVideosStart)
       .addCase(fetchVideos.fulfilled, fetchVideosSuccess)
-      .addCase(fetchVideos.rejected, fetchVideosFailed)
-      .addCase(downloadVideo.pending, downloadVideoStart)
-      .addCase(downloadVideo.fulfilled, downloadVideoSuccess)
-      .addCase(downloadVideo.rejected, downloadVideoFailed);
+      .addCase(fetchVideos.rejected, fetchVideosFailed);
   },
 });
 
