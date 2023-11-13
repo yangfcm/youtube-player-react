@@ -7,13 +7,15 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
 import { VideoComments } from "../components/VideoComments";
 import { PlayListVideos } from "../components/PlayListVideos";
-import { formatNumber, fromNow, getSearchString } from "../app/utils";
+import { formatNumber, fromNow, getSearchString, formatLengthFromSeconds } from "../app/utils";
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from '../components/RelatedVideos';
 import { DownloadFile } from '../components/DownloadFile';
@@ -37,6 +39,13 @@ export function Video() {
           <VideoPlayer videoId={id} />
           <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
             {video.title}
+            &nbsp;
+            <Chip
+              label={formatLengthFromSeconds(video.lengthSeconds)}
+              variant="outlined"
+              icon={<AccessTimeIcon />}
+              size="small"
+            />
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between">
             <Box sx={{ flexGrow: 1 }}>

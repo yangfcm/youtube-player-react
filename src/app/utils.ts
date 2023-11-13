@@ -85,3 +85,12 @@ export const formatDate = (date: string | Date) => {
 
   return `${year}-${month}-${day}`;
 };
+
+export const formatLengthFromSeconds = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+  let formatted = minutes + ":" + remainingSeconds;
+  if (hours > 0) formatted = hours + ":" + formatted;
+  return formatted;
+};
