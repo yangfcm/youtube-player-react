@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
@@ -39,14 +40,17 @@ export function Video() {
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between">
             <Box sx={{ flexGrow: 1 }}>
-              <MuiLink
-                component={Link}
-                to={`/channel/${video.channelId}`}
-                underline="hover"
-                variant="body1"
-              >
-                {video.channelTitle}
-              </MuiLink>
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Avatar sx={{ width: 40, height: 40 }} src={video.channelThumbnail} />
+                <MuiLink
+                  component={Link}
+                  to={`/channel/${video.channelId}`}
+                  underline="hover"
+                  variant="body1"
+                >
+                  {video.channelTitle}
+                </MuiLink>
+              </Stack>
               <Typography variant="body1" sx={{ my: 1 }}>
                 {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
                 {fromNow(video.publishedAt)}
