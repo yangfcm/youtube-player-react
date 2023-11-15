@@ -1,12 +1,16 @@
 import { AxiosResponse } from "axios";
-import { appAxios } from "../../settings/api";
+import { appAxios, googleAuthAxios } from "../../settings/api";
 import {
   MAX_RESULTS_24,
   PART_SNIPPET,
   PART_SNIPPET_CONTENT_STATUS,
 } from "../../settings/constant";
 import { PlayListsResponse } from "../playlist/types";
-import { SubscriptionSnippet, SubscriptionsResponse } from "./types";
+import {
+  SubscriptionSnippet,
+  SubscriptionsResponse,
+  UserInfoResponse,
+} from "./types";
 
 export async function fetchSubscriptionsAPI(
   options?: Record<string, string>
@@ -90,4 +94,14 @@ export async function unsubscribeChannelAPI(
     },
   });
   return subscriptionId;
+}
+
+export async function fetchUserByTokenAPI(
+  token: string
+): Promise<AxiosResponse<UserInfoResponse>> {
+  return await googleAuthAxios.get("/", {
+    params: {
+      access_token: token,
+    },
+  });
 }
