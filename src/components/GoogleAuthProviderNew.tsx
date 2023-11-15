@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef, createContext } from "react";
+import { useAuth } from "../features/user/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
 
 export type GsiResponse = {
@@ -25,6 +26,7 @@ export function GoogleAuthProviderNew({
 }) {
 
   const [gsiScriptLoaded, setGsiScriptLoaded] = useState(false);
+  const { setToken, fetchUserByToken } = useAuth();
   const client = useRef<any>(null);
 
   const initializeGsi = useCallback(() => {
@@ -35,10 +37,11 @@ export function GoogleAuthProviderNew({
       client_id: process.env.REACT_APP_CLIENT_ID,
       scope: 'https://www.googleapis.com/auth/userinfo.profile',
       callback: (res: GsiAuthResponse) => {
-        console.log(res);
+        setToken(res.access_token, Date.now() + res.expires_in * 1000);
+        fetchUserByToken(res.access_token);
       }
     })
-  },[gsiScriptLoaded]);
+  },[gsiScriptLoaded, setToken, fetchUserByToken]);
   
   useEffect(() =>{
     const script = document.createElement('script');

@@ -97,7 +97,10 @@ const userSlice = createSlice({
       state.expiresAt = expiresAt;
     },
     signout: (state) => {
-      state.profile.data = undefined;
+      state.profile = {
+        status: AsyncStatus.IDLE,
+        error: "",
+      };
       state.token = "";
       state.expiresAt = 0;
       state.subscriptions = {
@@ -225,10 +228,10 @@ const userSlice = createSlice({
       state.profile.status = AsyncStatus.SUCCESS;
       state.profile.error = "";
       const {
-        data: { email, family_name, given_name, name, picture },
+        data: { email, family_name, given_name, name, picture, sub },
       } = payload;
       state.profile.data = {
-        id: "",
+        id: sub,
         email,
         username: name,
         lastName: family_name,
