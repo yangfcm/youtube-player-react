@@ -1,5 +1,10 @@
 import axios from "axios";
-import { API_BASE_URL, LOCATION_API_URL, FIREBASE_SERVER_URL } from "./constant";
+import {
+  API_BASE_URL,
+  LOCATION_API_URL,
+  FIREBASE_SERVER_URL,
+  GOOGLE_AUTH_API_URL,
+} from "./constant";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -27,5 +32,9 @@ export const locationAxios = axios.create({
 });
 
 export const firebaseAxios = axios.create({
-  baseURL: FIREBASE_SERVER_URL
-})
+  baseURL: FIREBASE_SERVER_URL,
+});
+
+export const googleAuthAxios = axios.create({
+  baseURL: GOOGLE_AUTH_API_URL,
+});
