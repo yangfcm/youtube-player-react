@@ -5,6 +5,8 @@ import {
   signin as signinAction,
   signout as signoutAction,
   setGoogleAuthEnabled as setGoogleAuthEnabledAction,
+  setToken as setTokenAction,
+  fetchUserByToken as fetchUserByTokenAction,
 } from "./userSlice";
 import { resetTimeline } from "../timeline/timelineSlice";
 import { UserProfile } from "./types";
@@ -43,6 +45,21 @@ export function useAuth() {
     dispatch(signoutAction());
   }, [dispatch]);
 
+  const setToken = useCallback(
+    (token: string, expiresAt: number) => {
+      localStorage.setItem("token", "Bearer " + token);
+      dispatch(setTokenAction({ token, expiresAt }));
+    },
+    [dispatch]
+  );
+
+  const fetchUserByToken = useCallback(
+    (token: string) => {
+      dispatch(fetchUserByTokenAction(token));
+    },
+    [dispatch]
+  );
+
   return {
     isSignedIn,
     token,
@@ -50,5 +67,7 @@ export function useAuth() {
     signin,
     signout,
     setGoogleAuthEnabled,
+    setToken,
+    fetchUserByToken,
   };
 }
