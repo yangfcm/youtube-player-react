@@ -88,6 +88,14 @@ const userSlice = createSlice({
       state.token = "Bearer " + token;
       state.expiresAt = expiresAt;
     },
+    setToken: (
+      state,
+      { payload }: PayloadAction<{ token: string; expiresAt: number }>
+    ) => {
+      const { token, expiresAt } = payload;
+      state.token = "Bearer " + token;
+      state.expiresAt = expiresAt;
+    },
     signout: (state) => {
       state.profile.data = undefined;
       state.token = "";
@@ -250,6 +258,7 @@ const userSlice = createSlice({
 
 export const {
   signin,
+  setToken,
   signout,
   setGoogleAuthEnabled,
   receiveSubscriptionId,
