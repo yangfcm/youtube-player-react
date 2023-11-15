@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, createContext } from "react";
 import { LoadingSpinner } from "./LoadingSpinner";
 
 export type GsiResponse = {
@@ -16,6 +16,8 @@ export type GsiAuthResponse = {
   token_type: string
 }
 
+export const GoogleAuthContext = createContext<{client: any} | undefined>(undefined);
+
 export function GoogleAuthProviderNew({
   children,
 }: {
@@ -27,7 +29,6 @@ export function GoogleAuthProviderNew({
 
   const initializeGsi = useCallback(() => {
     const { google } = window as any;
-    console.log('initialize gsi', google,);
     if(!google || gsiScriptLoaded) return;
     setGsiScriptLoaded(true);
     client.current = google.accounts.oauth2.initTokenClient({
@@ -37,7 +38,6 @@ export function GoogleAuthProviderNew({
         console.log(res);
       }
     })
-    
   },[gsiScriptLoaded]);
   
   useEffect(() =>{
@@ -47,13 +47,13 @@ export function GoogleAuthProviderNew({
     script.async = true;
     script.id = 'google-client-script';
     document.querySelector('body')?.appendChild(script);
-  }, []);
+  }, [initializeGsi]);
 
   if(!gsiScriptLoaded) {
     return <LoadingSpinner />;
   }
 
   return (
-    <>{children}</>
+    <GoogleAuthContext.Provider value={{client: client.current}}>{children}</GoogleAuthContext.Provider>
   )
 }

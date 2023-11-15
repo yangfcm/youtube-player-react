@@ -15,7 +15,7 @@ export function useAuth() {
 
   const isSignedIn = useSelector(({ user }: RootState) => {
     const isExpired = Date.now() > user.expiresAt;
-    return !!(user.profile?.id && user.token && !isExpired);
+    return !!(user.profile.data?.id && user.token && !isExpired);
   });
 
   const token = useSelector((state: RootState) => state.user.token);

@@ -55,7 +55,11 @@ export interface UserProfile {
 }
 
 export interface UserState {
-  profile: UserProfile | null;
+  profile: {
+    status: AsyncStatus;
+    error: string;
+    data?: UserProfile;
+  };
   token: string;
   expiresAt: number;
   subscriptions: {

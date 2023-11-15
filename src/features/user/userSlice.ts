@@ -19,11 +19,15 @@ import {
   fetchPlayListsAPI,
   fetchSubscriptionIdAPI,
   fetchSubscriptionsAPI,
+  fetchUserByTokenAPI,
 } from "./userAPI";
 import { DEFAULT_ERROR_MESSAGE, UNSUBSCRIBED } from "../../settings/constant";
 
 const initialState: UserState = {
-  profile: null,
+  profile: {
+    status: AsyncStatus.IDLE,
+    error: "",
+  },
   token: "",
   expiresAt: 0,
   subscriptions: {
@@ -62,6 +66,13 @@ export const fetchSubscriptionId = createAsyncThunk(
   }
 );
 
+export const fetchUserByToken = createAsyncThunk(
+  "user/fetchUserByToken",
+  async (token: string) => {
+    return await fetchUserByTokenAPI(token);
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -72,12 +83,12 @@ const userSlice = createSlice({
         payload: { user, token, expiresAt },
       }: PayloadAction<{ user: UserProfile; token: string; expiresAt: number }>
     ) => {
-      state.profile = user;
+      state.profile.data = user;
       state.token = "Bearer " + token;
       state.expiresAt = expiresAt;
     },
     signout: (state) => {
-      state.profile = null;
+      state.profile.data = undefined;
       state.token = "";
       state.expiresAt = 0;
       state.subscriptions = {

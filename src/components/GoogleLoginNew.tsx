@@ -1,13 +1,17 @@
- 
+ import { useContext } from 'react';
+ import { GoogleAuthContext } from './GoogleAuthProviderNew';
+
 export function GoogleLoginNew() { 
 
+  const context = useContext(GoogleAuthContext);
+  console.log(context);
+
+  const handleLogin = () => {
+    if(!context) return;
+    context.client.requestAccessToken();
+  }
+
   return (
-    <div className="g_id_signin" 
-        data-type="standard"
-        data-size="large"
-        data-theme="outline"
-        data-text="sign_in_with"
-        data-shape="rectangular"
-        data-logo_alignment="left">Login</div>
+    <button onClick={handleLogin}>Login with Google</button>
   )
 }
