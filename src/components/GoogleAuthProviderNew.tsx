@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef, createContext } from "react";
 import { useAuth } from "../features/user/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
+import { ErrorMessage } from "./ErrorMessage";
 
 export type GsiResponse = {
   client_id: string
@@ -25,14 +26,18 @@ export function GoogleAuthProviderNew({
   children: React.ReactNode;
 }) {
 
-  const [gsiScriptLoaded, setGsiScriptLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { setToken, fetchUserByToken } = useAuth();
   const client = useRef<any>(null);
 
   const initializeGsi = useCallback(() => {
     const { google } = window as any;
-    if(!google || gsiScriptLoaded) return;
-    setGsiScriptLoaded(true);
+    if(!google) {
+      setLoading(false);
+      setError('Google Auth is enabled');
+    };
+    setLoading(false);
     client.current = google.accounts.oauth2.initTokenClient({
       client_id: process.env.REACT_APP_CLIENT_ID,
       scope: 'openid email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl',
@@ -41,9 +46,10 @@ export function GoogleAuthProviderNew({
         fetchUserByToken(res.access_token);
       }
     })
-  },[gsiScriptLoaded, setToken, fetchUserByToken]);
+  },[setToken, fetchUserByToken]);
   
   useEffect(() =>{
+    setLoading(true);
     const script = document.createElement('script');
     script.src = 'https://accounts.google.com/gsi/client';
     script.onload = initializeGsi;
@@ -52,11 +58,14 @@ export function GoogleAuthProviderNew({
     document.querySelector('body')?.appendChild(script);
   }, [initializeGsi]);
 
-  if(!gsiScriptLoaded) {
+  if(loading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <GoogleAuthContext.Provider value={{client: client.current}}>{children}</GoogleAuthContext.Provider>
+    <>
+      <ErrorMessage open={!!error}>{error}</ErrorMessage>
+      <GoogleAuthContext.Provider value={{client: client.current}}>{children}</GoogleAuthContext.Provider>
+    </>
   )
 }

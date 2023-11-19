@@ -10,10 +10,11 @@ export function GoogleLogout() {
   };
 
   return (
-    <GoogleLoginBase
-      isLoggedIn={true}
-      onSuccess={handleSignOut}
-      buttonText="Log out"
-    />
+    <button onClick={handleSignOut}>Log out</button>
+    // <GoogleLoginBase
+    //   isLoggedIn={true}
+    //   onSuccess={handleSignOut}
+    //   buttonText="Log out"
+    // />
   );
 }
