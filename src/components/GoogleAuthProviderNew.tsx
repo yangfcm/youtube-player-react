@@ -35,7 +35,7 @@ export function GoogleAuthProviderNew({
     setGsiScriptLoaded(true);
     client.current = google.accounts.oauth2.initTokenClient({
       client_id: process.env.REACT_APP_CLIENT_ID,
-      scope: 'https://www.googleapis.com/auth/userinfo.profile',
+      scope: 'openid email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl',
       callback: (res: GsiAuthResponse) => {
         setToken(res.access_token, Date.now() + res.expires_in * 1000);
         fetchUserByToken(res.access_token);
