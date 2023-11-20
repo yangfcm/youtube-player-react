@@ -46,8 +46,8 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
           <FormControl>
             <FormLabel>Download as</FormLabel>
-            <RadioGroup row defaultValue="video" onChange={e => setFileType(e.target.value as DownloadFileType)}>
-              <FormControlLabel value="video" control={<Radio />} label="Video" disabled={isDownloading} />
+            <RadioGroup row defaultValue="videoandaudio" onChange={e => setFileType(e.target.value as DownloadFileType)}>
+              <FormControlLabel value="videoandaudio" control={<Radio />} label="Video" disabled={isDownloading} />
               <FormControlLabel value="audioonly" control={<Radio />} label="Audio" disabled={isDownloading} />
             </RadioGroup>
           </FormControl>
