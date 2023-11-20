@@ -1,5 +1,7 @@
- import { useContext } from 'react';
- import { GoogleAuthContext } from './GoogleAuthProviderNew';
+ import { useContext } from "react";
+ import Button from "@mui/material/Button";
+ import GoogleIcon from '@mui/icons-material/Google';
+ import { GoogleAuthContext } from "./GoogleAuthProviderNew";
 
 export function GoogleLoginNew() { 
 
@@ -12,6 +14,11 @@ export function GoogleLoginNew() {
   }
 
   return (
-    <button onClick={handleLogin}>Login with Google</button>
+    <Button
+      variant="outlined"
+      color="inherit"
+      startIcon={<GoogleIcon />}
+      onClick={handleLogin}
+    >Login</Button>
   )
 }

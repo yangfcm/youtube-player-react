@@ -1,4 +1,5 @@
-import { GoogleLoginBase } from "./GoogleLoginBase";
+import Button from '@mui/material/Button';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useAuth } from "../features/user/useAuth";
 
 export function GoogleLogout() {
@@ -10,11 +11,12 @@ export function GoogleLogout() {
   };
 
   return (
-    <button onClick={handleSignOut}>Log out</button>
-    // <GoogleLoginBase
-    //   isLoggedIn={true}
-    //   onSuccess={handleSignOut}
-    //   buttonText="Log out"
-    // />
+    <Button
+      onClick={handleSignOut}
+      color="inherit"
+      variant="outlined"
+      fullWidth
+      startIcon={<ExitToAppIcon />}
+    >Log out</Button>
   );
 }
