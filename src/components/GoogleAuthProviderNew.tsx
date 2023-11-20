@@ -27,6 +27,7 @@ export function GoogleAuthProviderNew({
 }) {
 
   const [gsiLoaded, setGsiLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
   // const [error, setError] = useState('');
   const [client, setClient] = useState<any>();
   const { setToken, fetchUserByToken, signout } = useAuth();
@@ -61,15 +62,17 @@ export function GoogleAuthProviderNew({
       const expiresAt = Number(localStorage.getItem('expiresAt'));
       if(!token || isNaN(expiresAt) || Date.now() > expiresAt) {
         signout();
+        setLoading(false);
         return;
       }
       setToken(token, expiresAt);
       fetchUserByToken(token);
+      setLoading(false);
     }
     // eslint-disable-next-line
   }, [gsiLoaded]);
 
-  if(!gsiLoaded) {
+  if(loading) {
     return <LoadingSpinner />;
   }
 
