@@ -41,7 +41,7 @@ export async function downloadVideoAPI({
   videoId,
   userId,
   title,
-  filter = "video",
+  filter = "videoandaudio",
   cancelToken,
 }: DownloadParameter): Promise<AxiosResponse<unknown>> {
   // The endpoint triggers downloading in the background. We don't really care what it returns.

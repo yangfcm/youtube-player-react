@@ -143,7 +143,7 @@ export interface VideoState {
   };
 }
 
-export type DownloadFileType = "video" | "audioonly";
+export type DownloadFileType = "videoandaudio" | "audioonly";
 
 export type DownloadParameter = {
   videoId: string;
