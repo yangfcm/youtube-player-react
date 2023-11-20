@@ -6,7 +6,6 @@
 export function GoogleLoginNew() { 
 
   const context = useContext(GoogleAuthContext);
-  console.log(context);
 
   const handleLogin = () => {
     if(!context) return;

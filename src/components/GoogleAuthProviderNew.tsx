@@ -1,6 +1,9 @@
 import { useEffect, useState, useCallback, createContext } from "react";
+import { doc, setDoc } from 'firebase/firestore';
 import { useAuth } from "../features/user/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
+import { useProfile } from "../features/user/useProfile";
+import { db } from "../settings/firebaseConfig";
 // import { ErrorMessage } from "./ErrorMessage";
 
 export type GsiResponse = {
@@ -30,8 +33,9 @@ export function GoogleAuthProviderNew({
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState('');
   const [client, setClient] = useState<any>();
-  const { setToken, fetchUserByToken, signout } = useAuth();
+  const { token, setToken, fetchUserByToken, signout } = useAuth();
   // const client = useRef<any>(null);
+  const profile = useProfile();
 
   const initializeGsi = useCallback(() => {
     const { google } = window as any;
@@ -71,6 +75,16 @@ export function GoogleAuthProviderNew({
     }
     // eslint-disable-next-line
   }, [gsiLoaded]);
+
+  useEffect(() => {
+    if(profile && token) {
+      setDoc(doc(db, 'users', profile.id), {
+        ...profile,
+        accessToken: token.replace("Bearer ", ""),
+        lastLogin: Date.now(),
+      }, { merge: true })
+    }
+  }, [profile, token]);
 
   if(loading) {
     return <LoadingSpinner />;
