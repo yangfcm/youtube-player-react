@@ -17,7 +17,7 @@ export function useAuth() {
 
   const isSignedIn = useSelector(({ user }: RootState) => {
     const isExpired = Date.now() > user.expiresAt;
-    return !!(user.profile.data?.id && user.token && !isExpired);
+    return !!user.token && !isExpired;
   });
 
   const token = useSelector((state: RootState) => state.user.token);
@@ -48,6 +48,7 @@ export function useAuth() {
   const setToken = useCallback(
     (token: string, expiresAt: number) => {
       localStorage.setItem("token", "Bearer " + token);
+      localStorage.setItem("expiresAt", expiresAt.toString());
       dispatch(setTokenAction({ token, expiresAt }));
     },
     [dispatch]

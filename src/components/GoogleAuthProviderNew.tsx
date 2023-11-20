@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback, useRef, createContext } from "react";
+import { useEffect, useState, useCallback, createContext } from "react";
 import { useAuth } from "../features/user/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
-import { ErrorMessage } from "./ErrorMessage";
+// import { ErrorMessage } from "./ErrorMessage";
 
 export type GsiResponse = {
   client_id: string
@@ -26,30 +26,27 @@ export function GoogleAuthProviderNew({
   children: React.ReactNode;
 }) {
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const { setToken, fetchUserByToken } = useAuth();
-  const client = useRef<any>(null);
+  const [gsiLoaded, setGsiLoaded] = useState(false);
+  // const [error, setError] = useState('');
+  const [client, setClient] = useState<any>();
+  const { setToken, fetchUserByToken, signout } = useAuth();
+  // const client = useRef<any>(null);
 
   const initializeGsi = useCallback(() => {
     const { google } = window as any;
-    if(!google) {
-      setLoading(false);
-      setError('Google Auth is enabled');
-    };
-    setLoading(false);
-    client.current = google.accounts.oauth2.initTokenClient({
+    const client = google.accounts.oauth2.initTokenClient({
       client_id: process.env.REACT_APP_CLIENT_ID,
       scope: 'openid email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl',
       callback: (res: GsiAuthResponse) => {
         setToken(res.access_token, Date.now() + res.expires_in * 1000);
         fetchUserByToken(res.access_token);
       }
-    })
+    });
+    setClient(client);
+    setGsiLoaded(true);
   },[setToken, fetchUserByToken]);
   
   useEffect(() =>{
-    setLoading(true);
     const script = document.createElement('script');
     script.src = 'https://accounts.google.com/gsi/client';
     script.onload = initializeGsi;
@@ -58,14 +55,28 @@ export function GoogleAuthProviderNew({
     document.querySelector('body')?.appendChild(script);
   }, [initializeGsi]);
 
-  if(loading) {
+  useEffect(() => {
+    if(gsiLoaded) {
+      const token = localStorage.getItem('token')?.replace('Bearer ', '') || '';
+      const expiresAt = Number(localStorage.getItem('expiresAt'));
+      if(!token || isNaN(expiresAt) || Date.now() > expiresAt) {
+        signout();
+        return;
+      }
+      setToken(token, expiresAt);
+      fetchUserByToken(token);
+    }
+    // eslint-disable-next-line
+  }, [gsiLoaded]);
+
+  if(!gsiLoaded) {
     return <LoadingSpinner />;
   }
 
   return (
     <>
-      <ErrorMessage open={!!error}>{error}</ErrorMessage>
-      <GoogleAuthContext.Provider value={{client: client.current}}>{children}</GoogleAuthContext.Provider>
+      {/* <ErrorMessage open={!!error}>{error}</ErrorMessage> */}
+      <GoogleAuthContext.Provider value={{ client }}>{children}</GoogleAuthContext.Provider>
     </>
   )
 }

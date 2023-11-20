@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Subscriptions } from "./pages/Subscriptions";
 import { SearchResults } from "./pages/SearchResults";
@@ -12,14 +11,8 @@ import { ChannelPlayLists } from "./pages/ChannelPlayLists";
 import { ChannelProfile } from "./pages/ChannelProfile";
 import { PopularVideos } from "./pages/PopularVideos";
 import { NotFound } from "./pages/NotFound";
-import { useAuth } from "./features/user/useAuth";
 
 export function Router() {
-  const location = useLocation();
-  const { isSignedIn, signout } = useAuth();
-  useEffect(() => {
-    if(!isSignedIn) signout();
-  }, [location, signout, isSignedIn]);
 
   return (
     <Routes>
