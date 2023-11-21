@@ -24,7 +24,7 @@ export function Home() {
     <RequireAuth>      
       <Box sx={{ pb: 2 }}>
         <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-        {status === AsyncStatus.SUCCESS && videos.length === 0 && (
+        {(status === AsyncStatus.SUCCESS || status === AsyncStatus.IDLE) && videos.length === 0 && (
           <NoContent> Your feed is empty.</NoContent>
         )}
         <Grid container spacing={2} sx={{ pb: 2 }}>
@@ -46,7 +46,7 @@ export function Home() {
               );
             })}
         </Grid>
-        {hasMore && (
+        {hasMore && !videos.length && (
           <MoreButton
             loading={status===AsyncStatus.LOADING}
             onClick={fetchMore}
