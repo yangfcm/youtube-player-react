@@ -46,7 +46,7 @@ export function Home() {
               );
             })}
         </Grid>
-        {hasMore && !videos.length && (
+        {hasMore && (
           <MoreButton
             loading={status===AsyncStatus.LOADING}
             onClick={fetchMore}
