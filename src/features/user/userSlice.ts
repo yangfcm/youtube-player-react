@@ -14,16 +14,21 @@ import {
   SubscriptionsResponse,
   UserState,
   UserProfile,
+  UserInfoResponse,
 } from "./types";
 import {
   fetchPlayListsAPI,
   fetchSubscriptionIdAPI,
   fetchSubscriptionsAPI,
+  fetchUserByTokenAPI,
 } from "./userAPI";
 import { DEFAULT_ERROR_MESSAGE, UNSUBSCRIBED } from "../../settings/constant";
 
 const initialState: UserState = {
-  profile: null,
+  profile: {
+    status: AsyncStatus.IDLE,
+    error: "",
+  },
   token: "",
   expiresAt: 0,
   subscriptions: {
@@ -62,6 +67,13 @@ export const fetchSubscriptionId = createAsyncThunk(
   }
 );
 
+export const fetchUserByToken = createAsyncThunk(
+  "user/fetchUserByToken",
+  async (token: string) => {
+    return await fetchUserByTokenAPI(token);
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -72,12 +84,23 @@ const userSlice = createSlice({
         payload: { user, token, expiresAt },
       }: PayloadAction<{ user: UserProfile; token: string; expiresAt: number }>
     ) => {
-      state.profile = user;
+      state.profile.data = user;
+      state.token = "Bearer " + token;
+      state.expiresAt = expiresAt;
+    },
+    setToken: (
+      state,
+      { payload }: PayloadAction<{ token: string; expiresAt: number }>
+    ) => {
+      const { token, expiresAt } = payload;
       state.token = "Bearer " + token;
       state.expiresAt = expiresAt;
     },
     signout: (state) => {
-      state.profile = null;
+      state.profile = {
+        status: AsyncStatus.IDLE,
+        error: "",
+      };
       state.token = "";
       state.expiresAt = 0;
       state.subscriptions = {
@@ -194,18 +217,51 @@ const userSlice = createSlice({
       state.playlists.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
+    const fetchUserByTokenStart = (state: UserState) => {
+      state.profile.status = AsyncStatus.LOADING;
+      state.profile.error = "";
+    };
+    const fetchUserByTokenSuccess = (
+      state: UserState,
+      { payload }: { payload: AxiosResponse<UserInfoResponse> }
+    ) => {
+      state.profile.status = AsyncStatus.SUCCESS;
+      state.profile.error = "";
+      const {
+        data: { email, family_name, given_name, name, picture, sub },
+      } = payload;
+      state.profile.data = {
+        id: sub,
+        email,
+        username: name,
+        lastName: family_name,
+        firstName: given_name,
+        avatar: picture,
+      };
+    };
+    const fetchUserByTokenFailed = (
+      state: UserState,
+      { error }: { error: SerializedError }
+    ) => {
+      state.profile.status = AsyncStatus.FAIL;
+      state.profile.error = error.message || "Failed to login";
+    };
     builder
       .addCase(fetchSubscriptions.pending, fetchSubscriptionsStart)
       .addCase(fetchSubscriptions.fulfilled, fetchSubscriptionsSuccess)
       .addCase(fetchSubscriptions.rejected, fetchSubscriptionsFailed)
       .addCase(fetchPlayLists.pending, fetchPlayListsStart)
       .addCase(fetchPlayLists.fulfilled, fetchPlayListsSuccess)
-      .addCase(fetchPlayLists.rejected, fetchPlayListsFailed);
+      .addCase(fetchPlayLists.rejected, fetchPlayListsFailed)
+      .addCase(fetchUserByToken.pending, fetchUserByTokenStart)
+      .addCase(fetchUserByToken.fulfilled, fetchUserByTokenSuccess)
+      .addCase(fetchUserByToken.rejected, fetchUserByTokenFailed);
   },
 });
 
 export const {
   signin,
+  setToken,
   signout,
   setGoogleAuthEnabled,
   receiveSubscriptionId,

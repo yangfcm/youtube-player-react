@@ -2,6 +2,7 @@ import {
   createAsyncThunk,
   createSlice,
   SerializedError,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
@@ -9,8 +10,9 @@ import {
   VideosResponse,
   VideoState,
   VideoInfoResponse,
-  DownloadResponse,
   DownloadParameter,
+  DownloadState,
+  DownloadFileType,
 } from "./types";
 import {
   fetchVideosAPI,
@@ -61,7 +63,26 @@ export const downloadVideo = createAsyncThunk(
 const videoSlice = createSlice({
   name: "video",
   initialState,
-  reducers: {},
+  reducers: {
+    setDownloadState: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        videoId: string;
+        filter: DownloadFileType;
+        downloadState: Partial<DownloadState>;
+      }>
+    ) => {
+      const { videoId, downloadState, filter } = payload;
+      const videoItem = state.video.item[videoId];
+      if (!videoItem) return;
+      const key =
+        filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
+      const currentState = videoItem[key] || {};
+      videoItem[key] = { ...currentState, ...downloadState };
+    },
+  },
   extraReducers: (builder) => {
     const fetchVideoStart = (state: VideoState) => {
       state.video.status = AsyncStatus.LOADING;
@@ -160,27 +181,6 @@ const videoSlice = createSlice({
         error: error.message || DEFAULT_ERROR_MESSAGE,
       };
     };
-    const downloadVideoSuccess = (
-      state: VideoState,
-      {
-        payload,
-        meta: { arg },
-      }: {
-        payload: AxiosResponse<DownloadResponse>;
-        meta: { arg: DownloadParameter };
-      }
-    ) => {
-      const videoItem = state.video.item[arg.videoId];
-      if (!videoItem) return;
-      const key =
-        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
-      videoItem[key] = {
-        status: AsyncStatus.SUCCESS,
-        error: "",
-        url: payload.data.url,
-        expiredAt: payload.data.expiredAt,
-      };
-    };
 
     builder
       .addCase(fetchVideo.pending, fetchVideoStart)
@@ -190,9 +190,10 @@ const videoSlice = createSlice({
       .addCase(fetchVideos.fulfilled, fetchVideosSuccess)
       .addCase(fetchVideos.rejected, fetchVideosFailed)
       .addCase(downloadVideo.pending, downloadVideoStart)
-      .addCase(downloadVideo.fulfilled, downloadVideoSuccess)
       .addCase(downloadVideo.rejected, downloadVideoFailed);
   },
 });
+
+export const { setDownloadState } = videoSlice.actions;
 
 export const videoReducer = videoSlice.reducer;

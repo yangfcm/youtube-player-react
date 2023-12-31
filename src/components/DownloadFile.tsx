@@ -22,7 +22,7 @@ import { AsyncStatus } from '../settings/types';
 import { DownloadLink } from './DownloadLink';
 
 export function DownloadFile({ video }: { video: VideoInfoResponse }) {
-  const [fileType, setFileType] = useState<DownloadFileType>('video');
+  const [fileType, setFileType] = useState<DownloadFileType>('videoandaudio');
 
   const user = useProfile();
   const { url, isUrlExpired, status, error, downloadVideo, expiredAt, downloadProgress } = useDownloadVideo({
@@ -46,12 +46,12 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
           <FormControl>
             <FormLabel>Download as</FormLabel>
-            <RadioGroup row defaultValue="video" onChange={e => setFileType(e.target.value as DownloadFileType)}>
-              <FormControlLabel value="video" control={<Radio />} label="Video" disabled={isDownloading} />
+            <RadioGroup row defaultValue="videoandaudio" onChange={e => setFileType(e.target.value as DownloadFileType)}>
+              <FormControlLabel value="videoandaudio" control={<Radio />} label="Video" disabled={isDownloading} />
               <FormControlLabel value="audioonly" control={<Radio />} label="Audio" disabled={isDownloading} />
             </RadioGroup>
           </FormControl>
-          {fileType === 'video' &&
+          {fileType === 'videoandaudio' &&
             <>
               {url && !isUrlExpired ? <Button
                 href={url}

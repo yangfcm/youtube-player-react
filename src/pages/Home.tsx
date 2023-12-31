@@ -15,8 +15,8 @@ export function Home() {
   //   useMostPopularVideos();
   const user = useProfile();
   const userId = user?.id || '';
-  const { videos, status, error, hasMore, fetchMore } = useTimeline(userId);
-  if (!videos.length && status === AsyncStatus.LOADING) {
+  const { videos, status, error, hasMore, fetchMore, meta } = useTimeline(userId);
+  if (!videos.length && (status === AsyncStatus.LOADING || meta?.loading ) ) {
     return <LoadingSpinner />;
   }
 
@@ -24,7 +24,7 @@ export function Home() {
     <RequireAuth>      
       <Box sx={{ pb: 2 }}>
         <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-        {status === AsyncStatus.SUCCESS && videos.length === 0 && (
+        {(status === AsyncStatus.SUCCESS || status === AsyncStatus.IDLE) && videos.length === 0 && (
           <NoContent> Your feed is empty.</NoContent>
         )}
         <Grid container spacing={2} sx={{ pb: 2 }}>

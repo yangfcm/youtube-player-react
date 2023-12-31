@@ -25,3 +25,5 @@ export const ALLOWED_COUNTRY_CODES = [
 export const FIREBASE_SERVER_URL =
   "https://australia-southeast1-player-3fb79.cloudfunctions.net/widgets";
 export const DOWNLOAD_CANCELD_ERROR = "Download is canceld.";
+export const GOOGLE_AUTH_API_URL =
+  "https://www.googleapis.com/oauth2/v3/userinfo";

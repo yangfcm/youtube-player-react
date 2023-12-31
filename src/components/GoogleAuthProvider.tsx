@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { gapi } from "gapi-script";
+import { loadGapiInsideDOM  } from "gapi-script";
 import { GapiLoadError } from "../settings/types";
 import { ErrorMessage } from "./ErrorMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
@@ -13,17 +13,19 @@ export function GoogleAuthProvider({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { signin, signout, setGoogleAuthEnabled } = useAuth();
+  const [gapi, setGapi] = useState<any>();
 
   useEffect(() => {
-    const initClient = async () => {
-      if(!gapi?.client?.init) {
-        return;
-      }
+    const initGapi = async() => {
       setLoading(true);
-      gapi.client
+      const gapi = await loadGapiInsideDOM();
+      setGapi(gapi);
+    }
+    const initClient = async () => {
+      gapi?.client
         .init({
           clientId: process.env.REACT_APP_CLIENT_ID,
-          scope: "openid ",
+          scope: "openid email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl",
         })
         .then(() => {
           setLoading(false);
@@ -35,8 +37,8 @@ export function GoogleAuthProvider({
           setGoogleAuthEnabled(false);
           return;
         });
-      const googleAuth = await gapi.auth2.getAuthInstance();
-      const isSignedIn = googleAuth.isSignedIn.get();
+      const googleAuth = await gapi?.auth2.getAuthInstance();
+      const isSignedIn = googleAuth?.isSignedIn.get();
       if (isSignedIn) {
         const currentUser = googleAuth.currentUser.get();
         const authResponse = currentUser.getAuthResponse();
@@ -59,10 +61,17 @@ export function GoogleAuthProvider({
       setLoading(false);
       setError("");
     };
-    gapi.load("client:auth2", initClient);
-  }, [signin, signout, setGoogleAuthEnabled]);
 
-  if (loading) return <LoadingSpinner />;
+    initGapi();
+    if(gapi) {
+      setLoading(true);
+      gapi?.load("client:auth2", initClient);
+    }
+  }, [signin, signout, setGoogleAuthEnabled, gapi]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>

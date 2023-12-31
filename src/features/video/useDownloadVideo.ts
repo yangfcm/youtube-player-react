@@ -3,7 +3,10 @@ import axios from "axios";
 import { doc, onSnapshot } from "firebase/firestore";
 import { shallowEqual, useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
-import { downloadVideo as downloadVideoAction } from "./videoSlice";
+import {
+  downloadVideo as downloadVideoAction,
+  setDownloadState,
+} from "./videoSlice";
 import { DownloadParameter } from "./types";
 import { RootState } from "../../app/store";
 import { getVideoDownloadState } from "./selectors";
@@ -63,6 +66,37 @@ export function useDownloadVideo({
     return () => unsubscribe();
     // eslint-disable-next-line
   }, [status, videoId, filter]);
+
+  useEffect(() => {
+    const statusArr: AsyncStatus[] = [
+      AsyncStatus.IDLE,
+      AsyncStatus.LOADING,
+      AsyncStatus.FAIL,
+      AsyncStatus.IDLE,
+      AsyncStatus.SUCCESS,
+    ];
+    const unsubscribe1 = onSnapshot(
+      doc(db, "download", `${videoId}_${userId}_${filter}`),
+      (doc) => {
+        const data = doc.data();
+        if (data) {
+          dispatch(
+            setDownloadState({
+              videoId,
+              filter,
+              downloadState: {
+                error: data.error,
+                url: data.downloadUrl,
+                expiredAt: data.expiredAt,
+                status: statusArr[data.status],
+              },
+            })
+          );
+        }
+      }
+    );
+    return () => unsubscribe1();
+  }, [dispatch, filter, userId, videoId]);
 
   const downloadVideo = useCallback(() => {
     dispatch(

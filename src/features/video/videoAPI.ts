@@ -6,8 +6,6 @@ import {
   VideoResponse,
   VideosResponse,
   DownloadParameter,
-  DownloadResponse,
-  ProgressResponse,
 } from "./types";
 
 export async function fetchVideosAPI(
@@ -43,9 +41,10 @@ export async function downloadVideoAPI({
   videoId,
   userId,
   title,
-  filter = "video",
+  filter = "videoandaudio",
   cancelToken,
-}: DownloadParameter): Promise<AxiosResponse<DownloadResponse>> {
+}: DownloadParameter): Promise<AxiosResponse<unknown>> {
+  // The endpoint triggers downloading in the background. We don't really care what it returns.
   return await firebaseAxios.post(
     `/download/`,
     {
@@ -56,18 +55,4 @@ export async function downloadVideoAPI({
     },
     { cancelToken }
   );
-}
-
-export async function getDownloadProgressAPI({
-  videoId,
-  userId,
-  filter,
-}: Pick<DownloadParameter, "videoId" | "userId" | "filter">): Promise<
-  AxiosResponse<ProgressResponse>
-> {
-  return await firebaseAxios.post("/progress", {
-    videoId,
-    userId,
-    filter,
-  });
 }

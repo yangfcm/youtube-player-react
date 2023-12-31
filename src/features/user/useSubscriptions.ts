@@ -10,7 +10,9 @@ export function useSubscriptions() {
     (state: RootState) => state.user.subscriptions
   );
   const nextPageToken = data?.nextPageToken;
-  const userId = useSelector((state: RootState) => state.user.profile?.id);
+  const userId = useSelector(
+    (state: RootState) => state.user.profile?.data?.id
+  );
 
   const fetchMore = useCallback(() => {
     if (nextPageToken) {
