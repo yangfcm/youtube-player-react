@@ -65,10 +65,13 @@ export function Video() {
                 {fromNow(video.publishedAt)}
               </Typography>
             </Box>
-            <DownloadFile video={video} />
           </Stack>
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.description}</Typography>
+          <Divider sx={{ my: 1 }} />
+          <Box>
+            <DownloadFile video={video} />
+          </Box>
           <Box sx={{ my: 2 }}>
             {playlistId ? <PlayListVideos playlistId={playlistId} /> : <RelatedVideos videos={video.relatedVideos} />}
           </Box>
