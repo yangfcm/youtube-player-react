@@ -21,6 +21,21 @@ import { RelatedVideos } from '../components/RelatedVideos';
 import { DownloadFile } from '../components/DownloadFile';
 
 export function Video() {
+  const { id= "" } = useParams();
+
+  if(!id) {
+    return <NoContent>The video isn't available.</NoContent>;
+  } 
+  
+  return (
+    <Box>
+      <VideoPlayer videoId={id} />
+      <VideoDataSection />
+    </Box>
+  )
+}
+
+export function VideoDataSection() {
   const { id = "" } = useParams();
   const location = useLocation();
   const playlistId = getSearchString(location.search, "playlistId");
@@ -36,7 +51,6 @@ export function Video() {
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <VideoPlayer videoId={id} />
           <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
             {video.title}
             &nbsp;
