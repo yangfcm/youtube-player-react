@@ -9,7 +9,6 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
@@ -19,6 +18,7 @@ import { formatNumber, fromNow, getSearchString, formatLengthFromSeconds } from 
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from '../components/RelatedVideos';
 import { DownloadFile } from '../components/DownloadFile';
+import { VideoDataLoader } from "../components/VideoDataLoader";
 
 export function Video() {
   const { id= "" } = useParams();
@@ -42,7 +42,7 @@ export function VideoDataSection() {
   const { video, status, error } = useVideo(id);
 
   if (status === AsyncStatus.IDLE) return null;
-  if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
+  if (status === AsyncStatus.LOADING) return <VideoDataLoader />;
   if (!video) {
     return <NoContent>The video isn't available.</NoContent>;
   }
