@@ -43,7 +43,7 @@ export function DownloadFile({ video }: { video: VideoInfoResponse }) {
     <RequireAuth showLoginButton={false}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Box>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+        <Stack direction="row" alignItems="center" spacing={1}>
           <FormControl>
             <FormLabel>Download as</FormLabel>
             <RadioGroup row defaultValue="videoandaudio" onChange={e => setFileType(e.target.value as DownloadFileType)}>

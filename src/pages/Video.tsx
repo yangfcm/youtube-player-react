@@ -9,7 +9,6 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
@@ -19,15 +18,31 @@ import { formatNumber, fromNow, getSearchString, formatLengthFromSeconds } from 
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from '../components/RelatedVideos';
 import { DownloadFile } from '../components/DownloadFile';
+import { VideoDataLoader } from "../components/VideoDataLoader";
 
 export function Video() {
+  const { id= "" } = useParams();
+
+  if(!id) {
+    return <NoContent>The video isn't available.</NoContent>;
+  } 
+  
+  return (
+    <Box>
+      <VideoPlayer videoId={id} />
+      <VideoDataSection />
+    </Box>
+  )
+}
+
+export function VideoDataSection() {
   const { id = "" } = useParams();
   const location = useLocation();
   const playlistId = getSearchString(location.search, "playlistId");
   const { video, status, error } = useVideo(id);
 
   if (status === AsyncStatus.IDLE) return null;
-  if (status === AsyncStatus.LOADING) return <LoadingSpinner />;
+  if (status === AsyncStatus.LOADING) return <VideoDataLoader />;
   if (!video) {
     return <NoContent>The video isn't available.</NoContent>;
   }
@@ -36,7 +51,6 @@ export function Video() {
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <VideoPlayer videoId={id} />
           <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
             {video.title}
             &nbsp;
@@ -65,10 +79,13 @@ export function Video() {
                 {fromNow(video.publishedAt)}
               </Typography>
             </Box>
-            <DownloadFile video={video} />
           </Stack>
           <Divider sx={{ my: 1 }} />
           <Typography variant="body2">{video.description}</Typography>
+          <Divider sx={{ my: 1 }} />
+          <Box>
+            <DownloadFile video={video} />
+          </Box>
           <Box sx={{ my: 2 }}>
             {playlistId ? <PlayListVideos playlistId={playlistId} /> : <RelatedVideos videos={video.relatedVideos} />}
           </Box>
