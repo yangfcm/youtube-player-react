@@ -1,4 +1,4 @@
-import { GoogleLoginNew } from "./GoogleLoginNew";
+import { GoogleLogin } from "./GoogleLogin";
 import { useAuth } from "../features/user/useAuth";
 
 export function RequireAuth({
@@ -11,7 +11,7 @@ export function RequireAuth({
   const { isSignedIn } = useAuth();
 
   if (!isSignedIn) {
-    return showLoginButton ? <GoogleLoginNew /> : null;
+    return showLoginButton ? <GoogleLogin /> : null;
   }
 
   return <>{children}</>;

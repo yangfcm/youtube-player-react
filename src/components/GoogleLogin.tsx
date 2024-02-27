@@ -1,45 +1,24 @@
-import { doc, setDoc } from "firebase/firestore";
-import { GoogleLoginBase, GoogleLoginResponse } from "./GoogleLoginBase";
-import { useAuth } from "../features/user/useAuth";
-import { db } from "../settings/firebaseConfig";
+import { useContext } from "react";
+import Button from "@mui/material/Button";
+import GoogleIcon from "@mui/icons-material/Google";
+import { GoogleAuthContext } from "./GoogleAuthProvider";
 
 export function GoogleLogin() {
-  const { signin, signout, isGoogleAuthEnabled } = useAuth();
+  const context = useContext(GoogleAuthContext);
 
-  const handleSuccessSignin = async (response?: GoogleLoginResponse) => {
-    const auth = (response as GoogleLoginResponse).getAuthResponse();
-    const userProfile = (response as GoogleLoginResponse).getBasicProfile();
-    const user = {
-      id: userProfile.getId(),
-      firstName: userProfile.getGivenName(),
-      lastName: userProfile.getFamilyName(),
-      email: userProfile.getEmail(),
-      avatar: userProfile.getImageUrl(),
-      username: userProfile.getName(),
-    };
-    signin(
-      user,
-      auth.access_token,
-      auth.expires_at
-    );
-    await setDoc(doc(db, 'users', user.id), {
-      ...user,
-      accessToken: auth.access_token,
-      lastLogin: (new Date()).getTime()
-    }, { merge: true });
-  };
-
-  const handleFailureSignin = () => {
-    signout();
+  const handleLogin = () => {
+    if (!context) return;
+    context.client.requestAccessToken();
   };
 
   return (
-    <GoogleLoginBase
-      disabled={!isGoogleAuthEnabled}
-      isLoggedIn={false}
-      buttonText="Log in"
-      onSuccess={handleSuccessSignin}
-      onFailure={handleFailureSignin}
-    />
+    <Button
+      variant="outlined"
+      color="inherit"
+      startIcon={<GoogleIcon />}
+      onClick={handleLogin}
+    >
+      Login
+    </Button>
   );
 }
