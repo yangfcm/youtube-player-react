@@ -75,8 +75,7 @@ export function GoogleAuthProvider({
       fetchUserByToken(token);
       setLoading(false);
     }
-    // eslint-disable-next-line
-  }, [gsiLoaded]);
+  }, [gsiLoaded, fetchUserByToken, setToken, signout]);
 
   useEffect(() => {
     if (profile && token) {
