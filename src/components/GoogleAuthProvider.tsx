@@ -31,10 +31,8 @@ export function GoogleAuthProvider({
 }) {
   const [gsiLoaded, setGsiLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState('');
   const [client, setClient] = useState<any>();
   const { token, setToken, fetchUserByToken, signout } = useAuth();
-  // const client = useRef<any>(null);
   const profile = useProfile();
 
   const initializeGsi = useCallback(() => {
@@ -97,7 +95,6 @@ export function GoogleAuthProvider({
 
   return (
     <>
-      {/* <ErrorMessage open={!!error}>{error}</ErrorMessage> */}
       <GoogleAuthContext.Provider value={{ client }}>
         {children}
       </GoogleAuthContext.Provider>
