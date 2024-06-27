@@ -7,7 +7,7 @@ import { Router } from "./Router";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 import { AppThemeProvider } from "./components/AppThemeProvider";
-import { GoogleAuthProviderNew } from "./components/GoogleAuthProviderNew";
+import { GoogleAuthProvider } from "./components/GoogleAuthProvider";
 import { RegionProvider } from "./components/RegionProvider";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <AppThemeProvider>
-          <GoogleAuthProviderNew>
+          <GoogleAuthProvider>
             <RegionProvider>
               <Header />
               <Box
@@ -33,7 +33,7 @@ function App() {
                 </Box>
               </Box>
             </RegionProvider>
-          </GoogleAuthProviderNew>
+          </GoogleAuthProvider>
         </AppThemeProvider>
       </BrowserRouter>
     </Provider>
