@@ -4,7 +4,6 @@ import { useAuth } from "../features/user/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { useProfile } from "../features/user/useProfile";
 import { db } from "../settings/firebaseConfig";
-// import { ErrorMessage } from "./ErrorMessage";
 
 export type GsiResponse = {
   client_id: string;
@@ -75,7 +74,8 @@ export function GoogleAuthProvider({
       fetchUserByToken(token);
       setLoading(false);
     }
-  }, [gsiLoaded, fetchUserByToken, setToken, signout]);
+    // eslint-disable-next-line
+  }, [gsiLoaded]);
 
   useEffect(() => {
     if (profile && token) {
