@@ -9,6 +9,7 @@ import { Sidebar } from "./components/Sidebar";
 import { AppThemeProvider } from "./components/AppThemeProvider";
 import { GoogleAuthProvider } from "./components/GoogleAuthProvider";
 import { RegionProvider } from "./components/RegionProvider";
+import { BottomNav } from "./components/BottomNav";
 
 function App() {
   return (
@@ -25,9 +26,23 @@ function App() {
                 <Sidebar />
                 <Box id="app__main" component="main" sx={{ flexGrow: 1 }}>
                   <Toolbar />
-                  <Box id="app__position-anchor" sx={{ position: "relative" }}>
-                    <Box id="app__router-container" sx={{ p: 2 }}>
+                  <Box
+                    id="app__position-anchor"
+                    sx={{
+                      position: "relative",
+                      minHeight: "100vh",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Box id="app__router-container" sx={{ p: 2, flexGrow: 1 }}>
                       <Router />
+                    </Box>
+                    <Box
+                      id="app__bottom-nav"
+                      sx={{ position: "sticky", bottom: 0 }}
+                    >
+                      <BottomNav />
                     </Box>
                   </Box>
                 </Box>
