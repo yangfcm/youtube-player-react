@@ -14,6 +14,16 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
     palette: {
       mode: darkTheme ? "dark" : "light",
     },
+    typography: {
+      fontFamily: [
+        "poppins",
+        "system-ui",
+        "Avenir",
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+      ].join(","),
+    },
   });
 
   return (
