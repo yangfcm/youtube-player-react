@@ -11,7 +11,7 @@ import { NoContent } from "../components/NoContent";
 import { ChannelItem } from "../components/ChannelItem";
 import { ChannelBanner, bannerHeight } from "../components/ChannelBanner";
 
-export function Channel() {
+export default function Channel() {
   const { pathname } = useLocation();
   const pathValue = pathname.split("/")[3] || "videos";
   const [value, setValue] = useState(pathValue);
@@ -64,12 +64,7 @@ export function Channel() {
             label="Playlists"
             value="playlists"
           />
-          <Tab
-            component={Link}
-            to="./about"
-            label="About"
-            value="about"
-          />
+          <Tab component={Link} to="./about" label="About" value="about" />
         </Tabs>
         <Outlet />
       </Box>

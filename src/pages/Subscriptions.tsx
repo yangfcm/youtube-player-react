@@ -10,7 +10,7 @@ import { AsyncStatus } from "../settings/types";
 import { ChannelCard } from "../components/ChannelCard";
 import { NoContent } from "../components/NoContent";
 
-export function Subscriptions() {
+export default function Subscriptions() {
   const {
     subscriptions = [],
     status,
