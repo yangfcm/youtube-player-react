@@ -1,6 +1,5 @@
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import { store } from "./app/store";
 import { Router } from "./Router";
@@ -10,6 +9,7 @@ import { AppThemeProvider } from "./components/AppThemeProvider";
 import { GoogleAuthProvider } from "./components/GoogleAuthProvider";
 import { RegionProvider } from "./components/RegionProvider";
 import { BottomNav } from "./components/BottomNav";
+import { HEADER_HEIGHT } from "./settings/constant";
 
 function App() {
   return (
@@ -19,31 +19,30 @@ function App() {
           <GoogleAuthProvider>
             <RegionProvider>
               <Header />
-              <Box
-                id="app__main-container"
-                sx={{ display: " flex", height: "100vh" }}
-              >
+              <Box id="app__main-container" sx={{ display: " flex" }}>
                 <Sidebar />
-                <Box id="app__main" component="main" sx={{ flexGrow: 1 }}>
-                  <Toolbar />
+                <Box
+                  id="app__position-anchor"
+                  sx={{
+                    flexGrow: 1,
+                    position: "relative",
+                    paddingTop: HEADER_HEIGHT,
+                    minHeight: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <Box
-                    id="app__position-anchor"
-                    sx={{
-                      position: "relative",
-                      minHeight: "100vh",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
+                    id="app__router-container"
+                    sx={{ p: { xs: 1, md: 2 }, flexGrow: 1 }}
                   >
-                    <Box id="app__router-container" sx={{ p: 2, flexGrow: 1 }}>
-                      <Router />
-                    </Box>
-                    <Box
-                      id="app__bottom-nav"
-                      sx={{ position: "sticky", bottom: 0 }}
-                    >
-                      <BottomNav />
-                    </Box>
+                    <Router />
+                  </Box>
+                  <Box
+                    id="app__bottom-nav"
+                    sx={{ position: "sticky", bottom: 0 }}
+                  >
+                    <BottomNav />
                   </Box>
                 </Box>
               </Box>

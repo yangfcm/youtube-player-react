@@ -9,9 +9,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 
 const TAB_STYLE = {
-  fontSize: { xs: "12px", sm: "14px" },
-  py: 1,
-  px: { xs: 1, sm: 2 },
+  fontSize: "12px",
+  padding: 0,
+  minWidth: "auto",
+  minHeight: "60px",
 };
 
 export function BottomNav() {
@@ -27,9 +28,9 @@ export function BottomNav() {
       sx={{
         display: {
           xs: "block",
-          md: "none",
+          sm: "none",
         },
-        p: 1,
+        p: 0,
         backgroundColor: (theme) =>
           theme.palette.mode === "light"
             ? theme.palette.grey[200]
@@ -48,7 +49,7 @@ export function BottomNav() {
         <Tab
           component={Link}
           to="/subscriptions"
-          label="Subscriptions"
+          label="Channels"
           icon={<SubscriptionsIcon />}
           value="/subscriptions"
           sx={TAB_STYLE}
