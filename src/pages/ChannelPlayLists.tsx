@@ -9,7 +9,7 @@ import { ErrorMessage } from "../components/ErrorMessage";
 import { NoContent } from "../components/NoContent";
 import { PlayListCard } from "../components/PlayListCard";
 
-export function ChannelPlayLists() {
+export default function ChannelPlayLists() {
   const { id = "" } = useParams();
   const {
     channelPlaylists = [],

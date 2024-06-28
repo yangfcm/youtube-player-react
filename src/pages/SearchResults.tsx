@@ -14,7 +14,7 @@ import { ChannelSnippet } from "../features/channel/types";
 import { PlayListSnippet, PlayListId } from "../features/playlist/types";
 import { getSearchString } from "../app/utils";
 
-export function SearchResults() {
+export default function SearchResults() {
   const location = useLocation();
   const q = getSearchString(location.search, "q");
   const { searchResults, status, error, fetchMore, hasMore, queryChanged } =

@@ -10,7 +10,7 @@ import { MoreButton } from "../components/MoreButton";
 import { AsyncStatus } from "../settings/types";
 import { NoContent } from "../components/NoContent";
 
-export function PlayLists() {
+export default function PlayLists() {
   const { playLists = [], status, error, hasMore, fetchMore } = usePlayLists();
 
   return (

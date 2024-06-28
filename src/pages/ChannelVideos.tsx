@@ -10,7 +10,7 @@ import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoId } from "../features/video/types";
 import { NoContent } from "../components/NoContent";
 
-export function ChannelVideos() {
+export default function ChannelVideos() {
   const { id = "" } = useParams();
   const {
     channelVideos = [],

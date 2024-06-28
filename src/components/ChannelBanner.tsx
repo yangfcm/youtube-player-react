@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { HEADER_HEIGHT } from "../settings/constant";
 
 export const bannerHeight = "16vw";
 
@@ -14,7 +15,7 @@ export function ChannelBanner({ imageUrl }: { imageUrl?: string }) {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "0 50%",
         position: "absolute",
-        top: 0,
+        top: HEADER_HEIGHT,
         left: 0,
         display: {
           sm: "block",

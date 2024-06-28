@@ -7,7 +7,7 @@ import { AsyncStatus } from "../settings/types";
 import { MoreButton } from "../components/MoreButton";
 import { ErrorMessage } from "../components/ErrorMessage";
 
-export function PopularVideos() {
+export default function PopularVideos() {
   const { mostPopularVideos, status, error, fetchMore, hasMore } =
     useMostPopularVideos();
   if (!mostPopularVideos?.length && status === AsyncStatus.LOADING) {

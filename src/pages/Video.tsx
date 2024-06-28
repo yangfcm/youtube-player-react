@@ -5,34 +5,39 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
 import { VideoComments } from "../components/VideoComments";
 import { PlayListVideos } from "../components/PlayListVideos";
-import { formatNumber, fromNow, getSearchString, formatLengthFromSeconds } from "../app/utils";
+import {
+  formatNumber,
+  fromNow,
+  getSearchString,
+  formatLengthFromSeconds,
+} from "../app/utils";
 import { NoContent } from "../components/NoContent";
-import { RelatedVideos } from '../components/RelatedVideos';
-import { DownloadFile } from '../components/DownloadFile';
+import { RelatedVideos } from "../components/RelatedVideos";
+import { DownloadFile } from "../components/DownloadFile";
 import { VideoDataLoader } from "../components/VideoDataLoader";
 
-export function Video() {
-  const { id= "" } = useParams();
+export default function Video() {
+  const { id = "" } = useParams();
 
-  if(!id) {
+  if (!id) {
     return <NoContent>The video isn't available.</NoContent>;
-  } 
-  
+  }
+
   return (
     <Box>
       <VideoPlayer videoId={id} />
       <VideoDataSection />
     </Box>
-  )
+  );
 }
 
 export function VideoDataSection() {
@@ -61,10 +66,16 @@ export function VideoDataSection() {
               size="small"
             />
           </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between">
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            justifyContent="space-between"
+          >
             <Box sx={{ flexGrow: 1 }}>
               <Stack direction="row" alignItems="center" spacing={1}>
-                <Avatar sx={{ width: 40, height: 40 }} src={video.channelThumbnail} />
+                <Avatar
+                  sx={{ width: 40, height: 40 }}
+                  src={video.channelThumbnail}
+                />
                 <MuiLink
                   component={Link}
                   to={`/channel/${video.channelId}`}
@@ -87,7 +98,11 @@ export function VideoDataSection() {
             <DownloadFile video={video} />
           </Box>
           <Box sx={{ my: 2 }}>
-            {playlistId ? <PlayListVideos playlistId={playlistId} /> : <RelatedVideos videos={video.relatedVideos} />}
+            {playlistId ? (
+              <PlayListVideos playlistId={playlistId} />
+            ) : (
+              <RelatedVideos videos={video.relatedVideos} />
+            )}
           </Box>
           <VideoComments videoId={id} />
         </Grid>

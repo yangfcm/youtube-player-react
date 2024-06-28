@@ -7,7 +7,7 @@ export const PART_SNIPPET_CONTENT_STATUS = "snippet,contentDetails,status";
 export const PART_SNIPPET_CONTENT_STATS_BRANDING =
   "snippet,statistics,brandingSettings,contentDetails";
 export const DEFAULT_ERROR_MESSAGE = "Something bad happens";
-export const SIDEBAR_WIDTH = "220px";
+export const SIDEBAR_WIDTH = "200px";
 export const SMALL_SIDEBAR_WIDTH = "56px";
 export const HEADER_HEIGHT = "65px";
 export const COMMENTS_TURNED_OFF_MESSAGE = "Comments are turned off.";
