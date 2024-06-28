@@ -10,6 +10,9 @@ import ExploreIcon from "@mui/icons-material/Explore";
 
 const TAB_STYLE = {
   fontSize: "12px",
+  padding: 0,
+  minWidth: "auto",
+  minHeight: "60px",
 };
 
 export function BottomNav() {
@@ -46,7 +49,7 @@ export function BottomNav() {
         <Tab
           component={Link}
           to="/subscriptions"
-          label="Subscriptions"
+          label="Channels"
           icon={<SubscriptionsIcon />}
           value="/subscriptions"
           sx={TAB_STYLE}

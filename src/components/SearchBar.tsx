@@ -18,20 +18,12 @@ export function SearchBar() {
   );
 
   return (
-    <Paper
-      component="form"
-      sx={{ mr: { xs: 0, sm: 1 } }}
-      onSubmit={handleSearch}
-    >
+    <Paper component="form" sx={{ display: "flex" }} onSubmit={handleSearch}>
       <InputBase
         placeholder="Search"
         sx={{
           ml: 1,
-          width: {
-            xs: "105px",
-            sm: "auto",
-            xl: "300px",
-          },
+          flexGrow: 1,
         }}
         onChange={(e) => {
           setQuery(e.target.value);

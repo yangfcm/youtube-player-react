@@ -30,7 +30,6 @@ export function Header() {
           sx={{
             display: "flex",
             alignItems: "center",
-            flexGrow: 1,
           }}
         >
           <IconButton
@@ -74,7 +73,9 @@ export function Header() {
             </Typography>
           </MuiLink>
         </Box>
-        <SearchBar />
+        <Box sx={{ flexGrow: 1, mx: 1, maxWidth: "500px" }}>
+          <SearchBar />
+        </Box>
         <HeaderMenu />
       </Toolbar>
     </AppBar>
