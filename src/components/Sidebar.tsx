@@ -36,9 +36,9 @@ export function Sidebar() {
           },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            width: { md: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
+            width: { lg: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
           },
-          width: { md: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
+          width: { lg: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
         }}
       >
         <Toolbar />
