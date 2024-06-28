@@ -25,7 +25,7 @@ export function BottomNav() {
       sx={{
         display: {
           xs: "block",
-          md: "none",
+          sm: "none",
         },
         p: 0,
         backgroundColor: (theme) =>

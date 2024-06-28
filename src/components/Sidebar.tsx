@@ -1,7 +1,7 @@
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import { SidebarMenu } from "./SidebarMenu";
-import { SIDEBAR_WIDTH } from "../settings/constant";
+import { SIDEBAR_WIDTH, SMALL_SIDEBAR_WIDTH } from "../settings/constant";
 import { useToggleSidebar } from "../features/setting/useToggleSidebar";
 
 export function Sidebar() {
@@ -16,7 +16,7 @@ export function Sidebar() {
         sx={{
           display: {
             xs: "block",
-            md: "none",
+            sm: "none",
           },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
@@ -32,13 +32,13 @@ export function Sidebar() {
         sx={{
           display: {
             xs: "none",
-            md: "block",
+            sm: "block",
           },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            width: SIDEBAR_WIDTH,
+            width: { md: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
           },
-          width: SIDEBAR_WIDTH,
+          width: { md: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
         }}
       >
         <Toolbar />

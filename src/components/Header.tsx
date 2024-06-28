@@ -21,7 +21,7 @@ export function Header() {
       position="fixed"
       sx={{
         zIndex: {
-          md: theme.zIndex.drawer + 1,
+          sm: theme.zIndex.drawer + 1,
         },
       }}
     >
@@ -42,7 +42,7 @@ export function Header() {
             sx={{
               display: {
                 xs: "inline-flex",
-                md: "none",
+                sm: "none",
               },
             }}
           >

@@ -8,7 +8,7 @@ import MuiLink from "@mui/material/Link";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import HomeIcon from "@mui/icons-material/Home";
-import ExploreIcon from '@mui/icons-material/Explore';
+import ExploreIcon from "@mui/icons-material/Explore";
 
 export function SidebarMenu() {
   return (
