@@ -9,9 +9,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 
 const TAB_STYLE = {
-  fontSize: { xs: "12px", sm: "14px" },
-  py: 1,
-  px: { xs: 1, sm: 2 },
+  fontSize: "12px",
 };
 
 export function BottomNav() {
@@ -29,7 +27,7 @@ export function BottomNav() {
           xs: "block",
           md: "none",
         },
-        p: 1,
+        p: 0,
         backgroundColor: (theme) =>
           theme.palette.mode === "light"
             ? theme.palette.grey[200]
