@@ -29,7 +29,7 @@ export function SidebarMenu() {
             <ListItemIcon>
               <SubscriptionsIcon />
             </ListItemIcon>
-            <ListItemText primary="Subscriptions" />
+            <ListItemText primary="Channels" />
           </ListItemButton>
         </ListItem>
       </MuiLink>
