@@ -10,6 +10,8 @@ import { GoogleAuthProvider } from "./components/GoogleAuthProvider";
 import { RegionProvider } from "./components/RegionProvider";
 import { BottomNav } from "./components/BottomNav";
 import { HEADER_HEIGHT } from "./settings/constant";
+import { PageLoading } from "./components/PageLoading";
+import { Suspense } from "react";
 
 function App() {
   return (
@@ -32,12 +34,14 @@ function App() {
                     flexDirection: "column",
                   }}
                 >
-                  <Box
-                    id="app__router-container"
-                    sx={{ p: { xs: 1, md: 2 }, flexGrow: 1 }}
-                  >
-                    <Router />
-                  </Box>
+                  <Suspense fallback={<PageLoading />}>
+                    <Box
+                      id="app__router-container"
+                      sx={{ p: { xs: 1, md: 2 }, flexGrow: 1 }}
+                    >
+                      <Router />
+                    </Box>
+                  </Suspense>
                   <Box
                     id="app__bottom-nav"
                     sx={{ position: "sticky", bottom: 0 }}

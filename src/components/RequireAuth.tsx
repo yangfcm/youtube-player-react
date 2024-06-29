@@ -1,17 +1,16 @@
-import { GoogleLogin } from "./GoogleLogin";
 import { useAuth } from "../features/user/useAuth";
 
 export function RequireAuth({
   children,
-  showLoginButton = true,
+  unAuthedComponent: UnAuthedComponent,
 }: {
   children: React.ReactNode;
-  showLoginButton?: boolean;
+  unAuthedComponent?: React.ReactNode;
 }) {
   const { isSignedIn } = useAuth();
 
   if (!isSignedIn) {
-    return showLoginButton ? <GoogleLogin /> : null;
+    return UnAuthedComponent ? <>{UnAuthedComponent}</> : null;
   }
 
   return <>{children}</>;
