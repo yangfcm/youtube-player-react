@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import ChannelVideos from "./pages/ChannelVideos";
 import ChannelPlayLists from "./pages/ChannelPlayLists";
 import ChannelProfile from "./pages/ChannelProfile";
