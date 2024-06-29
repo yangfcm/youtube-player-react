@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { useVideo } from "../features/video/useVideo";
 import MuiLink from "@mui/material/Link";
@@ -40,11 +41,50 @@ export default function Video() {
   );
 }
 
+const shortenUrl = (url: string, maxLength = 30) => {
+  return url.length > maxLength ? url.substring(0, maxLength) + "..." : url;
+};
+
 export function VideoDataSection() {
   const { id = "" } = useParams();
   const location = useLocation();
   const playlistId = getSearchString(location.search, "playlistId");
   const { video, status, error } = useVideo(id);
+
+  const videoDescription = useMemo(() => {
+    if (!video?.description) return "";
+
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = video.description.split(
+      new RegExp(`(${urlRegex.source}|\\n)`, "g")
+    );
+
+    const processedText = parts.map((part, index) => {
+      if (urlRegex.test(part)) {
+        // Replace text with 'http://' with a clickable link.
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={part}
+          >
+            {shortenUrl(part)}
+          </a>
+        );
+      } else if (part === "\n") {
+        // Replace \n with breakline.
+        return <br key={index} />;
+      } else {
+        // For others, show as it is.
+        if (urlRegex.test(part)) return ""; // Not sure why link appears here again, so I want to get rid of it.
+        return part;
+      }
+    });
+
+    return processedText;
+  }, [video?.description]);
 
   if (status === AsyncStatus.IDLE) return null;
   if (status === AsyncStatus.LOADING) return <VideoDataLoader />;
@@ -91,9 +131,13 @@ export function VideoDataSection() {
               </Typography>
             </Box>
           </Stack>
-          <Divider sx={{ my: 1 }} />
-          <Typography variant="body2">{video.description}</Typography>
-          <Divider sx={{ my: 1 }} />
+          {video.description && (
+            <>
+              <Divider sx={{ my: 1 }} />
+              <Typography variant="body2">{videoDescription}</Typography>
+              <Divider sx={{ my: 1 }} />
+            </>
+          )}
           <Box>
             <DownloadFile video={video} />
           </Box>
