@@ -16,23 +16,21 @@ const PopularVideos = lazy(() => import("./pages/PopularVideos"));
 
 export function Router() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route path="/subscriptions" element={<Subscriptions />} />
-        <Route path="/search" element={<SearchResults />} />
-        <Route path="/playlist/:id" element={<PlayListVideos />} />
-        <Route path="/playlists" element={<PlayLists />} />
-        <Route path="/explore" element={<PopularVideos />} />
-        <Route path="/video/:id" element={<Video />} />
-        <Route path="/channel/:id" element={<Channel />}>
-          <Route index element={<Navigate replace to="videos" />} />
-          <Route path="videos" element={<ChannelVideos />} />
-          <Route path="playlists" element={<ChannelPlayLists />} />
-          <Route path="about" element={<ChannelProfile />} />
-        </Route>
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route path="/subscriptions" element={<Subscriptions />} />
+      <Route path="/search" element={<SearchResults />} />
+      <Route path="/playlist/:id" element={<PlayListVideos />} />
+      <Route path="/playlists" element={<PlayLists />} />
+      <Route path="/explore" element={<PopularVideos />} />
+      <Route path="/video/:id" element={<Video />} />
+      <Route path="/channel/:id" element={<Channel />}>
+        <Route index element={<Navigate replace to="videos" />} />
+        <Route path="videos" element={<ChannelVideos />} />
+        <Route path="playlists" element={<ChannelPlayLists />} />
+        <Route path="about" element={<ChannelProfile />} />
+      </Route>
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
