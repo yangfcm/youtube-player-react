@@ -9,6 +9,7 @@ import { MoreButton } from "../components/MoreButton";
 import { RequireAuth } from "../components/RequireAuth";
 import { NoContent } from "../components/NoContent";
 import { useProfile } from "../features/user/useProfile";
+import { RequireLoginPage } from "../components/RequireLoginPage";
 
 export function Home() {
   // const { mostPopularVideos, status, error, fetchMore, hasMore } =
@@ -22,7 +23,7 @@ export function Home() {
   }
 
   return (
-    <RequireAuth>
+    <RequireAuth unAuthedComponent={<RequireLoginPage />}>
       <Box sx={{ pb: 2 }}>
         <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
         {(status === AsyncStatus.SUCCESS || status === AsyncStatus.IDLE) &&

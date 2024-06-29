@@ -9,6 +9,7 @@ import { MoreButton } from "../components/MoreButton";
 import { AsyncStatus } from "../settings/types";
 import { ChannelCard } from "../components/ChannelCard";
 import { NoContent } from "../components/NoContent";
+import { RequireLoginPage } from "../components/RequireLoginPage";
 
 export default function Subscriptions() {
   const {
@@ -20,7 +21,7 @@ export default function Subscriptions() {
   } = useSubscriptions();
 
   return (
-    <RequireAuth>
+    <RequireAuth unAuthedComponent={<RequireLoginPage />}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Typography variant="h5" sx={{ mb: 2 }}>
         Subscriptions

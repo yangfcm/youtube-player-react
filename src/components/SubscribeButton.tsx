@@ -40,11 +40,11 @@ function SubscribeButtonComp({ channelId }: { channelId: string }) {
         onClick={() => {
           if (subscribed) {
             unsubscribeChannel(subscriptionId).then(() => {
-              updateUserSubscriptions(user?.id || '', channelId, 'unsubscribe');
+              updateUserSubscriptions(user?.id || "", channelId, "unsubscribe");
             });
           } else {
             subscribeChannel().then(() => {
-              updateUserSubscriptions(user?.id || '', channelId, 'subscribe');
+              updateUserSubscriptions(user?.id || "", channelId, "subscribe");
             });
           }
         }}
@@ -57,7 +57,7 @@ function SubscribeButtonComp({ channelId }: { channelId: string }) {
 
 export function SubscribeButton({ channelId }: { channelId: string }) {
   return (
-    <RequireAuth showLoginButton={false}>
+    <RequireAuth>
       <SubscribeButtonComp channelId={channelId} />
     </RequireAuth>
   );

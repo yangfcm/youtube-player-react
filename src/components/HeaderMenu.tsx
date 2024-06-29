@@ -9,6 +9,7 @@ import { RequireAuth } from "./RequireAuth";
 import { useProfile } from "../features/user/useProfile";
 import { GoogleLogout } from "./GoogleLogout";
 import { AppearanceSwitch } from "./AppearanceSwitch";
+import { GoogleLogin } from "./GoogleLogin";
 
 export function HeaderMenu() {
   const profile = useProfile();
@@ -19,12 +20,14 @@ export function HeaderMenu() {
   const handleClose = () => setAnchorEl(null);
 
   return (
-    <RequireAuth>
-      {profile && <Tooltip title="">
-        <IconButton size="small" onClick={handleOpen}>
-          <Avatar sx={{ width: 40, height: 40 }} src={profile.avatar} />
-        </IconButton>
-      </Tooltip>}
+    <RequireAuth unAuthedComponent={<GoogleLogin />}>
+      {profile && (
+        <Tooltip title="">
+          <IconButton size="small" onClick={handleOpen}>
+            <Avatar sx={{ width: 40, height: 40 }} src={profile.avatar} />
+          </IconButton>
+        </Tooltip>
+      )}
       <Menu
         anchorEl={anchorEl}
         open={open}
@@ -59,10 +62,12 @@ export function HeaderMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {profile && <MenuItem>
-          <Avatar sx={{ width: 40, height: 40 }} src={profile.avatar} />{" "}
-          {profile.username}
-        </MenuItem>}
+        {profile && (
+          <MenuItem>
+            <Avatar sx={{ width: 40, height: 40 }} src={profile.avatar} />{" "}
+            {profile.username}
+          </MenuItem>
+        )}
         <Divider />
         <MenuItem>
           <AppearanceSwitch />

@@ -9,12 +9,13 @@ import { LoadingSpinner } from "../components/LoadingSpinner";
 import { MoreButton } from "../components/MoreButton";
 import { AsyncStatus } from "../settings/types";
 import { NoContent } from "../components/NoContent";
+import { RequireLoginPage } from "../components/RequireLoginPage";
 
 export default function PlayLists() {
   const { playLists = [], status, error, hasMore, fetchMore } = usePlayLists();
 
   return (
-    <RequireAuth>
+    <RequireAuth unAuthedComponent={<RequireLoginPage />}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Typography variant="h5" sx={{ mb: 2 }}>
         Play List
