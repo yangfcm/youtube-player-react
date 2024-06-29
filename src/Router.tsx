@@ -2,6 +2,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Suspense, lazy } from "react";
+import ChannelVideos from "./pages/ChannelVideos";
+import ChannelPlayLists from "./pages/ChannelPlayLists";
+import ChannelProfile from "./pages/ChannelProfile";
 
 const Subscriptions = lazy(() => import("./pages/Subscriptions"));
 const SearchResults = lazy(() => import("./pages/SearchResults"));
@@ -9,9 +12,6 @@ const Video = lazy(() => import("./pages/Video"));
 const PlayLists = lazy(() => import("./pages/PlayLists"));
 const PlayListVideos = lazy(() => import("./pages/PlayListVideos"));
 const Channel = lazy(() => import("./pages/Channel"));
-const ChannelVideos = lazy(() => import("./pages/ChannelVideos"));
-const ChannelPlayLists = lazy(() => import("./pages/ChannelPlayLists"));
-const ChannelProfile = lazy(() => import("./pages/ChannelProfile"));
 const PopularVideos = lazy(() => import("./pages/PopularVideos"));
 
 export function Router() {
