@@ -17,5 +17,8 @@ export async function fetchPlaylistVideosAPI(
       maxResults: MAX_RESULTS_24,
       ...options,
     },
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
   });
 }
