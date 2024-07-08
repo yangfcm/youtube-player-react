@@ -45,7 +45,7 @@ export function useTimeline(userId: string) {
         maxResults: videos.length === 0 ? undefined : videos.length,
       })
     );
-  }, [userId, dispatch, meta?.totalCount]);
+  }, [userId, dispatch, meta?.totalCount, videos.length]);
 
   return { videos, status, error, hasMore, fetchMore, meta };
 }
