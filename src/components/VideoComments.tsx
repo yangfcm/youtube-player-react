@@ -41,7 +41,7 @@ export function VideoComments({ videoId }: { videoId: string }) {
       <AccordionSummary id="comment-header" expandIcon={<ExpandMoreIcon />}>
         <Typography variant="h5" sx={{ display: "flex", alignItems: "center" }}>
           <MessageIcon />
-          &nbsp; Comments
+          &nbsp;&nbsp;Comments
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
