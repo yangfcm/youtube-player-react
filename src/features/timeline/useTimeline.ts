@@ -39,7 +39,12 @@ export function useTimeline(userId: string) {
 
   useEffect(() => {
     if (!userId || !meta?.totalCount) return;
-    dispatch(fetchTimeline({ userId }));
+    dispatch(
+      fetchTimeline({
+        userId,
+        maxResults: videos.length === 0 ? undefined : videos.length,
+      })
+    );
   }, [userId, dispatch, meta?.totalCount]);
 
   return { videos, status, error, hasMore, fetchMore, meta };
