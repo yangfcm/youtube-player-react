@@ -1,8 +1,11 @@
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 import MessageIcon from "@mui/icons-material/Message";
-import Stack from "@mui/material/Stack";
 import { useComments } from "../features/comment/useComments";
 import { AsyncStatus } from "../settings/types";
 import { LoadingSpinner } from "./LoadingSpinner";
@@ -34,39 +37,41 @@ export function VideoComments({ videoId }: { videoId: string }) {
   }
 
   return (
-    <Box>
-      <Stack direction="row" spacing={2}>
+    <Accordion>
+      <AccordionSummary id="comment-header" expandIcon={<ExpandMoreIcon />}>
         <Typography variant="h5" sx={{ display: "flex", alignItems: "center" }}>
           <MessageIcon />
-          &nbsp;Comments
+          &nbsp; Comments
         </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
         <SortComments
           disabled={comments.length === 0}
           order={order}
           onChangeOrder={setOrder}
         />
-      </Stack>
-      <AddComment videoId={videoId} />
-      {status === AsyncStatus.LOADING && comments.length === 0 && (
-        <LoadingSpinner />
-      )}
-      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-      {status === AsyncStatus.SUCCESS && comments.length === 0 && (
-        <NoContent>Nobody has left comment.</NoContent>
-      )}
-      {comments.map((comment) => (
-        <Box sx={{ my: 3 }} key={comment.id}>
-          <CommentItem comment={comment} />
-        </Box>
-      ))}
-      {hasMore && (
-        <MoreButton
-          loading={status === AsyncStatus.LOADING}
-          onClick={fetchMore}
-        >
-          More
-        </MoreButton>
-      )}
-    </Box>
+        <AddComment videoId={videoId} />
+        {status === AsyncStatus.LOADING && comments.length === 0 && (
+          <LoadingSpinner />
+        )}
+        <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
+        {status === AsyncStatus.SUCCESS && comments.length === 0 && (
+          <NoContent>Nobody has left comment.</NoContent>
+        )}
+        {comments.map((comment) => (
+          <Box sx={{ my: 3 }} key={comment.id}>
+            <CommentItem comment={comment} />
+          </Box>
+        ))}
+        {hasMore && (
+          <MoreButton
+            loading={status === AsyncStatus.LOADING}
+            onClick={fetchMore}
+          >
+            More
+          </MoreButton>
+        )}
+      </AccordionDetails>
+    </Accordion>
   );
 }
