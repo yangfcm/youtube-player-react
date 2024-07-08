@@ -3,6 +3,7 @@ import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
 import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import placeholder from "../images/placeholder-item.jpg";
 import { LazyImage } from "./LazyImage";
 
@@ -11,10 +12,11 @@ type PlaylistPropsType = {
   title: string;
   imageUrl?: string;
   videoCount?: number;
+  privacy?: string;
 };
 
 export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
-  const { id, title, imageUrl, videoCount } = playlist;
+  const { id, title, imageUrl, videoCount, privacy } = playlist;
   return (
     <Card>
       <Link to={`/playlist/${id}`}>
@@ -41,7 +43,17 @@ export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
           {title}
         </MuiLink>
         {videoCount !== undefined && (
-          <Chip label={`${videoCount} videos`} size="small" />
+          <Chip
+            label={`${videoCount} videos`}
+            size="small"
+            variant="outlined"
+            color="primary"
+          />
+        )}
+        {privacy && (
+          <Typography variant="caption" sx={{ ml: 1 }}>
+            <Chip label={privacy} size="small" variant="outlined"></Chip>
+          </Typography>
         )}
       </CardContent>
     </Card>

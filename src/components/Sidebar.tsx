@@ -37,6 +37,7 @@ export function Sidebar() {
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: { lg: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
+            overflow: "hidden",
           },
           width: { lg: SIDEBAR_WIDTH, sm: SMALL_SIDEBAR_WIDTH },
         }}

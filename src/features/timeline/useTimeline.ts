@@ -35,13 +35,17 @@ export function useTimeline(userId: string) {
       dispatch(setTimelineMetaData(meta));
     });
     return () => unsubscribe();
-    // eslint-disable-next-line
-  }, [userId]);
+  }, [userId, dispatch]);
 
   useEffect(() => {
     if (!userId || !meta?.totalCount) return;
-    dispatch(fetchTimeline({ userId }));
-  }, [userId, dispatch, meta?.totalCount]);
+    dispatch(
+      fetchTimeline({
+        userId,
+        maxResults: videos.length === 0 ? undefined : videos.length,
+      })
+    );
+  }, [userId, dispatch, meta?.totalCount, videos.length]);
 
   return { videos, status, error, hasMore, fetchMore, meta };
 }

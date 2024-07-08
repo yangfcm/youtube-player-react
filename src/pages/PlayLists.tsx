@@ -37,6 +37,7 @@ export default function PlayLists() {
                     title: playList.snippet.title,
                     imageUrl: playList.snippet.thumbnails.high?.url,
                     videoCount: playList.contentDetails.itemCount,
+                    privacy: playList.status.privacyStatus,
                   }}
                 />
               </Grid>

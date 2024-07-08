@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 import { ErrorMessage } from "./ErrorMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { MoreButton } from "./MoreButton";
@@ -32,9 +32,17 @@ export function PlayListVideos({ playlistId }: { playlistId: string }) {
       {/* <Typography variant="h5">
         More videos in the playlist
       </Typography> */}
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ mb: 2 }}>
         {playlistVideos.map((video) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={video.contentDetails.videoId}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            xl={2}
+            key={video.contentDetails.videoId}
+          >
             <VideoCard
               video={{
                 id: video.contentDetails.videoId,
@@ -44,6 +52,7 @@ export function PlayListVideos({ playlistId }: { playlistId: string }) {
                 channelTitle: video.snippet.videoOwnerChannelTitle,
                 channelId: video.snippet.videoOwnerChannelId,
               }}
+              playlistId={playlistId}
             />
           </Grid>
         ))}

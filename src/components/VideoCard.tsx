@@ -18,7 +18,13 @@ type VideoTypeProps = {
   publishedAt?: Date | string;
 };
 
-export function VideoCard({ video }: { video: VideoTypeProps }) {
+export function VideoCard({
+  video,
+  playlistId,
+}: {
+  video: VideoTypeProps;
+  playlistId?: string;
+}) {
   const {
     id,
     title,
@@ -28,9 +34,14 @@ export function VideoCard({ video }: { video: VideoTypeProps }) {
     publishedAt,
     imageUrl,
   } = video;
+
+  const link = playlistId
+    ? `/video/${id}?playlistId=${playlistId}`
+    : `/video/${id}`;
+
   return (
     <Card>
-      <Link to={`/video/${id}`}>
+      <Link to={link}>
         {imageUrl ? (
           <LazyImage
             src={imageUrl}
@@ -53,7 +64,7 @@ export function VideoCard({ video }: { video: VideoTypeProps }) {
       >
         <MuiLink
           component={Link}
-          to={`/video/${id}`}
+          to={link}
           underline="none"
           variant="subtitle1"
           title={title}

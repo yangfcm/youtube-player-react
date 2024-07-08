@@ -9,7 +9,12 @@ import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
@@ -143,7 +148,23 @@ export function VideoDataSection() {
           </Box>
           <Box sx={{ my: 2 }}>
             {playlistId ? (
-              <PlayListVideos playlistId={playlistId} />
+              <Accordion>
+                <AccordionSummary
+                  id="playlist-accordion"
+                  expandIcon={<ExpandMoreIcon />}
+                >
+                  <Typography
+                    variant="h5"
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    <OndemandVideoIcon />
+                    &nbsp;&nbsp;Videos in Playlist
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <PlayListVideos playlistId={playlistId} />
+                </AccordionDetails>
+              </Accordion>
             ) : (
               <RelatedVideos videos={video.relatedVideos} />
             )}

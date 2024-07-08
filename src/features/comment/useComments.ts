@@ -2,10 +2,17 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { fetchComments, setCommentOrder } from "./commentSlice";
+import {
+  fetchComments as fetchCommentsAction,
+  setCommentOrder,
+} from "./commentSlice";
 import { CommentOrder } from "./types";
 
-export function useComments(videoId: string) {
+export function useComments(
+  videoId: string,
+  options: { initialFetch?: boolean } = {}
+) {
+  const { initialFetch = true } = options;
   const dispatch = useAppDispatch();
   const order =
     useSelector((state: RootState) => state.comment.comments[videoId]?.order) ||
@@ -27,7 +34,7 @@ export function useComments(videoId: string) {
   const fetchMore = useCallback(() => {
     if (nextPageToken) {
       dispatch(
-        fetchComments({
+        fetchCommentsAction({
           videoId,
           pageToken: nextPageToken,
           order,
@@ -35,6 +42,10 @@ export function useComments(videoId: string) {
       );
     }
   }, [dispatch, nextPageToken, videoId, order]);
+
+  const fetchComments = useCallback(() => {
+    dispatch(fetchCommentsAction({ videoId, order }));
+  }, [videoId, order, dispatch]);
 
   const setOrder = useCallback(
     (order: CommentOrder) => {
@@ -49,10 +60,10 @@ export function useComments(videoId: string) {
   );
 
   useEffect(() => {
-    if (videoId && !comments) {
-      dispatch(fetchComments({ videoId, order }));
+    if (videoId && !comments && initialFetch) {
+      fetchComments();
     }
-  }, [videoId, comments, dispatch, order]);
+  }, [videoId, comments, dispatch, order, fetchComments, initialFetch]);
 
   return {
     comments,
@@ -62,5 +73,6 @@ export function useComments(videoId: string) {
     fetchMore,
     order,
     setOrder,
+    fetchComments,
   };
 }
