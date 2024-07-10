@@ -28,8 +28,10 @@ import {
 } from "../app/utils";
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from "../components/RelatedVideos";
-import { DownloadFile } from "../components/DownloadFile";
+// import { DownloadFile } from "../components/DownloadFile";
+import { DownloadLink } from "../components/DownloadLink";
 import { VideoDataLoader } from "../components/VideoDataLoader";
+import { RequireAuth } from "../components/RequireAuth";
 
 export default function Video() {
   const { id = "" } = useParams();
@@ -144,7 +146,9 @@ export function VideoDataSection() {
             </>
           )}
           <Box>
-            <DownloadFile video={video} />
+            <RequireAuth>
+              <DownloadLink videoId={video.videoId}></DownloadLink>
+            </RequireAuth>
           </Box>
           <Box sx={{ my: 2 }}>
             {playlistId ? (
