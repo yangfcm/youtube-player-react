@@ -6,6 +6,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 import { VideoCard } from "./VideoCard";
 import { RelatedVideo } from "../features/video/types";
+import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 
 export function RelatedVideos({
   videos: videosProp,
@@ -24,8 +25,9 @@ export function RelatedVideos({
         id="related-videos-header"
         expandIcon={<ExpandMoreIcon />}
       >
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          Related Videos
+        <Typography variant="h5" sx={{ display: "flex", alignItems: "center" }}>
+          <VideoLibraryIcon />
+          &nbsp;&nbsp;Related Videos
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
