@@ -36,8 +36,8 @@ const initialState: VideoState = {
   },
 };
 
-export const fetchVideo = createAsyncThunk(
-  "video/fetchVideo",
+export const fetchVideoInfo = createAsyncThunk(
+  "video/fetchVideoInfo",
   async (videoId: string) => {
     const response = await fetchVideoInfoAPI(videoId);
     return response;
@@ -84,10 +84,10 @@ const videoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    const fetchVideoStart = (state: VideoState) => {
+    const fetchVideoInfoStart = (state: VideoState) => {
       state.video.status = AsyncStatus.LOADING;
     };
-    const fetchVideoSuccess = (
+    const fetchVideoInfoSuccess = (
       state: VideoState,
       { payload }: { payload: AxiosResponse<VideoInfoResponse> }
     ) => {
@@ -101,7 +101,7 @@ const videoSlice = createSlice({
         };
       }
     };
-    const fetchVideoFailed = (
+    const fetchVideoInfoFailed = (
       state: VideoState,
       { error }: { error: SerializedError }
     ) => {
@@ -183,9 +183,9 @@ const videoSlice = createSlice({
     };
 
     builder
-      .addCase(fetchVideo.pending, fetchVideoStart)
-      .addCase(fetchVideo.fulfilled, fetchVideoSuccess)
-      .addCase(fetchVideo.rejected, fetchVideoFailed)
+      .addCase(fetchVideoInfo.pending, fetchVideoInfoStart)
+      .addCase(fetchVideoInfo.fulfilled, fetchVideoInfoSuccess)
+      .addCase(fetchVideoInfo.rejected, fetchVideoInfoFailed)
       .addCase(fetchVideos.pending, fetchVideosStart)
       .addCase(fetchVideos.fulfilled, fetchVideosSuccess)
       .addCase(fetchVideos.rejected, fetchVideosFailed)
