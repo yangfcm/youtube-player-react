@@ -7,28 +7,19 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
-import Chip from "@mui/material/Chip";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { AsyncStatus } from "../settings/types";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { VideoPlayer } from "../components/VideoPlayer";
 import { VideoComments } from "../components/VideoComments";
 import { PlayListVideos } from "../components/PlayListVideos";
-import {
-  formatNumber,
-  fromNow,
-  getSearchString,
-  formatLengthFromSeconds,
-} from "../app/utils";
+import { formatNumber, fromNow, getSearchString } from "../app/utils";
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from "../components/RelatedVideos";
-// import { DownloadFile } from "../components/DownloadFile";
 import { DownloadLink } from "../components/DownloadLink";
 import { VideoDataLoader } from "../components/VideoDataLoader";
 import { RequireAuth } from "../components/RequireAuth";
@@ -59,10 +50,10 @@ export function VideoDataSection() {
   const { video, status, error } = useVideo(id);
 
   const videoDescription = useMemo(() => {
-    if (!video?.description) return "";
+    if (!video?.snippet.description) return "";
 
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const parts = video.description.split(
+    const parts = video.snippet.description.split(
       new RegExp(`(${urlRegex.source}|\\n)`, "g")
     );
 
@@ -91,7 +82,7 @@ export function VideoDataSection() {
     });
 
     return processedText;
-  }, [video?.description]);
+  }, [video?.snippet.description]);
 
   if (status === AsyncStatus.IDLE) return null;
   if (status === AsyncStatus.LOADING) return <VideoDataLoader />;
@@ -104,14 +95,11 @@ export function VideoDataSection() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
-            {video.title}
+            {video.snippet.title}
             &nbsp;
-            <Chip
-              label={formatLengthFromSeconds(video.lengthSeconds)}
-              variant="outlined"
-              icon={<AccessTimeIcon />}
-              size="small"
-            />
+            <RequireAuth>
+              <DownloadLink videoId={video.id as string}></DownloadLink>
+            </RequireAuth>
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -119,37 +107,28 @@ export function VideoDataSection() {
           >
             <Box sx={{ flexGrow: 1 }}>
               <Stack direction="row" alignItems="center" spacing={1}>
-                <Avatar
-                  sx={{ width: 40, height: 40 }}
-                  src={video.channelThumbnail}
-                />
                 <MuiLink
                   component={Link}
-                  to={`/channel/${video.channelId}`}
+                  to={`/channel/${video.snippet.channelId}`}
                   underline="hover"
                   variant="body1"
                 >
-                  {video.channelTitle}
+                  {video.snippet.channelTitle}
                 </MuiLink>
               </Stack>
               <Typography variant="body1" sx={{ my: 1 }}>
-                {formatNumber(parseInt(video.viewCount)) + " views"} •{" "}
-                {fromNow(video.publishedAt)}
+                {formatNumber(parseInt(video.statistics.viewCount)) + " views"}{" "}
+                • {fromNow(video.snippet.publishedAt)}
               </Typography>
             </Box>
           </Stack>
-          {video.description && (
+          {video.snippet.description && (
             <>
               <Divider sx={{ my: 1 }} />
               <Typography variant="body2">{videoDescription}</Typography>
               <Divider sx={{ my: 1 }} />
             </>
           )}
-          <Box>
-            <RequireAuth>
-              <DownloadLink videoId={video.videoId}></DownloadLink>
-            </RequireAuth>
-          </Box>
           <Box sx={{ my: 2 }}>
             {playlistId ? (
               <Accordion>
@@ -170,7 +149,7 @@ export function VideoDataSection() {
                 </AccordionDetails>
               </Accordion>
             ) : (
-              <RelatedVideos videos={video.relatedVideos} />
+              <RelatedVideos videos={[]} />
             )}
           </Box>
           <VideoComments videoId={id} />

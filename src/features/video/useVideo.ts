@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { fetchVideo } from "./videoSlice";
+import { fetchVideo, fetchVideoInfo } from "./videoSlice";
 
 export function useVideo(videoId?: string) {
   const dispatch = useAppDispatch();
