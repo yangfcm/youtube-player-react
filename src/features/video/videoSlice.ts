@@ -5,18 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import {
-  VideosResponse,
-  VideoState,
-  DownloadParameter,
-  VideoResponse,
-} from "./types";
-import {
-  fetchVideosAPI,
-  fetchVideoInfoAPI,
-  downloadVideoAPI,
-  fetchVideoAPI,
-} from "./videoAPI";
+import { VideosResponse, VideoState, VideoResponse } from "./types";
+import { fetchVideosAPI, fetchVideoAPI } from "./videoAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: VideoState = {
@@ -39,26 +29,10 @@ export const fetchVideo = createAsyncThunk(
   }
 );
 
-export const fetchVideoInfo = createAsyncThunk(
-  "video/fetchVideoInfo",
-  async (videoId: string) => {
-    const response = await fetchVideoInfoAPI(videoId);
-    return response;
-  }
-);
-
 export const fetchVideos = createAsyncThunk(
   "video/fetchVideos",
   async (filter?: Record<string, string>) => {
     const response = await fetchVideosAPI(filter);
-    return response;
-  }
-);
-
-export const downloadVideo = createAsyncThunk(
-  "video/downloadVideo",
-  async (para: DownloadParameter) => {
-    const response = await downloadVideoAPI(para);
     return response;
   }
 );
