@@ -2,27 +2,22 @@ import {
   createAsyncThunk,
   createSlice,
   SerializedError,
-  PayloadAction,
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
 import {
   VideosResponse,
   VideoState,
-  VideoInfoResponse,
   DownloadParameter,
-  DownloadState,
-  DownloadFileType,
+  VideoResponse,
 } from "./types";
 import {
   fetchVideosAPI,
   fetchVideoInfoAPI,
   downloadVideoAPI,
+  fetchVideoAPI,
 } from "./videoAPI";
-import {
-  DEFAULT_ERROR_MESSAGE,
-  DOWNLOAD_CANCELD_ERROR,
-} from "../../settings/constant";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: VideoState = {
   videos: {
@@ -35,6 +30,14 @@ const initialState: VideoState = {
     error: "",
   },
 };
+
+export const fetchVideo = createAsyncThunk(
+  "video/fetchVideo",
+  async (videoId: string) => {
+    const response = await fetchVideoAPI(videoId);
+    return response;
+  }
+);
 
 export const fetchVideoInfo = createAsyncThunk(
   "video/fetchVideoInfo",
@@ -63,45 +66,27 @@ export const downloadVideo = createAsyncThunk(
 const videoSlice = createSlice({
   name: "video",
   initialState,
-  reducers: {
-    setDownloadState: (
-      state,
-      {
-        payload,
-      }: PayloadAction<{
-        videoId: string;
-        filter: DownloadFileType;
-        downloadState: Partial<DownloadState>;
-      }>
-    ) => {
-      const { videoId, downloadState, filter } = payload;
-      const videoItem = state.video.item[videoId];
-      if (!videoItem) return;
-      const key =
-        filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
-      const currentState = videoItem[key] || {};
-      videoItem[key] = { ...currentState, ...downloadState };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    const fetchVideoInfoStart = (state: VideoState) => {
+    const fetchVideoStart = (state: VideoState) => {
       state.video.status = AsyncStatus.LOADING;
     };
-    const fetchVideoInfoSuccess = (
+    const fetchVideoSuccess = (
       state: VideoState,
-      { payload }: { payload: AxiosResponse<VideoInfoResponse> }
+      { payload }: { payload: AxiosResponse<VideoResponse> }
     ) => {
       state.video.status = AsyncStatus.SUCCESS;
       state.video.error = "";
-      const video = payload.data;
-      if (video) {
+      const videoResponse = payload.data;
+      if (videoResponse) {
+        const video = videoResponse.items[0];
         state.video.item = {
           ...state.video.item,
-          [video.videoId as string]: video,
+          [video.id as string]: video,
         };
       }
     };
-    const fetchVideoInfoFailed = (
+    const fetchVideoFailed = (
       state: VideoState,
       { error }: { error: SerializedError }
     ) => {
@@ -141,59 +126,14 @@ const videoSlice = createSlice({
       state.videos.error = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
-    const downloadVideoStart = (
-      state: VideoState,
-      {
-        meta: { arg },
-      }: {
-        meta: { arg: DownloadParameter };
-      }
-    ) => {
-      const videoItem = state.video.item[arg.videoId];
-      if (!videoItem) return;
-      const key =
-        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
-      videoItem[key] = {
-        status: AsyncStatus.LOADING,
-        error: "",
-      };
-    };
-    const downloadVideoFailed = (
-      state: VideoState,
-      {
-        error,
-        meta: { arg },
-      }: { error: SerializedError; meta: { arg: DownloadParameter } }
-    ) => {
-      const videoItem = state.video.item[arg.videoId];
-      if (!videoItem) return;
-      const key =
-        arg.filter === "audioonly" ? "downloadAudioonly" : "downloadVideo";
-      if (error.message === DOWNLOAD_CANCELD_ERROR) {
-        videoItem[key] = {
-          status: AsyncStatus.IDLE,
-          error: "",
-        };
-        return;
-      }
-      videoItem[key] = {
-        status: AsyncStatus.FAIL,
-        error: error.message || DEFAULT_ERROR_MESSAGE,
-      };
-    };
-
     builder
-      .addCase(fetchVideoInfo.pending, fetchVideoInfoStart)
-      .addCase(fetchVideoInfo.fulfilled, fetchVideoInfoSuccess)
-      .addCase(fetchVideoInfo.rejected, fetchVideoInfoFailed)
+      .addCase(fetchVideo.pending, fetchVideoStart)
+      .addCase(fetchVideo.fulfilled, fetchVideoSuccess)
+      .addCase(fetchVideo.rejected, fetchVideoFailed)
       .addCase(fetchVideos.pending, fetchVideosStart)
       .addCase(fetchVideos.fulfilled, fetchVideosSuccess)
-      .addCase(fetchVideos.rejected, fetchVideosFailed)
-      .addCase(downloadVideo.pending, downloadVideoStart)
-      .addCase(downloadVideo.rejected, downloadVideoFailed);
+      .addCase(fetchVideos.rejected, fetchVideosFailed);
   },
 });
-
-export const { setDownloadState } = videoSlice.actions;
 
 export const videoReducer = videoSlice.reducer;

@@ -11,9 +11,9 @@ export function VideoPlayer({ videoId }: { videoId: string }) {
         overflow: "hidden",
         background: "#dcddde",
         paddingBottom: {
-          xl: '54%',
-          md: '50%',
-          xs: '60%',
+          xl: "50%",
+          md: "60%",
+          xs: "70%",
         },
         mb: 1,
       }}

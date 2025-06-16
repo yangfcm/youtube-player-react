@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { fetchVideoInfo } from "./videoSlice";
+import { fetchVideo, fetchVideoInfo } from "./videoSlice";
 
 export function useVideo(videoId?: string) {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ export function useVideo(videoId?: string) {
 
   useEffect(() => {
     if (videoId && !video) {
-      dispatch(fetchVideoInfo(videoId));
+      dispatch(fetchVideo(videoId));
     }
     // eslint-disable-next-line
   }, [videoId]);

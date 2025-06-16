@@ -132,13 +132,7 @@ export interface VideoState {
   };
   video: {
     status: AsyncStatus;
-    item: Record<
-      string,
-      VideoInfoResponse & {
-        downloadVideo?: DownloadState;
-        downloadAudioonly?: DownloadState;
-      }
-    >;
+    item: Record<string, VideoSnippetStats>;
     error: string;
   };
 }
