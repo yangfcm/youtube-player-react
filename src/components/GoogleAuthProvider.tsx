@@ -4,6 +4,8 @@ import { useAuth } from "../features/user/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { useProfile } from "../features/user/useProfile";
 import { db } from "../settings/firebaseConfig";
+import { useTokenRefresh } from "../hooks/useTokenRefresh";
+import { useEnhancedSessionManager } from "../hooks/useEnhancedSessionManager";
 
 export type GsiResponse = {
   client_id: string;
@@ -21,7 +23,7 @@ export type GsiAuthResponse = {
 };
 
 export const GoogleAuthContext = createContext<{ client: any } | undefined>(
-  undefined
+  undefined,
 );
 
 export function GoogleAuthProvider({
@@ -34,6 +36,10 @@ export function GoogleAuthProvider({
   const [client, setClient] = useState<any>();
   const { token, setToken, fetchUserByToken, signout } = useAuth();
   const profile = useProfile();
+
+  // Initialize automatic token refresh and enhanced session management
+  useTokenRefresh();
+  useEnhancedSessionManager();
 
   const initializeGsi = useCallback(() => {
     const { google } = window as any;
@@ -77,6 +83,9 @@ export function GoogleAuthProvider({
 
   useEffect(() => {
     if (profile && token) {
+      // Store user email for refresh token hints
+      localStorage.setItem("user_email", profile.email);
+
       setDoc(
         doc(db, "users", profile.id),
         {
@@ -84,7 +93,7 @@ export function GoogleAuthProvider({
           accessToken: token.replace("Bearer ", ""),
           lastLogin: Date.now(),
         },
-        { merge: true }
+        { merge: true },
       );
     }
   }, [profile, token]);
