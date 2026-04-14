@@ -50,6 +50,9 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
             },
           }}
           image={imageUrl || placeholder}
+          onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+            e.currentTarget.src = placeholder;
+          }}
         />
       </Box>
       <Box>

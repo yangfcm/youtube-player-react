@@ -15,6 +15,7 @@ export default function Channel() {
   const { pathname } = useLocation();
   const pathValue = pathname.split("/")[3] || "videos";
   const [value, setValue] = useState(pathValue);
+  const [bannerImageError, setBannerImageError] = useState(false);
   const { id = "" } = useParams();
   const { channelProfile, status, error } = useChannelProfile(id);
 
@@ -30,11 +31,19 @@ export default function Channel() {
   return (
     <Box sx={{ pb: 2 }}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-      {bannerImageUrl && <ChannelBanner imageUrl={bannerImageUrl} />}
+      {bannerImageUrl && (
+        <ChannelBanner
+          imageUrl={bannerImageUrl}
+          onError={() => setBannerImageError(true)}
+        />
+      )}
       <Box
         sx={{
           transform: {
-            sm: bannerImageUrl ? `translateY(${bannerHeight})` : "",
+            sm:
+              bannerImageUrl && !bannerImageError
+                ? `translateY(${bannerHeight})`
+                : "",
             xs: "",
           },
         }}

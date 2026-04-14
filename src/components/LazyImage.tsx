@@ -5,6 +5,7 @@ import {
   useCallback,
   MutableRefObject,
 } from "react";
+import placeholder from "../images/placeholder-channel.jpg";
 
 const listenerCallbacks = new WeakMap();
 
@@ -26,12 +27,12 @@ let observer = new IntersectionObserver(
   {
     rootMargin: "0px",
     threshold: 0.25,
-  }
+  },
 );
 
 const useIntersection = (
   ref: MutableRefObject<HTMLDivElement | null>,
-  callback: () => void
+  callback: () => void,
 ) => {
   let intersectionRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -76,15 +77,23 @@ export function LazyImage(props: LazyImageProps) {
   return (
     <div ref={ref}>
       {inView ? (
-        <img src={src} alt={alt} title={title} style={style} />
+        <img
+          src={src}
+          alt={alt}
+          title={title}
+          style={style}
+          onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+            e.currentTarget.src = placeholder;
+          }}
+        />
       ) : (
         <img
           src={
             ratio === "1:1"
               ? PLACEHOLDER_IMAGE_SQUARE
               : ratio === "3:2"
-              ? PLACEHOLDER_IMAGE_RECTANGLE
-              : ""
+                ? PLACEHOLDER_IMAGE_RECTANGLE
+                : ""
           }
           alt="loading"
           style={{ width: "100%", height: "auto" }}
