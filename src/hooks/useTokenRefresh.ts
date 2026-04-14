@@ -22,6 +22,8 @@ export function useTokenRefresh() {
   const { isSignedIn, setToken, signout } = useAuth();
   const refreshTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const clientRef = useRef<any>(null);
+  const refreshTokenRef = useRef<() => void>(() => {});
+  const scheduleTokenRefreshRef = useRef<(expiresAt: number) => void>(() => {});
 
   // Get the Google client instance
   const getGoogleClient = useCallback(() => {
@@ -37,7 +39,7 @@ export function useTokenRefresh() {
         callback: (response: any) => {
           const newExpiresAt = Date.now() + response.expires_in * 1000;
           setToken(response.access_token, newExpiresAt);
-          scheduleTokenRefresh(newExpiresAt);
+          scheduleTokenRefreshRef.current(newExpiresAt);
         },
       });
     }
@@ -57,7 +59,7 @@ export function useTokenRefresh() {
 
     if (refreshTime > 0) {
       refreshTimeoutRef.current = setTimeout(() => {
-        refreshToken();
+        refreshTokenRef.current();
       }, refreshTime);
 
       console.log(
@@ -85,6 +87,15 @@ export function useTokenRefresh() {
       signout();
     }
   }, [getGoogleClient, signout]);
+
+  // Keep refs pointing at the latest function instances
+  useEffect(() => {
+    scheduleTokenRefreshRef.current = scheduleTokenRefresh;
+  }, [scheduleTokenRefresh]);
+
+  useEffect(() => {
+    refreshTokenRef.current = refreshToken;
+  }, [refreshToken]);
 
   // Initialize token refresh scheduling when user signs in
   useEffect(() => {
