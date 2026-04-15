@@ -37,9 +37,16 @@ export function useTokenRefresh() {
         scope:
           "openid email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl",
         callback: (response: any) => {
+          if (response.error) {
+            console.error("Token refresh error:", response.error);
+            return;
+          }
           const newExpiresAt = Date.now() + response.expires_in * 1000;
           setToken(response.access_token, newExpiresAt);
           scheduleTokenRefreshRef.current(newExpiresAt);
+        },
+        error_callback: (error: any) => {
+          console.error("Silent token refresh failed:", error);
         },
       });
     }
@@ -55,7 +62,7 @@ export function useTokenRefresh() {
     }
 
     // Calculate when to refresh (5 minutes before expiry)
-    const refreshTime = expiresAt - Date.now() - 5 * 60 * 1000; // 5 minutes before expiry
+    const refreshTime = expiresAt - Date.now() - 5 * 60 * 1000;
 
     if (refreshTime > 0) {
       refreshTimeoutRef.current = setTimeout(() => {
@@ -80,8 +87,9 @@ export function useTokenRefresh() {
 
       console.log("Refreshing access token...");
 
-      // Request a new access token
-      client.requestAccessToken();
+      // Refresh silently using the stored account hint
+      const hint = localStorage.getItem("user_email") || "";
+      client.requestAccessToken({ prompt: "", hint });
     } catch (error) {
       console.error("Failed to refresh token:", error);
       signout();
