@@ -74,8 +74,8 @@ export interface ChannelDetailsResponse {
 
 export interface ChannelState {
   profile: {
-    status: AsyncStatus;
-    error: string;
+    status: Record<string, AsyncStatus>;
+    error: Record<string, string>;
     data: Record<string, ChannelDetails>;
   };
   videos: {

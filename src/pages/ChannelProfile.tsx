@@ -40,7 +40,7 @@ export default function ChannelProfile() {
       <ProfileTitle>
         <VideoLibraryIcon />
         &nbsp;{formatNumber(
-          parseInt(channelProfile.statistics.videoCount)
+          parseInt(channelProfile.statistics.videoCount),
         )}{" "}
         videos
       </ProfileTitle>

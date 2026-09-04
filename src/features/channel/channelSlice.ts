@@ -17,8 +17,8 @@ import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: ChannelState = {
   profile: {
-    status: AsyncStatus.IDLE,
-    error: "",
+    status: {},
+    error: {},
     data: {},
   },
   videos: {
@@ -74,8 +74,16 @@ export const channelSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    const fetchChannelProfileStart = (state: ChannelState) => {
-      state.profile.status = AsyncStatus.LOADING;
+    const fetchChannelProfileStart = (
+      state: ChannelState,
+      {
+        meta: { arg },
+      }: {
+        meta: { arg: { channelId: string } };
+      }
+    ) => {
+      const { channelId } = arg;
+      state.profile.status[channelId] = AsyncStatus.LOADING;
     };
     const fetchChannelProfileSuccess = (
       state: ChannelState,
@@ -88,17 +96,24 @@ export const channelSlice = createSlice({
       }
     ) => {
       const { channelId } = arg;
-      state.profile.status = AsyncStatus.SUCCESS;
-      state.profile.error = "";
+      state.profile.status[channelId] = AsyncStatus.SUCCESS;
+      state.profile.error[channelId] = "";
       state.profile.data[channelId] =
         payload.data.items && payload.data.items[0];
     };
     const fetchChannelProfileFailed = (
       state: ChannelState,
-      { error }: { error: SerializedError }
+      {
+        error,
+        meta: { arg },
+      }: {
+        error: SerializedError;
+        meta: { arg: { channelId: string } };
+      }
     ) => {
-      state.profile.status = AsyncStatus.FAIL;
-      state.profile.error = error.message || DEFAULT_ERROR_MESSAGE;
+      const { channelId } = arg;
+      state.profile.status[channelId] = AsyncStatus.FAIL;
+      state.profile.error[channelId] = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     const fetchChannelVideosStart = (state: ChannelState) => {
