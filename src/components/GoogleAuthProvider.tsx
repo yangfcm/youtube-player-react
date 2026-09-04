@@ -1,9 +1,6 @@
 import { useEffect, useState, useCallback, createContext } from "react";
-import { doc, setDoc } from "firebase/firestore";
 import { useAuth } from "../features/user/useAuth";
 import { LoadingSpinner } from "./LoadingSpinner";
-import { useProfile } from "../features/user/useProfile";
-import { db } from "../settings/firebaseConfig";
 import { useTokenRefresh } from "../hooks/useTokenRefresh";
 import { useEnhancedSessionManager } from "../hooks/useEnhancedSessionManager";
 
@@ -34,8 +31,7 @@ export function GoogleAuthProvider({
   const [gsiLoaded, setGsiLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [client, setClient] = useState<any>();
-  const { token, setToken, fetchUserByToken, signout } = useAuth();
-  const profile = useProfile();
+  const { setToken, fetchUserByToken, signout } = useAuth();
 
   // Initialize automatic token refresh and enhanced session management
   useTokenRefresh();
@@ -80,23 +76,6 @@ export function GoogleAuthProvider({
     }
     // eslint-disable-next-line
   }, [gsiLoaded]);
-
-  useEffect(() => {
-    if (profile && token) {
-      // Store user email for refresh token hints
-      localStorage.setItem("user_email", profile.email);
-
-      setDoc(
-        doc(db, "users", profile.id),
-        {
-          ...profile,
-          accessToken: token.replace("Bearer ", ""),
-          lastLogin: Date.now(),
-        },
-        { merge: true },
-      );
-    }
-  }, [profile, token]);
 
   if (loading) {
     return <LoadingSpinner />;

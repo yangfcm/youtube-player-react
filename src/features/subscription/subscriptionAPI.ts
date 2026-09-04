@@ -5,6 +5,7 @@ import {
   doc,
   documentId,
   getDoc,
+  getDocFromServer,
   getDocs,
   query,
   setDoc,
@@ -29,7 +30,9 @@ function chunk<T>(items: T[], size: number): T[][] {
 }
 
 async function fetchSubscribedChannelIds(userId: string): Promise<string[]> {
-  const userSnap = await getDoc(doc(db, USERS, userId));
+  // This doc is also written to on login (see useAuth's profile mirror),
+  // so force a genuine server round trip rather than risk a stale local view.
+  const userSnap = await getDocFromServer(doc(db, USERS, userId));
   return (userSnap.data()?.subscriptions as string[] | undefined) || [];
 }
 

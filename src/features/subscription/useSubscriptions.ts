@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { AsyncStatus } from "../../settings/types";
 import { fetchSubscribedChannels } from "./subscriptionSlice";
 
 export function useSubscriptions() {
@@ -14,11 +13,14 @@ export function useSubscriptions() {
     (state: RootState) => state.user.profile?.data?.id
   );
 
+  // Always refetch on mount rather than only when idle, so the list is
+  // never left stuck showing a stale/empty result from an earlier mount.
   useEffect(() => {
-    if (userId && status === AsyncStatus.IDLE) {
+    if (userId) {
       dispatch(fetchSubscribedChannels(userId));
     }
-  }, [userId, status, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, dispatch]);
 
   return { channels, status, error };
 }
