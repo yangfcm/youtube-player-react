@@ -83,7 +83,13 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
                 {title}
               </Typography>
             )}
-            {id && <SubscribeButton channelId={id} />}
+            {id && (
+              <SubscribeButton
+                channelId={id}
+                title={title}
+                thumbnail={imageUrl || ""}
+              />
+            )}
           </Stack>
           <Typography
             variant="subtitle2"

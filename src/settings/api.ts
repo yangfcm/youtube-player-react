@@ -17,7 +17,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     // Check if this endpoint needs authentication
-    const needsAuth = ["/subscriptions", "/playlists", "/commentThreads"].some(
+    const needsAuth = ["/playlists", "/commentThreads"].some(
       (endpoint) => config.url?.includes(endpoint),
     );
 

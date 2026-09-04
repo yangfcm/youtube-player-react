@@ -11,7 +11,6 @@ export const SIDEBAR_WIDTH = "200px";
 export const SMALL_SIDEBAR_WIDTH = "56px";
 export const HEADER_HEIGHT = "65px";
 export const COMMENTS_TURNED_OFF_MESSAGE = "Comments are turned off.";
-export const UNSUBSCRIBED = "0"; // Use string '0' to indicate the channel is not subscribed.
 export const DEFAULT_COUNTRY_CODE = "US";
 export const LOCATION_API_URL = "https://api.db-ip.com/v2/free/self";
 export const ALLOWED_COUNTRY_CODES = [

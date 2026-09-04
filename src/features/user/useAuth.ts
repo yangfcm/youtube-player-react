@@ -9,6 +9,7 @@ import {
   fetchUserByToken as fetchUserByTokenAction,
 } from "./userSlice";
 import { resetTimeline } from "../timeline/timelineSlice";
+import { resetSubscriptions } from "../subscription/subscriptionSlice";
 import { UserProfile } from "./types";
 import { RootState } from "../../app/store";
 
@@ -42,6 +43,7 @@ export function useAuth() {
   const signout = useCallback(() => {
     localStorage.removeItem("token");
     dispatch(resetTimeline());
+    dispatch(resetSubscriptions());
     dispatch(signoutAction());
   }, [dispatch]);
 

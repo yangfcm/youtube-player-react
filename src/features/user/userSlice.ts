@@ -9,20 +9,9 @@ import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
-import {
-  SubscriptionSnippet,
-  SubscriptionsResponse,
-  UserState,
-  UserProfile,
-  UserInfoResponse,
-} from "./types";
-import {
-  fetchPlayListsAPI,
-  fetchSubscriptionIdAPI,
-  fetchSubscriptionsAPI,
-  fetchUserByTokenAPI,
-} from "./userAPI";
-import { DEFAULT_ERROR_MESSAGE, UNSUBSCRIBED } from "../../settings/constant";
+import { UserState, UserProfile, UserInfoResponse } from "./types";
+import { fetchPlayListsAPI, fetchUserByTokenAPI } from "./userAPI";
+import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: UserState = {
   profile: {
@@ -31,11 +20,6 @@ const initialState: UserState = {
   },
   token: "",
   expiresAt: 0,
-  subscriptions: {
-    status: AsyncStatus.IDLE,
-    error: "",
-    subscriptionIds: {},
-  },
   playlists: {
     status: AsyncStatus.IDLE,
     error: "",
@@ -43,26 +27,10 @@ const initialState: UserState = {
   isGoogleAuthEnabled: false,
 };
 
-export const fetchSubscriptions = createAsyncThunk(
-  "user/fetchSubscriptions",
-  async (options?: Record<string, string>) => {
-    const response = await fetchSubscriptionsAPI(options);
-    return response;
-  }
-);
-
 export const fetchPlayLists = createAsyncThunk(
   "user/fetchPlayLists",
   async (options?: Record<string, string>) => {
     const response = await fetchPlayListsAPI(options);
-    return response;
-  }
-);
-
-export const fetchSubscriptionId = createAsyncThunk(
-  "user/fetchSubscriptionId",
-  async (channelId: string) => {
-    const response = await fetchSubscriptionIdAPI(channelId);
     return response;
   }
 );
@@ -103,11 +71,6 @@ const userSlice = createSlice({
       };
       state.token = "";
       state.expiresAt = 0;
-      state.subscriptions = {
-        status: AsyncStatus.IDLE,
-        error: "",
-        subscriptionIds: {},
-      };
       state.playlists = {
         status: AsyncStatus.IDLE,
         error: "",
@@ -116,76 +79,8 @@ const userSlice = createSlice({
     setGoogleAuthEnabled: (state, { payload }: PayloadAction<boolean>) => {
       state.isGoogleAuthEnabled = payload;
     },
-    receiveSubscriptionId: (
-      state,
-      {
-        payload: { channelId, subscriptionId },
-      }: PayloadAction<{ channelId: string; subscriptionId: string }>
-    ) => {
-      state.subscriptions.subscriptionIds[channelId] = subscriptionId;
-    },
-    subscribed: (
-      state,
-      {
-        payload: { channelId, subscription },
-      }: PayloadAction<{ channelId: string; subscription: SubscriptionSnippet }>
-    ) => {
-      state.subscriptions.subscriptionIds[channelId] = subscription.id;
-      if (state.subscriptions.data) {
-        // Add the newly subscribed channel to the top of the existing subscriptions.
-        state.subscriptions.data.items.unshift(subscription);
-      }
-    },
-    unsubscribed: (
-      state,
-      { payload: { channelId } }: PayloadAction<{ channelId: string }>
-    ) => {
-      state.subscriptions.subscriptionIds[channelId] = UNSUBSCRIBED;
-      if (state.subscriptions.data) {
-        state.subscriptions.data.items = state.subscriptions.data.items.filter(
-          (item) => item.snippet.resourceId.channelId !== channelId
-        );
-      }
-    },
   },
   extraReducers: (builder) => {
-    const fetchSubscriptionsStart = (
-      state: UserState,
-      { meta: { arg } }: { meta: { arg?: Record<string, string> } }
-    ) => {
-      state.subscriptions.status = AsyncStatus.LOADING;
-      if (!arg?.pageToken) state.subscriptions.data = undefined;
-    };
-    const fetchSubscriptionsSuccess = (
-      state: UserState,
-      {
-        payload,
-      }: {
-        payload: AxiosResponse<SubscriptionsResponse>;
-      }
-    ) => {
-      const currentItems = state.subscriptions.data?.items || [];
-      state.subscriptions.status = AsyncStatus.SUCCESS;
-      state.subscriptions.error = "";
-      state.subscriptions.data = {
-        ...payload.data,
-        items: [...currentItems, ...payload.data.items],
-      };
-      payload.data.items.forEach(
-        (item) =>
-          (state.subscriptions.subscriptionIds[
-            item.snippet.resourceId.channelId
-          ] = item.id)
-      ); // Populate subscriptionIds map.
-    };
-    const fetchSubscriptionsFailed = (
-      state: UserState,
-      { error }: { error: SerializedError }
-    ) => {
-      state.subscriptions.status = AsyncStatus.FAIL;
-      state.subscriptions.error = error.message || DEFAULT_ERROR_MESSAGE;
-    };
-
     const fetchPlayListsStart = (
       state: UserState,
       { meta: { arg } }: { meta: { arg?: Record<string, string> } }
@@ -247,9 +142,6 @@ const userSlice = createSlice({
       state.profile.error = error.message || "Failed to login";
     };
     builder
-      .addCase(fetchSubscriptions.pending, fetchSubscriptionsStart)
-      .addCase(fetchSubscriptions.fulfilled, fetchSubscriptionsSuccess)
-      .addCase(fetchSubscriptions.rejected, fetchSubscriptionsFailed)
       .addCase(fetchPlayLists.pending, fetchPlayListsStart)
       .addCase(fetchPlayLists.fulfilled, fetchPlayListsSuccess)
       .addCase(fetchPlayLists.rejected, fetchPlayListsFailed)
@@ -259,15 +151,8 @@ const userSlice = createSlice({
   },
 });
 
-export const {
-  signin,
-  setToken,
-  signout,
-  setGoogleAuthEnabled,
-  receiveSubscriptionId,
-  subscribed,
-  unsubscribed,
-} = userSlice.actions;
+export const { signin, setToken, signout, setGoogleAuthEnabled } =
+  userSlice.actions;
 
 const selUserState = (state: RootState) => state.user;
 

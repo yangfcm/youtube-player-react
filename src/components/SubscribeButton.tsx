@@ -1,35 +1,38 @@
 import LoadingButton from "@mui/lab/LoadingButton";
 import { RequireAuth } from "./RequireAuth";
-import { useSubscribe } from "../features/user/useSubscribe";
-import { AsyncStatus } from "../settings/types";
-import { UNSUBSCRIBED } from "../settings/constant";
+import { useSubscribe } from "../features/subscription/useSubscribe";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
-import { updateUserSubscriptions } from "../app/firebaseServices";
-import { useProfile } from "../features/user/useProfile";
 
-function SubscribeButtonComp({ channelId }: { channelId: string }) {
+type SubscribeButtonProps = {
+  channelId: string;
+  title: string;
+  thumbnail: string;
+};
+
+function SubscribeButtonComp({
+  channelId,
+  title,
+  thumbnail,
+}: SubscribeButtonProps) {
   const {
-    status,
-    subscriptionId,
-    subscribeChannel,
-    unsubscribeChannel,
+    subscribed,
+    ready,
+    loading,
     error,
+    subscribe,
+    unsubscribe,
   } = useSubscribe(channelId);
-  const subscribed = subscriptionId !== UNSUBSCRIBED;
   const [subscribedText, setSubscribedText] = useState("Subscribed");
-  const user = useProfile();
-
-  if (!subscriptionId) return null;
 
   return (
     <>
-      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
+      <ErrorMessage open={!!error}>{error}</ErrorMessage>
       <LoadingButton
-        loading={status === AsyncStatus.LOADING}
+        loading={loading}
         variant={subscribed ? "contained" : "outlined"}
         size="small"
-        disabled={status === AsyncStatus.LOADING}
+        disabled={loading || !ready}
         sx={{ width: "130px" }}
         onMouseOver={() => {
           if (subscribed) setSubscribedText("Unsubscribe");
@@ -39,13 +42,9 @@ function SubscribeButtonComp({ channelId }: { channelId: string }) {
         }}
         onClick={() => {
           if (subscribed) {
-            unsubscribeChannel(subscriptionId).then(() => {
-              updateUserSubscriptions(user?.id || "", channelId, "unsubscribe");
-            });
+            unsubscribe();
           } else {
-            subscribeChannel().then(() => {
-              updateUserSubscriptions(user?.id || "", channelId, "subscribe");
-            });
+            subscribe({ id: channelId, title, thumbnail });
           }
         }}
       >
@@ -55,10 +54,10 @@ function SubscribeButtonComp({ channelId }: { channelId: string }) {
   );
 }
 
-export function SubscribeButton({ channelId }: { channelId: string }) {
+export function SubscribeButton(props: SubscribeButtonProps) {
   return (
     <RequireAuth>
-      <SubscribeButtonComp channelId={channelId} />
+      <SubscribeButtonComp {...props} />
     </RequireAuth>
   );
 }
