@@ -27,11 +27,18 @@ export function useSubscribe(channelId: string) {
     (state: RootState) => state.user.profile?.data?.id
   );
 
+  // Mount-only, same as useSubscriptions: if the user signs in while this
+  // button stays mounted, useAuth's post-login flow dispatches this fetch
+  // itself (sequenced after its own Firestore write to the same doc), and
+  // `status`/`subscribed` below pick up the result reactively regardless of
+  // who dispatched it. Reacting to userId here too would fire a second,
+  // unsequenced fetch that can race that write and read back stale data.
   useEffect(() => {
     if (userId && status === AsyncStatus.IDLE) {
       dispatch(fetchSubscribedChannels(userId));
     }
-  }, [userId, status, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const subscribe = useCallback(
     (channel: Channel) => {
