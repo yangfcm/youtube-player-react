@@ -17,7 +17,7 @@ export default function Subscriptions() {
     <RequireAuth unAuthedComponent={<RequireLoginPage />}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Typography variant="h5" sx={{ mb: 2 }}>
-        Subscriptions
+        My Channels
       </Typography>
       {status === AsyncStatus.LOADING && channels.length === 0 && (
         <LoadingSpinner />

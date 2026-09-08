@@ -13,6 +13,7 @@ const PlayLists = lazy(() => import("./pages/PlayLists"));
 const PlayListVideos = lazy(() => import("./pages/PlayListVideos"));
 const Channel = lazy(() => import("./pages/Channel"));
 const PopularVideos = lazy(() => import("./pages/PopularVideos"));
+const Collections = lazy(() => import("./pages/Collections"));
 
 export function Router() {
   return (
@@ -21,6 +22,7 @@ export function Router() {
       <Route path="/search" element={<SearchResults />} />
       <Route path="/playlist/:id" element={<PlayListVideos />} />
       <Route path="/playlists" element={<PlayLists />} />
+      <Route path="/collections" element={<Collections />} />
       <Route path="/explore" element={<PopularVideos />} />
       <Route path="/video/:id" element={<Video />} />
       <Route path="/channel/:id" element={<Channel />}>

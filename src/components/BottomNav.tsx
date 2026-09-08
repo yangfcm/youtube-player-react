@@ -4,7 +4,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Link, useLocation } from "react-router-dom";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import ViewListIcon from "@mui/icons-material/ViewList";
+// import ViewListIcon from "@mui/icons-material/ViewList";
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 
@@ -54,11 +55,19 @@ export function BottomNav() {
           value="/subscriptions"
           sx={TAB_STYLE}
         />
-        <Tab
+        {/* <Tab
           component={Link}
           to="/playlists"
           label="Play List"
           icon={<ViewListIcon />}
+          value="/playlists"
+          sx={TAB_STYLE}
+        /> */}
+        <Tab
+          component={Link}
+          to="/collections"
+          label="Collections"
+          icon={<CollectionsBookmarkIcon />}
           value="/playlists"
           sx={TAB_STYLE}
         />
