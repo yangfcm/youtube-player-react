@@ -8,3 +8,13 @@ export interface CollectionItem {
   channelId?: string;
   channelTitle?: string;
 }
+
+export interface Collection {
+  id: string;
+  name: string;
+  thumbnail?: string;
+  createdAt: number;
+  updatedAt: number;
+  totalCount: number;
+  items: CollectionItem[];
+}

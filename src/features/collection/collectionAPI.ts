@@ -1,0 +1,96 @@
+import {
+  arrayUnion,
+  collection,
+  doc,
+  documentId,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  writeBatch,
+} from "firebase/firestore";
+import { db } from "../../settings/firebaseConfig";
+import { Collection, CollectionItem } from "./types";
+
+const USERS = "users";
+const COLLECTIONS = "collections";
+
+// Firestore allows at most 30 values in an `in` filter.
+const IN_QUERY_LIMIT = 30;
+
+function chunk<T>(items: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < items.length; i += size) {
+    chunks.push(items.slice(i, i + size));
+  }
+  return chunks;
+}
+
+// Firestore rejects `undefined` field values, but CollectionItem's optional
+// fields (e.g. channelId/channelTitle on a channel item) come through as
+// undefined rather than simply absent.
+function stripUndefined<T extends object>(obj: T): T {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, value]) => value !== undefined)
+  ) as T;
+}
+
+async function fetchUserCollections(userId: string): Promise<Collection[]> {
+  const userSnap = await getDoc(doc(db, USERS, userId));
+  const collectionIds = (userSnap.data()?.collections as string[]) || [];
+  if (collectionIds.length === 0) return [];
+
+  const collections: Collection[] = [];
+  const snapshots = await Promise.all(
+    chunk(collectionIds, IN_QUERY_LIMIT).map((ids) =>
+      getDocs(
+        query(collection(db, COLLECTIONS), where(documentId(), "in", ids))
+      )
+    )
+  );
+  snapshots.forEach((snapshot) =>
+    snapshot.forEach((collectionDoc) =>
+      collections.push(collectionDoc.data() as Collection)
+    )
+  );
+  return collections;
+}
+
+export async function createCollectionAPI(
+  userId: string,
+  name: string,
+  item: CollectionItem
+): Promise<Collection> {
+  const trimmedName = name.trim();
+  const existingCollections = await fetchUserCollections(userId);
+  const isDuplicate = existingCollections.some(
+    (existing) =>
+      existing.name.trim().toLowerCase() === trimmedName.toLowerCase()
+  );
+  if (isDuplicate) {
+    throw new Error("A collection with this name already exists.");
+  }
+
+  const newCollectionRef = doc(collection(db, COLLECTIONS));
+  const now = Date.now();
+  const newCollection: Collection = {
+    id: newCollectionRef.id,
+    name: trimmedName,
+    thumbnail: item.imageUrl || "",
+    createdAt: now,
+    updatedAt: now,
+    totalCount: 1,
+    items: [stripUndefined(item)],
+  };
+
+  const batch = writeBatch(db);
+  batch.set(newCollectionRef, newCollection);
+  batch.set(
+    doc(db, USERS, userId),
+    { collections: arrayUnion(newCollectionRef.id) },
+    { merge: true }
+  );
+  await batch.commit();
+
+  return newCollection;
+}
