@@ -110,8 +110,10 @@ export function SaveToCollectionModal({
           </Box>
         </DialogContent>
       </Dialog>
-      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-      <SuccessMessage open={status === AsyncStatus.SUCCESS}>
+      <ErrorMessage open={open && status === AsyncStatus.FAIL}>
+        {error}
+      </ErrorMessage>
+      <SuccessMessage open={open && status === AsyncStatus.SUCCESS}>
         Collection created
       </SuccessMessage>
     </>

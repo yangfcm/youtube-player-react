@@ -39,12 +39,9 @@ export default function Channel() {
       )}
       <Box
         sx={{
-          transform: {
-            sm:
-              bannerImageUrl && !bannerImageError
-                ? `translateY(${bannerHeight})`
-                : "",
-            xs: "",
+          marginTop: {
+            sm: bannerImageUrl && !bannerImageError ? bannerHeight : 0,
+            xs: 0,
           },
         }}
       >
