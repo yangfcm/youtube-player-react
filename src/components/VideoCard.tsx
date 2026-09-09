@@ -88,7 +88,9 @@ export function VideoCard({
           >
             {title}
           </MuiLink>
-          <ActionMenu />
+          <ActionMenu
+            item={{ type: "video", id, title, imageUrl, channelId, channelTitle }}
+          />
         </Box>
         <Box sx={{ mb: "5px" }}>
           <MuiLink

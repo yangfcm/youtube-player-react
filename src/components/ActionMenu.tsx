@@ -8,8 +8,13 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
 import { RequireAuth } from "./RequireAuth";
+import { CollectionItem } from "../features/collection/types";
 
-export function ActionMenu() {
+type ActionMenuPropsType = {
+  item: CollectionItem;
+};
+
+export function ActionMenu({ item }: ActionMenuPropsType) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const menuOpen = Boolean(anchorEl);
@@ -52,6 +57,7 @@ export function ActionMenu() {
         </MenuItem>
       </Menu>
       <SaveToCollectionModal
+        item={item}
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       />

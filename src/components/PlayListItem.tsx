@@ -72,7 +72,16 @@ export function PlayListItem({ playlist }: { playlist: PlaylistPropsType }) {
               />
               &nbsp;{title}
             </MuiLink>
-            <ActionMenu />
+            <ActionMenu
+              item={{
+                type: "playlist",
+                id,
+                title,
+                imageUrl,
+                channelId,
+                channelTitle,
+              }}
+            />
           </Box>
           {channelTitle && (
             <>

@@ -15,10 +15,13 @@ type PlaylistPropsType = {
   imageUrl?: string;
   videoCount?: number;
   privacy?: string;
+  channelId?: string;
+  channelTitle?: string;
 };
 
 export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
-  const { id, title, imageUrl, videoCount, privacy } = playlist;
+  const { id, title, imageUrl, videoCount, privacy, channelId, channelTitle } =
+    playlist;
   return (
     <Card>
       <Link to={`/playlist/${id}`}>
@@ -46,7 +49,16 @@ export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
           >
             {title}
           </MuiLink>
-          <ActionMenu />
+          <ActionMenu
+            item={{
+              type: "playlist",
+              id,
+              title,
+              imageUrl,
+              channelId,
+              channelTitle,
+            }}
+          />
         </Box>
         {videoCount !== undefined && (
           <Chip

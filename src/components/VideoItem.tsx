@@ -93,7 +93,16 @@ export function VideoItem({ video }: { video: VideoPropsType }) {
               />
               &nbsp;{title}
             </MuiLink>
-            <ActionMenu />
+            <ActionMenu
+              item={{
+                type: "video",
+                id,
+                title,
+                imageUrl,
+                channelId,
+                channelTitle,
+              }}
+            />
           </Box>
           {channelTitle && (
             <>
