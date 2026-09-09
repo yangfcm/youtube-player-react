@@ -2,7 +2,7 @@ export type CollectionItemType = "video" | "playlist" | "channel";
 
 export interface CollectionItem {
   type: CollectionItemType;
-  id: string;
+  itemId: string;
   title: string;
   imageUrl?: string;
   channelId?: string;

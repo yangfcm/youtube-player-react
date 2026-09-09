@@ -91,7 +91,9 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
                 thumbnail={imageUrl || ""}
               />
             )}
-            <ActionMenu item={{ type: "channel", id, title, imageUrl }} />
+            <ActionMenu
+              item={{ type: "channel", itemId: id, title, imageUrl }}
+            />
           </Stack>
           <Typography
             variant="subtitle2"

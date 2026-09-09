@@ -52,7 +52,7 @@ export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
           <ActionMenu
             item={{
               type: "playlist",
-              id,
+              itemId: id,
               title,
               imageUrl,
               channelId,

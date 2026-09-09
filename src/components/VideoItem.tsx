@@ -96,7 +96,7 @@ export function VideoItem({ video }: { video: VideoPropsType }) {
             <ActionMenu
               item={{
                 type: "video",
-                id,
+                itemId: id,
                 title,
                 imageUrl,
                 channelId,
