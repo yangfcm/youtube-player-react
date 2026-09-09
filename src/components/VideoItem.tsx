@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { fromNow } from "../app/utils";
 import placeholder from "../images/placeholder-item.jpg";
+import { ActionMenu } from "./ActionMenu";
 
 type VideoPropsType = {
   id: string;
@@ -64,31 +65,36 @@ export function VideoItem({ video }: { video: VideoPropsType }) {
       </Box>
       <Box>
         <CardContent>
-          <MuiLink
-            component={Link}
-            to={
-              `/video/${id}` + (playlistId ? `?playlistId=${playlistId}` : "")
-            }
-            underline="none"
-            variant="h6"
-            color="inherit"
-            sx={{
-              display: "block",
-              lineHeight: "23px",
-              height: {
-                xs: "auto",
-                sm: 23 * 3 + "px", // Restrict title to three lines.
-              },
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            <OndemandVideoIcon
-              sx={{ height: "18px", transform: "translateY(2px)" }}
-              color="error"
-            />
-            &nbsp;{title}
-          </MuiLink>
+          <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1 }}>
+            <MuiLink
+              component={Link}
+              to={
+                `/video/${id}` + (playlistId ? `?playlistId=${playlistId}` : "")
+              }
+              underline="none"
+              variant="h6"
+              color="inherit"
+              sx={{
+                display: "block",
+                flexGrow: 1,
+                minWidth: 0,
+                lineHeight: "23px",
+                height: {
+                  xs: "auto",
+                  sm: 23 * 3 + "px", // Restrict title to three lines.
+                },
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              <OndemandVideoIcon
+                sx={{ height: "18px", transform: "translateY(2px)" }}
+                color="error"
+              />
+              &nbsp;{title}
+            </MuiLink>
+            <ActionMenu />
+          </Box>
           {channelTitle && (
             <>
               {channelId ? (
