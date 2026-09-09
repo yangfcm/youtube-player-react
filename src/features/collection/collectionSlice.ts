@@ -1,17 +1,22 @@
-import { createAsyncThunk, createSlice, SerializedError } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  SerializedError,
+} from "@reduxjs/toolkit";
 import { AsyncStatus } from "../../settings/types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 import { createCollectionAPI } from "./collectionAPI";
-import { CollectionItem } from "./types";
-
-interface CollectionState {
-  createStatus: AsyncStatus;
-  createError: string;
-}
+import { CollectionItem, CollectionState } from "./types";
 
 const initialState: CollectionState = {
   createStatus: AsyncStatus.IDLE,
   createError: "",
+
+  status: AsyncStatus.IDLE,
+  error: "",
+
+  collections: [],
+  collectionsData: new Map(),
 };
 
 export const createCollection = createAsyncThunk(
@@ -19,7 +24,7 @@ export const createCollection = createAsyncThunk(
   async (args: { userId: string; name: string; item: CollectionItem }) => {
     const { userId, name, item } = args;
     return await createCollectionAPI(userId, name, item);
-  }
+  },
 );
 
 const collectionSlice = createSlice({
@@ -46,7 +51,7 @@ const collectionSlice = createSlice({
         (state, { error }: { error: SerializedError }) => {
           state.createStatus = AsyncStatus.FAIL;
           state.createError = error.message || DEFAULT_ERROR_MESSAGE;
-        }
+        },
       );
   },
 });
