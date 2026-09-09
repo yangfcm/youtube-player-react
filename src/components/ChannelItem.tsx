@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import RecentActorsIcon from "@mui/icons-material/RecentActors";
 import placeholder from "../images/placeholder-channel.jpg";
 import { SubscribeButton } from "./SubscribeButton";
+import { ActionMenu } from "./ActionMenu";
 
 type ChannelPropsType = {
   id: string;
@@ -90,6 +91,7 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
                 thumbnail={imageUrl || ""}
               />
             )}
+            <ActionMenu />
           </Stack>
           <Typography
             variant="subtitle2"
