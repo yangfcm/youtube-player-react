@@ -1,4 +1,5 @@
 import {
+  arrayRemove,
   arrayUnion,
   collection,
   doc,
@@ -95,4 +96,19 @@ export async function createCollectionAPI(
   await batch.commit();
 
   return newCollection;
+}
+
+export async function deleteUserCollectionAPI(
+  userId: string,
+  collectionId: string
+): Promise<string> {
+  const batch = writeBatch(db);
+  batch.delete(doc(db, COLLECTIONS, collectionId));
+  batch.set(
+    doc(db, USERS, userId),
+    { collections: arrayRemove(collectionId) },
+    { merge: true }
+  );
+  await batch.commit();
+  return collectionId;
 }
