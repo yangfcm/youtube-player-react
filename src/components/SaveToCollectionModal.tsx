@@ -24,6 +24,8 @@ import { ErrorMessage } from "./ErrorMessage";
 import { SuccessMessage } from "./SuccessMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
 
+const MAX_NAME_LENGTH = 40;
+
 type SaveToCollectionModalPropsType = {
   item: CollectionItem;
   open: boolean;
@@ -53,6 +55,7 @@ export function SaveToCollectionModal({
     if (status === AsyncStatus.SUCCESS) {
       setName("");
       onClose();
+      reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
@@ -79,6 +82,12 @@ export function SaveToCollectionModal({
     const trimmedName = name.trim();
     if (!trimmedName) {
       setNameError("Collection name is required");
+      return;
+    }
+    if (trimmedName.length > MAX_NAME_LENGTH) {
+      setNameError(
+        `Collection name cannot exceed ${MAX_NAME_LENGTH} characters`,
+      );
       return;
     }
     createCollection(trimmedName, item);
@@ -115,6 +124,7 @@ export function SaveToCollectionModal({
                   }}
                   error={Boolean(nameError)}
                   helperText={nameError || " "}
+                  inputProps={{ maxLength: MAX_NAME_LENGTH }}
                   sx={{ mb: 4 }}
                 />
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

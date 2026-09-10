@@ -17,7 +17,7 @@ export function SuccessMessage({
 }) {
   const [openAlert, setOpenAlert] = useState(false);
   useEffect(() => {
-    setOpenAlert(open);
+    if (open) setOpenAlert(true);
   }, [open]);
 
   return (
