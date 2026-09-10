@@ -11,16 +11,6 @@ export interface CollectionItem {
   channelTitle?: string;
 }
 
-export interface Collection {
-  id: string;
-  name: string;
-  thumbnail?: string;
-  createdAt: number;
-  updatedAt: number;
-  totalCount: number;
-  items: CollectionItem[];
-}
-
 export interface CollectionSnippet {
   id: string;
   name: string;
@@ -28,6 +18,10 @@ export interface CollectionSnippet {
   createdAt: number;
   updatedAt: number;
   totalCount: number;
+}
+
+export interface Collection extends CollectionSnippet {
+  items: CollectionItem[];
 }
 
 interface CollectionData {

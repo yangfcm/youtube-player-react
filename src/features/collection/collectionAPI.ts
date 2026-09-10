@@ -10,7 +10,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
-import { Collection, CollectionItem } from "./types";
+import { Collection, CollectionItem, CollectionSnippet } from "./types";
 
 const USERS = "users";
 const COLLECTIONS = "collections";
@@ -35,7 +35,9 @@ function stripUndefined<T extends object>(obj: T): T {
   ) as T;
 }
 
-async function fetchUserCollections(userId: string): Promise<Collection[]> {
+export async function fetchUserCollectionsAPI(
+  userId: string
+): Promise<CollectionSnippet[]> {
   const userSnap = await getDoc(doc(db, USERS, userId));
   const collectionIds = (userSnap.data()?.collections as string[]) || [];
   if (collectionIds.length === 0) return [];
@@ -62,7 +64,7 @@ export async function createCollectionAPI(
   item: CollectionItem
 ): Promise<Collection> {
   const trimmedName = name.trim();
-  const existingCollections = await fetchUserCollections(userId);
+  const existingCollections = await fetchUserCollectionsAPI(userId);
   const isDuplicate = existingCollections.some(
     (existing) =>
       existing.name.trim().toLowerCase() === trimmedName.toLowerCase()

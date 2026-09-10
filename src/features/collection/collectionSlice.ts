@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { AsyncStatus } from "../../settings/types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
-import { createCollectionAPI } from "./collectionAPI";
+import { createCollectionAPI, fetchUserCollectionsAPI } from "./collectionAPI";
 import { CollectionItem, CollectionState } from "./types";
 
 const initialState: CollectionState = {
@@ -27,10 +27,16 @@ export const createCollection = createAsyncThunk(
   },
 );
 
+export const fetchUserCollections = createAsyncThunk(
+  "collection/fetchUserCollections",
+  async (userId: string) => await fetchUserCollectionsAPI(userId),
+);
+
 const collectionSlice = createSlice({
   name: "collection",
   initialState,
   reducers: {
+    resetCollections: () => initialState,
     resetCreateStatus: (state) => {
       state.createStatus = AsyncStatus.IDLE;
       state.createError = "";
@@ -52,10 +58,26 @@ const collectionSlice = createSlice({
           state.createStatus = AsyncStatus.FAIL;
           state.createError = error.message || DEFAULT_ERROR_MESSAGE;
         },
+      )
+      .addCase(fetchUserCollections.pending, (state) => {
+        state.status = AsyncStatus.LOADING;
+        state.error = "";
+      })
+      .addCase(fetchUserCollections.fulfilled, (state, { payload }) => {
+        state.status = AsyncStatus.SUCCESS;
+        state.error = "";
+        state.collections = payload;
+      })
+      .addCase(
+        fetchUserCollections.rejected,
+        (state, { error }: { error: SerializedError }) => {
+          state.status = AsyncStatus.FAIL;
+          state.error = error.message || DEFAULT_ERROR_MESSAGE;
+        },
       );
   },
 });
 
-export const { resetCreateStatus } = collectionSlice.actions;
+export const { resetCollections, resetCreateStatus } = collectionSlice.actions;
 
 export const collectionReducer = collectionSlice.reducer;

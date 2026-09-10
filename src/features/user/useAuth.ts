@@ -14,6 +14,10 @@ import {
   resetSubscriptions,
   fetchSubscribedChannels,
 } from "../subscription/subscriptionSlice";
+import {
+  resetCollections,
+  fetchUserCollections,
+} from "../collection/collectionSlice";
 import { UserProfile } from "./types";
 import { RootState } from "../../app/store";
 import { db } from "../../settings/firebaseConfig";
@@ -27,7 +31,7 @@ async function mirrorProfileToFirestore(profile: UserProfile, token: string) {
   await setDoc(
     doc(db, "users", profile.id),
     { ...profile, accessToken: token, lastLogin: Date.now() },
-    { merge: true }
+    { merge: true },
   );
 }
 
@@ -42,14 +46,14 @@ export function useAuth() {
   const token = useSelector((state: RootState) => state.user.token);
   const profile = useSelector((state: RootState) => state.user.profile?.data);
   const isGoogleAuthEnabled = useSelector(
-    (state: RootState) => state.user.isGoogleAuthEnabled
+    (state: RootState) => state.user.isGoogleAuthEnabled,
   );
 
   const setGoogleAuthEnabled = useCallback(
     (enabled: boolean) => {
       dispatch(setGoogleAuthEnabledAction(enabled));
     },
-    [dispatch]
+    [dispatch],
   );
 
   const signin = useCallback(
@@ -57,11 +61,12 @@ export function useAuth() {
       localStorage.setItem("token", "Bearer " + token);
       dispatch(signinAction({ user, token, expiresAt }));
     },
-    [dispatch]
+    [dispatch],
   );
   const signout = useCallback(() => {
     localStorage.removeItem("token");
     dispatch(resetTimeline());
+    dispatch(resetCollections());
     dispatch(resetSubscriptions());
     dispatch(signoutAction());
   }, [dispatch]);
@@ -78,7 +83,7 @@ export function useAuth() {
         mirrorProfileToFirestore(profile, token);
       }
     },
-    [dispatch, profile]
+    [dispatch, profile],
   );
 
   const fetchUserByToken = useCallback(
@@ -100,10 +105,11 @@ export function useAuth() {
           // Firestore operations on this doc never race each other.
           await mirrorProfileToFirestore(newProfile, token);
           dispatch(fetchSubscribedChannels(sub));
+          dispatch(fetchUserCollections(sub));
         })
         .catch(() => {});
     },
-    [dispatch]
+    [dispatch],
   );
 
   return {
