@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
@@ -14,7 +14,10 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { LazyImage } from "./LazyImage";
 import { ConfirmDialog } from "./ConfirmDialog";
+import { ErrorMessage } from "./ErrorMessage";
 import { CollectionSnippet } from "../features/collection/types";
+import { useDeleteCollection } from "../features/collection/useDeleteCollection";
+import { AsyncStatus } from "../settings/types";
 import placeholder from "../images/placeholder-item.jpg";
 
 export function CollectionCard({
@@ -34,6 +37,15 @@ export function CollectionCard({
   const handleCloseMenu = () => setAnchorEl(null);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const { deleteCollection, status, error } = useDeleteCollection(
+    collection.id,
+  );
+
+  useEffect(() => {
+    if (status === AsyncStatus.SUCCESS) {
+      setConfirmOpen(false);
+    }
+  }, [status]);
 
   return (
     <>
@@ -112,9 +124,11 @@ export function CollectionCard({
       <ConfirmDialog
         open={confirmOpen}
         title="Are you sure to delete the collection?"
-        onConfirm={() => setConfirmOpen(false)}
+        loading={status === AsyncStatus.LOADING}
+        onConfirm={deleteCollection}
         onCancel={() => setConfirmOpen(false)}
       />
+      <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
     </>
   );
 }

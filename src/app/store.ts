@@ -1,4 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { enableMapSet } from "immer";
 import { videoReducer } from "../features/video/videoSlice";
 import { settingReducer } from "../features/setting/settingSlice";
 import { userReducer } from "../features/user/userSlice";
@@ -9,6 +10,8 @@ import { channelReducer } from "../features/channel/channelSlice";
 import { timelineReducer } from "../features/timeline/timelineSlice";
 import { subscriptionReducer } from "../features/subscription/subscriptionSlice";
 import { collectionReducer } from "../features/collection/collectionSlice";
+
+enableMapSet();
 
 export const store = configureStore({
   reducer: {

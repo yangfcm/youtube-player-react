@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 type ConfirmDialogPropsType = {
   open: boolean;
   title: string;
+  loading?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 };
@@ -13,6 +14,7 @@ type ConfirmDialogPropsType = {
 export function ConfirmDialog({
   open,
   title,
+  loading = false,
   onConfirm,
   onCancel,
 }: ConfirmDialogPropsType) {
@@ -20,11 +22,11 @@ export function ConfirmDialog({
     <Dialog open={open} onClose={onCancel}>
       <DialogTitle>{title}</DialogTitle>
       <DialogActions>
-        <Button onClick={onCancel} color="inherit">
+        <Button onClick={onCancel} color="inherit" disabled={loading}>
           Cancel
         </Button>
-        <Button onClick={onConfirm} variant="outlined">
-          Confirm
+        <Button onClick={onConfirm} variant="outlined" disabled={loading}>
+          {loading ? "Confirming..." : "Confirm"}
         </Button>
       </DialogActions>
     </Dialog>
