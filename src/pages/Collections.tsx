@@ -28,7 +28,7 @@ export default function Collections() {
       <Box sx={{ pb: 2 }}>
         <Grid container spacing={2} sx={{ pb: 2 }}>
           {collections.map((collection) => (
-            <Grid item xs={6} sm={3} lg={2} key={collection.id}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={collection.id}>
               <CollectionCard collection={collection} />
             </Grid>
           ))}

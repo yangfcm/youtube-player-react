@@ -32,12 +32,12 @@ function chunk<T>(items: T[], size: number): T[][] {
 // undefined rather than simply absent.
 function stripUndefined<T extends object>(obj: T): T {
   return Object.fromEntries(
-    Object.entries(obj).filter(([, value]) => value !== undefined)
+    Object.entries(obj).filter(([, value]) => value !== undefined),
   ) as T;
 }
 
 export async function fetchUserCollectionsAPI(
-  userId: string
+  userId: string,
 ): Promise<CollectionSnippet[]> {
   const userSnap = await getDoc(doc(db, USERS, userId));
   const collectionIds = (userSnap.data()?.collections as string[]) || [];
@@ -47,14 +47,14 @@ export async function fetchUserCollectionsAPI(
   const snapshots = await Promise.all(
     chunk(collectionIds, IN_QUERY_LIMIT).map((ids) =>
       getDocs(
-        query(collection(db, COLLECTIONS), where(documentId(), "in", ids))
-      )
-    )
+        query(collection(db, COLLECTIONS), where(documentId(), "in", ids)),
+      ),
+    ),
   );
   snapshots.forEach((snapshot) =>
     snapshot.forEach((collectionDoc) =>
-      collections.push(collectionDoc.data() as Collection)
-    )
+      collections.push(collectionDoc.data() as Collection),
+    ),
   );
   return collections;
 }
@@ -62,13 +62,13 @@ export async function fetchUserCollectionsAPI(
 export async function createCollectionAPI(
   userId: string,
   name: string,
-  item: CollectionItem
+  item: CollectionItem,
+  existingCollections: CollectionSnippet[],
 ): Promise<Collection> {
   const trimmedName = name.trim();
-  const existingCollections = await fetchUserCollectionsAPI(userId);
   const isDuplicate = existingCollections.some(
     (existing) =>
-      existing.name.trim().toLowerCase() === trimmedName.toLowerCase()
+      existing.name.trim().toLowerCase() === trimmedName.toLowerCase(),
   );
   if (isDuplicate) {
     throw new Error("A collection with this name already exists.");
@@ -91,7 +91,7 @@ export async function createCollectionAPI(
   batch.set(
     doc(db, USERS, userId),
     { collections: arrayUnion(newCollectionRef.id) },
-    { merge: true }
+    { merge: true },
   );
   await batch.commit();
 
@@ -100,14 +100,14 @@ export async function createCollectionAPI(
 
 export async function deleteUserCollectionAPI(
   userId: string,
-  collectionId: string
+  collectionId: string,
 ): Promise<string> {
   const batch = writeBatch(db);
   batch.delete(doc(db, COLLECTIONS, collectionId));
   batch.set(
     doc(db, USERS, userId),
     { collections: arrayRemove(collectionId) },
-    { merge: true }
+    { merge: true },
   );
   await batch.commit();
   return collectionId;

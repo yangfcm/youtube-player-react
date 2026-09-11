@@ -3,6 +3,7 @@ import {
   createSlice,
   SerializedError,
 } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 import {
@@ -36,9 +37,13 @@ const initialState: CollectionState = {
 
 export const createCollection = createAsyncThunk(
   "collection/createCollection",
-  async (args: { userId: string; name: string; item: CollectionItem }) => {
+  async (
+    args: { userId: string; name: string; item: CollectionItem },
+    { getState },
+  ) => {
     const { userId, name, item } = args;
-    return await createCollectionAPI(userId, name, item);
+    const { collections } = (getState() as RootState).collection;
+    return await createCollectionAPI(userId, name, item, collections);
   },
 );
 
