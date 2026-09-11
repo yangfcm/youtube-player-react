@@ -41,5 +41,5 @@ export interface CollectionState {
 
   collections: CollectionSnippet[];
 
-  collectionsData: Map<string, CollectionData>;
+  collectionsData: Record<string, CollectionData>;
 }

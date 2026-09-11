@@ -11,8 +11,8 @@ export function useDeleteCollection(collectionId: string) {
   const userId = useSelector(
     (state: RootState) => state.user.profile?.data?.id,
   );
-  const collectionData = useSelector((state: RootState) =>
-    state.collection.collectionsData.get(collectionId),
+  const collectionData = useSelector(
+    (state: RootState) => state.collection.collectionsData[collectionId],
   );
   const status = collectionData?.mutateStatus ?? AsyncStatus.IDLE;
   const error = collectionData?.mutateError ?? "";

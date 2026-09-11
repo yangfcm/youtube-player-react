@@ -26,7 +26,7 @@ export function ConfirmDialog({
           Cancel
         </Button>
         <Button onClick={onConfirm} variant="outlined" disabled={loading}>
-          {loading ? "Confirming..." : "Confirm"}
+          Confirm
         </Button>
       </DialogActions>
     </Dialog>

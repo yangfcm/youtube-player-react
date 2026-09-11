@@ -15,7 +15,7 @@ import { CollectionItem, CollectionState } from "./types";
 
 function getCollectionData(state: CollectionState, id: string) {
   return (
-    state.collectionsData.get(id) ?? {
+    state.collectionsData[id] ?? {
       fetchStatus: AsyncStatus.IDLE,
       fetchError: "",
       mutateStatus: AsyncStatus.IDLE,
@@ -32,7 +32,7 @@ const initialState: CollectionState = {
   error: "",
 
   collections: [],
-  collectionsData: new Map(),
+  collectionsData: {},
 };
 
 export const createCollection = createAsyncThunk(
@@ -110,21 +110,21 @@ const collectionSlice = createSlice({
           { meta: { arg } }: { meta: { arg: { collectionId: string } } },
         ) => {
           const { collectionId } = arg;
-          state.collectionsData.set(collectionId, {
+          state.collectionsData[collectionId] = {
             ...getCollectionData(state, collectionId),
             mutateStatus: AsyncStatus.LOADING,
             mutateError: "",
-          });
+          };
         },
       )
       .addCase(
         deleteCollection.fulfilled,
         (state, { payload }: { payload: string }) => {
-          state.collectionsData.set(payload, {
+          state.collectionsData[payload] = {
             ...getCollectionData(state, payload),
             mutateStatus: AsyncStatus.SUCCESS,
             mutateError: "",
-          });
+          };
           state.collections = state.collections.filter(
             (c) => c.id !== payload,
           );
@@ -143,11 +143,11 @@ const collectionSlice = createSlice({
           },
         ) => {
           const { collectionId } = arg;
-          state.collectionsData.set(collectionId, {
+          state.collectionsData[collectionId] = {
             ...getCollectionData(state, collectionId),
             mutateStatus: AsyncStatus.FAIL,
             mutateError: error.message || DEFAULT_ERROR_MESSAGE,
-          });
+          };
         },
       );
   },
