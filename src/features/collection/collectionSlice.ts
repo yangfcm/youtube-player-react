@@ -9,8 +9,9 @@ import {
   createCollectionAPI,
   deleteUserCollectionAPI,
   fetchUserCollectionsAPI,
+  updateUserCollectionAPI,
 } from "./collectionAPI";
-import { CollectionItem, CollectionState } from "./types";
+import { Collection, CollectionItem, CollectionState } from "./types";
 
 function getCollectionData(state: CollectionState, id: string) {
   return (
@@ -45,6 +46,14 @@ export const createCollection = createAsyncThunk(
 export const fetchUserCollections = createAsyncThunk(
   "collection/fetchUserCollections",
   async (userId: string) => await fetchUserCollectionsAPI(userId),
+);
+
+export const updateCollection = createAsyncThunk(
+  "collection/updateCollection",
+  async (args: { collectionId: string; name: string }) => {
+    const { collectionId, name } = args;
+    return await updateUserCollectionAPI(collectionId, { name });
+  },
 );
 
 export const deleteCollection = createAsyncThunk(
@@ -96,6 +105,55 @@ const collectionSlice = createSlice({
         (state, { error }: { error: SerializedError }) => {
           state.status = AsyncStatus.FAIL;
           state.error = error.message || DEFAULT_ERROR_MESSAGE;
+        },
+      )
+      .addCase(
+        updateCollection.pending,
+        (
+          state,
+          { meta: { arg } }: { meta: { arg: { collectionId: string } } },
+        ) => {
+          const { collectionId } = arg;
+          state.collectionsData[collectionId] = {
+            ...getCollectionData(state, collectionId),
+            mutateStatus: AsyncStatus.LOADING,
+            mutateError: "",
+          };
+        },
+      )
+      .addCase(
+        updateCollection.fulfilled,
+        (state, { payload }: { payload: Collection }) => {
+          state.collectionsData[payload.id] = {
+            ...getCollectionData(state, payload.id),
+            mutateStatus: AsyncStatus.SUCCESS,
+            mutateError: "",
+          };
+          state.collections = state.collections.map((c) =>
+            c.id === payload.id
+              ? { ...c, name: payload.name, updatedAt: payload.updatedAt }
+              : c,
+          );
+        },
+      )
+      .addCase(
+        updateCollection.rejected,
+        (
+          state,
+          {
+            meta: { arg },
+            error,
+          }: {
+            meta: { arg: { collectionId: string } };
+            error: SerializedError;
+          },
+        ) => {
+          const { collectionId } = arg;
+          state.collectionsData[collectionId] = {
+            ...getCollectionData(state, collectionId),
+            mutateStatus: AsyncStatus.FAIL,
+            mutateError: error.message || DEFAULT_ERROR_MESSAGE,
+          };
         },
       )
       .addCase(

@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   query,
+  updateDoc,
   where,
   writeBatch,
 } from "firebase/firestore";
@@ -88,6 +89,28 @@ export async function createCollectionAPI(
   await batch.commit();
 
   return newCollection;
+}
+
+export async function updateUserCollectionAPI(
+  collectionId: string,
+  data: Pick<Collection, "name">,
+): Promise<Collection> {
+  const collectionRef = doc(db, COLLECTIONS, collectionId);
+  const collectionSnap = await getDoc(collectionRef);
+  const existing = collectionSnap.data() as Collection;
+
+  const updatedCollection: Collection = {
+    ...existing,
+    name: data.name.trim(),
+    updatedAt: Date.now(),
+  };
+
+  await updateDoc(collectionRef, {
+    name: updatedCollection.name,
+    updatedAt: updatedCollection.updatedAt,
+  });
+
+  return updatedCollection;
 }
 
 export async function deleteUserCollectionAPI(
