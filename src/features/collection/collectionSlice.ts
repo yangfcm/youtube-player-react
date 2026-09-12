@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createSlice,
+  PayloadAction,
   SerializedError,
 } from "@reduxjs/toolkit";
 import { AsyncStatus } from "../../settings/types";
@@ -9,9 +10,15 @@ import {
   createCollectionAPI,
   deleteUserCollectionAPI,
   fetchUserCollectionsAPI,
+  updateCollectionItemAPI,
   updateUserCollectionAPI,
 } from "./collectionAPI";
-import { Collection, CollectionItem, CollectionState } from "./types";
+import {
+  Collection,
+  CollectionItem,
+  CollectionItemOperation,
+  CollectionState,
+} from "./types";
 
 function getCollectionData(state: CollectionState, id: string) {
   return (
@@ -56,6 +63,18 @@ export const updateCollection = createAsyncThunk(
   },
 );
 
+export const updateCollectionItem = createAsyncThunk(
+  "collection/updateCollectionItem",
+  async (args: {
+    collectionId: string;
+    item: CollectionItem;
+    operation: CollectionItemOperation;
+  }) => {
+    const { collectionId, item, operation } = args;
+    return await updateCollectionItemAPI(collectionId, item, operation);
+  },
+);
+
 export const deleteCollection = createAsyncThunk(
   "collection/deleteCollection",
   async (args: { userId: string; collectionId: string }) => {
@@ -72,6 +91,14 @@ const collectionSlice = createSlice({
     resetCreateStatus: (state) => {
       state.createStatus = AsyncStatus.IDLE;
       state.createError = "";
+    },
+    resetCollectionMutateStatus: (state, action: PayloadAction<string>) => {
+      const collectionId = action.payload;
+      state.collectionsData[collectionId] = {
+        ...getCollectionData(state, collectionId),
+        mutateStatus: AsyncStatus.IDLE,
+        mutateError: "",
+      };
     },
   },
   extraReducers: (builder) => {
@@ -157,6 +184,53 @@ const collectionSlice = createSlice({
         },
       )
       .addCase(
+        updateCollectionItem.pending,
+        (
+          state,
+          { meta: { arg } }: { meta: { arg: { collectionId: string } } },
+        ) => {
+          const { collectionId } = arg;
+          state.collectionsData[collectionId] = {
+            ...getCollectionData(state, collectionId),
+            mutateStatus: AsyncStatus.LOADING,
+            mutateError: "",
+          };
+        },
+      )
+      .addCase(
+        updateCollectionItem.fulfilled,
+        (state, { payload }: { payload: Collection }) => {
+          state.collectionsData[payload.id] = {
+            ...getCollectionData(state, payload.id),
+            mutateStatus: AsyncStatus.SUCCESS,
+            mutateError: "",
+          };
+          state.collections = state.collections.map((c) =>
+            c.id === payload.id ? payload : c,
+          );
+        },
+      )
+      .addCase(
+        updateCollectionItem.rejected,
+        (
+          state,
+          {
+            meta: { arg },
+            error,
+          }: {
+            meta: { arg: { collectionId: string } };
+            error: SerializedError;
+          },
+        ) => {
+          const { collectionId } = arg;
+          state.collectionsData[collectionId] = {
+            ...getCollectionData(state, collectionId),
+            mutateStatus: AsyncStatus.FAIL,
+            mutateError: error.message || DEFAULT_ERROR_MESSAGE,
+          };
+        },
+      )
+      .addCase(
         deleteCollection.pending,
         (
           state,
@@ -206,6 +280,10 @@ const collectionSlice = createSlice({
   },
 });
 
-export const { resetCollections, resetCreateStatus } = collectionSlice.actions;
+export const {
+  resetCollections,
+  resetCreateStatus,
+  resetCollectionMutateStatus,
+} = collectionSlice.actions;
 
 export const collectionReducer = collectionSlice.reducer;

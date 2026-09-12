@@ -2,6 +2,8 @@ import { AsyncStatus } from "../../settings/types";
 
 export type CollectionItemType = "video" | "playlist" | "channel";
 
+export type CollectionItemOperation = "add" | "remove";
+
 export interface CollectionItem {
   type: CollectionItemType;
   itemId: string;

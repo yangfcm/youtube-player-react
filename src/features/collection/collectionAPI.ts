@@ -12,7 +12,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
-import { Collection, CollectionItem } from "./types";
+import { Collection, CollectionItem, CollectionItemOperation } from "./types";
 
 const USERS = "users";
 const COLLECTIONS = "collections";
@@ -89,6 +89,42 @@ export async function createCollectionAPI(
   await batch.commit();
 
   return newCollection;
+}
+
+export async function updateCollectionItemAPI(
+  collectionId: string,
+  item: CollectionItem,
+  operation: CollectionItemOperation,
+): Promise<Collection> {
+  const collectionRef = doc(db, COLLECTIONS, collectionId);
+  const collectionSnap = await getDoc(collectionRef);
+  const existing = collectionSnap.data() as Collection;
+
+  const updatedItems =
+    operation === "add"
+      ? [...existing.items, stripUndefined(item)]
+      : existing.items.filter(
+          (existingItem) =>
+            !(
+              existingItem.type === item.type &&
+              existingItem.itemId === item.itemId
+            ),
+        );
+
+  const updatedCollection: Collection = {
+    ...existing,
+    items: updatedItems,
+    totalCount: updatedItems.length,
+    updatedAt: Date.now(),
+  };
+
+  await updateDoc(collectionRef, {
+    items: updatedCollection.items,
+    totalCount: updatedCollection.totalCount,
+    updatedAt: updatedCollection.updatedAt,
+  });
+
+  return updatedCollection;
 }
 
 export async function updateUserCollectionAPI(

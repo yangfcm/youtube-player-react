@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -19,8 +19,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import placeholder from "../images/placeholder-item.jpg";
-import { CollectionItem } from "../features/collection/types";
+import { Collection, CollectionItem } from "../features/collection/types";
 import { useCreateCollection } from "../features/collection/useCreateCollection";
+import { useUpdateCollectionItem } from "../features/collection/useUpdateCollectionItem";
 import { fetchUserCollections } from "../features/collection/collectionSlice";
 import { useAppDispatch } from "../app/hooks";
 import { RootState } from "../app/store";
@@ -37,6 +38,62 @@ type SaveToCollectionModalPropsType = {
   onClose: () => void;
 };
 
+function CollectionListItem({
+  collection,
+  item,
+  onResult,
+}: {
+  collection: Collection;
+  item: CollectionItem;
+  onResult: (result: { status: AsyncStatus; error: string }) => void;
+}) {
+  const { updateCollectionItem, status, error, reset } =
+    useUpdateCollectionItem(collection.id);
+  const isSaved = collection.items.some(
+    (existingItem) =>
+      existingItem.type === item.type && existingItem.itemId === item.itemId,
+  );
+  const loading = status === AsyncStatus.LOADING;
+
+  useEffect(() => {
+    if (status === AsyncStatus.SUCCESS || status === AsyncStatus.FAIL) {
+      onResult({ status, error });
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  const handleClick = () => {
+    updateCollectionItem(item, isSaved ? "remove" : "add");
+  };
+
+  return (
+    <ListItem
+      disablePadding
+      sx={{ py: 0.5 }}
+      secondaryAction={
+        <IconButton
+          aria-label={isSaved ? "Remove from collection" : "Add to collection"}
+          size="small"
+          disabled={loading}
+          onClick={handleClick}
+        >
+          {isSaved ? <BookmarkIcon /> : <BookmarkAddOutlinedIcon />}
+        </IconButton>
+      }
+    >
+      <ListItemAvatar>
+        <Avatar
+          variant="rounded"
+          src={collection.thumbnail || placeholder}
+          alt={collection.name}
+        />
+      </ListItemAvatar>
+      <ListItemText primary={collection.name} />
+    </ListItem>
+  );
+}
+
 export function SaveToCollectionModal({
   item,
   open,
@@ -45,6 +102,19 @@ export function SaveToCollectionModal({
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const { createCollection, status, error, reset } = useCreateCollection();
+  const [itemActionStatus, setItemActionStatus] = useState<AsyncStatus>(
+    AsyncStatus.IDLE,
+  );
+  const [itemActionError, setItemActionError] = useState("");
+
+  const handleItemActionResult = useCallback(
+    ({ status, error }: { status: AsyncStatus; error: string }) => {
+      setItemActionStatus(status);
+      setItemActionError(error);
+      if (status === AsyncStatus.SUCCESS) onClose();
+    },
+    [onClose],
+  );
 
   const dispatch = useAppDispatch();
   const userId = useSelector(
@@ -68,7 +138,11 @@ export function SaveToCollectionModal({
   // Start each time the modal is opened with a clean slate, so a previous
   // success/error doesn't leak into the next item's "Save to Collection" flow.
   useEffect(() => {
-    if (open) reset();
+    if (open) {
+      reset();
+      setItemActionStatus(AsyncStatus.IDLE);
+      setItemActionError("");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
@@ -186,45 +260,14 @@ export function SaveToCollectionModal({
               {collections.length > 0 && (
                 <Box sx={{ maxHeight: 240, overflowY: "auto" }}>
                   <List disablePadding>
-                    {collections.map((collection) => {
-                      const isSaved = collection.items.some(
-                        (existingItem) =>
-                          existingItem.type === item.type &&
-                          existingItem.itemId === item.itemId,
-                      );
-                      return (
-                        <ListItem
-                          key={collection.id}
-                          disablePadding
-                          sx={{ py: 0.5 }}
-                          secondaryAction={
-                            <IconButton
-                              aria-label={
-                                isSaved
-                                  ? "Already in collection"
-                                  : "Add to collection"
-                              }
-                              size="small"
-                            >
-                              {isSaved ? (
-                                <BookmarkIcon />
-                              ) : (
-                                <BookmarkAddOutlinedIcon />
-                              )}
-                            </IconButton>
-                          }
-                        >
-                          <ListItemAvatar>
-                            <Avatar
-                              variant="rounded"
-                              src={collection.thumbnail || placeholder}
-                              alt={collection.name}
-                            />
-                          </ListItemAvatar>
-                          <ListItemText primary={collection.name} />
-                        </ListItem>
-                      );
-                    })}
+                    {collections.map((collection) => (
+                      <CollectionListItem
+                        key={collection.id}
+                        collection={collection}
+                        item={item}
+                        onResult={handleItemActionResult}
+                      />
+                    ))}
                   </List>
                 </Box>
               )}
@@ -237,6 +280,12 @@ export function SaveToCollectionModal({
       </ErrorMessage>
       <SuccessMessage open={status === AsyncStatus.SUCCESS}>
         Collection created
+      </SuccessMessage>
+      <ErrorMessage open={itemActionStatus === AsyncStatus.FAIL}>
+        {itemActionError}
+      </ErrorMessage>
+      <SuccessMessage open={itemActionStatus === AsyncStatus.SUCCESS}>
+        Collection updated
       </SuccessMessage>
     </>
   );
