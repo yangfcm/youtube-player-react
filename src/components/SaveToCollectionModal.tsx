@@ -70,7 +70,7 @@ function CollectionListItem({
   return (
     <ListItem
       disablePadding
-      sx={{ py: 0.5 }}
+      sx={{ py: 0.5, pr: 6 }}
       secondaryAction={
         <IconButton
           aria-label={isSaved ? "Remove from collection" : "Add to collection"}
