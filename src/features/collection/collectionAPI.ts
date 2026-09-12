@@ -60,6 +60,18 @@ export async function fetchUserCollectionsAPI(
   return collections;
 }
 
+export async function fetchUserCollectionAPI(
+  userId: string,
+  collectionId: string,
+): Promise<Collection | null> {
+  const userSnap = await getDoc(doc(db, USERS, userId));
+  const collectionIds = (userSnap.data()?.collections as string[]) || [];
+  if (!collectionIds.includes(collectionId)) return null;
+
+  const collectionSnap = await getDoc(doc(db, COLLECTIONS, collectionId));
+  return collectionSnap.exists() ? (collectionSnap.data() as Collection) : null;
+}
+
 export async function createCollectionAPI(
   userId: string,
   name: string,

@@ -9,6 +9,7 @@ import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 import {
   createCollectionAPI,
   deleteUserCollectionAPI,
+  fetchUserCollectionAPI,
   fetchUserCollectionsAPI,
   updateCollectionItemAPI,
   updateUserCollectionAPI,
@@ -53,6 +54,14 @@ export const createCollection = createAsyncThunk(
 export const fetchUserCollections = createAsyncThunk(
   "collection/fetchUserCollections",
   async (userId: string) => await fetchUserCollectionsAPI(userId),
+);
+
+export const fetchUserCollection = createAsyncThunk(
+  "collection/fetchUserCollection",
+  async (args: { userId: string; collectionId: string }) => {
+    const { userId, collectionId } = args;
+    return await fetchUserCollectionAPI(userId, collectionId);
+  },
 );
 
 export const updateCollection = createAsyncThunk(
@@ -100,6 +109,14 @@ const collectionSlice = createSlice({
         mutateError: "",
       };
     },
+    resetCollectionFetchStatus: (state, action: PayloadAction<string>) => {
+      const collectionId = action.payload;
+      state.collectionsData[collectionId] = {
+        ...getCollectionData(state, collectionId),
+        fetchStatus: AsyncStatus.IDLE,
+        fetchError: "",
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -132,6 +149,65 @@ const collectionSlice = createSlice({
         (state, { error }: { error: SerializedError }) => {
           state.status = AsyncStatus.FAIL;
           state.error = error.message || DEFAULT_ERROR_MESSAGE;
+        },
+      )
+      .addCase(
+        fetchUserCollection.pending,
+        (
+          state,
+          { meta: { arg } }: { meta: { arg: { collectionId: string } } },
+        ) => {
+          const { collectionId } = arg;
+          state.collectionsData[collectionId] = {
+            ...getCollectionData(state, collectionId),
+            fetchStatus: AsyncStatus.LOADING,
+            fetchError: "",
+          };
+        },
+      )
+      .addCase(
+        fetchUserCollection.fulfilled,
+        (
+          state,
+          {
+            payload,
+            meta: { arg },
+          }: { payload: Collection | null; meta: { arg: { collectionId: string } } },
+        ) => {
+          const { collectionId } = arg;
+          state.collectionsData[collectionId] = {
+            ...getCollectionData(state, collectionId),
+            fetchStatus: AsyncStatus.SUCCESS,
+            fetchError: "",
+          };
+          if (payload) {
+            const exists = state.collections.some((c) => c.id === payload.id);
+            state.collections = exists
+              ? state.collections.map((c) =>
+                  c.id === payload.id ? payload : c,
+                )
+              : [...state.collections, payload];
+          }
+        },
+      )
+      .addCase(
+        fetchUserCollection.rejected,
+        (
+          state,
+          {
+            meta: { arg },
+            error,
+          }: {
+            meta: { arg: { collectionId: string } };
+            error: SerializedError;
+          },
+        ) => {
+          const { collectionId } = arg;
+          state.collectionsData[collectionId] = {
+            ...getCollectionData(state, collectionId),
+            fetchStatus: AsyncStatus.FAIL,
+            fetchError: error.message || DEFAULT_ERROR_MESSAGE,
+          };
         },
       )
       .addCase(
@@ -284,6 +360,7 @@ export const {
   resetCollections,
   resetCreateStatus,
   resetCollectionMutateStatus,
+  resetCollectionFetchStatus,
 } = collectionSlice.actions;
 
 export const collectionReducer = collectionSlice.reducer;
