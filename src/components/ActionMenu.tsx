@@ -1,12 +1,11 @@
 import { useState } from "react";
-import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
+import { MoreOptionsButton } from "./MoreOptionsButton";
 import { RequireAuth } from "./RequireAuth";
 import { CollectionItem } from "../features/collection/types";
 
@@ -28,21 +27,7 @@ export function ActionMenu({ item }: ActionMenuPropsType) {
 
   return (
     <RequireAuth>
-      <IconButton
-        aria-label="Video options"
-        size="small"
-        onClick={handleOpenMenu}
-        sx={{
-          "&:hover": {
-            bgcolor: (theme) =>
-              theme.palette.mode === "dark"
-                ? "rgba(255,255,255,0.2)"
-                : "rgba(0,0,0,0.2)",
-          },
-        }}
-      >
-        <MoreVertIcon fontSize="small" />
-      </IconButton>
+      <MoreOptionsButton ariaLabel="Video options" onClick={handleOpenMenu} />
       <Menu
         anchorEl={anchorEl}
         open={menuOpen}

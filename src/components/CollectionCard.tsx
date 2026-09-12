@@ -5,17 +5,16 @@ import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { LazyImage } from "./LazyImage";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { ErrorMessage } from "./ErrorMessage";
+import { MoreOptionsButton } from "./MoreOptionsButton";
 import { CollectionSnippet } from "../features/collection/types";
 import { useDeleteCollection } from "../features/collection/useDeleteCollection";
 import { AsyncStatus } from "../settings/types";
@@ -87,21 +86,10 @@ export function CollectionCard({
             >
               {name}
             </MuiLink>
-            <IconButton
-              aria-label="Video options"
-              size="small"
-              sx={{
-                "&:hover": {
-                  bgcolor: (theme) =>
-                    theme.palette.mode === "dark"
-                      ? "rgba(255,255,255,0.2)"
-                      : "rgba(0,0,0,0.2)",
-                },
-              }}
+            <MoreOptionsButton
+              ariaLabel="Collection options"
               onClick={handleOpenMenu}
-            >
-              <MoreVertIcon fontSize="small" />
-            </IconButton>
+            />
             <Menu
               anchorEl={anchorEl}
               open={menuOpen}
