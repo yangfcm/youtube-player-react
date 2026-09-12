@@ -63,16 +63,8 @@ export async function createCollectionAPI(
   userId: string,
   name: string,
   item: CollectionItem,
-  existingCollections: CollectionSnippet[],
 ): Promise<Collection> {
   const trimmedName = name.trim();
-  const isDuplicate = existingCollections.some(
-    (existing) =>
-      existing.name.trim().toLowerCase() === trimmedName.toLowerCase(),
-  );
-  if (isDuplicate) {
-    throw new Error("A collection with this name already exists.");
-  }
 
   const newCollectionRef = doc(collection(db, COLLECTIONS));
   const now = Date.now();

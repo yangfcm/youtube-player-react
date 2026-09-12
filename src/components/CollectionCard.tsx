@@ -12,6 +12,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { LazyImage } from "./LazyImage";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { ErrorMessage } from "./ErrorMessage";
@@ -19,6 +20,7 @@ import { CollectionSnippet } from "../features/collection/types";
 import { useDeleteCollection } from "../features/collection/useDeleteCollection";
 import { AsyncStatus } from "../settings/types";
 import placeholder from "../images/placeholder-item.jpg";
+import { EditCollectionModal } from "./EditCollectionModal";
 
 export function CollectionCard({
   collection,
@@ -36,6 +38,7 @@ export function CollectionCard({
   };
   const handleCloseMenu = () => setAnchorEl(null);
 
+  const [editOpen, setEditOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { deleteCollection, status, error } = useDeleteCollection(
     collection.id,
@@ -105,6 +108,12 @@ export function CollectionCard({
               onClose={handleCloseMenu}
               onClick={handleCloseMenu}
             >
+              <MenuItem onClick={() => setEditOpen(true)}>
+                <ListItemIcon>
+                  <EditOutlinedIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Edit</ListItemText>
+              </MenuItem>
               <MenuItem onClick={() => setConfirmOpen(true)}>
                 <ListItemIcon>
                   <DeleteOutlinedIcon fontSize="small" />
@@ -121,6 +130,12 @@ export function CollectionCard({
           />
         </CardContent>
       </Card>
+
+      <EditCollectionModal
+        collection={collection}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+      />
       <ConfirmDialog
         open={confirmOpen}
         title="Are you sure to delete the collection?"

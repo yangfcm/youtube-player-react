@@ -7,12 +7,15 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
+import CloseIcon from "@mui/icons-material/Close";
 import placeholder from "../images/placeholder-item.jpg";
 import { CollectionItem } from "../features/collection/types";
 import { useCreateCollection } from "../features/collection/useCreateCollection";
@@ -90,6 +93,14 @@ export function SaveToCollectionModal({
       );
       return;
     }
+    const isDuplicate = collections.some(
+      (existing) =>
+        existing.name.trim().toLowerCase() === trimmedName.toLowerCase(),
+    );
+    if (isDuplicate) {
+      setNameError("A collection with this name already exists.");
+      return;
+    }
     createCollection(trimmedName, item);
   };
 
@@ -98,7 +109,18 @@ export function SaveToCollectionModal({
   return (
     <>
       <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
-        <DialogTitle>Save to My Collection</DialogTitle>
+        <DialogTitle>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <span>Save to My Collection</span>
+            <IconButton aria-label="close" onClick={onClose} size="small">
+              <CloseIcon />
+            </IconButton>
+          </Stack>
+        </DialogTitle>
         <DialogContent>
           <Box
             sx={{
@@ -128,7 +150,11 @@ export function SaveToCollectionModal({
                   sx={{ mb: 4 }}
                 />
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Button type="submit" variant="contained" disabled={loading}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    disabled={loading || !name.trim()}
+                  >
                     Create
                   </Button>
                 </Box>
