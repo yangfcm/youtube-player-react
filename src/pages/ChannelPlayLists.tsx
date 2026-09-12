@@ -38,6 +38,8 @@ export default function ChannelPlayLists() {
                   title: playlist.snippet.title,
                   imageUrl: playlist.snippet.thumbnails.high?.url,
                   videoCount: playlist.contentDetails.itemCount,
+                  channelId: playlist.snippet.channelId,
+                  channelTitle: playlist.snippet.channelTitle,
                 }}
               />
             </Grid>

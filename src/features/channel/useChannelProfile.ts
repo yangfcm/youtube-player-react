@@ -19,15 +19,10 @@ export function useChannelProfile(channelId: string) {
   );
 
   useEffect(() => {
-    if (
-      channelId &&
-      !channelProfile &&
-      asyncStatus !== AsyncStatus.LOADING &&
-      asyncStatus !== AsyncStatus.FAIL
-    ) {
+    if (channelId && asyncStatus === AsyncStatus.IDLE) {
       dispatch(fetchChannelProfile({ channelId }));
     }
-  }, [channelId, dispatch, channelProfile, asyncStatus]);
+  }, [channelId, dispatch, asyncStatus]);
 
   return {
     status: asyncStatus,

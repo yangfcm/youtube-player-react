@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
@@ -6,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import placeholder from "../images/placeholder-item.jpg";
 import { LazyImage } from "./LazyImage";
+import { ActionMenu } from "./ActionMenu";
 
 type PlaylistPropsType = {
   id: string;
@@ -13,10 +15,13 @@ type PlaylistPropsType = {
   imageUrl?: string;
   videoCount?: number;
   privacy?: string;
+  channelId?: string;
+  channelTitle?: string;
 };
 
 export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
-  const { id, title, imageUrl, videoCount, privacy } = playlist;
+  const { id, title, imageUrl, videoCount, privacy, channelId, channelTitle } =
+    playlist;
   return (
     <Card>
       <Link to={`/playlist/${id}`}>
@@ -27,21 +32,34 @@ export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
         />
       </Link>
       <CardContent>
-        <MuiLink
-          component={Link}
-          to={`/playlist/${id}`}
-          underline="none"
-          sx={{
-            display: "block",
-            lineHeight: "20px",
-            height: "40px",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            mb: 1,
-          }}
-        >
-          {title}
-        </MuiLink>
+        <Box sx={{ display: "flex", alignItems: "flex-start", mb: 1 }}>
+          <MuiLink
+            component={Link}
+            to={`/playlist/${id}`}
+            underline="none"
+            sx={{
+              display: "block",
+              flexGrow: 1,
+              minWidth: 0,
+              lineHeight: "20px",
+              height: "40px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {title}
+          </MuiLink>
+          <ActionMenu
+            item={{
+              type: "playlist",
+              itemId: id,
+              title,
+              imageUrl,
+              channelId,
+              channelTitle,
+            }}
+          />
+        </Box>
         {videoCount !== undefined && (
           <Chip
             label={`${videoCount} videos`}

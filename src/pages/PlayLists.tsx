@@ -38,6 +38,8 @@ export default function PlayLists() {
                     imageUrl: playList.snippet.thumbnails.high?.url,
                     videoCount: playList.contentDetails.itemCount,
                     privacy: playList.status.privacyStatus,
+                    channelId: playList.snippet.channelId,
+                    channelTitle: playList.snippet.channelTitle,
                   }}
                 />
               </Grid>

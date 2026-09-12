@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { fromNow, formatNumber } from "../app/utils";
 import placeholder from "../images/placeholder-item.jpg";
 import { LazyImage } from "./LazyImage";
+import { ActionMenu } from "./ActionMenu";
 
 type VideoTypeProps = {
   id: string;
@@ -62,26 +63,42 @@ export function VideoCard({
           pt: "3px",
         }}
       >
-        <MuiLink
-          component={Link}
-          to={link}
-          underline="none"
-          variant="subtitle1"
-          title={title}
-          sx={{
-            display: "block",
-            lineHeight: "23px",
-            height: {
-              xs: "auto",
-              sm: "46px",
-            },
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            mb: 1,
-          }}
-        >
-          {title}
-        </MuiLink>
+        <Box sx={{ display: "flex", alignItems: "flex-start", mb: 1 }}>
+          <MuiLink
+            component={Link}
+            to={link}
+            underline="none"
+            variant="subtitle1"
+            title={title}
+            sx={{
+              display: {
+                xs: "block",
+                sm: "-webkit-box",
+              },
+              flexGrow: 1,
+              minWidth: 0,
+              lineHeight: "23px",
+              WebkitLineClamp: {
+                sm: 2,
+              },
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {title}
+          </MuiLink>
+          <ActionMenu
+            item={{
+              type: "video",
+              itemId: id,
+              title,
+              imageUrl,
+              channelId,
+              channelTitle,
+            }}
+          />
+        </Box>
         <Box sx={{ mb: "5px" }}>
           <MuiLink
             component={Link}

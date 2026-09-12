@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { fromNow } from "../app/utils";
 import placeholder from "../images/placeholder-item.jpg";
+import { ActionMenu } from "./ActionMenu";
 
 type PlaylistPropsType = {
   id: string;
@@ -56,19 +57,32 @@ export function PlayListItem({ playlist }: { playlist: PlaylistPropsType }) {
       </Box>
       <Box>
         <CardContent>
-          <MuiLink
-            component={Link}
-            to={`/playlist/${id}`}
-            underline="none"
-            color="inherit"
-            variant="h6"
-          >
-            <FormatListBulletedIcon
-              sx={{ height: "20px", transform: "translateY(2px)" }}
-              color="secondary"
+          <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1 }}>
+            <MuiLink
+              component={Link}
+              to={`/playlist/${id}`}
+              underline="none"
+              color="inherit"
+              variant="h6"
+              sx={{ flexGrow: 1, minWidth: 0 }}
+            >
+              <FormatListBulletedIcon
+                sx={{ height: "20px", transform: "translateY(2px)" }}
+                color="secondary"
+              />
+              &nbsp;{title}
+            </MuiLink>
+            <ActionMenu
+              item={{
+                type: "playlist",
+                itemId: id,
+                title,
+                imageUrl,
+                channelId,
+                channelTitle,
+              }}
             />
-            &nbsp;{title}
-          </MuiLink>
+          </Box>
           {channelTitle && (
             <>
               {channelId ? (

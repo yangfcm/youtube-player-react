@@ -52,8 +52,8 @@ const videoSlice = createSlice({
       state.video.status = AsyncStatus.SUCCESS;
       state.video.error = "";
       const videoResponse = payload.data;
-      if (videoResponse) {
-        const video = videoResponse.items[0];
+      const video = videoResponse?.items[0];
+      if (video) {
         state.video.item = {
           ...state.video.item,
           [video.id as string]: video,

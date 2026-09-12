@@ -8,7 +8,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
   },
 );
 
-export function ErrorMessage({
+export function SuccessMessage({
   open,
   children,
 }: {
@@ -17,7 +17,7 @@ export function ErrorMessage({
 }) {
   const [openAlert, setOpenAlert] = useState(false);
   useEffect(() => {
-    setOpenAlert(open);
+    if (open) setOpenAlert(true);
   }, [open]);
 
   return (
@@ -28,7 +28,7 @@ export function ErrorMessage({
       onClose={() => setOpenAlert(false)}
     >
       <Alert
-        severity="error"
+        severity="success"
         sx={{ width: "100%" }}
         onClose={() => setOpenAlert(false)}
       >

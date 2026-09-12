@@ -2,38 +2,34 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { RequireAuth } from "../components/RequireAuth";
-import { useSubscriptions } from "../features/subscription/useSubscriptions";
+import { RequireLoginPage } from "../components/RequireLoginPage";
+import { useCollections } from "../features/collection/useCollections";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { AsyncStatus } from "../settings/types";
-import { ChannelCard } from "../components/ChannelCard";
+import { CollectionCard } from "../components/CollectionCard";
 import { NoContent } from "../components/NoContent";
-import { RequireLoginPage } from "../components/RequireLoginPage";
 
-export default function Subscriptions() {
-  const { channels, status, error } = useSubscriptions();
+export default function Collections() {
+  const { collections, status, error } = useCollections();
 
   return (
     <RequireAuth unAuthedComponent={<RequireLoginPage />}>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
       <Typography variant="h5" sx={{ mb: 2 }}>
-        My Channels
+        My Collections
       </Typography>
-      {status === AsyncStatus.LOADING && channels.length === 0 && (
+      {status === AsyncStatus.LOADING && collections.length === 0 && (
         <LoadingSpinner />
       )}
-      {status === AsyncStatus.SUCCESS && channels.length === 0 && (
-        <NoContent> You haven't subscribed any channel.</NoContent>
+      {status === AsyncStatus.SUCCESS && collections.length === 0 && (
+        <NoContent>You haven't created any collection.</NoContent>
       )}
       <Box sx={{ pb: 2 }}>
         <Grid container spacing={2} sx={{ pb: 2 }}>
-          {channels.map((channel) => (
-            <Grid item xs={6} sm={3} lg={2} key={channel.id}>
-              <ChannelCard
-                id={channel.id}
-                title={channel.title}
-                imageUrl={channel.thumbnail}
-              />
+          {collections.map((collection) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={collection.id}>
+              <CollectionCard collection={collection} />
             </Grid>
           ))}
         </Grid>
