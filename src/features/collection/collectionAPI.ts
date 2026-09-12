@@ -12,7 +12,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
-import { Collection, CollectionItem, CollectionSnippet } from "./types";
+import { Collection, CollectionItem } from "./types";
 
 const USERS = "users";
 const COLLECTIONS = "collections";
@@ -39,7 +39,7 @@ function stripUndefined<T extends object>(obj: T): T {
 
 export async function fetchUserCollectionsAPI(
   userId: string,
-): Promise<CollectionSnippet[]> {
+): Promise<Collection[]> {
   const userSnap = await getDoc(doc(db, USERS, userId));
   const collectionIds = (userSnap.data()?.collections as string[]) || [];
   if (collectionIds.length === 0) return [];

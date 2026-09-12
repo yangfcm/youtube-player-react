@@ -39,7 +39,7 @@ export interface CollectionState {
   status: AsyncStatus;
   error: string; // list-fetch status and error.
 
-  collections: CollectionSnippet[];
+  collections: Collection[];
 
   collectionsData: Record<string, CollectionData>;
 }

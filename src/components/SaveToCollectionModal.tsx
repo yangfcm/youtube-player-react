@@ -16,6 +16,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import CloseIcon from "@mui/icons-material/Close";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import placeholder from "../images/placeholder-item.jpg";
 import { CollectionItem } from "../features/collection/types";
 import { useCreateCollection } from "../features/collection/useCreateCollection";
@@ -184,22 +186,45 @@ export function SaveToCollectionModal({
               {collections.length > 0 && (
                 <Box sx={{ maxHeight: 240, overflowY: "auto" }}>
                   <List disablePadding>
-                    {collections.map((collection) => (
-                      <ListItem
-                        key={collection.id}
-                        disablePadding
-                        sx={{ py: 0.5 }}
-                      >
-                        <ListItemAvatar>
-                          <Avatar
-                            variant="rounded"
-                            src={collection.thumbnail || placeholder}
-                            alt={collection.name}
-                          />
-                        </ListItemAvatar>
-                        <ListItemText primary={collection.name} />
-                      </ListItem>
-                    ))}
+                    {collections.map((collection) => {
+                      const isSaved = collection.items.some(
+                        (existingItem) =>
+                          existingItem.type === item.type &&
+                          existingItem.itemId === item.itemId,
+                      );
+                      return (
+                        <ListItem
+                          key={collection.id}
+                          disablePadding
+                          sx={{ py: 0.5 }}
+                          secondaryAction={
+                            <IconButton
+                              aria-label={
+                                isSaved
+                                  ? "Already in collection"
+                                  : "Add to collection"
+                              }
+                              size="small"
+                            >
+                              {isSaved ? (
+                                <BookmarkIcon />
+                              ) : (
+                                <BookmarkAddOutlinedIcon />
+                              )}
+                            </IconButton>
+                          }
+                        >
+                          <ListItemAvatar>
+                            <Avatar
+                              variant="rounded"
+                              src={collection.thumbnail || placeholder}
+                              alt={collection.name}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText primary={collection.name} />
+                        </ListItem>
+                      );
+                    })}
                   </List>
                 </Box>
               )}
