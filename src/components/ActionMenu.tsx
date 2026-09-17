@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -8,16 +8,37 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
 import { MoreOptionsButton } from "./MoreOptionsButton";
 import { RequireAuth } from "./RequireAuth";
+import { ErrorMessage } from "./ErrorMessage";
+import { SuccessMessage } from "./SuccessMessage";
 import { CollectionItem } from "../features/collection/types";
+import { useUpdateCollection } from "../features/collection/useUpdateCollection";
+import { AsyncStatus } from "../settings/types";
 
 type ActionMenuPropsType = {
   item: CollectionItem;
+  collectionId?: string;
 };
 
-export function ActionMenu({ item }: ActionMenuPropsType) {
+export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const menuOpen = Boolean(anchorEl);
+  const {
+    updateCollection,
+    status: updateThumbnailStatus,
+    error: updateThumbnailError,
+    reset: resetUpdateThumbnailStatus,
+  } = useUpdateCollection(collectionId ?? "");
+
+  useEffect(() => {
+    if (
+      updateThumbnailStatus === AsyncStatus.SUCCESS ||
+      updateThumbnailStatus === AsyncStatus.FAIL
+    ) {
+      resetUpdateThumbnailStatus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateThumbnailStatus]);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -41,18 +62,29 @@ export function ActionMenu({ item }: ActionMenuPropsType) {
           </ListItemIcon>
           <ListItemText>Save to Collection</ListItemText>
         </MenuItem>
-        <MenuItem onClick={() => {}}>
-          <ListItemIcon>
-            <ImageOutlinedIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Set as Collection Thumbnail</ListItemText>
-        </MenuItem>
+        {collectionId && (
+          <MenuItem
+            disabled={!item.imageUrl}
+            onClick={() => updateCollection({ thumbnail: item.imageUrl })}
+          >
+            <ListItemIcon>
+              <ImageOutlinedIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Set as Collection Thumbnail</ListItemText>
+          </MenuItem>
+        )}
       </Menu>
       <SaveToCollectionModal
         item={item}
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       />
+      <ErrorMessage open={updateThumbnailStatus === AsyncStatus.FAIL}>
+        {updateThumbnailError}
+      </ErrorMessage>
+      <SuccessMessage open={updateThumbnailStatus === AsyncStatus.SUCCESS}>
+        Collection thumbnail updated.
+      </SuccessMessage>
     </RequireAuth>
   );
 }

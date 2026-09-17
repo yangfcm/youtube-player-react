@@ -60,6 +60,7 @@ export default function CollectionDetails() {
                       channelTitle: item.channelTitle,
                       imageUrl: item.imageUrl,
                     }}
+                    collectionId={collection.id}
                   />
                 ) : item.type === "channel" ? (
                   <ChannelItem
@@ -68,6 +69,7 @@ export default function CollectionDetails() {
                       title: item.title,
                       imageUrl: item.imageUrl,
                     }}
+                    collectionId={collection.id}
                   />
                 ) : item.type === "playlist" ? (
                   <PlayListItem
@@ -78,6 +80,7 @@ export default function CollectionDetails() {
                       channelId: item.channelId,
                       channelTitle: item.channelTitle,
                     }}
+                    collectionId={collection.id}
                   />
                 ) : null}
                 {index < collection.items.length - 1 && (

@@ -18,7 +18,13 @@ type ChannelPropsType = {
   description?: string;
 };
 
-export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
+export function ChannelItem({
+  channel,
+  collectionId,
+}: {
+  channel: ChannelPropsType;
+  collectionId?: string;
+}) {
   const { id, title, imageUrl, description } = channel;
   return (
     <Card
@@ -93,6 +99,7 @@ export function ChannelItem({ channel }: { channel: ChannelPropsType }) {
             )}
             <ActionMenu
               item={{ type: "channel", itemId: id, title, imageUrl }}
+              collectionId={collectionId}
             />
           </Stack>
           <Typography

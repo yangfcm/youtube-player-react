@@ -2,7 +2,10 @@ import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useAppDispatch } from "../../app/hooks";
-import { updateCollection as updateCollectionAction } from "./collectionSlice";
+import {
+  updateCollection as updateCollectionAction,
+  resetCollectionMutateStatus,
+} from "./collectionSlice";
 import { AsyncStatus } from "../../settings/types";
 
 export function useUpdateCollection(collectionId: string) {
@@ -21,5 +24,9 @@ export function useUpdateCollection(collectionId: string) {
     [collectionId, dispatch],
   );
 
-  return { updateCollection, status, error };
+  const reset = useCallback(() => {
+    dispatch(resetCollectionMutateStatus(collectionId));
+  }, [collectionId, dispatch]);
+
+  return { updateCollection, status, error, reset };
 }
