@@ -20,9 +20,8 @@ import { PlayListVideos } from "../components/PlayListVideos";
 import { formatNumber, fromNow, getSearchString } from "../app/utils";
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from "../components/RelatedVideos";
-import { DownloadLink } from "../components/DownloadLink";
 import { VideoDataLoader } from "../components/VideoDataLoader";
-import { RequireAuth } from "../components/RequireAuth";
+import { ActionMenu } from "../components/ActionMenu";
 
 export default function Video() {
   const { id = "" } = useParams();
@@ -54,7 +53,7 @@ export function VideoDataSection() {
 
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = video.snippet.description.split(
-      new RegExp(`(${urlRegex.source}|\\n)`, "g")
+      new RegExp(`(${urlRegex.source}|\\n)`, "g"),
     );
 
     const processedText = parts.map((part, index) => {
@@ -84,6 +83,22 @@ export function VideoDataSection() {
     return processedText;
   }, [video?.snippet.description]);
 
+  const collectionItem = useMemo(() => {
+    if (!video) return null;
+
+    return {
+      type: "video" as const,
+      itemId: video.id as string,
+      title: video.snippet.title,
+      imageUrl:
+        video.snippet.thumbnails.medium?.url ??
+        video.snippet.thumbnails.high?.url ??
+        video.snippet.thumbnails.default?.url,
+      channelId: video.snippet.channelId,
+      channelTitle: video.snippet.channelTitle,
+    };
+  }, [video]);
+
   if (status === AsyncStatus.IDLE) return null;
   if (status === AsyncStatus.LOADING) return <VideoDataLoader />;
   if (!video) {
@@ -97,9 +112,7 @@ export function VideoDataSection() {
           <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
             {video.snippet.title}
             &nbsp;
-            <RequireAuth>
-              <DownloadLink videoId={video.id as string}></DownloadLink>
-            </RequireAuth>
+            {collectionItem && <ActionMenu item={collectionItem} />}
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}

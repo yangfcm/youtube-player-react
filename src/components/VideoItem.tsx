@@ -20,7 +20,13 @@ type VideoPropsType = {
   playlistId?: string;
 };
 
-export function VideoItem({ video }: { video: VideoPropsType }) {
+export function VideoItem({
+  video,
+  collectionId,
+}: {
+  video: VideoPropsType;
+  collectionId?: string;
+}) {
   const {
     id,
     title,
@@ -102,6 +108,7 @@ export function VideoItem({ video }: { video: VideoPropsType }) {
                 channelId,
                 channelTitle,
               }}
+              collectionId={collectionId}
             />
           </Box>
           {channelTitle && (

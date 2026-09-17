@@ -36,7 +36,7 @@ export function EditCollectionModal({
     (state: RootState) => state.collection.collections,
   );
 
-  const { updateCollection, status, error } = useUpdateCollection(
+  const { updateCollection, status, error, reset } = useUpdateCollection(
     collection.id,
   );
 
@@ -50,6 +50,9 @@ export function EditCollectionModal({
   useEffect(() => {
     if (status === AsyncStatus.SUCCESS) {
       onClose();
+    }
+    if (status === AsyncStatus.SUCCESS || status === AsyncStatus.FAIL) {
+      reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
@@ -83,7 +86,7 @@ export function EditCollectionModal({
   const handleSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
-    updateCollection(trimmedName);
+    updateCollection({ name: trimmedName });
   };
 
   const loading = status === AsyncStatus.LOADING;
@@ -103,13 +106,8 @@ export function EditCollectionModal({
             </IconButton>
           </Stack>
         </DialogTitle>
-        <DialogContent>
-          <Box
-            component="form"
-            id="edit-collection-form"
-            onSubmit={handleSave}
-            noValidate
-          >
+        <Box>
+          <DialogContent>
             {collection.thumbnail && (
               <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
                 <LazyImage
@@ -120,39 +118,46 @@ export function EditCollectionModal({
                 />
               </Box>
             )}
-            <TextField
-              label="Name"
-              required
-              fullWidth
-              size="small"
-              autoFocus
-              disabled={loading}
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                if (nameError) setNameError("");
-              }}
-              error={Boolean(nameError)}
-              helperText={nameError || " "}
-              inputProps={{ maxLength: MAX_NAME_LENGTH }}
-            />
-          </Box>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <span></span>
-            <Button
-              type="submit"
-              form="edit-collection-form"
-              variant="contained"
-              disabled={isUnchanged || !trimmedName || loading}
+            <Box
+              component="form"
+              id="edit-collection-form"
+              onSubmit={handleSave}
+              noValidate
             >
-              Save
-            </Button>
-          </Stack>
-        </DialogContent>
+              <TextField
+                label="Name"
+                required
+                fullWidth
+                size="small"
+                autoFocus
+                disabled={loading}
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (nameError) setNameError("");
+                }}
+                error={Boolean(nameError)}
+                helperText={nameError || " "}
+                inputProps={{ maxLength: MAX_NAME_LENGTH }}
+              />
+            </Box>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <span></span>
+              <Button
+                type="submit"
+                form="edit-collection-form"
+                variant="contained"
+                disabled={isUnchanged || !trimmedName || loading}
+              >
+                Save
+              </Button>
+            </Stack>
+          </DialogContent>
+        </Box>
       </Dialog>
       <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
     </>

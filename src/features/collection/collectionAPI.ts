@@ -123,16 +123,31 @@ export async function updateCollectionItemAPI(
             ),
         );
 
+  let thumbnail = existing.thumbnail;
+  if (operation === "add") {
+    if (!thumbnail && item.imageUrl) {
+      thumbnail = item.imageUrl;
+    }
+  } else if (operation === "remove") {
+    if (updatedItems.length === 0) {
+      thumbnail = "";
+    } else if (item.imageUrl && item.imageUrl === existing.thumbnail) {
+      thumbnail = updatedItems[0].imageUrl || "";
+    }
+  }
+
   const updatedCollection: Collection = {
     ...existing,
     items: updatedItems,
     totalCount: updatedItems.length,
+    thumbnail,
     updatedAt: Date.now(),
   };
 
   await updateDoc(collectionRef, {
     items: updatedCollection.items,
     totalCount: updatedCollection.totalCount,
+    thumbnail: updatedCollection.thumbnail,
     updatedAt: updatedCollection.updatedAt,
   });
 
@@ -141,7 +156,7 @@ export async function updateCollectionItemAPI(
 
 export async function updateUserCollectionAPI(
   collectionId: string,
-  data: Pick<Collection, "name">,
+  data: Partial<Pick<Collection, "name" | "thumbnail">>,
 ): Promise<Collection> {
   const collectionRef = doc(db, COLLECTIONS, collectionId);
   const collectionSnap = await getDoc(collectionRef);
@@ -149,14 +164,19 @@ export async function updateUserCollectionAPI(
 
   const updatedCollection: Collection = {
     ...existing,
-    name: data.name.trim(),
+    ...(data.name !== undefined && { name: data.name.trim() }),
+    ...(data.thumbnail !== undefined && { thumbnail: data.thumbnail }),
     updatedAt: Date.now(),
   };
 
-  await updateDoc(collectionRef, {
-    name: updatedCollection.name,
-    updatedAt: updatedCollection.updatedAt,
-  });
+  await updateDoc(
+    collectionRef,
+    stripUndefined({
+      name: data.name !== undefined ? updatedCollection.name : undefined,
+      thumbnail: data.thumbnail,
+      updatedAt: updatedCollection.updatedAt,
+    }),
+  );
 
   return updatedCollection;
 }

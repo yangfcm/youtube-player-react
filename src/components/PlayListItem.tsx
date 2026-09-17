@@ -19,7 +19,13 @@ type PlaylistPropsType = {
   publishedAt?: Date;
 };
 
-export function PlayListItem({ playlist }: { playlist: PlaylistPropsType }) {
+export function PlayListItem({
+  playlist,
+  collectionId,
+}: {
+  playlist: PlaylistPropsType;
+  collectionId?: string;
+}) {
   const { id, title, imageUrl, channelId, channelTitle, publishedAt } =
     playlist;
   return (
@@ -81,6 +87,7 @@ export function PlayListItem({ playlist }: { playlist: PlaylistPropsType }) {
                 channelId,
                 channelTitle,
               }}
+              collectionId={collectionId}
             />
           </Box>
           {channelTitle && (
