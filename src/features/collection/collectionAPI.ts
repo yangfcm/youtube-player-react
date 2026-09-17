@@ -123,16 +123,27 @@ export async function updateCollectionItemAPI(
             ),
         );
 
+  let thumbnail = existing.thumbnail;
+  if (operation === "remove") {
+    if (updatedItems.length === 0) {
+      thumbnail = "";
+    } else if (item.imageUrl && item.imageUrl === existing.thumbnail) {
+      thumbnail = updatedItems[0].imageUrl || "";
+    }
+  }
+
   const updatedCollection: Collection = {
     ...existing,
     items: updatedItems,
     totalCount: updatedItems.length,
+    thumbnail,
     updatedAt: Date.now(),
   };
 
   await updateDoc(collectionRef, {
     items: updatedCollection.items,
     totalCount: updatedCollection.totalCount,
+    thumbnail: updatedCollection.thumbnail,
     updatedAt: updatedCollection.updatedAt,
   });
 
