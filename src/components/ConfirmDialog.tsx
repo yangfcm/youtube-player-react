@@ -21,7 +21,7 @@ export function ConfirmDialog({
   return (
     <Dialog open={open} onClose={onCancel}>
       <DialogTitle>{title}</DialogTitle>
-      <DialogActions>
+      <DialogActions sx={{ px: 3, mb: 1 }}>
         <Button onClick={onCancel} color="inherit" disabled={loading}>
           Cancel
         </Button>
