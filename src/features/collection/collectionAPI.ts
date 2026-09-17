@@ -124,7 +124,11 @@ export async function updateCollectionItemAPI(
         );
 
   let thumbnail = existing.thumbnail;
-  if (operation === "remove") {
+  if (operation === "add") {
+    if (!thumbnail && item.imageUrl) {
+      thumbnail = item.imageUrl;
+    }
+  } else if (operation === "remove") {
     if (updatedItems.length === 0) {
       thumbnail = "";
     } else if (item.imageUrl && item.imageUrl === existing.thumbnail) {

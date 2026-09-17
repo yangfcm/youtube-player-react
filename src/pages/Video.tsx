@@ -20,9 +20,7 @@ import { PlayListVideos } from "../components/PlayListVideos";
 import { formatNumber, fromNow, getSearchString } from "../app/utils";
 import { NoContent } from "../components/NoContent";
 import { RelatedVideos } from "../components/RelatedVideos";
-import { DownloadLink } from "../components/DownloadLink";
 import { VideoDataLoader } from "../components/VideoDataLoader";
-import { RequireAuth } from "../components/RequireAuth";
 import { ActionMenu } from "../components/ActionMenu";
 
 export default function Video() {
