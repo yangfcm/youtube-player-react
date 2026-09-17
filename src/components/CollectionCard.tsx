@@ -53,13 +53,28 @@ export function CollectionCard({
     <>
       <Card>
         <Link to={collection.id}>
-          <LazyImage
-            src={thumbnail || placeholder}
-            alt={name}
-            title={name}
-            style={{ width: "100%", height: "auto" }}
-            ratio="3:2"
-          />
+          <Box
+            sx={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "3 / 2",
+              overflow: "hidden",
+              "& img": {
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              },
+            }}
+          >
+            <LazyImage
+              src={thumbnail || placeholder}
+              alt={name}
+              title={name}
+              ratio="3:2"
+            />
+          </Box>
         </Link>
         <CardContent>
           <Box sx={{ display: "flex", alignItems: "flex-start", mb: 1 }}>
