@@ -5,6 +5,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
 import { MoreOptionsButton } from "./MoreOptionsButton";
 import { RequireAuth } from "./RequireAuth";
@@ -12,6 +13,7 @@ import { ErrorMessage } from "./ErrorMessage";
 import { SuccessMessage } from "./SuccessMessage";
 import { CollectionItem } from "../features/collection/types";
 import { useUpdateCollection } from "../features/collection/useUpdateCollection";
+import { useUpdateCollectionItem } from "../features/collection/useUpdateCollectionItem";
 import { AsyncStatus } from "../settings/types";
 
 type ActionMenuPropsType = {
@@ -29,6 +31,12 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
     error: updateThumbnailError,
     reset: resetUpdateThumbnailStatus,
   } = useUpdateCollection(collectionId ?? "");
+  const {
+    updateCollectionItem,
+    status: removeItemStatus,
+    error: removeItemError,
+    reset: resetRemoveItemStatus,
+  } = useUpdateCollectionItem(collectionId ?? "");
 
   useEffect(() => {
     if (
@@ -39,6 +47,16 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateThumbnailStatus]);
+
+  useEffect(() => {
+    if (
+      removeItemStatus === AsyncStatus.SUCCESS ||
+      removeItemStatus === AsyncStatus.FAIL
+    ) {
+      resetRemoveItemStatus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [removeItemStatus]);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -73,6 +91,14 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
             <ListItemText>Set as Collection Thumbnail</ListItemText>
           </MenuItem>
         )}
+        {collectionId && (
+          <MenuItem onClick={() => updateCollectionItem(item, "remove")}>
+            <ListItemIcon>
+              <DeleteOutlineOutlinedIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Remove from Collection</ListItemText>
+          </MenuItem>
+        )}
       </Menu>
       <SaveToCollectionModal
         item={item}
@@ -84,6 +110,12 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
       </ErrorMessage>
       <SuccessMessage open={updateThumbnailStatus === AsyncStatus.SUCCESS}>
         Collection thumbnail updated.
+      </SuccessMessage>
+      <ErrorMessage open={removeItemStatus === AsyncStatus.FAIL}>
+        {removeItemError}
+      </ErrorMessage>
+      <SuccessMessage open={removeItemStatus === AsyncStatus.SUCCESS}>
+        Removed from collection.
       </SuccessMessage>
     </RequireAuth>
   );
