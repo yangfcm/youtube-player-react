@@ -141,7 +141,7 @@ export async function updateCollectionItemAPI(
 
 export async function updateUserCollectionAPI(
   collectionId: string,
-  data: Pick<Collection, "name">,
+  data: Partial<Pick<Collection, "name" | "thumbnail">>,
 ): Promise<Collection> {
   const collectionRef = doc(db, COLLECTIONS, collectionId);
   const collectionSnap = await getDoc(collectionRef);
@@ -149,14 +149,19 @@ export async function updateUserCollectionAPI(
 
   const updatedCollection: Collection = {
     ...existing,
-    name: data.name.trim(),
+    ...(data.name !== undefined && { name: data.name.trim() }),
+    ...(data.thumbnail !== undefined && { thumbnail: data.thumbnail }),
     updatedAt: Date.now(),
   };
 
-  await updateDoc(collectionRef, {
-    name: updatedCollection.name,
-    updatedAt: updatedCollection.updatedAt,
-  });
+  await updateDoc(
+    collectionRef,
+    stripUndefined({
+      name: data.name !== undefined ? updatedCollection.name : undefined,
+      thumbnail: data.thumbnail,
+      updatedAt: updatedCollection.updatedAt,
+    }),
+  );
 
   return updatedCollection;
 }

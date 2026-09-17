@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
 import { MoreOptionsButton } from "./MoreOptionsButton";
 import { RequireAuth } from "./RequireAuth";
@@ -39,6 +40,12 @@ export function ActionMenu({ item }: ActionMenuPropsType) {
             <BookmarkBorderIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Save to Collection</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={() => {}}>
+          <ListItemIcon>
+            <ImageOutlinedIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Set as Collection Thumbnail</ListItemText>
         </MenuItem>
       </Menu>
       <SaveToCollectionModal

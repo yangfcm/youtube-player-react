@@ -15,8 +15,8 @@ export function useUpdateCollection(collectionId: string) {
   const error = collectionData?.mutateError ?? "";
 
   const updateCollection = useCallback(
-    (name: string) => {
-      dispatch(updateCollectionAction({ collectionId, name }));
+    (data: { name?: string; thumbnail?: string }) => {
+      dispatch(updateCollectionAction({ collectionId, ...data }));
     },
     [collectionId, dispatch],
   );

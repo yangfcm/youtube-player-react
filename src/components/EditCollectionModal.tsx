@@ -83,7 +83,7 @@ export function EditCollectionModal({
   const handleSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
-    updateCollection(trimmedName);
+    updateCollection({ name: trimmedName });
   };
 
   const loading = status === AsyncStatus.LOADING;

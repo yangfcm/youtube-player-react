@@ -66,9 +66,9 @@ export const fetchUserCollection = createAsyncThunk(
 
 export const updateCollection = createAsyncThunk(
   "collection/updateCollection",
-  async (args: { collectionId: string; name: string }) => {
-    const { collectionId, name } = args;
-    return await updateUserCollectionAPI(collectionId, { name });
+  async (args: { collectionId: string; name?: string; thumbnail?: string }) => {
+    const { collectionId, name, thumbnail } = args;
+    return await updateUserCollectionAPI(collectionId, { name, thumbnail });
   },
 );
 
