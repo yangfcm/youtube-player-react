@@ -21,42 +21,35 @@ type ActionMenuPropsType = {
   collectionId?: string;
 };
 
+// updateCollection and updateCollectionItem both mutate the same
+// collectionsData[collectionId].mutateStatus slot in the store (and
+// SaveToCollectionModal's own per-collection rows can touch it too), so
+// pendingAction tracks which action *this* menu triggered, and only that
+// action's message is shown.
+type PendingAction = "thumbnail" | "remove" | null;
+
 export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState<PendingAction>(null);
   const menuOpen = Boolean(anchorEl);
   const {
     updateCollection,
-    status: updateThumbnailStatus,
-    error: updateThumbnailError,
-    reset: resetUpdateThumbnailStatus,
+    status: mutateStatus,
+    error: mutateError,
+    reset: resetMutateStatus,
   } = useUpdateCollection(collectionId ?? "");
-  const {
-    updateCollectionItem,
-    status: removeItemStatus,
-    error: removeItemError,
-    reset: resetRemoveItemStatus,
-  } = useUpdateCollectionItem(collectionId ?? "");
+  const { updateCollectionItem } = useUpdateCollectionItem(collectionId ?? "");
 
   useEffect(() => {
     if (
-      updateThumbnailStatus === AsyncStatus.SUCCESS ||
-      updateThumbnailStatus === AsyncStatus.FAIL
+      mutateStatus === AsyncStatus.SUCCESS ||
+      mutateStatus === AsyncStatus.FAIL
     ) {
-      resetUpdateThumbnailStatus();
+      resetMutateStatus();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updateThumbnailStatus]);
-
-  useEffect(() => {
-    if (
-      removeItemStatus === AsyncStatus.SUCCESS ||
-      removeItemStatus === AsyncStatus.FAIL
-    ) {
-      resetRemoveItemStatus();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [removeItemStatus]);
+  }, [mutateStatus]);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -64,6 +57,16 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
     setAnchorEl(event.currentTarget);
   };
   const handleCloseMenu = () => setAnchorEl(null);
+
+  const handleSetThumbnail = () => {
+    setPendingAction("thumbnail");
+    updateCollection({ thumbnail: item.imageUrl });
+  };
+
+  const handleRemoveFromCollection = () => {
+    setPendingAction("remove");
+    updateCollectionItem(item, "remove");
+  };
 
   return (
     <RequireAuth>
@@ -81,10 +84,7 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
           <ListItemText>Save to Collection</ListItemText>
         </MenuItem>
         {collectionId && (
-          <MenuItem
-            disabled={!item.imageUrl}
-            onClick={() => updateCollection({ thumbnail: item.imageUrl })}
-          >
+          <MenuItem disabled={!item.imageUrl} onClick={handleSetThumbnail}>
             <ListItemIcon>
               <ImageOutlinedIcon fontSize="small" />
             </ListItemIcon>
@@ -92,7 +92,7 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
           </MenuItem>
         )}
         {collectionId && (
-          <MenuItem onClick={() => updateCollectionItem(item, "remove")}>
+          <MenuItem onClick={handleRemoveFromCollection}>
             <ListItemIcon>
               <DeleteOutlineOutlinedIcon fontSize="small" />
             </ListItemIcon>
@@ -105,18 +105,26 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       />
-      <ErrorMessage open={updateThumbnailStatus === AsyncStatus.FAIL}>
-        {updateThumbnailError}
+      <ErrorMessage
+        open={mutateStatus === AsyncStatus.FAIL && pendingAction === "thumbnail"}
+      >
+        {mutateError}
       </ErrorMessage>
-      <SuccessMessage open={updateThumbnailStatus === AsyncStatus.SUCCESS}>
+      <SuccessMessage
+        open={
+          mutateStatus === AsyncStatus.SUCCESS && pendingAction === "thumbnail"
+        }
+      >
         Collection thumbnail updated.
       </SuccessMessage>
-      <ErrorMessage open={removeItemStatus === AsyncStatus.FAIL}>
-        {removeItemError}
+      {/* No success message here: on removal the item (and this menu) is
+          unmounted in the same render as mutateStatus flipping to SUCCESS,
+          so a success toast would never get a chance to show. */}
+      <ErrorMessage
+        open={mutateStatus === AsyncStatus.FAIL && pendingAction === "remove"}
+      >
+        {mutateError}
       </ErrorMessage>
-      <SuccessMessage open={removeItemStatus === AsyncStatus.SUCCESS}>
-        Removed from collection.
-      </SuccessMessage>
     </RequireAuth>
   );
 }

@@ -36,7 +36,7 @@ export function EditCollectionModal({
     (state: RootState) => state.collection.collections,
   );
 
-  const { updateCollection, status, error } = useUpdateCollection(
+  const { updateCollection, status, error, reset } = useUpdateCollection(
     collection.id,
   );
 
@@ -50,6 +50,9 @@ export function EditCollectionModal({
   useEffect(() => {
     if (status === AsyncStatus.SUCCESS) {
       onClose();
+    }
+    if (status === AsyncStatus.SUCCESS || status === AsyncStatus.FAIL) {
+      reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
