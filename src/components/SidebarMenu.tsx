@@ -6,7 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MuiLink from "@mui/material/Link";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-// import ViewListIcon from "@mui/icons-material/ViewList";
+import ViewListIcon from "@mui/icons-material/ViewList";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -34,7 +34,7 @@ export function SidebarMenu() {
           </ListItemButton>
         </ListItem>
       </MuiLink>
-      {/* <MuiLink component={Link} to="/playlists" underline="none">
+      <MuiLink component={Link} to="/playlists" underline="none">
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -43,7 +43,7 @@ export function SidebarMenu() {
             <ListItemText primary="Play List" />
           </ListItemButton>
         </ListItem>
-      </MuiLink> */}
+      </MuiLink>
       <MuiLink component={Link} to="/collections" underline="none">
         <ListItem disablePadding>
           <ListItemButton>
