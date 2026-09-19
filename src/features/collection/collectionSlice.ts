@@ -124,10 +124,14 @@ const collectionSlice = createSlice({
         state.createStatus = AsyncStatus.LOADING;
         state.createError = "";
       })
-      .addCase(createCollection.fulfilled, (state) => {
-        state.createStatus = AsyncStatus.SUCCESS;
-        state.createError = "";
-      })
+      .addCase(
+        createCollection.fulfilled,
+        (state, { payload }: { payload: Collection }) => {
+          state.createStatus = AsyncStatus.SUCCESS;
+          state.createError = "";
+          state.collections = [payload, ...state.collections];
+        },
+      )
       .addCase(
         createCollection.rejected,
         (state, { error }: { error: SerializedError }) => {
@@ -172,7 +176,10 @@ const collectionSlice = createSlice({
           {
             payload,
             meta: { arg },
-          }: { payload: Collection | null; meta: { arg: { collectionId: string } } },
+          }: {
+            payload: Collection | null;
+            meta: { arg: { collectionId: string } };
+          },
         ) => {
           const { collectionId } = arg;
           state.collectionsData[collectionId] = {
@@ -234,7 +241,12 @@ const collectionSlice = createSlice({
           };
           state.collections = state.collections.map((c) =>
             c.id === payload.id
-              ? { ...c, name: payload.name, updatedAt: payload.updatedAt }
+              ? {
+                  ...c,
+                  name: payload.name,
+                  thumbnail: payload.thumbnail,
+                  updatedAt: payload.updatedAt,
+                }
               : c,
           );
         },
@@ -328,9 +340,7 @@ const collectionSlice = createSlice({
             mutateStatus: AsyncStatus.SUCCESS,
             mutateError: "",
           };
-          state.collections = state.collections.filter(
-            (c) => c.id !== payload,
-          );
+          state.collections = state.collections.filter((c) => c.id !== payload);
         },
       )
       .addCase(
