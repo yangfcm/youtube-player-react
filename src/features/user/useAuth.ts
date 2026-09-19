@@ -10,17 +10,12 @@ import {
   fetchUserByToken as fetchUserByTokenAction,
 } from "./userSlice";
 import { resetTimeline } from "../timeline/timelineSlice";
-import {
-  resetSubscriptions,
-  fetchSubscribedChannels,
-} from "../subscription/subscriptionSlice";
-import {
-  resetCollections,
-  fetchUserCollections,
-} from "../collection/collectionSlice";
+import { resetSubscriptions } from "../subscription/subscriptionSlice";
+import { resetCollections } from "../collection/collectionSlice";
 import { UserProfile } from "./types";
 import { RootState } from "../../app/store";
 import { db } from "../../settings/firebaseConfig";
+import { fetchUserProfileAPI } from "./userAPI";
 
 // Mirrors the profile + current access token onto the user's Firestore doc.
 // A backend Cloud Function reads this to make YouTube API calls on the
@@ -101,11 +96,13 @@ export function useAuth() {
             firstName: given_name,
             avatar: picture,
           };
-          // Await the mirror write before reading subscriptions so the two
-          // Firestore operations on this doc never race each other.
+
+          const existingProfile = await fetchUserProfileAPI(sub);
+          newProfile.collections = existingProfile?.collections;
+          newProfile.channels = existingProfile?.channels;
+
           await mirrorProfileToFirestore(newProfile, token);
-          dispatch(fetchSubscribedChannels(sub));
-          dispatch(fetchUserCollections(sub));
+          // dispatch(fetchSubscribedChannels(sub));
         })
         .catch(() => {});
     },

@@ -41,6 +41,7 @@ export async function fetchUserCollectionsAPI(
   userId: string,
 ): Promise<Collection[]> {
   const userSnap = await getDoc(doc(db, USERS, userId));
+  console.log("user", userSnap.data());
   const collectionIds = (userSnap.data()?.collections as string[]) || [];
   if (collectionIds.length === 0) return [];
 

@@ -19,6 +19,8 @@ export interface UserProfile {
   lastName: string;
   firstName: string;
   avatar: string;
+  collections?: string[];
+  channels?: string[];
 }
 
 export interface UserState {

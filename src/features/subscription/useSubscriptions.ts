@@ -3,29 +3,22 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { fetchSubscribedChannels } from "./subscriptionSlice";
+import { AsyncStatus } from "../../settings/types";
 
 export function useSubscriptions() {
   const dispatch = useAppDispatch();
   const { channels, status, error } = useSelector(
-    (state: RootState) => state.subscription
+    (state: RootState) => state.subscription,
   );
   const userId = useSelector(
-    (state: RootState) => state.user.profile?.data?.id
+    (state: RootState) => state.user.profile?.data?.id,
   );
 
-  // Fetch once per mount, using whatever userId is already available right
-  // then (covers navigating here while already signed in). Deliberately NOT
-  // reactive to userId - if the user signs in while this page stays
-  // mounted, useAuth's post-login flow dispatches this fetch itself, after
-  // awaiting its own Firestore write to the same doc. Reacting to userId
-  // here too would fire a second, unsequenced fetch that can race that
-  // write and read back stale/empty data.
   useEffect(() => {
-    if (userId) {
+    if (userId && status === AsyncStatus.IDLE) {
       dispatch(fetchSubscribedChannels(userId));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userId, status, dispatch]);
 
   return { channels, status, error };
 }
