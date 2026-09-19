@@ -20,7 +20,7 @@ export function SidebarMenu() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary="Home" primaryTypographyProps={{ noWrap: true }} />
           </ListItemButton>
         </ListItem>
       </MuiLink>
@@ -30,7 +30,7 @@ export function SidebarMenu() {
             <ListItemIcon>
               <SubscriptionsIcon />
             </ListItemIcon>
-            <ListItemText primary="Channels" />
+            <ListItemText primary="Channels" primaryTypographyProps={{ noWrap: true }} />
           </ListItemButton>
         </ListItem>
       </MuiLink>
@@ -40,7 +40,7 @@ export function SidebarMenu() {
             <ListItemIcon>
               <ViewListIcon />
             </ListItemIcon>
-            <ListItemText primary="Play List" />
+            <ListItemText primary="Play List" primaryTypographyProps={{ noWrap: true }} />
           </ListItemButton>
         </ListItem>
       </MuiLink>
@@ -50,7 +50,7 @@ export function SidebarMenu() {
             <ListItemIcon>
               <CollectionsBookmarkIcon />
             </ListItemIcon>
-            <ListItemText primary="Collections" />
+            <ListItemText primary="Collections" primaryTypographyProps={{ noWrap: true }} />
           </ListItemButton>
         </ListItem>
       </MuiLink>
@@ -60,7 +60,7 @@ export function SidebarMenu() {
             <ListItemIcon>
               <ExploreIcon />
             </ListItemIcon>
-            <ListItemText primary="Explore" />
+            <ListItemText primary="Explore" primaryTypographyProps={{ noWrap: true }} />
           </ListItemButton>
         </ListItem>
       </MuiLink>

@@ -69,9 +69,9 @@ export function useTokenRefresh() {
         refreshTokenRef.current();
       }, refreshTime);
 
-      console.log(
-        `Token refresh scheduled in ${Math.round(refreshTime / 1000)} seconds`,
-      );
+      // console.log(
+      //   `Token refresh scheduled in ${Math.round(refreshTime / 1000)} seconds`,
+      // );
     }
   }, []);
 

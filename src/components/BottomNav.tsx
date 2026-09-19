@@ -68,7 +68,7 @@ export function BottomNav() {
           to="/collections"
           label="Collections"
           icon={<CollectionsBookmarkIcon />}
-          value="/playlists"
+          value="/collections"
           sx={TAB_STYLE}
         />
         <Tab
