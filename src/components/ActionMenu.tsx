@@ -6,6 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
 import { MoreOptionsButton } from "./MoreOptionsButton";
 import { RequireAuth } from "./RequireAuth";
@@ -14,11 +15,14 @@ import { SuccessMessage } from "./SuccessMessage";
 import { CollectionItem } from "../features/collection/types";
 import { useUpdateCollection } from "../features/collection/useUpdateCollection";
 import { useUpdateCollectionItem } from "../features/collection/useUpdateCollectionItem";
+import { useArchiveTimelineVideo } from "../features/timeline/useArchiveTimelineVideo";
+import { useProfile } from "../features/user/useProfile";
 import { AsyncStatus } from "../settings/types";
 
 type ActionMenuPropsType = {
   item: CollectionItem;
   collectionId?: string;
+  canArchiveVideo?: boolean;
 };
 
 // updateCollection and updateCollectionItem both mutate the same
@@ -26,9 +30,13 @@ type ActionMenuPropsType = {
 // SaveToCollectionModal's own per-collection rows can touch it too), so
 // pendingAction tracks which action *this* menu triggered, and only that
 // action's message is shown.
-type PendingAction = "thumbnail" | "remove" | null;
+type PendingAction = "thumbnail" | "remove" | "archive" | null;
 
-export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
+export function ActionMenu({
+  item,
+  collectionId,
+  canArchiveVideo,
+}: ActionMenuPropsType) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState<PendingAction>(null);
@@ -40,6 +48,13 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
     reset: resetMutateStatus,
   } = useUpdateCollection(collectionId ?? "");
   const { updateCollectionItem } = useUpdateCollectionItem(collectionId ?? "");
+  const user = useProfile();
+  const {
+    archiveVideo,
+    status: archiveStatus,
+    error: archiveError,
+    reset: resetArchiveStatus,
+  } = useArchiveTimelineVideo(user?.id ?? "");
 
   useEffect(() => {
     if (
@@ -50,6 +65,16 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutateStatus]);
+
+  useEffect(() => {
+    if (
+      archiveStatus === AsyncStatus.SUCCESS ||
+      archiveStatus === AsyncStatus.FAIL
+    ) {
+      resetArchiveStatus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [archiveStatus]);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -66,6 +91,14 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
   const handleRemoveFromCollection = () => {
     setPendingAction("remove");
     updateCollectionItem(item, "remove");
+  };
+
+  const handleArchive = () => {
+    if (item.type !== "video") {
+      return;
+    }
+    setPendingAction("archive");
+    archiveVideo(item.itemId);
   };
 
   return (
@@ -99,6 +132,14 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
             <ListItemText>Remove from Collection</ListItemText>
           </MenuItem>
         )}
+        {canArchiveVideo && item.type === "video" && (
+          <MenuItem onClick={handleArchive}>
+            <ListItemIcon>
+              <ArchiveOutlinedIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Archive</ListItemText>
+          </MenuItem>
+        )}
       </Menu>
       <SaveToCollectionModal
         item={item}
@@ -106,7 +147,9 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
         onClose={() => setModalOpen(false)}
       />
       <ErrorMessage
-        open={mutateStatus === AsyncStatus.FAIL && pendingAction === "thumbnail"}
+        open={
+          mutateStatus === AsyncStatus.FAIL && pendingAction === "thumbnail"
+        }
       >
         {mutateError}
       </ErrorMessage>
@@ -124,6 +167,14 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
         open={mutateStatus === AsyncStatus.FAIL && pendingAction === "remove"}
       >
         {mutateError}
+      </ErrorMessage>
+      {/* No success message here either: archiving flips isActive to false,
+          which drops the video from the timeline (and unmounts this menu)
+          in the same render as archiveStatus flipping to SUCCESS. */}
+      <ErrorMessage
+        open={archiveStatus === AsyncStatus.FAIL && pendingAction === "archive"}
+      >
+        {archiveError}
       </ErrorMessage>
     </RequireAuth>
   );

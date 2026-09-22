@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { fromNow, formatNumber } from "../app/utils";
@@ -22,9 +23,13 @@ type VideoTypeProps = {
 export function VideoCard({
   video,
   playlistId,
+  canArchiveVideo = false,
+  isActive = true,
 }: {
   video: VideoTypeProps;
   playlistId?: string;
+  isActive?: boolean;
+  canArchiveVideo?: boolean;
 }) {
   const {
     id,
@@ -42,21 +47,38 @@ export function VideoCard({
 
   return (
     <Card>
-      <Link to={link}>
-        {imageUrl ? (
-          <LazyImage
-            src={imageUrl}
-            style={{ width: "100%", height: "auto" }}
-            ratio="3:2"
-          />
-        ) : (
-          <img
-            src={placeholder}
-            alt="placeholder"
-            style={{ width: "100%", height: "auto" }}
+      <Box sx={{ position: "relative" }}>
+        <Link to={link}>
+          {imageUrl ? (
+            <LazyImage
+              src={imageUrl}
+              style={{ width: "100%", height: "auto" }}
+              ratio="3:2"
+            />
+          ) : (
+            <img
+              src={placeholder}
+              alt="placeholder"
+              style={{ width: "100%", height: "auto" }}
+            />
+          )}
+        </Link>
+        {!isActive && (
+          <Chip
+            label="Archived"
+            size="small"
+            sx={{
+              position: "absolute",
+              top: 8,
+              right: 8,
+              bgcolor: "rgba(0, 0, 0, 0.5)",
+              color: "#fff",
+              fontWeight: 500,
+              pointerEvents: "none",
+            }}
           />
         )}
-      </Link>
+      </Box>
       <CardContent
         sx={{
           px: 1,
@@ -97,6 +119,7 @@ export function VideoCard({
               channelId,
               channelTitle,
             }}
+            canArchiveVideo={canArchiveVideo}
           />
         </Box>
         <Box sx={{ mb: "5px" }}>

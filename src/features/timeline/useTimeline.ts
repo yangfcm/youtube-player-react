@@ -7,7 +7,7 @@ import { fetchTimeline, setTimelineMetaData } from "./timelineSlice";
 import { db } from "../../settings/firebaseConfig";
 import { TimelineMetaData } from "./types";
 
-export function useTimeline(userId: string) {
+export function useTimeline(userId: string, includeArchived: boolean) {
   const dispatch = useAppDispatch();
   const { videos, status, error, meta } = useSelector((state: RootState) => {
     return state.timeline;
@@ -25,9 +25,10 @@ export function useTimeline(userId: string) {
         userId,
         after: lastItem.id,
         way: "APPEND",
+        includeArchived,
       })
     );
-  }, [userId, videos, dispatch]);
+  }, [userId, videos, dispatch, includeArchived]);
 
   useEffect(() => {
     if (!userId) return;
@@ -44,9 +45,10 @@ export function useTimeline(userId: string) {
       fetchTimeline({
         userId,
         maxResults: videos.length === 0 ? undefined : videos.length,
+        includeArchived,
       })
     );
-  }, [userId, dispatch, meta?.totalCount, videos.length]);
+  }, [userId, dispatch, meta?.totalCount, videos.length, includeArchived]);
 
   return { videos, status, error, hasMore, fetchMore, meta };
 }
