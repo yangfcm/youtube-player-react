@@ -15,7 +15,6 @@ export function useTimeline(userId: string) {
 
   const hasMore = useMemo(() => {
     if (videos.length === 0) return false;
-    console.log(meta, videos);
     return (meta?.totalCount || 0) > videos.length;
   }, [videos, meta?.totalCount]);
 

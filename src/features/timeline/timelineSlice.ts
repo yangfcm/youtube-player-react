@@ -18,6 +18,7 @@ import {
   getDoc,
   doc,
   updateDoc,
+  increment,
 } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
 
@@ -67,7 +68,11 @@ export const toggleHideTimelineVideo = createAsyncThunk(
   async (args: { userId: string; videoId: string; isActive: boolean }) => {
     const { userId, videoId, isActive } = args;
     const itemRef = doc(db, "timeline", userId, "items", videoId);
-    await updateDoc(itemRef, { isActive });
+    const metaRef = doc(db, "timeline", userId);
+    await Promise.all([
+      updateDoc(itemRef, { isActive }),
+      updateDoc(metaRef, { totalCount: increment(isActive ? 1 : -1) }),
+    ]);
     return { videoId, isActive };
   },
 );
@@ -153,12 +158,6 @@ const timelineSlice = createSlice({
           const video = state.videos.find((v) => v.id === videoId);
           if (video) {
             video.isActive = isActive;
-          }
-          if (state.meta) {
-            state.meta.totalCount = Math.max(
-              0,
-              state.meta.totalCount + (isActive ? 1 : -1),
-            );
           }
         },
       )
