@@ -2,13 +2,16 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
 import Card from "@mui/material/Card";
-import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { fromNow, formatNumber } from "../app/utils";
 import placeholder from "../images/placeholder-item.jpg";
 import { LazyImage } from "./LazyImage";
 import { ActionMenu } from "./ActionMenu";
+import { useProfile } from "../features/user/useProfile";
+import { useToggleHideTimelineVideo } from "../features/timeline/useToggleHideTimelineVideo";
+import { AsyncStatus } from "../settings/types";
 
 type VideoTypeProps = {
   id: string;
@@ -45,8 +48,13 @@ export function VideoCard({
     ? `/video/${id}?playlistId=${playlistId}`
     : `/video/${id}`;
 
+  const user = useProfile();
+  const { unHideVideo, status: unHideStatus } = useToggleHideTimelineVideo(
+    user?.id ?? "",
+  );
+
   return (
-    <Card>
+    <Card sx={{ position: "relative" }}>
       <Box sx={{ position: "relative" }}>
         <Link to={link}>
           {imageUrl ? (
@@ -63,21 +71,6 @@ export function VideoCard({
             />
           )}
         </Link>
-        {!isActive && (
-          <Chip
-            label="Archived"
-            size="small"
-            sx={{
-              position: "absolute",
-              top: 8,
-              right: 8,
-              bgcolor: "rgba(0, 0, 0, 0.5)",
-              color: "#fff",
-              fontWeight: 500,
-              pointerEvents: "none",
-            }}
-          />
-        )}
       </Box>
       <CardContent
         sx={{
@@ -141,6 +134,38 @@ export function VideoCard({
           </>
         </Typography>
       </CardContent>
+      {!isActive && (
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 1.5,
+            bgcolor: "rgba(0, 0, 0, 0.75)",
+          }}
+        >
+          <Typography variant="body2" fontWeight={500} sx={{ color: "#fff" }}>
+            Video hidden from feed
+          </Typography>
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              borderRadius: 999,
+              bgcolor: "grey.300",
+              color: "#000",
+              "&:hover": { bgcolor: "grey.400" },
+            }}
+            disabled={unHideStatus === AsyncStatus.LOADING}
+            onClick={() => unHideVideo(id)}
+          >
+            Unhide
+          </Button>
+        </Box>
+      )}
     </Card>
   );
 }
