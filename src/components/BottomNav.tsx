@@ -16,12 +16,16 @@ const TAB_STYLE = {
   minHeight: "60px",
 };
 
+const TAB_VALUES = ["/", "/subscriptions", "/collections", "/explore"];
+
 export function BottomNav() {
   const { pathname } = useLocation();
-  const [value, setValue] = useState(pathname);
+  const [value, setValue] = useState<string | false>(
+    TAB_VALUES.includes(pathname) ? pathname : false,
+  );
 
   useEffect(() => {
-    setValue(pathname);
+    setValue(TAB_VALUES.includes(pathname) ? pathname : false);
   }, [pathname]);
 
   return (

@@ -6,6 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import HideSourceIcon from "@mui/icons-material/HideSource";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
 import { MoreOptionsButton } from "./MoreOptionsButton";
 import { RequireAuth } from "./RequireAuth";
@@ -14,11 +15,14 @@ import { SuccessMessage } from "./SuccessMessage";
 import { CollectionItem } from "../features/collection/types";
 import { useUpdateCollection } from "../features/collection/useUpdateCollection";
 import { useUpdateCollectionItem } from "../features/collection/useUpdateCollectionItem";
+import { useToggleHideTimelineVideo } from "../features/timeline/useToggleHideTimelineVideo";
+import { useProfile } from "../features/user/useProfile";
 import { AsyncStatus } from "../settings/types";
 
 type ActionMenuPropsType = {
   item: CollectionItem;
   collectionId?: string;
+  canHideVideo?: boolean;
 };
 
 // updateCollection and updateCollectionItem both mutate the same
@@ -26,9 +30,13 @@ type ActionMenuPropsType = {
 // SaveToCollectionModal's own per-collection rows can touch it too), so
 // pendingAction tracks which action *this* menu triggered, and only that
 // action's message is shown.
-type PendingAction = "thumbnail" | "remove" | null;
+type PendingAction = "thumbnail" | "remove" | "hide" | null;
 
-export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
+export function ActionMenu({
+  item,
+  collectionId,
+  canHideVideo,
+}: ActionMenuPropsType) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState<PendingAction>(null);
@@ -40,6 +48,13 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
     reset: resetMutateStatus,
   } = useUpdateCollection(collectionId ?? "");
   const { updateCollectionItem } = useUpdateCollectionItem(collectionId ?? "");
+  const user = useProfile();
+  const {
+    hideVideo,
+    status: hideStatus,
+    error: hideError,
+    reset: resetHideStatus,
+  } = useToggleHideTimelineVideo(user?.id ?? "");
 
   useEffect(() => {
     if (
@@ -50,6 +65,13 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutateStatus]);
+
+  useEffect(() => {
+    if (hideStatus === AsyncStatus.SUCCESS || hideStatus === AsyncStatus.FAIL) {
+      resetHideStatus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hideStatus]);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -66,6 +88,14 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
   const handleRemoveFromCollection = () => {
     setPendingAction("remove");
     updateCollectionItem(item, "remove");
+  };
+
+  const handleHide = () => {
+    if (item.type !== "video") {
+      return;
+    }
+    setPendingAction("hide");
+    hideVideo(item.itemId);
   };
 
   return (
@@ -99,6 +129,14 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
             <ListItemText>Remove from Collection</ListItemText>
           </MenuItem>
         )}
+        {canHideVideo && item.type === "video" && (
+          <MenuItem onClick={handleHide}>
+            <ListItemIcon>
+              <HideSourceIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Hide</ListItemText>
+          </MenuItem>
+        )}
       </Menu>
       <SaveToCollectionModal
         item={item}
@@ -106,7 +144,9 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
         onClose={() => setModalOpen(false)}
       />
       <ErrorMessage
-        open={mutateStatus === AsyncStatus.FAIL && pendingAction === "thumbnail"}
+        open={
+          mutateStatus === AsyncStatus.FAIL && pendingAction === "thumbnail"
+        }
       >
         {mutateError}
       </ErrorMessage>
@@ -124,6 +164,11 @@ export function ActionMenu({ item, collectionId }: ActionMenuPropsType) {
         open={mutateStatus === AsyncStatus.FAIL && pendingAction === "remove"}
       >
         {mutateError}
+      </ErrorMessage>
+      <ErrorMessage
+        open={hideStatus === AsyncStatus.FAIL && pendingAction === "hide"}
+      >
+        {hideError}
       </ErrorMessage>
     </RequireAuth>
   );

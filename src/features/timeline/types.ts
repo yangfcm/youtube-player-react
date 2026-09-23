@@ -9,6 +9,7 @@ export interface TimelineVideo {
   publishTimestamp: number;
   liveBroadcastContent: string;
   imageUrl: string;
+  isActive: boolean;
 }
 
 export interface TimelineState {
@@ -16,6 +17,8 @@ export interface TimelineState {
   meta: TimelineMetaData | null;
   status: AsyncStatus;
   error: string;
+  hideStatus: AsyncStatus;
+  hideError: string;
 }
 
 export interface TimelineMetaData {

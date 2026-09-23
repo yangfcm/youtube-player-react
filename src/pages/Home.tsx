@@ -12,8 +12,6 @@ import { useProfile } from "../features/user/useProfile";
 import { RequireLoginPage } from "../components/RequireLoginPage";
 
 export function Home() {
-  // const { mostPopularVideos, status, error, fetchMore, hasMore } =
-  //   useMostPopularVideos();
   const user = useProfile();
   const userId = user?.id || "";
   const { videos, status, error, hasMore, fetchMore, meta } =
@@ -26,6 +24,7 @@ export function Home() {
     <RequireAuth unAuthedComponent={<RequireLoginPage />}>
       <Box sx={{ pb: 2 }}>
         <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
+
         {(status === AsyncStatus.SUCCESS || status === AsyncStatus.IDLE) &&
           videos.length === 0 && <NoContent> Your feed is empty.</NoContent>}
         <Grid container spacing={2} sx={{ pb: 2 }}>
@@ -41,6 +40,8 @@ export function Home() {
                     channelTitle: video.channelTitle,
                     publishedAt: new Date(video.publishTimestamp),
                   }}
+                  canHideVideo
+                  isActive={video.isActive}
                 />
               </Grid>
             );

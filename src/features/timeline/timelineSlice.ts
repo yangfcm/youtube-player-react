@@ -17,6 +17,8 @@ import {
   startAfter,
   getDoc,
   doc,
+  updateDoc,
+  increment,
 } from "firebase/firestore";
 import { db } from "../../settings/firebaseConfig";
 
@@ -25,6 +27,8 @@ const initialState: TimelineState = {
   meta: null,
   status: AsyncStatus.IDLE,
   error: "",
+  hideStatus: AsyncStatus.IDLE,
+  hideError: "",
 };
 
 type FetchTimelineFilter = {
@@ -48,7 +52,7 @@ export const fetchTimeline = createAsyncThunk(
       where("isActive", "==", true),
       orderBy("publishTimestamp", "desc"),
       startAfter(startAfterDoc || ""),
-      limit(Number(maxResults))
+      limit(Number(maxResults)),
     );
     const querySnapshot = await getDocs(timelineQuery);
     const timelineVideos: TimelineVideo[] = [];
@@ -56,7 +60,21 @@ export const fetchTimeline = createAsyncThunk(
       timelineVideos.push(doc.data() as TimelineVideo);
     });
     return timelineVideos;
-  }
+  },
+);
+
+export const toggleHideTimelineVideo = createAsyncThunk(
+  "timeline/toggleHideTimelineVideo",
+  async (args: { userId: string; videoId: string; isActive: boolean }) => {
+    const { userId, videoId, isActive } = args;
+    const itemRef = doc(db, "timeline", userId, "items", videoId);
+    const metaRef = doc(db, "timeline", userId);
+    await Promise.all([
+      updateDoc(itemRef, { isActive }),
+      updateDoc(metaRef, { totalCount: increment(isActive ? 1 : -1) }),
+    ]);
+    return { videoId, isActive };
+  },
 );
 
 const timelineSlice = createSlice({
@@ -77,6 +95,10 @@ const timelineSlice = createSlice({
       state.status = AsyncStatus.IDLE;
       state.meta = null;
     },
+    resetHideStatus: (state) => {
+      state.hideStatus = AsyncStatus.IDLE;
+      state.hideError = "";
+    },
   },
   extraReducers: (builder) => {
     const fetchTimelineStart = (state: TimelineState) => {
@@ -84,7 +106,7 @@ const timelineSlice = createSlice({
     };
     const fetchTimelineFailed = (
       state: TimelineState,
-      { error }: { error: SerializedError }
+      { error }: { error: SerializedError },
     ) => {
       state.status = AsyncStatus.FAIL;
       state.error = error.message || DEFAULT_ERROR_MESSAGE;
@@ -94,7 +116,7 @@ const timelineSlice = createSlice({
       {
         payload,
         meta: { arg },
-      }: { payload: TimelineVideo[]; meta: { arg: FetchTimelineFilter } }
+      }: { payload: TimelineVideo[]; meta: { arg: FetchTimelineFilter } },
     ) => {
       const { way = "REPLACE" } = arg;
       state.status = AsyncStatus.SUCCESS;
@@ -120,10 +142,36 @@ const timelineSlice = createSlice({
     builder
       .addCase(fetchTimeline.pending, fetchTimelineStart)
       .addCase(fetchTimeline.fulfilled, fetchTimelineSuccess)
-      .addCase(fetchTimeline.rejected, fetchTimelineFailed);
+      .addCase(fetchTimeline.rejected, fetchTimelineFailed)
+      .addCase(toggleHideTimelineVideo.pending, (state) => {
+        state.hideStatus = AsyncStatus.LOADING;
+        state.hideError = "";
+      })
+      .addCase(
+        toggleHideTimelineVideo.fulfilled,
+        (
+          state,
+          { payload }: { payload: { videoId: string; isActive: boolean } },
+        ) => {
+          state.hideStatus = AsyncStatus.SUCCESS;
+          const { videoId, isActive } = payload;
+          const video = state.videos.find((v) => v.id === videoId);
+          if (video) {
+            video.isActive = isActive;
+          }
+        },
+      )
+      .addCase(
+        toggleHideTimelineVideo.rejected,
+        (state, { error }: { error: SerializedError }) => {
+          state.hideStatus = AsyncStatus.FAIL;
+          state.hideError = error.message || DEFAULT_ERROR_MESSAGE;
+        },
+      );
   },
 });
 
-export const { setTimelineMetaData, resetTimeline } = timelineSlice.actions;
+export const { setTimelineMetaData, resetTimeline, resetHideStatus } =
+  timelineSlice.actions;
 
 export const timelineReducer = timelineSlice.reducer;

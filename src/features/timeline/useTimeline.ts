@@ -25,7 +25,7 @@ export function useTimeline(userId: string) {
         userId,
         after: lastItem.id,
         way: "APPEND",
-      })
+      }),
     );
   }, [userId, videos, dispatch]);
 
@@ -39,14 +39,14 @@ export function useTimeline(userId: string) {
   }, [userId, dispatch]);
 
   useEffect(() => {
-    if (!userId || !meta?.totalCount) return;
+    if (!userId) return;
     dispatch(
       fetchTimeline({
         userId,
         maxResults: videos.length === 0 ? undefined : videos.length,
-      })
+      }),
     );
-  }, [userId, dispatch, meta?.totalCount, videos.length]);
+  }, [userId, dispatch, videos.length]);
 
   return { videos, status, error, hasMore, fetchMore, meta };
 }
