@@ -26,8 +26,8 @@ const initialState: TimelineState = {
   meta: null,
   status: AsyncStatus.IDLE,
   error: "",
-  archiveStatus: AsyncStatus.IDLE,
-  archiveError: "",
+  hideStatus: AsyncStatus.IDLE,
+  hideError: "",
 };
 
 type FetchTimelineFilter = {
@@ -35,13 +35,11 @@ type FetchTimelineFilter = {
   maxResults?: number;
   after?: string;
   way?: "REPLACE" | "APPEND" | "TOP";
-  includeArchived?: boolean;
 };
 export const fetchTimeline = createAsyncThunk(
   "timeline/fetchTimeline",
   async (filter: FetchTimelineFilter) => {
-    const { userId, maxResults = MAX_RESULTS_24, after, includeArchived } =
-      filter;
+    const { userId, maxResults = MAX_RESULTS_24, after } = filter;
     const timelineCollectionRef = collection(db, "timeline", userId, "items");
 
     let startAfterDoc;
@@ -50,7 +48,7 @@ export const fetchTimeline = createAsyncThunk(
     }
     const timelineQuery = query(
       timelineCollectionRef,
-      ...(includeArchived ? [] : [where("isActive", "==", true)]),
+      where("isActive", "==", true),
       orderBy("publishTimestamp", "desc"),
       startAfter(startAfterDoc || ""),
       limit(Number(maxResults)),
@@ -64,13 +62,13 @@ export const fetchTimeline = createAsyncThunk(
   },
 );
 
-export const archiveTimelineVideo = createAsyncThunk(
-  "timeline/archiveTimelineVideo",
-  async (args: { userId: string; videoId: string }) => {
-    const { userId, videoId } = args;
+export const toggleHideTimelineVideo = createAsyncThunk(
+  "timeline/toggleHideTimelineVideo",
+  async (args: { userId: string; videoId: string; isActive: boolean }) => {
+    const { userId, videoId, isActive } = args;
     const itemRef = doc(db, "timeline", userId, "items", videoId);
-    await updateDoc(itemRef, { isActive: false });
-    return videoId;
+    await updateDoc(itemRef, { isActive });
+    return { videoId, isActive };
   },
 );
 
@@ -92,9 +90,9 @@ const timelineSlice = createSlice({
       state.status = AsyncStatus.IDLE;
       state.meta = null;
     },
-    resetArchiveStatus: (state) => {
-      state.archiveStatus = AsyncStatus.IDLE;
-      state.archiveError = "";
+    resetHideStatus: (state) => {
+      state.hideStatus = AsyncStatus.IDLE;
+      state.hideError = "";
     },
   },
   extraReducers: (builder) => {
@@ -140,34 +138,41 @@ const timelineSlice = createSlice({
       .addCase(fetchTimeline.pending, fetchTimelineStart)
       .addCase(fetchTimeline.fulfilled, fetchTimelineSuccess)
       .addCase(fetchTimeline.rejected, fetchTimelineFailed)
-      .addCase(archiveTimelineVideo.pending, (state) => {
-        state.archiveStatus = AsyncStatus.LOADING;
-        state.archiveError = "";
+      .addCase(toggleHideTimelineVideo.pending, (state) => {
+        state.hideStatus = AsyncStatus.LOADING;
+        state.hideError = "";
       })
       .addCase(
-        archiveTimelineVideo.fulfilled,
-        (state, { payload: videoId }: { payload: string }) => {
-          state.archiveStatus = AsyncStatus.SUCCESS;
+        toggleHideTimelineVideo.fulfilled,
+        (
+          state,
+          { payload }: { payload: { videoId: string; isActive: boolean } },
+        ) => {
+          state.hideStatus = AsyncStatus.SUCCESS;
+          const { videoId, isActive } = payload;
           const video = state.videos.find((v) => v.id === videoId);
           if (video) {
-            video.isActive = false;
+            video.isActive = isActive;
           }
           if (state.meta) {
-            state.meta.totalCount = Math.max(0, state.meta.totalCount - 1);
+            state.meta.totalCount = Math.max(
+              0,
+              state.meta.totalCount + (isActive ? 1 : -1),
+            );
           }
         },
       )
       .addCase(
-        archiveTimelineVideo.rejected,
+        toggleHideTimelineVideo.rejected,
         (state, { error }: { error: SerializedError }) => {
-          state.archiveStatus = AsyncStatus.FAIL;
-          state.archiveError = error.message || DEFAULT_ERROR_MESSAGE;
+          state.hideStatus = AsyncStatus.FAIL;
+          state.hideError = error.message || DEFAULT_ERROR_MESSAGE;
         },
       );
   },
 });
 
-export const { setTimelineMetaData, resetTimeline, resetArchiveStatus } =
+export const { setTimelineMetaData, resetTimeline, resetHideStatus } =
   timelineSlice.actions;
 
 export const timelineReducer = timelineSlice.reducer;

@@ -23,13 +23,13 @@ type VideoTypeProps = {
 export function VideoCard({
   video,
   playlistId,
-  canArchiveVideo = false,
+  canHideVideo = false,
   isActive = true,
 }: {
   video: VideoTypeProps;
   playlistId?: string;
   isActive?: boolean;
-  canArchiveVideo?: boolean;
+  canHideVideo?: boolean;
 }) {
   const {
     id,
@@ -119,7 +119,7 @@ export function VideoCard({
               channelId,
               channelTitle,
             }}
-            canArchiveVideo={canArchiveVideo}
+            canHideVideo={canHideVideo}
           />
         </Box>
         <Box sx={{ mb: "5px" }}>

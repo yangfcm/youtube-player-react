@@ -1,8 +1,5 @@
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import { useTimeline } from "../features/timeline/useTimeline";
 import { VideoCard } from "../components/VideoCard";
 import { LoadingSpinner } from "../components/LoadingSpinner";
@@ -15,42 +12,23 @@ import { useProfile } from "../features/user/useProfile";
 import { RequireLoginPage } from "../components/RequireLoginPage";
 
 export function Home() {
-  // const { mostPopularVideos, status, error, fetchMore, hasMore } =
-  //   useMostPopularVideos();
   const user = useProfile();
   const userId = user?.id || "";
-  const [showArchived, setShowArchived] = useState(false);
-  const { videos, status, error, hasMore, fetchMore, meta } = useTimeline(
-    userId,
-    showArchived,
-  );
+  const { videos, status, error, hasMore, fetchMore, meta } =
+    useTimeline(userId);
   if (!videos.length && (status === AsyncStatus.LOADING || meta?.loading)) {
     return <LoadingSpinner />;
   }
-
-  const visibleVideos = showArchived
-    ? videos
-    : videos.filter((video) => video.isActive !== false);
 
   return (
     <RequireAuth unAuthedComponent={<RequireLoginPage />}>
       <Box sx={{ pb: 2 }}>
         <ErrorMessage open={status === AsyncStatus.FAIL}>{error}</ErrorMessage>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={showArchived}
-              onChange={(e) => setShowArchived(e.target.checked)}
-            />
-          }
-          label="Show archived videos"
-        />
+
         {(status === AsyncStatus.SUCCESS || status === AsyncStatus.IDLE) &&
-          visibleVideos.length === 0 && (
-            <NoContent> Your feed is empty.</NoContent>
-          )}
+          videos.length === 0 && <NoContent> Your feed is empty.</NoContent>}
         <Grid container spacing={2} sx={{ pb: 2 }}>
-          {visibleVideos.map((video) => {
+          {videos.map((video) => {
             return (
               <Grid item xs={12} sm={6} md={4} lg={3} key={video.id as string}>
                 <VideoCard
@@ -62,7 +40,7 @@ export function Home() {
                     channelTitle: video.channelTitle,
                     publishedAt: new Date(video.publishTimestamp),
                   }}
-                  canArchiveVideo
+                  canHideVideo
                   isActive={video.isActive}
                 />
               </Grid>

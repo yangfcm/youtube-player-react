@@ -17,8 +17,8 @@ export interface TimelineState {
   meta: TimelineMetaData | null;
   status: AsyncStatus;
   error: string;
-  archiveStatus: AsyncStatus;
-  archiveError: string;
+  hideStatus: AsyncStatus;
+  hideError: string;
 }
 
 export interface TimelineMetaData {
