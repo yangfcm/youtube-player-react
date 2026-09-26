@@ -13,8 +13,7 @@ import { ChannelBanner, bannerHeight } from "../components/ChannelBanner";
 
 export default function Channel() {
   const { pathname } = useLocation();
-  const pathValue = pathname.split("/")[3] || "videos";
-  const [value, setValue] = useState(pathValue);
+  const value = pathname.split("/")[3] || "videos";
   const [bannerImageError, setBannerImageError] = useState(false);
   const { id = "" } = useParams();
   const { channelProfile, status, error } = useChannelProfile(id);
@@ -57,12 +56,7 @@ export default function Channel() {
             />
           </>
         )}
-        <Tabs
-          value={value}
-          onChange={(event: React.SyntheticEvent, newValue: string) =>
-            setValue(newValue)
-          }
-        >
+        <Tabs value={value} onChange={() => {}}>
           <Tab component={Link} to="./videos" label="Videos" value="videos" />
           <Tab
             component={Link}
