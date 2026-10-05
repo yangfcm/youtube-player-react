@@ -7,7 +7,7 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-import * as functions from "firebase-functions";
+import * as functions from "firebase-functions/v1";
 import express from "express";
 import cors from "cors";
 import {
