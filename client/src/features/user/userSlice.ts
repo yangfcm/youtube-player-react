@@ -8,10 +8,8 @@ import {
 import { AxiosResponse } from "axios";
 import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
-import { PlayListsResponse } from "../playlist/types";
 import { UserState, UserProfile, UserInfoResponse } from "./types";
 import { fetchUserByTokenAPI } from "./userAPI";
-import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: UserState = {
   profile: {

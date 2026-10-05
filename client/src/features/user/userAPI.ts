@@ -1,11 +1,6 @@
 import { AxiosResponse } from "axios";
 import { doc, getDoc } from "firebase/firestore";
-import { appAxios, googleAuthAxios } from "../../settings/api";
-import {
-  MAX_RESULTS_24,
-  PART_SNIPPET_CONTENT_STATUS,
-} from "../../settings/constant";
-import { PlayListsResponse } from "../playlist/types";
+import { googleAuthAxios } from "../../settings/api";
 import { UserInfoResponse, UserProfile } from "./types";
 import { db } from "../../settings/firebaseConfig";
 
