@@ -10,7 +10,7 @@ import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { PlayListsResponse } from "../playlist/types";
 import { UserState, UserProfile, UserInfoResponse } from "./types";
-import { fetchPlayListsAPI, fetchUserByTokenAPI } from "./userAPI";
+import { fetchUserByTokenAPI } from "./userAPI";
 import { DEFAULT_ERROR_MESSAGE } from "../../settings/constant";
 
 const initialState: UserState = {
@@ -27,19 +27,11 @@ const initialState: UserState = {
   isGoogleAuthEnabled: false,
 };
 
-export const fetchPlayLists = createAsyncThunk(
-  "user/fetchPlayLists",
-  async (options?: Record<string, string>) => {
-    const response = await fetchPlayListsAPI(options);
-    return response;
-  }
-);
-
 export const fetchUserByToken = createAsyncThunk(
   "user/fetchUserByToken",
   async (token: string) => {
     return await fetchUserByTokenAPI(token);
-  }
+  },
 );
 
 const userSlice = createSlice({
@@ -50,7 +42,7 @@ const userSlice = createSlice({
       state,
       {
         payload: { user, token, expiresAt },
-      }: PayloadAction<{ user: UserProfile; token: string; expiresAt: number }>
+      }: PayloadAction<{ user: UserProfile; token: string; expiresAt: number }>,
     ) => {
       state.profile.data = user;
       state.token = "Bearer " + token;
@@ -58,7 +50,7 @@ const userSlice = createSlice({
     },
     setToken: (
       state,
-      { payload }: PayloadAction<{ token: string; expiresAt: number }>
+      { payload }: PayloadAction<{ token: string; expiresAt: number }>,
     ) => {
       const { token, expiresAt } = payload;
       state.token = "Bearer " + token;
@@ -81,44 +73,13 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    const fetchPlayListsStart = (
-      state: UserState,
-      { meta: { arg } }: { meta: { arg?: Record<string, string> } }
-    ) => {
-      state.playlists.status = AsyncStatus.LOADING;
-      if (!arg?.pageToken) state.playlists.data = undefined;
-    };
-    const fetchPlayListsSuccess = (
-      state: UserState,
-      {
-        payload,
-      }: {
-        payload: AxiosResponse<PlayListsResponse>;
-      }
-    ) => {
-      const currentItems = state.playlists.data?.items || [];
-      state.playlists.status = AsyncStatus.SUCCESS;
-      state.playlists.error = "";
-      state.playlists.data = {
-        ...payload.data,
-        items: [...currentItems, ...payload.data.items],
-      };
-    };
-    const fetchPlayListsFailed = (
-      state: UserState,
-      { error }: { error: SerializedError }
-    ) => {
-      state.playlists.status = AsyncStatus.FAIL;
-      state.playlists.error = error.message || DEFAULT_ERROR_MESSAGE;
-    };
-
     const fetchUserByTokenStart = (state: UserState) => {
       state.profile.status = AsyncStatus.LOADING;
       state.profile.error = "";
     };
     const fetchUserByTokenSuccess = (
       state: UserState,
-      { payload }: { payload: AxiosResponse<UserInfoResponse> }
+      { payload }: { payload: AxiosResponse<UserInfoResponse> },
     ) => {
       state.profile.status = AsyncStatus.SUCCESS;
       state.profile.error = "";
@@ -136,15 +97,12 @@ const userSlice = createSlice({
     };
     const fetchUserByTokenFailed = (
       state: UserState,
-      { error }: { error: SerializedError }
+      { error }: { error: SerializedError },
     ) => {
       state.profile.status = AsyncStatus.FAIL;
       state.profile.error = error.message || "Failed to login";
     };
     builder
-      .addCase(fetchPlayLists.pending, fetchPlayListsStart)
-      .addCase(fetchPlayLists.fulfilled, fetchPlayListsSuccess)
-      .addCase(fetchPlayLists.rejected, fetchPlayListsFailed)
       .addCase(fetchUserByToken.pending, fetchUserByTokenStart)
       .addCase(fetchUserByToken.fulfilled, fetchUserByTokenSuccess)
       .addCase(fetchUserByToken.rejected, fetchUserByTokenFailed);

@@ -9,24 +9,8 @@ import { PlayListsResponse } from "../playlist/types";
 import { UserInfoResponse, UserProfile } from "./types";
 import { db } from "../../settings/firebaseConfig";
 
-export async function fetchPlayListsAPI(
-  options?: Record<string, string>
-): Promise<AxiosResponse<PlayListsResponse>> {
-  return await appAxios.get("/playlists", {
-    params: {
-      part: PART_SNIPPET_CONTENT_STATUS,
-      mine: "true",
-      maxResults: MAX_RESULTS_24,
-      ...options,
-    },
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-  });
-}
-
 export async function fetchUserByTokenAPI(
-  token: string
+  token: string,
 ): Promise<AxiosResponse<UserInfoResponse>> {
   return await googleAuthAxios.get("/", {
     params: {
