@@ -5,6 +5,7 @@ import { lazy } from "react";
 import ChannelVideos from "./pages/ChannelVideos";
 import ChannelPlayLists from "./pages/ChannelPlayLists";
 import ChannelProfile from "./pages/ChannelProfile";
+import PlayListVideos from "./pages/PlayListVideos";
 
 const Subscriptions = lazy(() => import("./pages/Subscriptions"));
 const SearchResults = lazy(() => import("./pages/SearchResults"));
@@ -19,8 +20,8 @@ export function Router() {
     <Routes>
       <Route path="/subscriptions" element={<Subscriptions />} />
       <Route path="/search" element={<SearchResults />} />
-      {/* <Route path="/playlist/:id" element={<PlayListVideos />} />
-      <Route path="/playlists" element={<PlayLists />} /> */}
+      <Route path="/playlist/:id" element={<PlayListVideos />} />
+      {/* <Route path="/playlists" element={<PlayLists />} /> */}
       <Route path="/collections" element={<Collections />} />
       <Route path="/collections/:id" element={<CollectionDetails />} />
       <Route path="/explore" element={<PopularVideos />} />
