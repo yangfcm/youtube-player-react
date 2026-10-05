@@ -7,7 +7,6 @@ import ListItemText from "@mui/material/ListItemText";
 import MuiLink from "@mui/material/Link";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import ViewListIcon from "@mui/icons-material/ViewList";
-import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 
@@ -20,7 +19,10 @@ export function SidebarMenu() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Home" primaryTypographyProps={{ noWrap: true }} />
+            <ListItemText
+              primary="Home"
+              primaryTypographyProps={{ noWrap: true }}
+            />
           </ListItemButton>
         </ListItem>
       </MuiLink>
@@ -30,7 +32,10 @@ export function SidebarMenu() {
             <ListItemIcon>
               <SubscriptionsIcon />
             </ListItemIcon>
-            <ListItemText primary="Channels" primaryTypographyProps={{ noWrap: true }} />
+            <ListItemText
+              primary="Channels"
+              primaryTypographyProps={{ noWrap: true }}
+            />
           </ListItemButton>
         </ListItem>
       </MuiLink>
@@ -40,11 +45,14 @@ export function SidebarMenu() {
             <ListItemIcon>
               <ViewListIcon />
             </ListItemIcon>
-            <ListItemText primary="Play List" primaryTypographyProps={{ noWrap: true }} />
+            <ListItemText
+              primary="Play List"
+              primaryTypographyProps={{ noWrap: true }}
+            />
           </ListItemButton>
         </ListItem>
       </MuiLink>
-      <MuiLink component={Link} to="/collections" underline="none">
+      {/* <MuiLink component={Link} to="/collections" underline="none">
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -53,14 +61,17 @@ export function SidebarMenu() {
             <ListItemText primary="Collections" primaryTypographyProps={{ noWrap: true }} />
           </ListItemButton>
         </ListItem>
-      </MuiLink>
+      </MuiLink> */}
       <MuiLink component={Link} to="/explore" underline="none">
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
               <ExploreIcon />
             </ListItemIcon>
-            <ListItemText primary="Explore" primaryTypographyProps={{ noWrap: true }} />
+            <ListItemText
+              primary="Explore"
+              primaryTypographyProps={{ noWrap: true }}
+            />
           </ListItemButton>
         </ListItem>
       </MuiLink>

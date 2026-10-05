@@ -8,7 +8,7 @@ import { PlayListItemsResponse } from "./types";
 
 export async function fetchPlaylistVideosAPI(
   playlistId: string,
-  options: Record<string, string> = {}
+  options: Record<string, string> = {},
 ): Promise<AxiosResponse<PlayListItemsResponse>> {
   return await appAxios.get("/playlistItems", {
     params: {
@@ -16,9 +16,6 @@ export async function fetchPlaylistVideosAPI(
       part: PART_SNIPPET_CONTENT_STATUS,
       maxResults: MAX_RESULTS_24,
       ...options,
-    },
-    headers: {
-      Authorization: localStorage.getItem("token"),
     },
   });
 }

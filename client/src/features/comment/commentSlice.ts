@@ -6,16 +6,11 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { AsyncStatus } from "../../settings/types";
-import {
-  fetchCommentsAPI,
-  fetchRepliesAPI,
-  postVideoCommentAPI,
-} from "./commentAPI";
+import { fetchCommentsAPI, fetchRepliesAPI } from "./commentAPI";
 import {
   CommentResponse,
   ReplyResponse,
   CommentOrder,
-  CommentSnippet,
   CommentState,
 } from "./types";
 import {
@@ -40,10 +35,10 @@ export const fetchComments = createAsyncThunk(
     const { videoId, pageToken, order = "relevance" } = args;
     const response = await fetchCommentsAPI(
       videoId,
-      pageToken ? { pageToken, order } : { order }
+      pageToken ? { pageToken, order } : { order },
     );
     return response;
-  }
+  },
 );
 
 export const fetchReplies = createAsyncThunk(
@@ -52,18 +47,10 @@ export const fetchReplies = createAsyncThunk(
     const { commentId, pageToken } = args;
     const response = await fetchRepliesAPI(
       commentId,
-      pageToken ? { pageToken } : {}
+      pageToken ? { pageToken } : {},
     );
     return response;
-  }
-);
-
-export const postVideoComment = createAsyncThunk(
-  "comment/postVideoComment",
-  async (args: { videoId: string; comment: string }) => {
-    const response = await postVideoCommentAPI(args);
-    return response;
-  }
+  },
 );
 
 export const commentSlice = createSlice({
@@ -75,7 +62,7 @@ export const commentSlice = createSlice({
       action: PayloadAction<{
         videoId: string;
         order: CommentOrder;
-      }>
+      }>,
     ) => {
       const { videoId, order } = action.payload;
       if (state.comments[videoId]) {
@@ -88,7 +75,7 @@ export const commentSlice = createSlice({
       state: CommentState,
       {
         meta: { arg },
-      }: { meta: { arg: { videoId: string; order?: CommentOrder } } }
+      }: { meta: { arg: { videoId: string; order?: CommentOrder } } },
     ) => {
       const { videoId, order = "relevance" } = arg;
       if (!videoId) return;
@@ -113,7 +100,7 @@ export const commentSlice = createSlice({
       }: {
         payload: AxiosResponse<CommentResponse>;
         meta: { arg: { videoId: string; order?: CommentOrder } };
-      }
+      },
     ) => {
       const { videoId, order = "relevance" } = arg;
       if (!videoId) return;
@@ -133,7 +120,7 @@ export const commentSlice = createSlice({
       }: {
         error: SerializedError;
         meta: { arg: { videoId: string; order?: CommentOrder } };
-      }
+      },
     ) => {
       const { videoId, order = "relevance" } = arg;
       if (!videoId) return;
@@ -148,7 +135,7 @@ export const commentSlice = createSlice({
 
     const fetchRepliesStart = (
       state: CommentState,
-      { meta: { arg } }: { meta: { arg: { commentId: string } } }
+      { meta: { arg } }: { meta: { arg: { commentId: string } } },
     ) => {
       const { commentId } = arg;
       if (!commentId) return;
@@ -171,7 +158,7 @@ export const commentSlice = createSlice({
       }: {
         payload: AxiosResponse<ReplyResponse>;
         meta: { arg: { commentId: string } };
-      }
+      },
     ) => {
       const { commentId } = arg;
       if (!commentId) return;
@@ -189,48 +176,12 @@ export const commentSlice = createSlice({
       {
         error,
         meta: { arg },
-      }: { error: SerializedError; meta: { arg: { commentId: string } } }
+      }: { error: SerializedError; meta: { arg: { commentId: string } } },
     ) => {
       const { commentId } = arg;
       if (!commentId) return;
       state.comments[commentId].status = AsyncStatus.FAIL;
       state.comments[commentId].error = error.message || DEFAULT_ERROR_MESSAGE;
-    };
-
-    const postVideoCommentStart = (state: CommentState) => {
-      state.postStatus = AsyncStatus.LOADING;
-    };
-
-    const postVideoCommentSuccess = (
-      state: CommentState,
-      {
-        payload,
-        meta: { arg },
-      }: {
-        payload: AxiosResponse<CommentSnippet>;
-        meta: { arg: { videoId: string } };
-      }
-    ) => {
-      const { videoId } = arg;
-      const addedComment = payload.data;
-      const order = state.comments[videoId].order || "relevance";
-      const currentItems = state.comments[videoId].data[order]?.items || [];
-      state.postStatus = AsyncStatus.SUCCESS;
-      state.postError = "";
-      if (state.comments[videoId].data[order]) {
-        state.comments[videoId].data[order]!.items = [
-          addedComment,
-          ...currentItems,
-        ];
-      }
-    };
-
-    const postVideoCommentFailed = (
-      state: CommentState,
-      { error }: { error: SerializedError }
-    ) => {
-      state.postStatus = AsyncStatus.FAIL;
-      state.postError = error.message || DEFAULT_ERROR_MESSAGE;
     };
 
     builder
@@ -239,10 +190,7 @@ export const commentSlice = createSlice({
       .addCase(fetchComments.rejected, fetchCommentsFailed)
       .addCase(fetchReplies.pending, fetchRepliesStart)
       .addCase(fetchReplies.fulfilled, fetchRepliesSuccess)
-      .addCase(fetchReplies.rejected, fetchRepliesFailed)
-      .addCase(postVideoComment.pending, postVideoCommentStart)
-      .addCase(postVideoComment.fulfilled, postVideoCommentSuccess)
-      .addCase(postVideoComment.rejected, postVideoCommentFailed);
+      .addCase(fetchReplies.rejected, fetchRepliesFailed);
   },
 });
 

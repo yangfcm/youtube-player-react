@@ -14,7 +14,6 @@ import { MoreButton } from "./MoreButton";
 import { NoContent } from "./NoContent";
 import { SortComments } from "./SortComments";
 import { ErrorMessage } from "./ErrorMessage";
-import { AddComment } from "./AddComment";
 import { COMMENTS_TURNED_OFF_MESSAGE } from "../settings/constant";
 
 export function VideoComments({ videoId }: { videoId: string }) {
@@ -50,7 +49,7 @@ export function VideoComments({ videoId }: { videoId: string }) {
           order={order}
           onChangeOrder={setOrder}
         />
-        <AddComment videoId={videoId} />
+        {/* <AddComment videoId={videoId} /> */}
         {status === AsyncStatus.LOADING && comments.length === 0 && (
           <LoadingSpinner />
         )}
