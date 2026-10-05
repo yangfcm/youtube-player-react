@@ -1,13 +1,12 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
+import type { User as FirebaseUser } from "firebase/auth";
 import { useAppDispatch } from "../../app/hooks";
 import {
   signin as signinAction,
   signout as signoutAction,
   setGoogleAuthEnabled as setGoogleAuthEnabledAction,
-  setToken as setTokenAction,
-  fetchUserByToken as fetchUserByTokenAction,
 } from "./userSlice";
 import { resetTimeline } from "../timeline/timelineSlice";
 import { resetSubscriptions } from "../subscription/subscriptionSlice";
@@ -17,15 +16,11 @@ import { RootState } from "../../app/store";
 import { db } from "../../settings/firebaseConfig";
 import { fetchUserProfileAPI } from "./userAPI";
 
-// Mirrors the profile + current access token onto the user's Firestore doc.
-// A backend Cloud Function reads this to make YouTube API calls on the
-// user's behalf (e.g. the daily timeline job), so it must stay fresh across
-// token refreshes - not just at login.
-async function mirrorProfileToFirestore(profile: UserProfile, token: string) {
-  localStorage.setItem("user_email", profile.email);
+// Mirrors the profile onto the user's Firestore doc.
+async function mirrorProfileToFirestore(profile: UserProfile) {
   await setDoc(
     doc(db, "users", profile.id),
-    { ...profile, accessToken: token, lastLogin: Date.now() },
+    { ...profile, lastLogin: Date.now() },
     { merge: true },
   );
 }
@@ -33,12 +28,8 @@ async function mirrorProfileToFirestore(profile: UserProfile, token: string) {
 export function useAuth() {
   const dispatch = useAppDispatch();
 
-  const isSignedIn = useSelector(({ user }: RootState) => {
-    const isExpired = Date.now() > user.expiresAt;
-    return !!user.token && !isExpired;
-  });
+  const isSignedIn = useSelector(({ user }: RootState) => !!user.profile.data);
 
-  const token = useSelector((state: RootState) => state.user.token);
   const profile = useSelector((state: RootState) => state.user.profile?.data);
   const isGoogleAuthEnabled = useSelector(
     (state: RootState) => state.user.isGoogleAuthEnabled,
@@ -51,72 +42,48 @@ export function useAuth() {
     [dispatch],
   );
 
-  const signin = useCallback(
-    (user: UserProfile, token: string, expiresAt: number) => {
-      localStorage.setItem("token", "Bearer " + token);
-      dispatch(signinAction({ user, token, expiresAt }));
-    },
-    [dispatch],
-  );
   const signout = useCallback(() => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user_email");
     dispatch(resetTimeline());
     dispatch(resetCollections());
     dispatch(resetSubscriptions());
     dispatch(signoutAction());
   }, [dispatch]);
 
-  const setToken = useCallback(
-    (token: string, expiresAt: number) => {
-      localStorage.setItem("token", "Bearer " + token);
-      localStorage.setItem("expiresAt", expiresAt.toString());
-      dispatch(setTokenAction({ token, expiresAt }));
-      // Keep the Firestore mirror's accessToken fresh on periodic refreshes
-      // too - only login/session-restore needs to sequence against the
-      // subscriptions fetch below, since that's the only place they race.
-      if (profile) {
-        mirrorProfileToFirestore(profile, token);
-      }
-    },
-    [dispatch, profile],
-  );
+  // Called from GoogleAuthProvider's onAuthStateChanged whenever Firebase
+  // reports a signed-in user (initial load, popup sign-in, or token renewal).
+  const syncFirebaseUser = useCallback(
+    async (firebaseUser: FirebaseUser) => {
+      // Keep the Google account's own id (same value as the old GSI `sub`),
+      // not Firebase's own uid, so existing Firestore docs still resolve.
+      const googleProviderData = firebaseUser.providerData.find(
+        (p) => p.providerId === "google.com",
+      );
+      const id = googleProviderData?.uid ?? firebaseUser.uid;
 
-  const fetchUserByToken = useCallback(
-    (token: string) => {
-      dispatch(fetchUserByTokenAction(token))
-        .unwrap()
-        .then(async (response) => {
-          const { sub, email, name, family_name, given_name, picture } =
-            response.data;
-          const newProfile: UserProfile = {
-            id: sub,
-            email,
-            username: name,
-            lastName: family_name,
-            firstName: given_name,
-            avatar: picture,
-          };
+      const existingProfile = await fetchUserProfileAPI(id);
+      const newProfile: UserProfile = {
+        id,
+        email: firebaseUser.email || "",
+        username: firebaseUser.displayName || "",
+        avatar: firebaseUser.photoURL || "",
+        collections: existingProfile?.collections ?? [],
+        subscriptions: existingProfile?.subscriptions ?? [],
+      };
 
-          const existingProfile = await fetchUserProfileAPI(sub);
-          newProfile.collections = existingProfile?.collections;
-          newProfile.channels = existingProfile?.channels;
-
-          await mirrorProfileToFirestore(newProfile, token);
-          // dispatch(fetchSubscribedChannels(sub));
-        })
-        .catch(() => {});
+      localStorage.setItem("user_email", newProfile.email);
+      dispatch(signinAction({ user: newProfile }));
+      await mirrorProfileToFirestore(newProfile);
     },
     [dispatch],
   );
 
   return {
     isSignedIn,
-    token,
+    profile,
     isGoogleAuthEnabled,
-    signin,
     signout,
     setGoogleAuthEnabled,
-    setToken,
-    fetchUserByToken,
+    syncFirebaseUser,
   };
 }

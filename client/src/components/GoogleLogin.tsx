@@ -8,8 +8,7 @@ export function GoogleLogin({ responsive = true }: { responsive?: boolean }) {
   const context = useContext(GoogleAuthContext);
 
   const handleLogin = () => {
-    if (!context) return;
-    context.client.requestAccessToken();
+    context?.signIn();
   };
 
   return (

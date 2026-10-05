@@ -1,13 +1,13 @@
+import { useContext } from "react";
 import Button from '@mui/material/Button';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { useAuth } from "../features/user/useAuth";
+import { GoogleAuthContext } from "./GoogleAuthProvider";
 
 export function GoogleLogout() {
-  const { signout } = useAuth();
+  const context = useContext(GoogleAuthContext);
 
   const handleSignOut = () => {
-    localStorage.removeItem("token");
-    signout();
+    context?.signOutUser();
   };
 
   return (
