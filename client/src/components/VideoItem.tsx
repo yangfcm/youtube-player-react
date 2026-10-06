@@ -69,7 +69,7 @@ export function VideoItem({
           image={imageUrl || placeholder}
         />
       </Box>
-      <Box>
+      <Box sx={{ flexGrow: 1 }}>
         <CardContent>
           <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1 }}>
             <MuiLink
@@ -99,17 +99,26 @@ export function VideoItem({
               />
               &nbsp;{title}
             </MuiLink>
-            <ActionMenu
-              item={{
-                type: "video",
-                itemId: id,
-                title,
-                imageUrl,
-                channelId,
-                channelTitle,
+            <Box
+              sx={{
+                display: {
+                  xs: "block",
+                  sm: "none",
+                },
               }}
-              collectionId={collectionId}
-            />
+            >
+              <ActionMenu
+                item={{
+                  type: "video",
+                  itemId: id,
+                  title,
+                  imageUrl,
+                  channelId,
+                  channelTitle,
+                }}
+                collectionId={collectionId}
+              />
+            </Box>
           </Box>
           {channelTitle && (
             <>
@@ -134,6 +143,41 @@ export function VideoItem({
           {publishedAt && (
             <Typography variant="caption">{fromNow(publishedAt)}</Typography>
           )}
+        </CardContent>
+      </Box>
+      <Box
+        sx={{
+          display: {
+            xs: "none",
+            sm: "flex",
+          },
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CardContent>
+          <Box
+            sx={{
+              alignItems: "center",
+              justifyContent: "center",
+              display: {
+                xs: "none",
+                sm: "flex",
+              },
+            }}
+          >
+            <ActionMenu
+              item={{
+                type: "video",
+                itemId: id,
+                title,
+                imageUrl,
+                channelId,
+                channelTitle,
+              }}
+              collectionId={collectionId}
+            />
+          </Box>
         </CardContent>
       </Box>
     </Card>
