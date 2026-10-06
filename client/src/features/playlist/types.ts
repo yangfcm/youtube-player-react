@@ -1,6 +1,11 @@
 import { AsyncStatus } from "../../settings/types";
 import { Thumbnail } from "../video/types";
 
+export type VideoPrivacyStatus =
+  | "public"
+  | "private"
+  | "privacyStatusUnspecified";
+
 export interface Snippet {
   channelId: string;
   channelTitle: string;
@@ -37,7 +42,7 @@ export interface PlayListDetails extends Meta {
     itemCount: number;
   };
   status: {
-    privacyStatus: string;
+    privacyStatus: VideoPrivacyStatus;
   };
 }
 
@@ -80,7 +85,7 @@ interface PlayListItemDetails extends Meta {
     videoPublishedAt: Date;
   };
   status: {
-    privacyStatus: string;
+    privacyStatus: VideoPrivacyStatus;
   };
 }
 

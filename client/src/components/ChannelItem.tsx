@@ -62,7 +62,7 @@ export function ChannelItem({
           }}
         />
       </Box>
-      <Box>
+      <Box sx={{ flexGrow: 1 }}>
         <CardContent>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -90,6 +90,19 @@ export function ChannelItem({
                 {title}
               </Typography>
             )}
+          </Stack>
+
+          <Box
+            sx={{
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 1,
+              display: {
+                xs: "flex",
+                sm: "none",
+              },
+            }}
+          >
             {id && (
               <SubscribeButton
                 channelId={id}
@@ -101,7 +114,7 @@ export function ChannelItem({
               item={{ type: "channel", itemId: id, title, imageUrl }}
               collectionId={collectionId}
             />
-          </Stack>
+          </Box>
           <Typography
             variant="subtitle2"
             color="text.secondary"
@@ -109,6 +122,42 @@ export function ChannelItem({
           >
             {description}
           </Typography>
+        </CardContent>
+      </Box>
+      <Box
+        sx={{
+          display: {
+            xs: "none",
+            sm: "flex",
+          },
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CardContent>
+          <Box
+            sx={{
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 1,
+              display: {
+                xs: "none",
+                sm: "flex",
+              },
+            }}
+          >
+            {id && (
+              <SubscribeButton
+                channelId={id}
+                title={title}
+                thumbnail={imageUrl || ""}
+              />
+            )}
+            <ActionMenu
+              item={{ type: "channel", itemId: id, title, imageUrl }}
+              collectionId={collectionId}
+            />
+          </Box>
         </CardContent>
       </Box>
     </Card>

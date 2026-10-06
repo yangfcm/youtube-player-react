@@ -12,6 +12,7 @@ import { ActionMenu } from "./ActionMenu";
 import { useProfile } from "../features/user/useProfile";
 import { useToggleHideTimelineVideo } from "../features/timeline/useToggleHideTimelineVideo";
 import { AsyncStatus } from "../settings/types";
+import { VideoPrivacyStatus } from "../features/playlist/types";
 
 type VideoTypeProps = {
   id: string;
@@ -21,6 +22,7 @@ type VideoTypeProps = {
   imageUrl?: string;
   viewCount?: string;
   publishedAt?: Date | string;
+  privacyStatus?: VideoPrivacyStatus;
 };
 
 export function VideoCard({
@@ -42,6 +44,7 @@ export function VideoCard({
     viewCount,
     publishedAt,
     imageUrl,
+    privacyStatus = "public",
   } = video;
 
   const link = playlistId
@@ -56,7 +59,7 @@ export function VideoCard({
   return (
     <Card sx={{ position: "relative" }}>
       <Box sx={{ position: "relative" }}>
-        <Link to={link}>
+        <Link to={privacyStatus === "public" ? link : ""}>
           {imageUrl ? (
             <LazyImage
               src={imageUrl}
@@ -81,7 +84,7 @@ export function VideoCard({
         <Box sx={{ display: "flex", alignItems: "flex-start", mb: 1 }}>
           <MuiLink
             component={Link}
-            to={link}
+            to={privacyStatus === "public" ? link : ""}
             underline="none"
             variant="subtitle1"
             title={title}
@@ -103,17 +106,19 @@ export function VideoCard({
           >
             {title}
           </MuiLink>
-          <ActionMenu
-            item={{
-              type: "video",
-              itemId: id,
-              title,
-              imageUrl,
-              channelId,
-              channelTitle,
-            }}
-            canHideVideo={canHideVideo}
-          />
+          {privacyStatus === "public" && (
+            <ActionMenu
+              item={{
+                type: "video",
+                itemId: id,
+                title,
+                imageUrl,
+                channelId,
+                channelTitle,
+              }}
+              canHideVideo={canHideVideo}
+            />
+          )}
         </Box>
         <Box sx={{ mb: "5px" }}>
           <MuiLink

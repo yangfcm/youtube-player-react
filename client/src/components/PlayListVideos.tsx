@@ -51,6 +51,7 @@ export function PlayListVideos({ playlistId }: { playlistId: string }) {
                 publishedAt: video.contentDetails.videoPublishedAt,
                 channelTitle: video.snippet.videoOwnerChannelTitle,
                 channelId: video.snippet.videoOwnerChannelId,
+                privacyStatus: video.status.privacyStatus,
               }}
               playlistId={playlistId}
             />
