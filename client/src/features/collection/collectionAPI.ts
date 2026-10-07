@@ -112,10 +112,11 @@ export async function updateCollectionItemAPI(
   const collectionSnap = await getDoc(collectionRef);
   const existing = collectionSnap.data() as Collection;
 
+  const existingItems = existing.items ?? [];
   const updatedItems =
     operation === "add"
-      ? [...existing.items, stripUndefined(item)]
-      : existing.items.filter(
+      ? [...existingItems, stripUndefined(item)]
+      : existingItems.filter(
           (existingItem) =>
             !(
               existingItem.type === item.type &&

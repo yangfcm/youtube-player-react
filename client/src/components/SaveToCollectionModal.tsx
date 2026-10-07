@@ -49,7 +49,7 @@ function CollectionListItem({
 }) {
   const { updateCollectionItem, status, error, reset } =
     useUpdateCollectionItem(collection.id);
-  const isSaved = collection.items.some(
+  const isSaved = (collection.items ?? []).some(
     (existingItem) =>
       existingItem.type === item.type && existingItem.itemId === item.itemId,
   );

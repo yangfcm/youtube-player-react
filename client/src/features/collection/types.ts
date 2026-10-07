@@ -23,7 +23,7 @@ export interface CollectionSnippet {
 }
 
 export interface Collection extends CollectionSnippet {
-  items: CollectionItem[];
+  items: CollectionItem[] | null;
 }
 
 interface CollectionData {
