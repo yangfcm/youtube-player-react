@@ -20,15 +20,18 @@ export function useCollection(collectionId: string) {
   const collectionData = useSelector(
     (state: RootState) => state.collection.collectionsData[collectionId],
   );
-  const status = collectionData?.fetchStatus ?? AsyncStatus.IDLE;
+  // Items already in redux from a previous fetch - no need to refetch.
+  const cached = !!collection && collection.items !== null;
+  const status = cached
+    ? AsyncStatus.SUCCESS
+    : (collectionData?.fetchStatus ?? AsyncStatus.IDLE);
   const error = collectionData?.fetchError ?? "";
 
   useEffect(() => {
-    if (userId && collectionId) {
+    if (userId && collectionId && !cached) {
       dispatch(fetchUserCollection({ userId, collectionId }));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, collectionId]);
+  }, [dispatch, userId, collectionId, cached]);
 
   const reset = useCallback(() => {
     dispatch(resetCollectionFetchStatus(collectionId));

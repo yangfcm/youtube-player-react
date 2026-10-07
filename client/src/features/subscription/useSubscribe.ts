@@ -1,51 +1,32 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
 import { RootState } from "../../app/store";
-import { AsyncStatus } from "../../settings/types";
 import { Channel } from "./types";
-import {
-  fetchSubscribedChannels,
-  subscribeChannel,
-  unsubscribeChannel,
-} from "./subscriptionSlice";
+import { subscribeChannel, unsubscribeChannel } from "./subscriptionSlice";
 
 export function useSubscribe(channelId: string) {
   const dispatch = useAppDispatch();
-  const status = useSelector((state: RootState) => state.subscription.status);
   // Only this channel's own write error - the shared list error is reported by the page.
   const error = useSelector(
-    (state: RootState) => state.subscription.errors[channelId] || ""
+    (state: RootState) => state.subscription.errors[channelId] || "",
   );
-  const subscribed = useSelector(
-    (state: RootState) => !!state.subscription.ids[channelId]
+  const subscribed = useSelector((state: RootState) =>
+    !!state.user.profile.data?.subscriptions?.includes(channelId),
   );
   const writing = useSelector(
-    (state: RootState) => !!state.subscription.pending[channelId]
+    (state: RootState) => !!state.subscription.pending[channelId],
   );
   const userId = useSelector(
-    (state: RootState) => state.user.profile?.data?.id
+    (state: RootState) => state.user.profile?.data?.id,
   );
-
-  // Mount-only, same as useSubscriptions: if the user signs in while this
-  // button stays mounted, useAuth's post-login flow dispatches this fetch
-  // itself (sequenced after its own Firestore write to the same doc), and
-  // `status`/`subscribed` below pick up the result reactively regardless of
-  // who dispatched it. Reacting to userId here too would fire a second,
-  // unsequenced fetch that can race that write and read back stale data.
-  useEffect(() => {
-    if (userId && status === AsyncStatus.IDLE) {
-      dispatch(fetchSubscribedChannels(userId));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const subscribe = useCallback(
     (channel: Channel) => {
       if (!userId) return;
       dispatch(subscribeChannel({ userId, channel }));
     },
-    [userId, dispatch]
+    [userId, dispatch],
   );
 
   const unsubscribe = useCallback(() => {
@@ -55,9 +36,7 @@ export function useSubscribe(channelId: string) {
 
   return {
     subscribed,
-    // The subscription list has been loaded, so `subscribed` is trustworthy.
-    ready: status === AsyncStatus.SUCCESS || status === AsyncStatus.FAIL,
-    loading: writing || status === AsyncStatus.LOADING,
+    loading: writing,
     error,
     subscribe,
     unsubscribe,

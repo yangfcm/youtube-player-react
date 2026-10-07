@@ -17,7 +17,6 @@ const initialState: SubscriptionState = {
   status: AsyncStatus.IDLE,
   error: "",
   channels: [],
-  ids: {},
   pending: {},
   errors: {},
 };
@@ -26,7 +25,7 @@ export const fetchSubscribedChannels = createAsyncThunk(
   "subscription/fetchSubscribedChannels",
   async (userId: string) => await fetchSubscribedChannelsAPI(userId),
   {
-    // Several SubscribeButtons can mount at once - only let one fetch through.
+    // Guards against React StrictMode's double-invoked effects re-firing this.
     condition: (_userId, { getState }) =>
       (getState() as RootState).subscription.status !== AsyncStatus.LOADING,
   }
@@ -66,8 +65,6 @@ const subscriptionSlice = createSlice({
       state.status = AsyncStatus.SUCCESS;
       state.error = "";
       state.channels = payload;
-      state.ids = {};
-      payload.forEach((channel) => (state.ids[channel.id] = true));
     };
     const fetchSubscribedChannelsFailed = (
       state: SubscriptionState,
@@ -89,7 +86,6 @@ const subscriptionSlice = createSlice({
       { payload }: { payload: Channel }
     ) => {
       state.pending[payload.id] = false;
-      state.ids[payload.id] = true;
       if (!state.channels.some((channel) => channel.id === payload.id)) {
         state.channels.unshift(payload);
       }
@@ -117,7 +113,6 @@ const subscriptionSlice = createSlice({
       { payload }: { payload: string }
     ) => {
       state.pending[payload] = false;
-      state.ids[payload] = false;
       state.channels = state.channels.filter(
         (channel) => channel.id !== payload
       );
