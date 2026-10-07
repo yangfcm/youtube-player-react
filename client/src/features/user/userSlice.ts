@@ -2,6 +2,10 @@ import { createSlice, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { AsyncStatus } from "../../settings/types";
 import { UserState, UserProfile } from "./types";
+import {
+  subscribeChannel,
+  unsubscribeChannel,
+} from "../subscription/subscriptionSlice";
 
 const initialState: UserState = {
   profile: {
@@ -32,6 +36,21 @@ const userSlice = createSlice({
     setGoogleAuthEnabled: (state, { payload }: PayloadAction<boolean>) => {
       state.isGoogleAuthEnabled = payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(subscribeChannel.fulfilled, (state, { payload: channel }) => {
+        const subscriptions = state.profile.data?.subscriptions ?? [];
+        if (state.profile.data && !subscriptions.includes(channel.id)) {
+          state.profile.data.subscriptions = [...subscriptions, channel.id];
+        }
+      })
+      .addCase(unsubscribeChannel.fulfilled, (state, { payload: channelId }) => {
+        if (!state.profile.data) return;
+        state.profile.data.subscriptions = (
+          state.profile.data.subscriptions ?? []
+        ).filter((id) => id !== channelId);
+      });
   },
 });
 

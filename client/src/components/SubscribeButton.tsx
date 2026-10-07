@@ -15,14 +15,8 @@ function SubscribeButtonComp({
   title,
   thumbnail,
 }: SubscribeButtonProps) {
-  const {
-    subscribed,
-    ready,
-    loading,
-    error,
-    subscribe,
-    unsubscribe,
-  } = useSubscribe(channelId);
+  const { subscribed, loading, error, subscribe, unsubscribe } =
+    useSubscribe(channelId);
   const [subscribedText, setSubscribedText] = useState("Subscribed");
 
   return (
@@ -32,7 +26,7 @@ function SubscribeButtonComp({
         loading={loading}
         variant={subscribed ? "contained" : "outlined"}
         size="small"
-        disabled={loading || !ready}
+        disabled={loading}
         sx={{ width: "130px" }}
         onMouseOver={() => {
           if (subscribed) setSubscribedText("Unsubscribe");
