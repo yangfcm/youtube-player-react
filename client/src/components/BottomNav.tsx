@@ -7,6 +7,7 @@ import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
+import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
 
 const TAB_STYLE = {
   fontSize: "12px",
@@ -15,7 +16,13 @@ const TAB_STYLE = {
   minHeight: "60px",
 };
 
-const TAB_VALUES = ["/", "/subscriptions", "/collections", "/explore"];
+const TAB_VALUES = [
+  "/",
+  "/subscriptions",
+  "/playlists",
+  "/collections",
+  "/explore",
+];
 
 export function BottomNav() {
   const { pathname } = useLocation();
@@ -56,6 +63,14 @@ export function BottomNav() {
           label="Channels"
           icon={<SubscriptionsIcon />}
           value="/subscriptions"
+          sx={TAB_STYLE}
+        />
+        <Tab
+          component={Link}
+          to="/playlists"
+          label="Playlists"
+          icon={<PlaylistPlayIcon />}
+          value="/playlists"
           sx={TAB_STYLE}
         />
         <Tab

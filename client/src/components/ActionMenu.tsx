@@ -7,6 +7,8 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import HideSourceIcon from "@mui/icons-material/HideSource";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import PlaylistRemoveIcon from "@mui/icons-material/PlaylistRemove";
 import { SaveToCollectionModal } from "./SaveToCollectionModal";
 import { MoreOptionsButton } from "./MoreOptionsButton";
 import { RequireAuth } from "./RequireAuth";
@@ -16,6 +18,7 @@ import { CollectionItem } from "../features/collection/types";
 import { useUpdateCollection } from "../features/collection/useUpdateCollection";
 import { useUpdateCollectionItem } from "../features/collection/useUpdateCollectionItem";
 import { useToggleHideTimelineVideo } from "../features/timeline/useToggleHideTimelineVideo";
+import { useSavePlaylist } from "../features/playlist/useSavePlaylist";
 import { useProfile } from "../features/user/useProfile";
 import { AsyncStatus } from "../settings/types";
 
@@ -30,7 +33,13 @@ type ActionMenuPropsType = {
 // SaveToCollectionModal's own per-collection rows can touch it too), so
 // pendingAction tracks which action *this* menu triggered, and only that
 // action's message is shown.
-type PendingAction = "thumbnail" | "remove" | "hide" | null;
+type PendingAction =
+  | "thumbnail"
+  | "remove"
+  | "hide"
+  | "savePlaylist"
+  | "removePlaylist"
+  | null;
 
 export function ActionMenu({
   item,
@@ -55,6 +64,15 @@ export function ActionMenu({
     error: hideError,
     reset: resetHideStatus,
   } = useToggleHideTimelineVideo(user?.id ?? "");
+  const {
+    saved: playlistSaved,
+    loading: playlistWriting,
+    status: playlistStatus,
+    error: playlistError,
+    save: savePlaylistItem,
+    remove: removePlaylistItem,
+    reset: resetPlaylistStatus,
+  } = useSavePlaylist(item.type === "playlist" ? item.itemId : "");
 
   useEffect(() => {
     if (
@@ -72,6 +90,16 @@ export function ActionMenu({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hideStatus]);
+
+  useEffect(() => {
+    if (
+      playlistStatus === AsyncStatus.SUCCESS ||
+      playlistStatus === AsyncStatus.FAIL
+    ) {
+      resetPlaylistStatus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playlistStatus]);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -96,6 +124,26 @@ export function ActionMenu({
     }
     setPendingAction("hide");
     hideVideo(item.itemId);
+  };
+
+  const handleSavePlaylist = () => {
+    if (item.type !== "playlist") {
+      return;
+    }
+    setPendingAction("savePlaylist");
+    savePlaylistItem({
+      id: item.itemId,
+      title: item.title,
+      thumbnail: item.imageUrl ?? "",
+      channelId: item.channelId ?? "",
+      channelTitle: item.channelTitle ?? "",
+      itemCount: item.itemCount,
+    });
+  };
+
+  const handleRemovePlaylist = () => {
+    setPendingAction("removePlaylist");
+    removePlaylistItem();
   };
 
   return (
@@ -137,6 +185,22 @@ export function ActionMenu({
             <ListItemText>Hide</ListItemText>
           </MenuItem>
         )}
+        {item.type === "playlist" && !playlistSaved && (
+          <MenuItem disabled={playlistWriting} onClick={handleSavePlaylist}>
+            <ListItemIcon>
+              <PlaylistAddIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Save to My Playlist</ListItemText>
+          </MenuItem>
+        )}
+        {item.type === "playlist" && playlistSaved && (
+          <MenuItem disabled={playlistWriting} onClick={handleRemovePlaylist}>
+            <ListItemIcon>
+              <PlaylistRemoveIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Remove from My Playlist</ListItemText>
+          </MenuItem>
+        )}
       </Menu>
       <SaveToCollectionModal
         item={item}
@@ -170,6 +234,38 @@ export function ActionMenu({
       >
         {hideError}
       </ErrorMessage>
+      <ErrorMessage
+        open={
+          playlistStatus === AsyncStatus.FAIL &&
+          pendingAction === "savePlaylist"
+        }
+      >
+        {playlistError}
+      </ErrorMessage>
+      <SuccessMessage
+        open={
+          playlistStatus === AsyncStatus.SUCCESS &&
+          pendingAction === "savePlaylist"
+        }
+      >
+        Saved to My Playlist.
+      </SuccessMessage>
+      <ErrorMessage
+        open={
+          playlistStatus === AsyncStatus.FAIL &&
+          pendingAction === "removePlaylist"
+        }
+      >
+        {playlistError}
+      </ErrorMessage>
+      <SuccessMessage
+        open={
+          playlistStatus === AsyncStatus.SUCCESS &&
+          pendingAction === "removePlaylist"
+        }
+      >
+        Removed from My Playlist.
+      </SuccessMessage>
     </RequireAuth>
   );
 }

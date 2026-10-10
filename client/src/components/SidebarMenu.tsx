@@ -9,6 +9,7 @@ import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
+import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
 
 export function SidebarMenu() {
   return (
@@ -34,6 +35,19 @@ export function SidebarMenu() {
             </ListItemIcon>
             <ListItemText
               primary="Channels"
+              primaryTypographyProps={{ noWrap: true }}
+            />
+          </ListItemButton>
+        </ListItem>
+      </MuiLink>
+      <MuiLink component={Link} to="/playlists" underline="none">
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <PlaylistPlayIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Playlists"
               primaryTypographyProps={{ noWrap: true }}
             />
           </ListItemButton>
