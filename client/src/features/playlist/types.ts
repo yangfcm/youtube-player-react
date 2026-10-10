@@ -100,8 +100,24 @@ export interface PlayListItemsResponse {
   items: PlayListItemDetails[];
 }
 
+export interface SavedPlaylist {
+  id: string;
+  title: string;
+  thumbnail: string;
+  channelId: string;
+  channelTitle: string;
+  itemCount?: number;
+}
+
 export interface PlaylistState {
   playlists: Record<string, PlayListItemsResponse>;
   status: AsyncStatus;
   error: string;
+
+  savedPlaylists: SavedPlaylist[];
+  savedStatus: AsyncStatus;
+  savedError: string;
+  pending: Record<string, boolean>;
+  errors: Record<string, string>;
+  writeStatus: Record<string, AsyncStatus>;
 }

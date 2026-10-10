@@ -57,6 +57,7 @@ export function PlayListCard({ playlist }: { playlist: PlaylistPropsType }) {
               imageUrl,
               channelId,
               channelTitle,
+              itemCount: videoCount,
             }}
           />
         </Box>

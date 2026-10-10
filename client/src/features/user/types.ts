@@ -7,6 +7,7 @@ export interface UserProfile {
   avatar: string;
   collections?: string[];
   subscriptions?: string[];
+  playlists?: string[];
 }
 
 export interface UserState {

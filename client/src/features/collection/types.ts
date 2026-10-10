@@ -11,6 +11,7 @@ export interface CollectionItem {
   imageUrl?: string;
   channelId?: string;
   channelTitle?: string;
+  itemCount?: number;
 }
 
 export interface CollectionSnippet {

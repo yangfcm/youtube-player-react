@@ -6,6 +6,7 @@ import {
   subscribeChannel,
   unsubscribeChannel,
 } from "../subscription/subscriptionSlice";
+import { savePlaylist, removePlaylist } from "../playlist/playlistSlice";
 
 const initialState: UserState = {
   profile: {
@@ -50,6 +51,18 @@ const userSlice = createSlice({
         state.profile.data.subscriptions = (
           state.profile.data.subscriptions ?? []
         ).filter((id) => id !== channelId);
+      })
+      .addCase(savePlaylist.fulfilled, (state, { payload: playlist }) => {
+        const playlists = state.profile.data?.playlists ?? [];
+        if (state.profile.data && !playlists.includes(playlist.id)) {
+          state.profile.data.playlists = [...playlists, playlist.id];
+        }
+      })
+      .addCase(removePlaylist.fulfilled, (state, { payload: playlistId }) => {
+        if (!state.profile.data) return;
+        state.profile.data.playlists = (
+          state.profile.data.playlists ?? []
+        ).filter((id) => id !== playlistId);
       });
   },
 });

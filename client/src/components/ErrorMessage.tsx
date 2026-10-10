@@ -17,7 +17,7 @@ export function ErrorMessage({
 }) {
   const [openAlert, setOpenAlert] = useState(false);
   useEffect(() => {
-    setOpenAlert(open);
+    if (open) setOpenAlert(true);
   }, [open]);
 
   return (

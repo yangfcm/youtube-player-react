@@ -69,6 +69,7 @@ export function useAuth() {
         avatar: firebaseUser.photoURL || "",
         collections: existingProfile?.collections ?? [],
         subscriptions: existingProfile?.subscriptions ?? [],
+        playlists: existingProfile?.playlists ?? [],
       };
 
       localStorage.setItem("user_email", newProfile.email);
