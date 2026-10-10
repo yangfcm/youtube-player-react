@@ -41,10 +41,10 @@ export const fetchPlaylistVideos = createAsyncThunk(
 
 export const fetchSavedPlaylists = createAsyncThunk(
   "playlist/fetchSavedPlaylists",
-  async (userId: string) => await fetchSavedPlaylistsAPI(userId),
+  async (playlistIds: string[]) => await fetchSavedPlaylistsAPI(playlistIds),
   {
     // Guards against React StrictMode's double-invoked effects re-firing this.
-    condition: (_userId, { getState }) =>
+    condition: (_playlistIds, { getState }) =>
       (getState() as RootState).playlist.savedStatus !== AsyncStatus.LOADING,
   }
 );

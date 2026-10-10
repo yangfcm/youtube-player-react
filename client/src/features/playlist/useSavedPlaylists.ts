@@ -10,19 +10,20 @@ export function useSavedPlaylists() {
   const { savedPlaylists, savedStatus, savedError } = useSelector(
     (state: RootState) => state.playlist,
   );
-  const userId = useSelector(
-    (state: RootState) => state.user.profile?.data?.id,
+  const playlistIds = useSelector(
+    (state: RootState) => state.user.profile?.data?.playlists,
   );
+  const hasSavedPlaylistIds = !!playlistIds && playlistIds.length > 0;
 
   useEffect(() => {
-    if (userId && savedStatus === AsyncStatus.IDLE) {
-      dispatch(fetchSavedPlaylists(userId));
+    if (hasSavedPlaylistIds && savedStatus === AsyncStatus.IDLE) {
+      dispatch(fetchSavedPlaylists(playlistIds as string[]));
     }
-  }, [userId, savedStatus, dispatch]);
+  }, [hasSavedPlaylistIds, playlistIds, savedStatus, dispatch]);
 
   return {
     playlists: savedPlaylists,
-    status: savedStatus,
+    status: hasSavedPlaylistIds ? savedStatus : AsyncStatus.SUCCESS,
     error: savedError,
   };
 }

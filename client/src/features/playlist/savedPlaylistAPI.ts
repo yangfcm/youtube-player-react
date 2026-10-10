@@ -5,7 +5,6 @@ import {
   doc,
   documentId,
   getDoc,
-  getDocFromServer,
   getDocs,
   query,
   setDoc,
@@ -29,17 +28,9 @@ function chunk<T>(items: T[], size: number): T[][] {
   return chunks;
 }
 
-async function fetchSavedPlaylistIds(userId: string): Promise<string[]> {
-  // This doc is also written to on login (see useAuth's profile mirror),
-  // so force a genuine server round trip rather than risk a stale local view.
-  const userSnap = await getDocFromServer(doc(db, USERS, userId));
-  return (userSnap.data()?.playlists as string[] | undefined) || [];
-}
-
 export async function fetchSavedPlaylistsAPI(
-  userId: string
+  playlistIds: string[]
 ): Promise<SavedPlaylist[]> {
-  const playlistIds = await fetchSavedPlaylistIds(userId);
   if (playlistIds.length === 0) return [];
 
   const playlistsById: Record<string, SavedPlaylist> = {};
